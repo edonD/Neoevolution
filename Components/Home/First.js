@@ -8,7 +8,7 @@ function First() {
     <Container>
       <Wrapper>
         <Header>
-          <h1>Active Device Modeling</h1>
+          <h1>AI Research Lab for Enterprise</h1>
           <p>
             Cassandra Light gives you complete visibility over your entire
             fleet’s performance and emissions – delivering accurate insights
@@ -16,10 +16,10 @@ function First() {
           </p>
         </Header>
         <ButtonContainer>
-          <StyledButton variant='contained' component='label' color='primary'>
+          {/* <StyledButton variant='contained' component='label' color='primary'>
             Upload Data
             <input type='file' hidden />
-          </StyledButton>
+          </StyledButton> */}
           <Link href='/Contact' passHref>
             <RequestButton>Contact US</RequestButton>
           </Link>
@@ -175,7 +175,7 @@ const Header = styled.div`
   h1 {
     text-align: left;
     margin: 0px;
-    font-size: 58px;
+    font-size: 84px;
     @media screen and (max-width: 1200px) {
       font-size: 48px;
     }
