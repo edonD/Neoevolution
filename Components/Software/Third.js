@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Button } from "@mui/material";
-import Feature1 from "./Animations/Feature1";
-import Feature2 from "./Animations/Feature2";
-import Feature3 from "./Animations/Feature3";
 
 import { motion, useAnimation } from "framer-motion";
-import ProcessDescription from "../Home/ThirdComponents/ProcessDescription";
-import DisplayScreen from "../Home/DisplayScreen";
-import DataUpload from "../Home/ThirdComponents/DataUpload";
-import FinalResults from "../Home/ThirdComponents/FinalResults";
+
 import F1 from "./Features/F1";
 import F4 from "./Features/F4";
 import F3 from "./Features/F3";
