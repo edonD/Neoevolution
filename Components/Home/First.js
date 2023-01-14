@@ -219,7 +219,7 @@ const ImageContainer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-end;
-  background-color: #12151a;
+  background-color: #252a34;
   position: relative;
 `;
 const Wrapper = styled.div`
