@@ -1,46 +1,40 @@
 import { Button } from "@mui/material";
+import Image from "next/image";
 import React from "react";
-import styled, { keyframes } from "styled-components";
-import Software from "./Software";
-import dynamic from "next/dynamic";
-import Gradient from "rgt";
-
-import Img1 from "../../public/images/space.jpg";
-
+import styled from "styled-components";
+import Link from "next/link";
 function First() {
   return (
     <Container>
-      {/* {typeof window !== "undefined" && (
-        <StarfieldAnimation
-          numParticles={500}
-          lineWidth={1.0}
-          alphaFactor={1}
-          depth={1}
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      )} */}
-      <Body>
-        <Gradient dir='left-to-right' from='#44aeff' to='#70edec'>
-          <h1>Model Calibration with AI </h1>
-        </Gradient>
-
-        <h2>Dramatically shortening the chip design cycle! </h2>
+      <Wrapper>
+        <Header>
+          <h1>Active Device Modeling</h1>
+          <p>
+            Cassandra Light gives you complete visibility over your entire
+            fleet’s performance and emissions – delivering accurate insights
+            without any hardware for the first time.
+          </p>
+        </Header>
         <ButtonContainer>
-          <UploadButton variant='contained' component='label' color='primary'>
-            <input type='file' hidden />
+          <StyledButton variant='contained' component='label' color='primary'>
             Upload Data
-          </UploadButton>
-          <StyledButton>
             <input type='file' hidden />
-            Contact US
           </StyledButton>
+          <Link href='/Contact' passHref>
+            <RequestButton>Contact US</RequestButton>
+          </Link>
         </ButtonContainer>
-      </Body>
-      <Software />
+      </Wrapper>
+      <SecondWrapper>
+        <ImageContainer>
+          <Image
+            src='/images/test-1.jpeg'
+            layout='fill'
+            objectFit='cover' // Scale your image down to fit into the container
+            alt='activeDevice'
+          />
+        </ImageContainer>
+      </SecondWrapper>
     </Container>
   );
 }
@@ -48,145 +42,244 @@ function First() {
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  position: relative;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  z-index: 5;
+  position: relative;
 
-  background: rgb(25, 64, 116);
-  background: linear-gradient(
-    132deg,
-    rgba(59, 76, 116, 1) 0%,
-    rgba(6, 20, 41, 1) 53%,
-    rgba(4, 33, 77, 1) 99%
+  background: #42656c;
+  /* background: linear-gradient(131deg, #42656c 0%, #2e353a 44%, #2a2430 100%);
+  
+    /* ff 3.6+ */
+  background: -moz-radial-gradient(
+    circle at 68% 15%,
+    rgba(99, 112, 128, 0.21) 0%,
+    rgba(34, 38, 49, 1) 50%,
+    rgba(18, 21, 26, 1) 100%
   );
 
-  @media (max-width: 1200px) {
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-  }
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-radial-gradient(
+    circle at 68% 15%,
+    rgba(99, 112, 128, 0.21) 0%,
+    rgba(34, 38, 49, 1) 50%,
+    rgba(18, 21, 26, 1) 100%
+  );
 
-  @media screen and (min-height: 700px) and (max-height: 850px) {
-    flex-direction: column;
-    justify-content: center;
-    height: 80vh;
-  }
+  /* opera 11.10+ */
+  background: -o-radial-gradient(
+    circle at 68% 15%,
+    rgba(99, 112, 128, 0.21) 0%,
+    rgba(34, 38, 49, 1) 50%,
+    rgba(18, 21, 26, 1) 100%
+  );
+
+  /* ie 10+ */
+  background: -ms-radial-gradient(
+    circle at 68% 15%,
+    rgba(99, 112, 128, 0.21) 0%,
+    rgba(34, 38, 49, 1) 50%,
+    rgba(18, 21, 26, 1) 100%
+  );
+
+  /* global 92%+ browsers support */
+  background: radial-gradient(
+    circle at 68% 15%,
+    rgba(99, 112, 128, 0.21) 0%,
+    rgba(34, 38, 49, 1) 50%,
+    rgba(18, 21, 26, 1) 100%
+  );
+
+  /* background: radial-gradient(
+    circle at center center,
+    #1e2538 0%,
+    #17181d 100%
+  ); */
 `;
 const ButtonContainer = styled.div`
   position: relative;
-  width: 100%;
+  width: 50%;
   height: fit-content;
-  background-color: transparent;
+
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   color: white;
-  padding-left: 00px;
-  margin-top: 40px;
-  @media (max-width: 1200px) {
-    justify-content: center;
-    align-items: center;
-  }
+  padding-left: 50px;
 `;
 
 const StyledButton = styled(Button)`
   && {
     font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
-    background-color: #f5c900;
     width: 220px;
     height: 50px;
-    color: #235fd7;
-    font-weight: 600;
-    font-size: 20px;
-    margin-top: 00px;
-    @media (max-width: 1200px) {
-      width: 180px;
-      height: 38px;
-      font-size: 15px;
-    }
+    background-color: transparent;
+    padding: 8px 16px;
+    border: 1px solid #ffffff1a;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.2s ease 0s;
     &:hover {
-      background-color: #f7d448;
+      background-color: #f9f9f9;
+      color: #232331;
+      border-color: transparent;
+    }
+    @media (max-width: 1000px) {
+      display: none;
     }
   }
 `;
-const UploadButton = styled(Button)`
+
+const RequestButton = styled(Button)`
   && {
     font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
     width: 220px;
     height: 50px;
-    margin-right: 60px;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-    border: 1px solid #f5c900;
-    box-shadow: 0 0 16px rgb(0, 0, 0, 0%);
-    font-weight: 600;
-    @media (max-width: 1200px) {
-      width: 180px;
-      height: 38px;
-      font-size: 15px;
-    }
+    background-color: white;
+    padding: 8px 16px;
+    margin-left: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    border-radius: 4px;
+    color: #091936;
+    font-size: 16px;
+    transition: all 0.2s ease 0s;
     &:hover {
-      background: rgb(73, 61, 87);
-      background: linear-gradient(
-        130deg,
-        rgba(73, 61, 87, 1) 0%,
-        rgba(72, 51, 106, 1) 47%,
-        rgba(50, 57, 95, 1) 100%
-      );
-    }
+      background-color: #96b4f7;
 
-    @media screen and (max-width: 400px) {
-      font-size: 12px;
+      border-color: transparent;
+    }
+    @media (max-width: 1000px) {
+      display: none;
     }
   }
 `;
+const Header = styled.div`
+  position: relative;
+  width: 50%;
+  height: fit-content;
 
-const Body = styled.div`
-  height: 80%;
-  width: 40%;
-  background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   color: white;
-  text-align: left;
-  margin-top: 80px;
-  user-select: none;
-  @media (max-width: 1200px) {
-    height: 50%;
-    width: 90%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 0px;
-  }
-  @media (max-height: 1250px) {
-    margin-top: 80px;
+  padding: 50px;
+  @media screen and (max-width: 1200px) {
+    width: 80%;
   }
   h1 {
+    text-align: left;
     margin: 0px;
-    font-size: 60px;
-    @media (max-width: 1200px) {
-      font-size: 36px;
+    font-size: 58px;
+    @media screen and (max-width: 1200px) {
+      font-size: 48px;
+    }
+    @media screen and (max-width: 600px) {
+      font-size: 42px;
     }
   }
-  h2 {
+  p {
+    text-align: left;
     margin: 0px;
-    margin-top: 30px;
-    font-size: 20px;
-    font-weight: 500;
-    color: #6995c2;
-    @media (max-width: 1200px) {
-      font-size: 18px;
+    margin-top: 15px;
+    font-size: 18px;
+    @media screen and (max-width: 1200px) {
+      font-size: 14px;
+    }
+    @media screen and (max-width: 600px) {
+      font-size: 13px;
     }
   }
+`;
+const SecondWrapper = styled.div`
+  top: 0;
+  left: 0;
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  color: white;
+  user-select: none;
+`;
+const ImageContainer = styled.div`
+  width: 60%;
+  height: 100%;
+  /* margin-right: 200px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  position: relative;
+`;
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 10vh;
+  justify-content: center;
+  align-items: flex-start;
+  /* ff 3.6+ */
+  background: -moz-radial-gradient(
+    circle at 88% 45%,
+    rgba(99, 112, 128, 0.01) 0%,
+    rgba(99, 112, 128, 0) 23%,
+    rgba(34, 38, 49, 1) 37%,
+    rgba(18, 21, 26, 1) 100%
+  );
+
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-radial-gradient(
+    circle at 88% 45%,
+    rgba(99, 112, 128, 0.01) 0%,
+    rgba(99, 112, 128, 0) 23%,
+    rgba(34, 38, 49, 1) 37%,
+    rgba(18, 21, 26, 1) 100%
+  );
+
+  /* opera 11.10+ */
+  background: -o-radial-gradient(
+    circle at 88% 45%,
+    rgba(99, 112, 128, 0.01) 0%,
+    rgba(99, 112, 128, 0) 23%,
+    rgba(34, 38, 49, 1) 37%,
+    rgba(18, 21, 26, 1) 100%
+  );
+
+  /* ie 10+ */
+  background: -ms-radial-gradient(
+    circle at 88% 45%,
+    rgba(99, 112, 128, 0.01) 0%,
+    rgba(99, 112, 128, 0) 23%,
+    rgba(34, 38, 49, 1) 37%,
+    rgba(18, 21, 26, 1) 100%
+  );
+
+  /* global 92%+ browsers support */
+  background: radial-gradient(
+    circle at 88% 45%,
+    rgba(99, 112, 128, 0.01) 0%,
+    rgba(99, 112, 128, 0) 23%,
+    rgba(34, 38, 49, 1) 37%,
+    rgba(18, 21, 26, 1) 100%
+  );
+
+  z-index: 3;
 `;
 
 export default First;

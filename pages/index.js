@@ -1,42 +1,55 @@
-import Header from "../Components/Home/Header";
+import React from "react";
 import styled from "styled-components";
+import Header from "../Components/Home/Header";
 import First from "../Components/Home/First";
 import Second from "../Components/Home/Second";
 import Third from "../Components/Home/Third";
-
-export default function Home() {
+function index() {
   return (
     <Container>
       <Header />
       <First />
       <Second />
-      <Third />
+      <Third
+        sreverse={true}
+        header={"Active Modeling"}
+        paragraph={
+          "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
+        }
+      />
+      <Third
+        sreverse={false}
+        header={"yee safety"}
+        paragraph={
+          "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
+        }
+      />
+      <Third
+        sreverse={true}
+        header={"Employ safety"}
+        paragraph={
+          "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
+        }
+      />
+      <Third
+        sreverse={false}
+        header={"Emplo safety"}
+        paragraph={
+          "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
+        }
+      />
     </Container>
   );
 }
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  /* fallback for old browsers */
-  background: white;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  /* background: -webkit-linear-gradient(
-    to right,
-    rgba(56, 189, 248, 1),
-    rgba(59, 130, 246, 1)
-  );
-
-   W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  /*background: radial-gradient(
-    circle at center center,
-    #2c3e70 0%,
-    #17181c 100%
-  ); */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
   position: relative;
 `;
+
+export default index;

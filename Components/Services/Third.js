@@ -9,7 +9,7 @@ import F4 from "./Features/F4";
 import F3 from "./Features/F3";
 import F2 from "./Features/F2";
 import { Button } from "@mui/material";
-// import Second from "../Home/Second";
+
 function Third() {
   const controls1 = useAnimation();
   const controls2 = useAnimation();

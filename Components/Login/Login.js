@@ -10,7 +10,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import Image from "next/image";
-import Header from "../Home/Header";
+
 import Link from "next/link";
 
 function Login() {

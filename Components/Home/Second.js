@@ -1,232 +1,86 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
-
 function Second() {
   return (
     <Container>
-      <Header>
-        <h1>How it works</h1>
-      </Header>
-      <Body>
-        <DataContainer>
-          <ImageContainer>
-            <Image
-              src='/images/data.svg'
-              width={150}
-              height={100}
-              alt='brain'
-            />
-          </ImageContainer>
-          <Description>
-            <DescriptionHeader>
-              <h3>Upload measured data</h3>
-            </DescriptionHeader>
-            <DescriptionBody>
-              <p>Supported formats are: csv, xlsx, json, mat.</p>
-            </DescriptionBody>
-          </Description>
-        </DataContainer>
-        <ArrowContainer>
-          <Image src='/images/arrow.svg' width={150} height={100} alt='brain' />
-        </ArrowContainer>
-        <DataContainer>
-          <ImageContainer>
-            <Image
-              src='/images/brain.svg'
-              width={150}
-              height={100}
-              alt='brain'
-            />
-          </ImageContainer>
-          <Description>
-            <DescriptionHeader>
-              <h3>Machine Learning</h3>
-            </DescriptionHeader>
-            <DescriptionBody>
-              <p>Software with a dedicated ML algorithm</p>
-            </DescriptionBody>
-          </Description>
-        </DataContainer>
-        <ArrowContainer>
-          <Image src='/images/arrow.svg' width={150} height={100} alt='brain' />
-        </ArrowContainer>
-        <DataContainer>
-          <ImageContainer>
-            <Image
-              src='/images/graph.svg'
-              width={150}
-              height={100}
-              alt='brain'
-            />
-          </ImageContainer>
-          <Description>
-            <DescriptionHeader>
-              <h3>Final Model</h3>
-            </DescriptionHeader>
-            <DescriptionBody>
-              <p>Receive the final device model in less than 24h</p>
-            </DescriptionBody>
-          </Description>
-        </DataContainer>
-      </Body>
+      <HeaderDivider>
+        <h1>Evolve your industry 4.0 strategy with computer vision and AI.</h1>
+      </HeaderDivider>
+      <BodyDivider>
+        <h1>
+          Industry 4.0 offers the opportunity for smart manufacturers to
+          optimize their operations quickly and efficiently by knowing what
+          needs attention. By using data from cameras and other Edge devices,
+          manufacturers can better manage capital assets, improve processes and
+          systems, monitor employee safety, and improve security.
+        </h1>
+      </BodyDivider>
     </Container>
   );
 }
 
 const Container = styled.div`
   width: 100%;
-  padding: 10px;
-  height: 400px;
-  user-select: none;
+  height: 35vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  position: "relative";
-  z-index: 5;
   background-color: #f3f4f8;
-  @media screen and (max-width: 800px) {
-    height: 320px;
-  }
-  @media screen and (max-width: 600px) {
-    height: 100%;
-  }
+  background: #f3f4f8;
+  position: relative;
 `;
 
-const Body = styled.div`
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: "relative";
-  @media screen and (max-width: 600px) {
-    flex-direction: column;
-  }
-`;
+const HeaderDivider = styled.div`
+  width: 70%;
+  height: 50%;
 
-const DescriptionHeader = styled.div`
-  width: 100%;
-  height: 40%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   color: black;
-  h3 {
+  @media screen and (max-width: 1200px) {
+    justify-content: center;
+    align-items: center;
+  }
+  h1 {
+    margin: 0px;
+    font-size: 48px;
     font-weight: 400;
+    text-align: left;
     @media screen and (max-width: 1200px) {
-      font-size: 12px;
-    }
-    @media screen and (max-width: 650px) {
-      font-size: 8px;
+      font-size: 32px;
     }
     @media screen and (max-width: 600px) {
-      font-size: 16px;
+      font-size: 24px;
     }
   }
 `;
-
-const DescriptionBody = styled.div`
-  width: 100%;
-  height: 60%;
+const BodyDivider = styled.div`
+  width: 70%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   color: black;
-
-  p {
-    margin: 0px 15px 15px 15px;
-    color: #826d7a;
+  @media screen and (max-width: 1200px) {
+    justify-content: flex-start;
+    align-items: center;
+  }
+  h1 {
+    margin: 0px;
     font-size: 15px;
+    font-weight: 200;
+    text-align: left;
     @media screen and (max-width: 1200px) {
-      font-size: 8px;
-    }
-    @media screen and (max-width: 600px) {
       font-size: 14px;
     }
-  }
-`;
-const Header = styled.div`
-  width: 100%;
-  height: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  h1 {
-    font-weight: 400;
-  }
-`;
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media screen and (max-width: 600px) {
-    height: 40%;
-
-    padding: 10px;
-  }
-`;
-
-const Description = styled.div`
-  width: 100%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;
-const DataContainer = styled.div`
-  width: 250px;
-  height: 300px;
-  background-color: #e2e4f1;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 4px;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 20%;
-    height: 80%;
-    margin: 0px;
-  }
-  @media screen and (max-width: 600px) {
-    width: 80%;
-    height: 30%;
-  }
-  /* &:hover {
-    background-color: #4a8bff;
-    color: white;
-    p {
-      color: white;
+    @media screen and (max-width: 600px) {
+      font-size: 12px;
     }
-  } */
-`;
-const ArrowContainer = styled.div`
-  width: 50px;
-  height: 300px;
-  background-color: transparent;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 4px;
-  justify-content: center;
-  align-items: center;
-
-  @media screen and (max-width: 1200px) {
-    width: 30px;
-  }
-  @media screen and (max-width: 600px) {
-    width: 100%;
-    height: 50px;
   }
 `;
 

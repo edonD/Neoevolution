@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
-// import Second from "../Home/Second";
 function Third({ sreverse, header, paragraph }) {
   return (
     <Container>
