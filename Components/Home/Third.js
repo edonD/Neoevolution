@@ -38,7 +38,8 @@ const Container = styled.div`
   align-items: center;
   background-color: #242331;
   position: relative;
-  background: black;
+  background: #f5f5f5;
+
   @media screen and (max-width: 1200px) {
     padding-top: 50px;
   }
@@ -46,7 +47,7 @@ const Container = styled.div`
 
 const RowContainer = styled.div`
   height: 50vh;
-  width: 70%;
+  width: 90%;
   display: flex;
   position: relative;
   flex-direction: ${(p) => (p.sreverse === true ? "row" : "row-reverse")};
@@ -64,7 +65,7 @@ const RowContainer = styled.div`
 
 const StyledImage = styled.div`
   height: 85%;
-  width: 95%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

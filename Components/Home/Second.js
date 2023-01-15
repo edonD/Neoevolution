@@ -27,8 +27,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f3f4f8;
-  background: #f3f4f8;
+  background-color: transparent;
+  /* background-color: #f3f4f8;
+  background: #f3f4f8; */
   position: relative;
 `;
 
