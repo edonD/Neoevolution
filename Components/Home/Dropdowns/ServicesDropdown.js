@@ -14,7 +14,113 @@ function ServicesDropdown({ children }) {
     <HoverCard openDelay={100}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
       <HoverCardContent>
-        <Container>
+        {/* <Container> */}
+        {/* <Wrapper>
+            <Services>
+              <h1>Compact Model Calibration</h1>
+            </Services>
+            <Link href='/Services/passive-modeling'>
+              <RowContainer>
+                <ImageContainer>
+                  <StyledImage>
+                    <Image
+                      src='/images/resistor.svg'
+                      width='35px'
+                      height='35px'
+                      alt='MOSFET'
+                    />
+                  </StyledImage>
+                </ImageContainer>
+                <BodyContainer>
+                  <BodyHeaderContainer>
+                    <h1>Passive Components Modeling</h1>
+                  </BodyHeaderContainer>
+                  <BodyBodyContainer>
+                    <p>
+                      Machine learning methodology for passive devices model
+                      extraction.
+                    </p>
+                  </BodyBodyContainer>
+                </BodyContainer>
+              </RowContainer>
+            </Link>
+            <Link href='/Services/active-modeling'>
+              <RowContainer>
+                <ImageContainer>
+                  <StyledImage>
+                    <Image
+                      src='/images/mosfet.svg'
+                      width='40px'
+                      height='35px'
+                      alt='MOSFET'
+                    />
+                  </StyledImage>
+                </ImageContainer>
+                <BodyContainer>
+                  <BodyHeaderContainer>
+                    <h1>Active Components Modeling </h1>
+                  </BodyHeaderContainer>
+                  <BodyBodyContainer>
+                    <p>
+                      Machine learning methodology for active devices model
+                      extraction.
+                    </p>
+                  </BodyBodyContainer>
+                </BodyContainer>
+              </RowContainer>
+            </Link>
+            <Link href='/Services/package-modeling'>
+              <RowContainer>
+                <ImageContainer>
+                  <StyledImage>
+                    <Image
+                      src='/images/ic.svg'
+                      width='35px'
+                      height='35px'
+                      alt='MOSFET'
+                      color='#235fd7'
+                    />
+                  </StyledImage>
+                </ImageContainer>
+                <BodyContainer>
+                  <BodyHeaderContainer>
+                    <h1>Package design modeling </h1>
+                  </BodyHeaderContainer>
+                  <BodyBodyContainer>
+                    <p>
+                      Machine learning methodology for package model extraction.
+                    </p>
+                  </BodyBodyContainer>
+                </BodyContainer>
+              </RowContainer>
+            </Link>
+            <Link href='/Services/contract-modeling'>
+              <RowContainer>
+                <ImageContainer>
+                  <StyledImage>
+                    <Image
+                      src='/images/contract.svg'
+                      width='35px'
+                      height='35px'
+                      alt='MOSFET'
+                      color='#235fd7'
+                    />
+                  </StyledImage>
+                </ImageContainer>
+                <BodyContainer>
+                  <BodyHeaderContainer>
+                    <h1>Contract Modeling</h1>
+                  </BodyHeaderContainer>
+                  <BodyBodyContainer>
+                    <p>
+                      Machine learning methodology for package model extraction.
+                    </p>
+                  </BodyBodyContainer>
+                </BodyContainer>
+              </RowContainer>
+            </Link>
+          </Wrapper> */}
+        <Wrapper>
           <Link href='/Services/passive-modeling'>
             <RowContainer>
               <ImageContainer>
@@ -115,40 +221,37 @@ function ServicesDropdown({ children }) {
               </BodyContainer>
             </RowContainer>
           </Link>
-          {/* <RowContainer>
-            <ImageContainer>
-              <StyledImage>
-                <Image
-                  src='/images/software.svg'
-                  width='35px'
-                  height='35px'
-                  alt='MOSFET'
-                  color='#235fd7'
-                />
-              </StyledImage>
-            </ImageContainer>
-            <BodyContainer>
-              <BodyHeaderContainer>
-                <h1>Software </h1>
-              </BodyHeaderContainer>
-              <BodyBodyContainer>
-                <p>
-                  Machine learning methodology for package model extraction.
-                </p>
-              </BodyBodyContainer>
-            </BodyContainer>
-          </RowContainer> */}
-        </Container>
+        </Wrapper>
+        {/* </Container> */}
       </HoverCardContent>
     </HoverCard>
   );
 }
-
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
+`;
+
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: fit-content;
+`;
+
+const Services = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  h1 {
+    font-size: 24px;
+  }
 `;
 const RowContainer = styled.div`
   height: 100px;

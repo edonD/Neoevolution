@@ -80,7 +80,7 @@ const StyledImage = styled.div`
 const SecondPart = styled.div`
   height: 100%;
   width: 50%;
-
+  margin: 0px 10px 0px 10px;
   user-select: none;
   display: flex;
   flex-direction: column;
@@ -99,7 +99,7 @@ const BodyBodyContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  color: white;
+  color: black;
   p {
     font-size: 18px;
     font-weight: 200;
@@ -118,14 +118,14 @@ const BodyHeaderContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: #232331;
+  color: black;
   cursor: pointer;
 
   h1 {
     margin: 0px;
     font-size: 38px;
     font-weight: 200;
-    color: white;
+    color: black;
     @media screen and (max-width: 1200px) {
       font-size: 32px;
     }

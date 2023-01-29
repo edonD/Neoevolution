@@ -19,6 +19,7 @@
     "@react-three/drei": "^9.32.3",
     "@react-three/fiber": "^8.8.6",
     "@stitches/react": "^1.2.7",
+    "@usertive/react-fluid-animation": "^1.0.5",
     "framer-motion": "^6.3.0",
     "lottie-react-web": "^2.2.2",
     "next": "^12.1.5",
@@ -30,10 +31,12 @@
     "react-scroll": "^1.8.7",
     "react-starfield-animation": "^1.0.1",
     "react-text-mask": "^5.5.0",
+    "react-tsparticles": "^2.8.0",
     "rgt": "^1.0.7",
     "styled-components": "^5.3.5",
     "text-mask-addons": "^3.8.0",
-    "three": "^0.144.0"
+    "three": "^0.144.0",
+    "tsparticles": "^2.8.0"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^2.0.7",

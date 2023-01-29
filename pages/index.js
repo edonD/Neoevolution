@@ -52,13 +52,14 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  background-color: transparent;
 `;
 const ThirdContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 90%;
   height: 100%;
   margin-bottom: 50px;
   box-shadow: 0px 0px 17px 3px rgba(158, 153, 158, 1);
