@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import Gradient from "rgt";
 
 // import Fluid from "webgl-fluid";
 function First() {
@@ -16,6 +17,7 @@ function First() {
       <Wrapper>
         <Header>
           <h1>AI Research Lab for Chip Design</h1>
+
           <p>
             Cassandra Light gives you complete visibility over your entire
             fleet’s performance and emissions – delivering accurate insights
@@ -74,10 +76,9 @@ const ButtonContainer = styled.div`
 
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   color: white;
-  padding-left: 50px;
 `;
 
 const RequestButton = styled(Button)`
@@ -106,22 +107,24 @@ const RequestButton = styled(Button)`
 `;
 const Header = styled.div`
   position: relative;
-  width: 50%;
+  width: 40%;
   height: fit-content;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   color: white;
   padding: 50px;
+
   @media screen and (max-width: 1200px) {
     width: 80%;
   }
   h1 {
-    text-align: left;
+    /* font-weight: 400; */
+    text-align: center;
     margin: 0px;
-    font-size: 84px;
+    font-size: 64px;
+    text-shadow: 3px 3px 5px black;
     @media screen and (max-width: 1400px) {
       font-size: 48px;
     }
@@ -130,10 +133,11 @@ const Header = styled.div`
     }
   }
   p {
-    text-align: left;
+    text-align: center;
     margin: 0px;
     margin-top: 15px;
     font-size: 18px;
+    text-shadow: 3px 3px 5px black;
     @media screen and (max-width: 1200px) {
       font-size: 14px;
     }
@@ -225,9 +229,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding-left: 10vh;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   /* ff 3.6+ */
   background: -moz-radial-gradient(
@@ -280,7 +283,6 @@ const Wrapper = styled.div`
     circle at 80% 50%,
     rgba(99, 112, 128, 0) 0%,
     rgba(99, 112, 128, 0) 22%,
-    rgba(99, 112, 128, 0) 38%,
     rgba(0, 0, 0, 1) 45%,
     rgba(0, 0, 0, 1) 55%,
     rgba(0, 0, 0, 0) 60%
@@ -288,6 +290,12 @@ const Wrapper = styled.div`
   /* background: transparent; */
   @media screen and (max-width: 1200px) {
     background: transparent;
+  }
+
+  @media screen and (max-width: 800px) {
+    justify-content: flex-start;
+    padding-top: 100px;
+    padding-left: 5vh;
   }
   z-index: 3;
 `;
