@@ -23,7 +23,7 @@ function index() {
           sreverse={false}
           header={"Analog IP Technology"}
           paragraph={
-            "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
+            "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued w close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
           }
           button={"Contact US"}
         />

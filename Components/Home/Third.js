@@ -71,7 +71,7 @@ const ButtonContainer = styled.div`
   position: relative;
   width: 100%;
   height: 10%;
-
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
