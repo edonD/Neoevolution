@@ -21,6 +21,14 @@ function index() {
         />
         <Third
           sreverse={false}
+          header={"Design and Verification"}
+          paragraph={
+            "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued w close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
+          }
+          button={"Contact US"}
+        />
+        <Third
+          sreverse={true}
           header={"Analog IP Technology"}
           paragraph={
             "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued w close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
@@ -29,7 +37,7 @@ function index() {
         />
 
         <Third
-          sreverse={true}
+          sreverse={false}
           header={"Custom Analog ICs"}
           paragraph={
             "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
