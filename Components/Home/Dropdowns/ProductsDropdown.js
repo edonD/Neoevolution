@@ -28,7 +28,7 @@ function ProductsDropdown({ children }) {
               </ImageContainer>
               <BodyContainer>
                 <BodyHeaderContainer>
-                  <h1>Software</h1>
+                  <h1>Model Calibration Software</h1>
                 </BodyHeaderContainer>
                 <BodyBodyContainer>
                   <p>Software for characterization and modeling of devices</p>

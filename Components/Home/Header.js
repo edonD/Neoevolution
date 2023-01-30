@@ -64,7 +64,7 @@ function Header({ children }) {
               </Link>
             </ItemContainer>
             <ItemContainer headerdown={hasScrolled}>
-              <Link href='/About Us' passHref>
+              <Link href='/about' passHref>
                 <span>About</span>
               </Link>
             </ItemContainer>
