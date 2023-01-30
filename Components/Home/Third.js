@@ -70,7 +70,7 @@ const RowContainer = styled.div`
 const ButtonContainer = styled.div`
   position: relative;
   width: 100%;
-  height: fit-content;
+  height: 10%;
 
   display: flex;
   flex-direction: row;
@@ -157,7 +157,7 @@ const BodyBodyContainer = styled.div`
   }
 `;
 const BodyHeaderContainer = styled.div`
-  height: 20%;
+  height: 10%;
   width: 100%;
   user-select: none;
   display: flex;
