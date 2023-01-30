@@ -13,31 +13,28 @@ function index() {
       <ThirdContainer>
         <Third
           sreverse={true}
-          header={"Active Modeling"}
+          header={"Model Calibration Software"}
           paragraph={
             "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
           }
+          button={"Contact US"}
         />
         <Third
           sreverse={false}
-          header={"yee safety"}
+          header={"Analog IP Technology"}
           paragraph={
             "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
           }
+          button={"Contact US"}
         />
+
         <Third
           sreverse={true}
-          header={"Employ safety"}
+          header={"Custom Analog ICs"}
           paragraph={
             "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
           }
-        />
-        <Third
-          sreverse={false}
-          header={"Emplo safety"}
-          paragraph={
-            "Analyze plant images and video against previous accident records to predict where future accidents may occur. Spot fatigued workers or people standing too close to running machine or employees without PPE. Recognize safety hazards such as spills, blocked fire exits, and unattended security posts."
-          }
+          button={"Learn More"}
         />
       </ThirdContainer>
     </Container>
@@ -59,10 +56,9 @@ const ThirdContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 95%;
   height: 100%;
   margin-bottom: 50px;
-  box-shadow: 0px 0px 17px 3px rgba(158, 153, 158, 1);
 `;
 
 export default index;

@@ -96,8 +96,8 @@ const RequestButton = styled(Button)`
     font-size: 16px;
     transition: all 0.2s ease 0s;
     &:hover {
-      background-color: #96b4f7;
-
+      background-color: #091936;
+      color: white;
       border-color: transparent;
     }
     @media (max-width: 1000px) {

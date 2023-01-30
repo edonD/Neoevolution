@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import { Button } from "@mui/material";
 
-function Third({ sreverse, header, paragraph }) {
+function Third({ sreverse, header, paragraph, button }) {
   return (
     <Container>
       <RowContainer sreverse={sreverse}>
@@ -13,6 +14,9 @@ function Third({ sreverse, header, paragraph }) {
           <BodyBodyContainer>
             <p>{paragraph}</p>
           </BodyBodyContainer>
+          <ButtonContainer>
+            <RequestButton>{button}</RequestButton>
+          </ButtonContainer>
         </SecondPart>
         <OnePart>
           <StyledImage>
@@ -25,6 +29,7 @@ function Third({ sreverse, header, paragraph }) {
           </StyledImage>
         </OnePart>
       </RowContainer>
+      <Divider />
     </Container>
   );
 }
@@ -62,7 +67,44 @@ const RowContainer = styled.div`
     height: 400px;
   }
 `;
+const ButtonContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: fit-content;
 
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: white;
+`;
+
+const RequestButton = styled(Button)`
+  && {
+    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
+    width: 320px;
+    height: 50px;
+
+    padding: 8px 16px;
+    margin-left: 0px;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    border-radius: 4px;
+
+    font-size: 16px;
+    transition: all 0.1s ease 0s;
+    background-color: #091936;
+    color: white;
+    &:hover {
+      background-color: white;
+      color: #091936;
+      border-color: transparent;
+    }
+    @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+`;
 const StyledImage = styled.div`
   height: 85%;
   width: 100%;
@@ -84,7 +126,10 @@ const SecondPart = styled.div`
   user-select: none;
   display: flex;
   flex-direction: column;
-  justify-content: ${(p) => (p.sreverse === true ? "center" : "flex-start")};
+  padding-left: ${(p) => (p.sreverse === true ? "0px" : "50px")};
+  /* justify-content: ${(p) =>
+    p.sreverse === true ? "center" : "flex-start"}; */
+  justify-content: center;
   align-items: center;
   color: #232331;
   @media screen and (max-width: 1200px) {
@@ -93,7 +138,7 @@ const SecondPart = styled.div`
   }
 `;
 const BodyBodyContainer = styled.div`
-  height: 80%;
+  height: 30%;
   width: 100%;
   user-select: none;
   display: flex;
@@ -101,7 +146,7 @@ const BodyBodyContainer = styled.div`
   align-items: flex-start;
   color: black;
   p {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 200;
     @media screen and (max-width: 1200px) {
       font-size: 14px;
@@ -123,7 +168,7 @@ const BodyHeaderContainer = styled.div`
 
   h1 {
     margin: 0px;
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 200;
     color: black;
     @media screen and (max-width: 1200px) {
@@ -134,7 +179,11 @@ const BodyHeaderContainer = styled.div`
     }
   }
 `;
-
+const Divider = styled.div`
+  width: 90%;
+  height: 1px;
+  background-color: #bebebe;
+`;
 const OnePart = styled.div`
   width: 50%;
   height: 100%;
