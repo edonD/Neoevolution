@@ -15,11 +15,11 @@ function Progressbar() {
   useEffect(() => {
     let intervalId = null;
 
-    if (count <= 13) {
+    if (count <= 17) {
       intervalId = setInterval(() => {
         setCount((prevCount) => prevCount + 0.1);
       }, 10);
-    } else if (count < 49 && count >= 13) {
+    } else if (count < 47 && count >= 17) {
       intervalId = setInterval(() => {
         setShadow({
           firstCircle: true,
@@ -28,7 +28,7 @@ function Progressbar() {
         });
         setCount((prevCount) => prevCount + 1);
       }, 10);
-    } else if (count < 82 && count >= 49) {
+    } else if (count < 77 && count >= 47) {
       intervalId = setInterval(() => {
         setShadow({
           firstCircle: true,
@@ -37,7 +37,7 @@ function Progressbar() {
         });
         setCount((prevCount) => prevCount + 1);
       }, 10);
-    } else if (count < 99.5 && count >= 82) {
+    } else if (count < 97 && count >= 77) {
       intervalId = setInterval(() => {
         setShadow({
           firstCircle: true,
@@ -46,7 +46,7 @@ function Progressbar() {
         });
         setCount((prevCount) => prevCount + 1);
       }, 10);
-    } else if (count >= 99.5) {
+    } else if (count >= 97) {
       clearInterval(intervalId);
       // setCount(0);
     }
@@ -55,12 +55,6 @@ function Progressbar() {
   }, [count]);
   return (
     <Container>
-      <Image
-        src='/images/Network.png'
-        layout='fill'
-        objectFit='contain'
-        alt='brain'
-      />
       <TextDiv>
         <TextContainer shadow={shadow.firstCircle} up={"false"}>
           <h1>Current State</h1>
@@ -73,6 +67,7 @@ function Progressbar() {
         </TextContainer>
       </TextDiv>
       {/* <TestDivider> */}
+
       <Mask>
         <Intro />
 
@@ -125,7 +120,7 @@ export default Progressbar;
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #001c58;
   display: flex;
   flex-direction: column;
@@ -183,8 +178,9 @@ const Mask = styled.div`
 
 const Intro = styled.div`
   /* Size */
-  width: 200px;
+  width: 18%;
   border-top: dashed ${(props) => (props.large ? 3 : 1)}px #392158;
+
   background-size: contain;
   /* Content alignment */
   /* display: flex;
@@ -204,7 +200,7 @@ const Intro = styled.div`
 
 const Body = styled.div`
   /* Size */
-  width: 500px;
+  width: 30%;
   border: solid 1px #392158;
 
   /* Content alignment */
@@ -224,7 +220,7 @@ const Body = styled.div`
 const Circle = styled.div`
   width: 30px;
   height: 30px;
-  border-radius: 25px;
+  border-radius: 30px;
   border: 3px solid ${(props) => (props.shadow ? "white" : "#392158")};
   background-color: ${(props) => (props.shadow ? "#f63869" : "transparent")};
   z-index: 3;
@@ -284,6 +280,7 @@ const TextContainer = styled.div`
   width: 300px;
   background-color: transparent;
   color: ${(props) => (props.shadow ? "white" : "#3f537c")};
+  border: 1px solid green;
   h1 {
     margin: 0px;
     text-align: center;

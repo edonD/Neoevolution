@@ -5,7 +5,7 @@ function Second() {
   return (
     <Container>
       <HeaderDivider>
-        <h1>Evolve your industry 4.0 strategy with computer vision and AI.</h1>
+        <h1> Chip Development At Warp Speed</h1>
       </HeaderDivider>
       <BodyDivider>
         <p>
@@ -45,28 +45,6 @@ function Second() {
           purus et laoreet. Curabitur placerat mauris sit amet lectus malesuada,
           id congue ante tempus. Nulla quis bibendum arcu, nec interdum nibh.
           Nullam feugiat sem ut tincidunt porttitor.
-        </p>
-
-        <p>
-          Duis nibh dolor, tempus non malesuada vel, hendrerit in metus. Donec
-          in blandit turpis. Etiam tincidunt eros in dolor tincidunt, quis
-          porttitor ex consectetur. In non nisl tristique diam vehicula
-          tincidunt. Etiam at fermentum ligula, ac fermentum eros. Aliquam quis
-          nisi accumsan, sollicitudin felis eu, sagittis mauris. Nam blandit sed
-          nisi sit amet vestibulum. Aliquam eget rhoncus risus, blandit iaculis
-          enim. Proin ac iaculis neque, eu tempus arcu.
-        </p>
-
-        <p>
-          Quisque eu sapien augue. Phasellus nulla orci, finibus a egestas et,
-          fringilla a nunc. Praesent lacinia at mauris ac elementum. Nullam
-          rhoncus ultricies odio et commodo. Donec gravida, quam a sagittis
-          facilisis, lorem augue maximus libero, a suscipit velit magna sit amet
-          nulla. Phasellus elementum tempus lectus eu aliquet. In hac habitasse
-          platea dictumst. Curabitur commodo lacus nec nulla eleifend posuere.
-          In tellus ipsum, convallis eget ullamcorper sit amet, scelerisque in
-          mauris. Donec quis fringilla felis, id dictum urna. Pellentesque
-          dignissim eleifend nibh eu volutpat.
         </p>
       </BodyDivider>
     </Container>
@@ -127,8 +105,8 @@ const BodyDivider = styled.div`
   }
   p {
     margin: 20px 0px 20px 0px;
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 100;
     text-align: left;
     @media screen and (max-width: 1200px) {
       font-size: 14px;

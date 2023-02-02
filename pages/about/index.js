@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Header from "../../Components/Home/Header";
 import First from "../../Components/About/First";
 import Second from "../../Components/About/Second";
+import Third from "../../Components/About/Third";
+import Roadmap from "../../Components/Roadmap/Roadmap";
 
 function index() {
   return (
@@ -10,6 +12,8 @@ function index() {
       <Header />
       <First />
       <Second />
+      {/* <Roadmap /> */}
+      <Third />
     </Container>
   );
 }
