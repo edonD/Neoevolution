@@ -8,7 +8,6 @@ import ServicesDropdown from "./Dropdowns/ServicesDropdown";
 import ProductsDropdown from "./Dropdowns/ProductsDropdown";
 import Link from "next/link";
 import HeaderDropdown from "./HeaderDropdown";
-import { SiCoronaengine } from "react-icons/si";
 
 function Header({ children }) {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -36,11 +35,16 @@ function Header({ children }) {
   return (
     <>
       <Nav headerdown={hasScrolled}>
-        <Logo>
-          <Link href='/' passHref>
-            <SiCoronaengine size={50} />
-          </Link>
-        </Logo>
+        <Link href='/' passHref>
+          <Logo>
+            <Image
+              src='/images/logo_white.png'
+              layout='fill'
+              objectFit='contain'
+              alt='brain'
+            />
+          </Logo>
+        </Link>
         <NavMenu>
           <FirstDivider>
             <ServicesDropdown>
@@ -143,6 +147,23 @@ const ItemContainer = styled.div`
     }
   }
 `;
+
+const LogoContainer = styled.div`
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  margin-left: 20px;
+  color: black;
+  h1 {
+    color: white;
+    font-size: 22px;
+  }
+`;
 const ImageContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -178,9 +199,10 @@ const SecondDivider = styled.div`
 const Logo = styled.div`
   position: relative;
   width: 10%;
-  height: 100%;
+  height: 70%;
   background: transparent;
-  padding-left: 40px;
+  margin-left: 5px;
+
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -269,7 +291,11 @@ const Nav = styled.nav`
     #17181c 100%
   );
 
-  backdrop-filter: blur(3px);
+  backdrop-filter: ${(p) =>
+    p.headerdown === true
+      ? " blur(3px)"
+      : // ? "radial-gradient(circle at center center, #191B23 0%, #17181C 100%);"
+        "transparent"};
   background: ${(p) =>
     p.headerdown === true
       ? "rgba(23, 24, 28, 0.8)"
