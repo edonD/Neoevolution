@@ -23,7 +23,7 @@ function Third({ sreverse, header, paragraph, button }) {
             <Image
               src='/images/test-Software.svg'
               layout='fill'
-              alt='resistance'
+              alt='test-Software.svg'
               color='#235fd7'
             />
           </StyledImage>

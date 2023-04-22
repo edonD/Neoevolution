@@ -135,7 +135,7 @@ function Third() {
                 src='/images/resistorwhite.svg'
                 width='55px'
                 height='55px'
-                alt='resistance'
+                alt='test-Software.svgare.svgare.svg'
                 color='#235fd7'
               />
             </StyledImage>
