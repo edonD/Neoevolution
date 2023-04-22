@@ -5,46 +5,51 @@ function Second() {
   return (
     <Container>
       <HeaderDivider>
-        <h1> Chip Development At Warp Speed</h1>
+        <h1> Unleashing the potential of AI for modeling and simulations</h1>
       </HeaderDivider>
       <BodyDivider>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris velit
-          nibh, varius et viverra vitae, rutrum ut diam. Nullam ex nisl, mattis
-          bibendum mollis ac, imperdiet ut mauris. Integer commodo euismod nibh
-          vel varius. Maecenas consectetur scelerisque convallis. Phasellus
-          molestie faucibus enim. Donec sit amet dictum magna. Mauris ac
-          sagittis nulla. Curabitur ut tristique sapien, sit amet egestas magna.
-          Duis ornare bibendum tellus. Integer ac lacus ut nisi ultrices
-          molestie. Orci varius natoque penatibus et magnis dis parturient
-          montes, nascetur ridiculus mus. Integer aliquet eget ligula ut
-          tincidunt. Nulla diam sapien, porttitor at fringilla sed, congue sed
-          felis. Phasellus sapien nunc, luctus ac vulputate quis, venenatis
-          vitae tortor.
+          Our vision for the future of science is one where computational
+          sciences play a crucial role in advancing fundamental sciences and
+          engineering solutions to our most pressing challenges. We believe in
+          the power of data-driven models learned through machine learning and
+          specialized by domain knowledge to revolutionize the scientific
+          method. This paradigm shift will enable domain scientists to formulate
+          new research questions and find answers in innovative ways, ultimately
+          leading to solutions for problems that we cannot currently solve. Our
+          company is dedicated to accelerating this transition by bridging the
+          gap between machine learning and its use in science. We strive to
+          deepen our understanding of ML models so that we can use them as
+          scientist co-pilots in pursuit of groundbreaking scientific
+          discoveries. Join us in shaping the future of science.
         </p>
 
         <p>
-          Nunc bibendum tortor eros, at fermentum nisi volutpat eu. Maecenas
-          faucibus tortor at mi ultrices, vitae pretium mauris vehicula.
-          Vestibulum erat eros, consequat vel tristique vitae, molestie tempus
-          tortor. Nunc a tempor magna. Quisque in tincidunt leo, et molestie
-          augue. Integer tempor bibendum massa. Sed scelerisque commodo tempus.
-          Curabitur nulla ipsum, malesuada in accumsan ac, vulputate nec neque.
-          Sed tempor neque eu neque sodales venenatis. In hac habitasse platea
-          dictumst. Cras imperdiet, augue at faucibus consectetur, ipsum velit
-          porta turpis, quis lobortis arcu lectus ac erat. Proin sed consequat
-          dui. Pellentesque consectetur dui libero, vel euismod tellus tristique
-          non. Donec mollis interdum enim sed eleifend. Curabitur ut massa quis
-          lorem finibus dignissim. Duis laoreet varius odio, non iaculis nunc
-          rhoncus non.
+          In particular, we are exploring the application of AI to drug
+          discovery, leveraging the power of data-driven models and
+          domain-specific knowledge to accelerate the process of drug design and
+          optimization. Our team is dedicated to deepening our understanding of
+          machine learning models and developing user-friendly tools that can be
+          used by domain scientists to generate novel drug candidates and
+          predict their properties. We believe that AI has the potential to
+          revolutionize the field of drug discovery, and we are excited to be at
+          the forefront of this transformation.
         </p>
 
         <p>
-          Cras sed nunc lacus. Etiam ante odio, faucibus nec ante sed, mattis
-          rutrum mi. Proin eget ex sed quam blandit vulputate. Ut semper nec
-          purus et laoreet. Curabitur placerat mauris sit amet lectus malesuada,
-          id congue ante tempus. Nulla quis bibendum arcu, nec interdum nibh.
-          Nullam feugiat sem ut tincidunt porttitor.
+          Improvements in simulation and modeling with AI have the potential to
+          greatly impact the semiconductor industry by accelerating the process
+          of chip design and optimization. With the help of AI algorithms,
+          engineers can quickly generate and test virtual prototypes of new chip
+          designs, reducing the time and cost required for physical testing.
+          Machine learning can also assist in the prediction of semiconductor
+          properties, allowing for the optimization of chip performance and
+          energy efficiency. By leveraging these technologies, semiconductor
+          companies can stay at the forefront of innovation and rapidly bring
+          new products to market. Overall, AI has the potential to transform the
+          way that the semiconductor industry operates, streamlining the design
+          and production process and ultimately driving progress in this
+          critical field
         </p>
       </BodyDivider>
     </Container>

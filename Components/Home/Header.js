@@ -199,7 +199,7 @@ const SecondDivider = styled.div`
 const Logo = styled.div`
   position: relative;
   width: 10%;
-  height: 70%;
+  height: 60%;
   background: transparent;
   margin-left: 5px;
 

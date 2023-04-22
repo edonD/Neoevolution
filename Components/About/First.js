@@ -15,10 +15,12 @@ function First() {
           />
         </SecondWrapper>
         <Header>
-          <h1>Automating Analog Circuit Design</h1>
+          <h1>AI in Science</h1>
           <p>
-            Experience the future with our innovative AI-based compact model
-            calibration, perfected through 5 years of research.
+            The integration of AI and physics offers a powerful approach to
+            achieving AGI, enabling machines to reason about the world more like
+            humans and unlocking the potential for transformative impact on
+            society.
           </p>
           <StyledButton>Contact us</StyledButton>
         </Header>

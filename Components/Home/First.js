@@ -16,12 +16,11 @@ function First() {
       {/* <GradientOnTop /> */}
       <Wrapper>
         <Header>
-          <h1>AI Research Lab for Chip Design</h1>
+          <h1>Revolutionizing modeling and simulations with AI</h1>
 
           <p>
-            Cassandra Light gives you complete visibility over your entire
-            fleet’s performance and emissions – delivering accurate insights
-            without any hardware for the first time.
+            The Power of AI and Physics Combined: Pioneering the Future of
+            Science.
           </p>
         </Header>
         <ButtonContainer>
@@ -123,10 +122,10 @@ const Header = styled.div`
     /* font-weight: 400; */
     text-align: center;
     margin: 0px;
-    font-size: 64px;
+    font-size: 44px;
     text-shadow: 3px 3px 5px black;
     @media screen and (max-width: 1400px) {
-      font-size: 48px;
+      font-size: 36px;
     }
     @media screen and (max-width: 600px) {
       font-size: 42px;

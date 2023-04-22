@@ -5,15 +5,16 @@ function Second() {
   return (
     <Container>
       <HeaderDivider>
-        <h1>Evolve your industry 4.0 strategy with computer vision and AI.</h1>
+        <h1>AI in Science: Advancing Research and Discovery</h1>
       </HeaderDivider>
       <BodyDivider>
         <h1>
-          Industry 4.0 offers the opportunity for smart manufacturers to
-          optimize their operations quickly and efficiently by knowing what
-          needs attention. By using data from cameras and other Edge devices,
-          manufacturers can better manage capital assets, improve processes and
-          systems, monitor employee safety, and improve security.
+          Our mission is to build cutting-edge AI tools that drive scientific
+          discoveries and tackle real-world challenges. We believe in
+          transparency and will be building in public, sharing our progress with
+          the community. Our focus is on product delivery, ensuring our tools
+          are accessible and user-friendly for domain scientists. Join us in
+          shaping the future of science through collaborative innovation.
         </h1>
       </BodyDivider>
     </Container>
@@ -36,7 +37,7 @@ const Container = styled.div`
 const HeaderDivider = styled.div`
   width: 70%;
   height: 50%;
-
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
