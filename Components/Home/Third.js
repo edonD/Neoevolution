@@ -21,7 +21,7 @@ function Third({ sreverse, header, paragraph, button }) {
         <OnePart>
           <StyledImage>
             <Image
-              src='/images/software.png'
+              src='/images/test-Software.svg'
               layout='fill'
               alt='resistance'
               color='#235fd7'

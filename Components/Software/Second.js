@@ -32,8 +32,8 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #0044aa;
-  background: #0044aa;
+  background-color: #1945ad;
+  background: #1945ad;
   user-select: none;
   position: relative;
   @media screen and (max-width: 650px) {
@@ -48,7 +48,7 @@ const Divider = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: black;
+  color: #43ffff;
   @media screen and (max-width: 650px) {
     width: 30%;
   }

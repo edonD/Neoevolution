@@ -121,7 +121,10 @@ function ServicesDropdown({ children }) {
             </Link>
           </Wrapper> */}
         <Wrapper>
-          <Link href='/Services/passive-modeling'>
+          <Title>
+            <h1>Model Calibration Services</h1>
+          </Title>
+          <Link href='/Services/passive-modeling' passHref>
             <RowContainer>
               <ImageContainer>
                 <StyledImage>
@@ -146,7 +149,7 @@ function ServicesDropdown({ children }) {
               </BodyContainer>
             </RowContainer>
           </Link>
-          <Link href='/Services/active-modeling'>
+          <Link href='/Services/active-modeling' passHref>
             <RowContainer>
               <ImageContainer>
                 <StyledImage>
@@ -171,7 +174,7 @@ function ServicesDropdown({ children }) {
               </BodyContainer>
             </RowContainer>
           </Link>
-          <Link href='/Services/package-modeling'>
+          <Link href='/Services/package-modeling' passHref>
             <RowContainer>
               <ImageContainer>
                 <StyledImage>
@@ -196,7 +199,7 @@ function ServicesDropdown({ children }) {
               </BodyContainer>
             </RowContainer>
           </Link>
-          <Link href='/Services/contract-modeling'>
+          <Link href='/Services/contract-modeling' passHref>
             <RowContainer>
               <ImageContainer>
                 <StyledImage>
@@ -243,14 +246,17 @@ const Wrapper = styled.div`
   width: fit-content;
 `;
 
-const Services = styled.div`
+const Title = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
+  margin-bottom: 10px;
   h1 {
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: 200;
+    text-align: left;
   }
 `;
 const RowContainer = styled.div`

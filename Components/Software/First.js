@@ -49,13 +49,14 @@ const Container = styled.div`
 `;
 const ImageContainer = styled.div`
   position: relative;
-  width: 700px;
-  height: 380px;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   border-radius: 6px;
   opacity: 1;
+  overflow: hidden;
   /* border: 1px solid #333333;
   box-shadow: 0px 0px 0px 16px #333333ca; */
   @media screen and (min-width: 950px) and (max-width: 1200px) {
@@ -141,7 +142,7 @@ const Header = styled.div`
 
 const SoftwareContianer = styled.div`
   position: relative;
-  width: 40%;
+  width: 50%;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -149,7 +150,8 @@ const SoftwareContianer = styled.div`
   align-items: flex-start;
   color: white;
   user-select: none;
-  padding-top: 50px;
+  /* padding-top: 50px; */
+  /* border: 1px solid red; */
   h1 {
     text-align: left;
     margin: 0px;
