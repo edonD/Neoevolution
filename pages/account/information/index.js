@@ -29,12 +29,4 @@ const Container = styled.div`
   }
 `;
 
-const Background = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 80px;
-  background: red;
-  background-color: red;
-`;
-
 export default Contact;
