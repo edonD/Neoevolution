@@ -16,6 +16,7 @@ import DataGridFirst from "../DataGrids/DataGridFirst";
 import DropdownMenu from "../DropdownMenu";
 import Link from "next/link";
 import Plots from "../Plots";
+import DataGridSecond from "../DataGrids/DataGridSecond";
 
 function SidebarBodyResults() {
   return (
@@ -58,7 +59,7 @@ function SidebarBodyResults() {
       <MainView>
         <Grid container spacing={2}>
           <Grid item sm={4}>
-            <DataGridFirst />
+            <DataGridSecond />
           </Grid>
           <Grid item sm={8}>
             <Plots />

@@ -71,10 +71,33 @@ const rows = [
   { id: 26, w: "Frances", l: "Rossini", t: 36 },
   { id: 27, w: "Roxie", l: "Harvey", t: 65 },
 ];
-function DataGridFirst() {
+function DataGridSecond() {
   return (
     <Container>
-      <DropdownMenu />
+      <LabelContainer>
+        <Label>Iteration</Label>
+        <Label
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          }}
+        >
+          15
+        </Label>
+      </LabelContainer>
+      <LabelContainer>
+        <Label>Accuracy</Label>
+        <Label
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          }}
+        >
+          1.233e+00
+        </Label>
+      </LabelContainer>
       <SelectButtons />
       <Data>
         <DataGrid
@@ -117,4 +140,20 @@ const Data = styled.div`
   height: calc(100vh - 300px);
   width: 100%;
 `;
-export default DataGridFirst;
+const LabelContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: fit-content;
+  width: 100%;
+  margin: 5px 0px 5px 0px;
+`;
+const Label = styled.span`
+  font-size: 16px;
+  font-weight: 200;
+  color: #353740;
+  margin-left: 10px;
+  width: 50%;
+`;
+
+export default DataGridSecond;
