@@ -19,6 +19,7 @@ import Plots from "../Plots";
 import Buttons from "../Buttons";
 import ProgressBar from "../ProgressBar";
 import OptimizationScatterPlot from "../DataGrids/OptimizationScatterPlot";
+import MultipleHistograms from "../DataGrids/MultipleHistograms";
 
 function SidebarBody() {
   return (
@@ -59,14 +60,35 @@ function SidebarBody() {
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        <Grid container spacing={2}>
-          <Grid item sm={4}>
-            <Buttons />
-            <ProgressBar />
-            <OptimizationScatterPlot />
+        <Grid
+          container
+          direction='row'
+          justifyContent='center'
+          alignItems='center'
+          spacing={2}
+        >
+          <Grid
+            container
+            direction='column'
+            justifyContent='center'
+            alignItems='center'
+            item
+            xs={12}
+            sm={8}
+            spacing={2}
+          >
+            <Grid item>
+              <Buttons />
+            </Grid>
+            <Grid item>
+              <ProgressBar />
+            </Grid>
+            <Grid item>
+              <OptimizationScatterPlot />
+            </Grid>
           </Grid>
-          <Grid item sm={8}>
-            <Plots />
+          <Grid container item xs={12} sm={4}>
+            <MultipleHistograms />
           </Grid>
         </Grid>
       </MainView>
@@ -192,7 +214,8 @@ const AccountBody = styled.div`
 `;
 const MainView = styled.div`
   width: calc(100% - 300px);
-  height: calc(100vh - 100px);
+  /* height: calc(100vh - 100px); */
+  height: 100%;
   display: flex;
   flex-direction: row;
 

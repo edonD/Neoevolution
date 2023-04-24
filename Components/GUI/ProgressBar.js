@@ -10,6 +10,7 @@ const ProgressBarContainer = styled.div`
   border-radius: 1px;
   overflow: hidden;
   position: relative;
+  width: 800px;
 `;
 
 const ProgressFill = styled.div`

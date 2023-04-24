@@ -12,17 +12,21 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: #6c757d;
+  background-color: #353740;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 35px;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
   padding: 10px;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #007bff;
+    color: black;
+    background-color: #d0d0d0;
   }
 `;
 
@@ -42,7 +46,7 @@ function Buttons() {
   return (
     <ButtonContainer>
       <Button onClick={handlePlay}>
-        <BsFillPlayCircleFill />
+        <FaPlay />
       </Button>
       <Button onClick={handlePause}>
         <FaPause />
