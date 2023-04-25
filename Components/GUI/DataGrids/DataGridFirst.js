@@ -103,18 +103,30 @@ const Container = styled.div`
   position: relative;
   margin: 0px;
   padding-top: 20px;
-  @media screen and (max-height: 750px) {
+  @media screen and (max-width: 600px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     height: 100%;
-    background-color: white;
+    /* background-color: red; */
   }
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1600px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     height: 100%;
-    background-color: white;
+    width: 90%;
+    /* background-color: blue; */
   }
 `;
 
 const Data = styled.div`
   height: calc(100vh - 300px);
   width: 100%;
+  @media screen and (max-width: 1600px) {
+    height: 100%;
+  }
 `;
 export default DataGridFirst;

@@ -57,10 +57,12 @@ function SidebarBody() {
       </WrapperDescription>
       <MainView>
         <Grid container spacing={2}>
-          <Grid item sm={4}>
-            <DataGridFirst />
+          <Grid item xs={12} sm={12} xl={4}>
+            <GridContainer>
+              <DataGridFirst />
+            </GridContainer>
           </Grid>
-          <Grid item sm={8}>
+          <Grid item xs={12} sm={12} xl={8}>
             <Plots />
           </Grid>
         </Grid>
@@ -185,6 +187,14 @@ const AccountBody = styled.div`
     }
   }
 `;
+const GridContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 const MainView = styled.div`
   width: calc(100% - 300px);
   height: calc(100vh - 100px);
@@ -202,6 +212,15 @@ const MainView = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0px;
+
+    height: 100%;
+  }
+  @media screen and (max-height: 1200px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     background-color: white;
     height: 100%;

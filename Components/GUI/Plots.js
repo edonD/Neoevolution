@@ -240,8 +240,10 @@ const Container = styled.div`
   height: calc(100vh - 100px);
   padding: 10px;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1210px) {
     overflow: hidden;
+    padding: 0px;
+    height: 100%;
   }
 
   /* overflow-y: scr; */
@@ -265,6 +267,12 @@ const FirstRow = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 1210px) {
+    height: 100%;
+    width: 90%;
+    flex-direction: column;
+  }
 `;
 
 export default Plots;
