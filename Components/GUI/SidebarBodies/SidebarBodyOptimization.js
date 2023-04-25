@@ -74,20 +74,24 @@ function SidebarBody() {
             alignItems='center'
             item
             xs={12}
-            sm={8}
+            sm={12}
+            md={12}
+            lg={8}
             spacing={2}
           >
             <Grid item>
               <Buttons />
             </Grid>
             <Grid item>
-              <ProgressBar />
+              <ProgressBarContainer>
+                <ProgressBar />
+              </ProgressBarContainer>
             </Grid>
             <Grid item>
               <OptimizationScatterPlot />
             </Grid>
           </Grid>
-          <Grid container item xs={12} sm={4}>
+          <Grid container item xs={12} sm={12} md={12} lg={4}>
             <MultipleHistograms />
           </Grid>
         </Grid>
@@ -173,6 +177,15 @@ const PersonalContent = styled.div`
     } */
 `;
 
+const ProgressBarContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
 const ImageContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -218,7 +231,7 @@ const MainView = styled.div`
   height: 100%;
   display: flex;
   flex-direction: row;
-
+  position: relative;
   justify-content: flex-start;
   padding-top: 0px;
   align-items: center;

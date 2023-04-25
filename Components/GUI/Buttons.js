@@ -8,6 +8,8 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: red;
+  width: 100%;
   gap: 10px;
 `;
 

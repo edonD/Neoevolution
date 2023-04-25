@@ -11,6 +11,10 @@ const ProgressBarContainer = styled.div`
   overflow: hidden;
   position: relative;
   width: 800px;
+
+  @media screen and (max-width: 800px) {
+    width: 90vw;
+  }
 `;
 
 const ProgressFill = styled.div`

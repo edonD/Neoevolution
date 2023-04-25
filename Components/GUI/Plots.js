@@ -253,7 +253,7 @@ const PlotContainer = styled.div`
   height: 90%;
   width: 95%;
   background-color: #f5f5f5;
-  border: 10px solid #cccccc;
+  border: 1px solid #cccccc;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
