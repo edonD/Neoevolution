@@ -57,12 +57,12 @@ function SidebarBody() {
       </WrapperDescription>
       <MainView>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={12} xl={4}>
+          <Grid item xs={12} sm={12} lg={12} xl={4}>
             <GridContainer>
               <DataGridFirst />
             </GridContainer>
           </Grid>
-          <Grid item xs={12} sm={12} xl={8}>
+          <Grid item xs={12} sm={12} lg={12} xl={8}>
             <Plots />
           </Grid>
         </Grid>
@@ -215,7 +215,7 @@ const MainView = styled.div`
 
     height: 100%;
   }
-  @media screen and (max-height: 1200px) {
+  @media screen and (max-height: 1600px) {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -294,7 +294,7 @@ const WrapperDescription = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1600px) {
     display: none;
   }
 `;

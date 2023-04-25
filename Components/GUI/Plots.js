@@ -240,7 +240,7 @@ const Container = styled.div`
   height: calc(100vh - 100px);
   padding: 10px;
 
-  @media screen and (max-width: 1210px) {
+  @media screen and (max-width: 1600px) {
     overflow: hidden;
     padding: 0px;
     height: 100%;
@@ -253,12 +253,13 @@ const PlotContainer = styled.div`
   height: 90%;
   width: 95%;
   background-color: #f5f5f5;
-  border: 1px solid #cccccc;
+  border: 10px solid #cccccc;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 `;
 
 const FirstRow = styled.div`
@@ -268,7 +269,7 @@ const FirstRow = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 1210px) {
+  @media screen and (max-width: 1538px) {
     height: 100%;
     width: 90%;
     flex-direction: column;
