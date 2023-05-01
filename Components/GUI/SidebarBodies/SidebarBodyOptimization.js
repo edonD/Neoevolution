@@ -20,8 +20,56 @@ import Buttons from "../Buttons";
 import ProgressBar from "../ProgressBar";
 import OptimizationScatterPlot from "../DataGrids/OptimizationScatterPlot";
 import MultipleHistograms from "../DataGrids/MultipleHistograms";
+import dynamic from "next/dynamic";
 
 function SidebarBody() {
+  const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
+  const [response, setResponse] = useState("");
+
+  const [data, setData] = useState([]);
+  const [layout, setLayout] = useState({
+    title: "i(vds) vs v(d)",
+    xaxis: { title: "v(d)" },
+    yaxis: { title: "i(vds)" },
+    showlegend: true,
+  });
+
+  function onlyUnique(value, index, array) {
+    return array.indexOf(value) === index;
+  }
+
+  async function handleClick() {
+    try {
+      const res = await fetch("http://3.72.38.1:3000/show-result");
+      const text = await res.text();
+      /*console.log(text);
+      setResponse(text);*/
+
+      const rows = text.trim().split("\n").slice(1); // remove header row
+      const columns = rows[0].trim().split(/\s+/); // split by whitespace
+
+      const intermediateData = columns
+        .slice(1)
+        .map((name, i) => rows.map((row) => +row.trim().split(/\s+/)[i + 1]));
+      const id = intermediateData[0];
+      const vd = intermediateData[1];
+      const vg = intermediateData[2];
+      const vg_unique = vg.filter(onlyUnique);
+
+      const data = vg_unique.map((vg_val, _) => ({
+        x: vd.filter((_, index) => vg[index] == vg_val),
+        y: id.filter((_, index) => vg[index] == vg_val),
+        type: "scatter",
+        mode: "markers",
+        name: "vg = " + vg_val,
+      }));
+
+      setData(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <Container>
       <WrapperDescription>
@@ -80,7 +128,7 @@ function SidebarBody() {
             spacing={2}
           >
             <Grid item>
-              <Buttons />
+              <Buttons onClick={handleClick} />
             </Grid>
             <Grid item>
               <ProgressBarContainer>
@@ -88,8 +136,38 @@ function SidebarBody() {
               </ProgressBarContainer>
             </Grid>
             <Grid item>
-              <OptimizationScatterPlot />
+              <Plot data={data} layout={layout} />
             </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            {/* <Grid item>
+              <OptimizationScatterPlot />
+            </Grid> */}
           </Grid>
           <Grid container item xs={12} sm={12} md={12} lg={4}>
             <MultipleHistograms />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { FaPlay, FaPause, FaStop } from "react-icons/fa";
 import { BsFillPlayCircleFill } from "react-icons/bs";
@@ -32,9 +32,9 @@ const Button = styled.button`
   }
 `;
 
-function Buttons() {
+function Buttons({ onClick }) {
   const handlePlay = () => {
-    // handle play button click
+    onClick();
   };
 
   const handlePause = () => {
