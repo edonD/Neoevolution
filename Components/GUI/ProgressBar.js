@@ -21,7 +21,7 @@ const ProgressFill = styled.div`
   height: 100%;
   background-color: #3ba9e7;
   border-radius: 1px;
-  transition: width 1s ease;
+  transition: width 0.1s ease;
 `;
 
 const ProgressNumber = styled.span`
@@ -33,8 +33,10 @@ const ProgressNumber = styled.span`
   transform: translate(-50%, -50%);
 `;
 
-function ProgressBar() {
+function ProgressBar({ now }) {
   const [progress, setProgress] = useState(0);
+
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     if (progress < 100) {
@@ -44,7 +46,7 @@ function ProgressBar() {
 
       return () => clearInterval(interval);
     }
-  }, [progress]);
+  }, [progress, now, check]);
 
   return (
     <ProgressBarContainer>

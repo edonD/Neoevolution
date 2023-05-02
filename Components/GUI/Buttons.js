@@ -32,9 +32,9 @@ const Button = styled.button`
   }
 `;
 
-function Buttons({ onClick }) {
+function Buttons({ onClickPlay, onClickStop }) {
   const handlePlay = () => {
-    onClick();
+    onClickPlay();
   };
 
   const handlePause = () => {
@@ -43,6 +43,7 @@ function Buttons({ onClick }) {
 
   const handleStop = () => {
     // handle stop button click
+    onClickStop();
   };
 
   return (
