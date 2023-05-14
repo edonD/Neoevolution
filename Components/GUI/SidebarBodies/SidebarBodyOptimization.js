@@ -173,6 +173,33 @@ function SidebarBody() {
             <Grid item>
               <Plot data={data} layout={layout} />
             </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>{" "}
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>{" "}
+            <Grid item>
+              <Plot data={data} layout={layout} />
+            </Grid>
           </Grid>
           <Grid container item xs={12} sm={12} md={12} lg={4}>
             <MultipleHistograms />
