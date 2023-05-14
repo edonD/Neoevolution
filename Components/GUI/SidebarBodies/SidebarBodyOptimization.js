@@ -25,6 +25,7 @@ import dynamic from "next/dynamic";
 function SidebarBody() {
   const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
   const [now, setNow] = useState(false);
+  const [text, setText] = useState("");
 
   const [data, setData] = useState([]);
   const [layout, setLayout] = useState({
@@ -38,45 +39,38 @@ function SidebarBody() {
     return array.indexOf(value) === index;
   }
 
-  async function handleClickPlay() {
+  async function handleClickPython() {
     try {
       //setNow("start");
-      const res = await fetch("http://3.76.126.24:3000/show-result");
+      const res = await fetch("https://aivalancheapi.com/run-python");
       const text = await res.text();
-      /*console.log(text);
+      console.log(text);
+      setText(text);
+      /*
       setResponse(text);*/
-
-      const rows = text.trim().split("\n").slice(1); // remove header row
-      const columns = rows[0].trim().split(/\s+/); // split by whitespace
-
-      const intermediateData = columns
-        .slice(1)
-        .map((name, i) => rows.map((row) => +row.trim().split(/\s+/)[i + 1]));
-      const id = intermediateData[0];
-      const vd = intermediateData[1];
-      const vg = intermediateData[2];
-      const vg_unique = vg.filter(onlyUnique);
-
-      const data = vg_unique.map((vg_val, _) => ({
-        x: vd.filter((_, index) => vg[index] == vg_val),
-        y: id.filter((_, index) => vg[index] == vg_val),
-        type: "scatter",
-        mode: "markers",
-        name: "vg = " + vg_val,
-      }));
-
-      setData(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function handleClickStop() {
+  async function handleClickNGSpice() {
     try {
       const res = await fetch(
-        "http://3.76.126.24:3000/show-result-with-python"
+        "https://aivalancheapi.com/run-ngspice?file=/home/ubuntu/Desktop/ngspice/examples/measure/MOScharacteristics.sp"
       );
+      const text = await res.text();
+      console.log(text);
+      setText(text);
+      /*console.log(text);
+      setResponse(text);*/
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleClickPlot() {
+    try {
+      const res = await fetch("https://aivalancheapi.com/show-result");
       const text = await res.text();
       /*console.log(text);
       setResponse(text);*/
@@ -101,15 +95,9 @@ function SidebarBody() {
       }));
 
       setData(data);
-
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
-  }
-
-  function handleClickPlot() {
-    setNow((prevCheck) => !prevCheck);
   }
 
   return (
@@ -171,15 +159,16 @@ function SidebarBody() {
           >
             <Grid item>
               <TestButtons
-                onClickPlay={handleClickPlay}
-                onClickStop={handleClickStop}
+                onClickRunNGSPice={handleClickNGSpice}
+                onClickRunPython={handleClickPython}
                 onClickPlot={handleClickPlot}
               />
             </Grid>
             <Grid item>
-              <ProgressBarContainer>
+              <h1>{text}</h1>
+              {/* <ProgressBarContainer>
                 <ProgressBar now={now} />
-              </ProgressBarContainer>
+              </ProgressBarContainer> */}
             </Grid>
             <Grid item>
               <Plot data={data} layout={layout} />

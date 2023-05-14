@@ -4,9 +4,9 @@ import { FaPlay, FaPause, FaStop } from "react-icons/fa";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import styled from "styled-components";
 
-function TestButtons({ onClickPlay, onClickStop, onClickPlot }) {
+function TestButtons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
   const handlePlay = () => {
-    onClickPlay();
+    onClickRunNGSPice();
   };
 
   const handlePlot = () => {
@@ -15,7 +15,7 @@ function TestButtons({ onClickPlay, onClickStop, onClickPlot }) {
 
   const handleStop = () => {
     // handle stop button click
-    onClickStop();
+    onClickRunPython();
   };
 
   return (
