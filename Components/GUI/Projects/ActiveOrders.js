@@ -1,13 +1,13 @@
 import React from "react";
 
-import CardInternal from "../Billing/Card/CardInternal";
-
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
+import CardInternal from "../../Account/Billing/Card/CardInternal";
+import CardForProjects from "../../Account/Billing/Card/CardForProjects";
 
-function BillingHistory() {
+function ActiveOrders() {
   return (
     <WrapperForm>
       <Form
@@ -18,32 +18,26 @@ function BillingHistory() {
       >
         <Grid container spacing={2} columnSpacing={2}>
           <Grid item xs={12}>
-            <Headerh2>Active Orders</Headerh2>
+            <Headerh2>Projects</Headerh2>
           </Grid>
           <Grid item xs={12} md={12} xl={6}>
-            <CardInternal state={"In Process"} />
+            <CardForProjects state={"In Process"} />
           </Grid>
           <Grid item xs={12} md={12} xl={6}>
-            <CardInternal state={"In Process"} />
+            <CardForProjects state={"In Process"} />
           </Grid>
           <Grid item xs={12} md={12} xl={6}>
-            <CardInternal state={"In Process"} />
-          </Grid>
-          <Grid item xs={12} md={12} xl={6}>
-            <CardInternal state={"In Process"} />
+            <CardForProjects state={"Delivered"} />
           </Grid>
 
           <Grid item xs={12} md={12} xl={6}>
-            <CardInternal state={"In Process"} />
+            <CardForProjects state={"In Process"} />
           </Grid>
           <Grid item xs={12} md={12} xl={6}>
-            <CardInternal state={"In Process"} />
+            <CardForProjects state={"In Process"} />
           </Grid>
           <Grid item xs={12} md={12} xl={6}>
-            <CardInternal state={"In Process"} />
-          </Grid>
-          <Grid item xs={12} md={12} xl={6}>
-            <CardInternal state={"In Process"} />
+            <CardForProjects state={"In Process"} />
           </Grid>
         </Grid>
       </Form>
@@ -143,4 +137,4 @@ const FormButton = styled(Button)`
   }
 `;
 
-export default BillingHistory;
+export default ActiveOrders;

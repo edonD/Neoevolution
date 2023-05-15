@@ -5,12 +5,13 @@ import dynamic from "next/dynamic";
 import { Grid } from "@material-ui/core";
 import Plots from "../../../Components/GUI/Plots";
 import SidebarHeader from "../../../Components/GUI/SidebarHeader";
+import ProfileHeader from "../../../Components/Account/ProfileHeader/ProfileHeader";
 import SidebarBodyOptimization from "../../../Components/GUI/SidebarBodies/SidebarBodyOptimization";
 
 function index() {
   return (
     <Container>
-      <SidebarHeader />
+      <ProfileHeader />
       <SidebarBodyOptimization />
     </Container>
   );

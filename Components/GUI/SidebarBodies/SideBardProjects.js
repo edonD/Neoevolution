@@ -12,94 +12,12 @@ import { Button } from "@mui/material";
 import { BsPerson } from "react-icons/bs";
 import { AiFillCreditCard, AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
-import DataGridFirst from "../DataGrids/DataGridFirst";
-import DropdownMenu from "../DropdownMenu";
+
 import Link from "next/link";
 import Plots from "../Plots";
-import TestButtons from "../TestButtons";
-import ProgressBar from "../ProgressBar";
-import OptimizationScatterPlot from "../DataGrids/OptimizationScatterPlot";
-import MultipleHistograms from "../DataGrids/MultipleHistograms";
-import dynamic from "next/dynamic";
+import ActiveOrders from "../Projects/ActiveOrders";
 
-function SidebarBody() {
-  const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
-  const [now, setNow] = useState(false);
-  const [text, setText] = useState("");
-
-  const [data, setData] = useState([]);
-  const [layout, setLayout] = useState({
-    title: "i(vds) vs v(d)",
-    xaxis: { title: "v(d)" },
-    yaxis: { title: "i(vds)" },
-    showlegend: true,
-  });
-
-  function onlyUnique(value, index, array) {
-    return array.indexOf(value) === index;
-  }
-
-  async function handleClickPython() {
-    try {
-      //setNow("start");
-      const res = await fetch("https://aivalancheapi.com/run-python");
-      const text = await res.text();
-      console.log(text);
-      setText(text);
-      /*
-      setResponse(text);*/
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function handleClickNGSpice() {
-    try {
-      const res = await fetch(
-        "https://aivalancheapi.com/run-ngspice?file=/home/ubuntu/Desktop/ngspice/examples/measure/MOScharacteristics.sp"
-      );
-      const text = await res.text();
-      console.log(text);
-      setText(text);
-      /*console.log(text);
-      setResponse(text);*/
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function handleClickPlot() {
-    try {
-      const res = await fetch("https://aivalancheapi.com/show-result");
-      const text = await res.text();
-      /*console.log(text);
-      setResponse(text);*/
-
-      const rows = text.trim().split("\n").slice(1); // remove header row
-      const columns = rows[0].trim().split(/\s+/); // split by whitespace
-
-      const intermediateData = columns
-        .slice(1)
-        .map((name, i) => rows.map((row) => +row.trim().split(/\s+/)[i + 1]));
-      const id = intermediateData[0];
-      const vd = intermediateData[1];
-      const vg = intermediateData[2];
-      const vg_unique = vg.filter(onlyUnique);
-
-      const data = vg_unique.map((vg_val, _) => ({
-        x: vd.filter((_, index) => vg[index] == vg_val),
-        y: id.filter((_, index) => vg[index] == vg_val),
-        type: "scatter",
-        mode: "markers",
-        name: "vg = " + vg_val,
-      }));
-
-      setData(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
+function SidebarProjects() {
   return (
     <Container>
       <WrapperDescription>
@@ -112,19 +30,11 @@ function SidebarBody() {
           <h2>Valanche</h2>
         </AccountHeader>
         <AccountBody>
-          <Link href='/aivalanche/model-and-data' passHref>
-            <ListItem>
-              <Icon>
-                <AiFillFolderOpen size={30} />
-              </Icon>
-              <h1>Projects</h1>
-            </ListItem>
-          </Link>
           <ListItemMain>
             <Icon>
-              <AiFillCreditCard size={30} />
+              <AiFillFolderOpen size={30} />
             </Icon>
-            <h1>Optimization</h1>
+            <h1>Projects</h1>
           </ListItemMain>
 
           <Link href='/aivalanche/results' passHref>
@@ -138,46 +48,7 @@ function SidebarBody() {
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        <Grid
-          container
-          direction='row'
-          justifyContent='center'
-          alignItems='center'
-          spacing={2}
-        >
-          <Grid
-            container
-            direction='column'
-            justifyContent='center'
-            alignItems='center'
-            item
-            xs={12}
-            sm={12}
-            md={12}
-            lg={8}
-            spacing={2}
-          >
-            <Grid item>
-              <TestButtons
-                onClickRunNGSPice={handleClickNGSpice}
-                onClickRunPython={handleClickPython}
-                onClickPlot={handleClickPlot}
-              />
-            </Grid>
-            <Grid item>
-              <h1>{text}</h1>
-              {/* <ProgressBarContainer>
-                <ProgressBar now={now} />
-              </ProgressBarContainer> */}
-            </Grid>
-            <Grid item>
-              <Plot data={data} layout={layout} />
-            </Grid>
-          </Grid>
-          <Grid container item xs={12} sm={12} md={12} lg={4}>
-            <MultipleHistograms />
-          </Grid>
-        </Grid>
+        <ActiveOrders />
       </MainView>
     </Container>
   );
@@ -253,11 +124,11 @@ const PersonalContent = styled.div`
     color: #119bbd;
   }
   /* @media (min-width: 1000px) {
-      display: none;
-    }
-    &:hover {
-      color: #119bbd;
-    } */
+        display: none;
+      }
+      &:hover {
+        color: #119bbd;
+      } */
 `;
 
 const ImageContainer = styled.div`
@@ -299,13 +170,20 @@ const AccountBody = styled.div`
     }
   }
 `;
-const MainView = styled.div`
-  width: calc(100% - 300px);
-  /* height: calc(100vh - 100px); */
+const GridContainer = styled.div`
+  width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const MainView = styled.div`
+  width: calc(100% - 300px);
+  height: calc(100vh - 100px);
+  display: flex;
   flex-direction: row;
-  position: relative;
+
   justify-content: flex-start;
   padding-top: 0px;
   align-items: center;
@@ -317,6 +195,15 @@ const MainView = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0px;
+
+    height: 100%;
+  }
+  @media screen and (max-height: 1600px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     background-color: white;
     height: 100%;
@@ -390,7 +277,7 @@ const WrapperDescription = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1600px) {
     display: none;
   }
 `;
@@ -459,4 +346,4 @@ const FormButton = styled(Button)`
   }
 `;
 
-export default SidebarBody;
+export default SidebarProjects;

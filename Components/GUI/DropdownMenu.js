@@ -2,17 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 
-const options = [
-  { label: "NMOS-BSIM4", value: "option1" },
-  { label: "PMOS-BSIM4", value: "option2" },
-  { label: "PMOS-HiSIM", value: "option3" },
-  { label: "NMOS-HiSIM", value: "option4" },
-  { label: "Diode", value: "option5" },
-  { label: "Capacitor", value: "option6" },
-  { label: "Resistor", value: "option7" },
-];
-
-const DropdownMenu = () => {
+const DropdownMenu = ({ items, label }) => {
   const [selectedOption, setSelectedOption] = useState("option1");
 
   const handleSelectChange = (event) => {
@@ -21,19 +11,34 @@ const DropdownMenu = () => {
 
   return (
     <Container>
-      <LabelContainer>
-        <Label>Model Id</Label>
-      </LabelContainer>
-      <FormControl fullWidth>
+      {label ? (
+        <LabelContainer>
+          <Label>Model Id</Label>
+        </LabelContainer>
+      ) : (
+        <></>
+      )}
+      <FormControl fullWidth margin='normal'>
         <Select
           labelId='dropdown-label'
           value={selectedOption}
           onChange={handleSelectChange}
-          // displayEmpty
+          MenuProps={{
+            PaperProps: {
+              style: {
+                maxHeight: "200px",
+                overflowY: "auto",
+              },
+            },
+          }}
         >
-          {options.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
+          {items.map((items) => (
+            <MenuItem
+              style={{ display: "block" }}
+              key={items.value}
+              value={items.value}
+            >
+              {items.label}
             </MenuItem>
           ))}
         </Select>
@@ -43,7 +48,7 @@ const DropdownMenu = () => {
 };
 
 const Container = styled.div`
-  height: fit-content;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;

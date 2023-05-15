@@ -74,7 +74,17 @@ const rows = [
 function DataGridFirst() {
   return (
     <Container>
-      <DropdownMenu />
+      <DropdownMenu
+        items={[
+          { label: "aNMOS-BSIM4", value: "option1" },
+          { label: "PMOS-BSIM4", value: "option2" },
+          { label: "PMOS-HiSIM", value: "option3" },
+          { label: "NMOS-HiSIM", value: "option4" },
+          { label: "Diode", value: "option5" },
+          { label: "Capacitor", value: "option6" },
+          { label: "Resistor", value: "option7" },
+        ]}
+      />
       <SelectButtons />
       <Data>
         <DataGrid

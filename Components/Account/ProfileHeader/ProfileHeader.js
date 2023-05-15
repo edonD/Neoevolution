@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SiCoronaengine } from "react-icons/si";
+
 import ProfileHeaderDropdown from "../Dropdown/ProfileHeaderDropdown";
 import Link from "next/link";
 import { Button } from "@mui/material";
+import Image from "next/image";
 
 function ProfileHeader() {
   const [dropDownState, setdropDownState] = useState(false);
@@ -13,7 +14,12 @@ function ProfileHeader() {
   return (
     <Background>
       <LogoContainer>
-        <SiCoronaengine size={50} />
+        <Image
+          src='/images/logo_blue.png'
+          layout='fill'
+          objectFit='contain'
+          alt='brain'
+        />
       </LogoContainer>
       <SecondDivider>
         <Link href='/Contact' passHref>
@@ -80,6 +86,25 @@ const Contact = styled(Button)`
     }
   }
 `;
+
+const LogoContainer = styled.div`
+  position: relative;
+  width: 10%;
+  height: 60%;
+  background: transparent;
+  margin-left: 5px;
+
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  user-select: none;
+  @media (max-width: 1000px) {
+    width: 20%;
+  }
+`;
 const PersonalContent = styled.div`
   padding: 0;
   width: 48px;
@@ -124,23 +149,6 @@ const ImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #353740;
-  color: black;
-  h1 {
-    color: white;
-    font-size: 22px;
-  }
-`;
-
-const LogoContainer = styled.div`
-  width: fit-content;
-  height: 100%;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  margin-left: 20px;
   color: black;
   h1 {
     color: white;

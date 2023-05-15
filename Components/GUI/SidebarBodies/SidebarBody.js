@@ -10,7 +10,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import { BsPerson } from "react-icons/bs";
-import { AiFillCreditCard } from "react-icons/ai";
+import { AiFillCreditCard, AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 import DataGridFirst from "../DataGrids/DataGridFirst";
 import DropdownMenu from "../DropdownMenu";
@@ -32,9 +32,9 @@ function SidebarBody() {
         <AccountBody>
           <ListItemMain>
             <Icon>
-              <BsPerson size={30} />
+              <AiFillFolderOpen size={30} />
             </Icon>
-            <h1>Model and Data</h1>
+            <h1>Projects</h1>
           </ListItemMain>
 
           <Link href='/aivalanche/optimization' passHref>
@@ -48,9 +48,9 @@ function SidebarBody() {
           <Link href='/aivalanche/results' passHref>
             <ListItem>
               <Icon>
-                <BiLoaderCircle size={30} />
+                <BiLoaderCircle color={"red"} size={30} />
               </Icon>
-              <h1>Results</h1>
+              <h1>Running</h1>
             </ListItem>
           </Link>
         </AccountBody>
