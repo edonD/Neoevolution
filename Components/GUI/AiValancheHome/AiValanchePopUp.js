@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { MdOutlineBusinessCenter } from "react-icons/md";
 import Link from "next/link";
 
-export default function AiValanchePopUp() {
+export default function AiValanchePopUp({ onData }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -35,9 +35,15 @@ export default function AiValanchePopUp() {
         </DialogContent>
         <DialogActions>
           <CancelButton onClick={handleClose}>Cancel</CancelButton>
-          <Link href='/aivalanche/optimization/' passHref>
-            <SubmitButton>Create</SubmitButton>
-          </Link>
+
+          <SubmitButton
+            onClick={() => {
+              const increment = 1;
+              onData(increment);
+            }}
+          >
+            Create
+          </SubmitButton>
         </DialogActions>
       </Dialog>
     </div>

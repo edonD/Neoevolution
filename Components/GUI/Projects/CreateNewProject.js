@@ -1,13 +1,11 @@
 import React from "react";
 import { GiSwirledShell } from "react-icons/gi";
-import AiValanchePopUp from "../../Components/GUI/AiValancheHome/AiValanchePopUp";
+import AiValanchePopUp from "../../../Components/GUI/AiValancheHome/AiValanchePopUp";
 import styled from "styled-components";
-import ProfileHeader from "../../Components/Account/ProfileHeader/ProfileHeader";
 
-function index() {
+function CreateNewProject({ onData }) {
   return (
     <Container>
-      <ProfileHeader />
       <Wrapper>
         <Logo>
           <GiSwirledShell size={50} style={{ transform: "rotate(-180deg)" }} />
@@ -19,7 +17,7 @@ function index() {
             including models, simulations, model calibrations and more.
           </Description>
           <ButtonContainer>
-            <AiValanchePopUp />
+            <AiValanchePopUp onData={onData} />
           </ButtonContainer>
         </Body>
       </Wrapper>
@@ -32,7 +30,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
 `;
 
 const Wrapper = styled.div`
@@ -93,4 +93,4 @@ const Logo = styled.div`
   }
 `;
 
-export default index;
+export default CreateNewProject;

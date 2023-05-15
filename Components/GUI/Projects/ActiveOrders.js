@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import CardInternal from "../../Account/Billing/Card/CardInternal";
 import CardForProjects from "../../Account/Billing/Card/CardForProjects";
 
-function ActiveOrders() {
+function ActiveOrders({ projects }) {
   return (
     <WrapperForm>
       <Form
@@ -20,22 +20,11 @@ function ActiveOrders() {
           <Grid item xs={12}>
             <Headerh2>Projects</Headerh2>
           </Grid>
-          <Grid item xs={12} md={12} xl={6}>
-            <CardForProjects state={"In Process"} />
-          </Grid>
-          <Grid item xs={12} md={12} xl={6}>
-            <CardForProjects state={"In Process"} />
-          </Grid>
-          <Grid item xs={12} md={12} xl={6}>
-            <CardForProjects state={"Delivered"} />
-          </Grid>
-
-          <Grid item xs={12} md={12} xl={6}>
-            <CardForProjects state={"In Process"} />
-          </Grid>
-          <Grid item xs={12} md={12} xl={6}>
-            <CardForProjects state={"In Process"} />
-          </Grid>
+          {Array.from({ length: projects }, (_, index) => (
+            <Grid item xs={12} md={12} xl={6}>
+              <CardForProjects state={"In Process"} />
+            </Grid>
+          ))}
           <Grid item xs={12} md={12} xl={6}>
             <CardForProjects state={"In Process"} />
           </Grid>

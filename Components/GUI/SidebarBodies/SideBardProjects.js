@@ -1,23 +1,25 @@
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
-import React, { useEffect } from "react";
-import { Grid } from "@mui/material";
+import React from "react";
+
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import { BsPerson } from "react-icons/bs";
-import { AiFillCreditCard, AiFillFolderOpen } from "react-icons/ai";
+
+import { AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
+import { TiTick } from "react-icons/ti";
 
 import Link from "next/link";
-import Plots from "../Plots";
+
 import ActiveOrders from "../Projects/ActiveOrders";
+import CreateNewProject from "../Projects/CreateNewProject";
 
 function SidebarProjects() {
+  const [projects, setProjects] = useState(0);
+  const handleDataFromChild = (increment) => {
+    // Do something with the received data
+    setProjects(projects + increment);
+    console.log(projects);
+  };
   return (
     <Container>
       <WrapperDescription>
@@ -37,7 +39,7 @@ function SidebarProjects() {
             <h1>Projects</h1>
           </ListItemMain>
 
-          <Link href='/aivalanche/results' passHref>
+          <Link href='/running' passHref>
             <ListItem>
               <Icon>
                 <BiLoaderCircle color={"red"} size={30} />
@@ -45,10 +47,23 @@ function SidebarProjects() {
               <h1>Running</h1>
             </ListItem>
           </Link>
+          <Link href='/done' passHref>
+            <ListItem>
+              <Icon>
+                <TiTick color={"green"} size={30} />
+              </Icon>
+              <h1>Done</h1>
+            </ListItem>
+          </Link>
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        <ActiveOrders />
+        {projects === 0 ? (
+          <CreateNewProject onData={handleDataFromChild} />
+        ) : (
+          <ActiveOrders />
+        )}
+        {/* <ActiveOrders /> */}
       </MainView>
     </Container>
   );

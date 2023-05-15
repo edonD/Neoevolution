@@ -19,7 +19,7 @@ function CardForProjects({ state }) {
       <Header>
         <ImageContainer>
           <Image
-            src='/images/activity-img2.jpg'
+            src='/images/gggrain.svg'
             layout='fill'
             objectFit='contain'
             alt='brain'
