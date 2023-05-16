@@ -13,7 +13,7 @@ import { BiLoaderCircle } from "react-icons/bi";
 import { RiCalendar2Line } from "react-icons/ri";
 import { AiOutlineDownload, AiOutlineClockCircle } from "react-icons/ai";
 
-function CardForProjects({ state }) {
+function CardForProjects({ state, onData }) {
   return (
     <Card>
       <Header>
@@ -41,7 +41,15 @@ function CardForProjects({ state }) {
             <h1>7 June, 2022</h1>
           </ListItemEnd>
           <ListItemEnd>
-            <Button className='red-white-black'>Cancel</Button>
+            <Button
+              onClick={() => {
+                const decrement = 1;
+                onData(decrement);
+              }}
+              className='red-white-black'
+            >
+              Cancel
+            </Button>
           </ListItemEnd>
         </CardContent>
       </Box>
@@ -138,7 +146,7 @@ const Header = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding-left: 10px;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1200px) {
     display: none;
   }
 `;

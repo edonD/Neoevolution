@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useState } from "react";
 import styled from "styled-components";
@@ -8,18 +8,16 @@ import { AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
 
-import Link from "next/link";
-
 import ActiveOrders from "../Projects/ActiveOrders";
 import CreateNewProject from "../Projects/CreateNewProject";
 
-function SidebarProjects() {
-  const [projects, setProjects] = useState(0);
-  const handleDataFromChild = (increment) => {
-    // Do something with the received data
-    setProjects(projects + increment);
-    console.log(projects);
+function SidebarProjects({ increment, decrement, projects }) {
+  const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
+
+  const handleListItemClick = (index) => {
+    setSelectedItem(index);
   };
+
   return (
     <Container>
       <WrapperDescription>
@@ -32,36 +30,42 @@ function SidebarProjects() {
           <h2>Valanche</h2>
         </AccountHeader>
         <AccountBody>
-          <ListItemMain>
+          <ListItem
+            isSelected={selectedItem === 0}
+            onClick={() => handleListItemClick(0)}
+          >
             <Icon>
               <AiFillFolderOpen size={30} />
             </Icon>
             <h1>Projects</h1>
-          </ListItemMain>
+          </ListItem>
 
-          <Link href='/running' passHref>
-            <ListItem>
-              <Icon>
-                <BiLoaderCircle color={"red"} size={30} />
-              </Icon>
-              <h1>Running</h1>
-            </ListItem>
-          </Link>
-          <Link href='/done' passHref>
-            <ListItem>
-              <Icon>
-                <TiTick color={"green"} size={30} />
-              </Icon>
-              <h1>Done</h1>
-            </ListItem>
-          </Link>
+          <ListItem
+            isSelected={selectedItem === 1}
+            onClick={() => handleListItemClick(1)}
+          >
+            <Icon>
+              <BiLoaderCircle color={"red"} size={30} />
+            </Icon>
+            <h1>Running</h1>
+          </ListItem>
+
+          <ListItem
+            isSelected={selectedItem === 2}
+            onClick={() => handleListItemClick(2)}
+          >
+            <Icon>
+              <TiTick color={"green"} size={30} />
+            </Icon>
+            <h1>Done</h1>
+          </ListItem>
         </AccountBody>
       </WrapperDescription>
       <MainView>
         {projects === 0 ? (
-          <CreateNewProject onData={handleDataFromChild} />
+          <CreateNewProject onData={increment} />
         ) : (
-          <ActiveOrders />
+          <ActiveOrders projects={projects} onData={decrement} />
         )}
         {/* <ActiveOrders /> */}
       </MainView>
@@ -70,7 +74,7 @@ function SidebarProjects() {
 }
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -85,6 +89,7 @@ const Container = styled.div`
     #031224,
     #0f2847
   ); /* Chrome 10-25, Safari 5.1-6 */
+  background-color: #f3f3f8;
 `;
 
 const AccountHeader = styled.div`
@@ -185,20 +190,14 @@ const AccountBody = styled.div`
     }
   }
 `;
-const GridContainer = styled.div`
-  width: 100%;
+
+const MainView = styled.div`
+  width: calc(100% - 300px);
+  min-height: calc(100vh - 80px);
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-const MainView = styled.div`
-  width: calc(100% - 300px);
-  height: calc(100vh - 100px);
-  display: flex;
-  flex-direction: row;
-
+  background-color: red;
   justify-content: flex-start;
   padding-top: 0px;
   align-items: center;
@@ -207,24 +206,24 @@ const MainView = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin: 0px;
 
     height: 100%;
   }
   @media screen and (max-height: 1600px) {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     background-color: white;
     height: 100%;
   }
   @media screen and (max-height: 600px) {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -237,28 +236,7 @@ const MainView = styled.div`
     margin: 0px;
   }
 `;
-const ListItemMain = styled.div`
-  width: 90%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: green;
-  padding: 5px;
-  background-color: white;
-  margin: 5px 0px 5px 0px;
-  border-radius: 4px;
-  cursor: pointer;
-  :hover {
-    background: #e2e2e6;
-  }
-  h1 {
-    font-size: 14px;
-    color: black;
-    font-weight: 200;
-  }
-`;
+
 const ListItem = styled.div`
   width: 90%;
   height: 100%;
@@ -268,7 +246,10 @@ const ListItem = styled.div`
   align-items: center;
   background: green;
   padding: 5px;
-  background-color: transparent;
+  background-color: ${(props) =>
+    props.isSelected
+      ? "white"
+      : "transparent"}; // Apply different background color based on isSelected prop
   margin: 5px 0px 5px 0px;
   border-radius: 4px;
   cursor: pointer;
@@ -283,7 +264,7 @@ const ListItem = styled.div`
 `;
 const WrapperDescription = styled.div`
   width: 300px;
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
   /* height: 100%; */
   /* position: relative; */
   display: flex;
@@ -296,41 +277,7 @@ const WrapperDescription = styled.div`
     display: none;
   }
 `;
-const WrapperForm = styled.div`
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 
-  justify-content: center;
-  padding-top: 0px;
-  align-items: center;
-
-  @media screen and (max-width: 1200px), screen and (max-height: 700px) {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0px;
-
-    background-color: white;
-    height: 100%;
-  }
-  @media screen and (max-height: 600px) {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    background-color: white;
-    height: 100%;
-  }
-  h1 {
-    margin: 0px;
-  }
-`;
 const Icon = styled.div`
   width: 40px;
   height: 40px;
@@ -341,24 +288,6 @@ const Icon = styled.div`
   align-items: center;
   color: black;
   background: transparent;
-`;
-const FormButton = styled(Button)`
-  && {
-    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: #3f9cf3;
-    color: white;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #388ddb;
-    }
-  }
-  @media screen and (max-width: 400px) {
-    font-size: 12px;
-  }
 `;
 
 export default SidebarProjects;

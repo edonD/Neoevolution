@@ -9,9 +9,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import AiValanchePopUpInformation from "./AiValanchePopUpInformation";
 import styled from "styled-components";
 import { MdOutlineBusinessCenter } from "react-icons/md";
+import { BsPlusCircleFill } from "react-icons/bs";
 import Link from "next/link";
+import { background } from "@chakra-ui/react";
 
-export default function AiValanchePopUp({ onData }) {
+export default function AiValanchePopUp({ onData, ButtonText, icon, size }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -24,8 +26,20 @@ export default function AiValanchePopUp({ onData }) {
 
   return (
     <div>
-      <FormButton className='blue-white-lightblue' onClick={handleClickOpen}>
-        Create
+      <FormButton
+        className='blue-white-lightblue'
+        onClick={handleClickOpen}
+        size={size}
+      >
+        {icon ? (
+          <BsPlusCircleFill
+            size={15}
+            style={{ marginRight: "10px", background: "transparent" }}
+          />
+        ) : (
+          <></>
+        )}
+        {ButtonText}
       </FormButton>
 
       <Dialog open={open} onClose={handleClose}>
@@ -40,6 +54,7 @@ export default function AiValanchePopUp({ onData }) {
             onClick={() => {
               const increment = 1;
               onData(increment);
+              handleClose();
             }}
           >
             Create
@@ -50,75 +65,27 @@ export default function AiValanchePopUp({ onData }) {
   );
 }
 
-const CardContent = styled.div`
-  width: calc(100%-150px);
-  height: 100px;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding-left: 10px;
-`;
-
-const ListItem = styled.div`
-  width: fit-content;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  background: transparent;
-  padding: 0px;
-  background-color: transparent;
-  margin: 0px 0px 0px 0px;
-
-  //cursor: pointer;
-
-  h3 {
-    font-size: 14px;
-    color: #a2a2a6;
-    font-weight: 200;
-    margin: 0px;
-    @media screen and (max-width: 650px) {
-      font-size: 12px;
-    }
-  }
-  h1 {
-    color: black;
-    font-size: 22px;
-    font-weight: 200;
-    margin: 0px;
-    @media screen and (max-width: 650px) {
-      font-size: 18px;
-    }
-  }
-`;
-const Container = styled.div`
-  width: fit-content;
-  height: fit-content;
-
-  background-color: white;
-  color: white;
-
-  cursor: pointer;
-`;
-
 const FormButton = styled.button`
   background-color: #1abc9c;
   border: none;
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  font-size: 35px;
+  /* font-size: 35px; */
+  font-size: ${(props) => `${props.size}px`};
+
   display: flex;
   flex-direction: center;
   justify-content: center;
   padding: 10px 60px 10px 60px;
   transition: background-color 0.2s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  font-size: 20px;
-
+  /* font-size: 20px; */
+  @media screen and (max-width: 1000px) {
+    justify-content: flex-start;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+  }
   &:active {
     transform: translateY(2px);
   }

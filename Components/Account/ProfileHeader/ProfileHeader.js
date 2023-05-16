@@ -5,8 +5,9 @@ import ProfileHeaderDropdown from "../Dropdown/ProfileHeaderDropdown";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import Image from "next/image";
+import AiValanchePopUp from "../../GUI/AiValancheHome/AiValanchePopUp";
 
-function ProfileHeader() {
+function ProfileHeader({ onData }) {
   const [dropDownState, setdropDownState] = useState(false);
   const toggle = () => {
     setdropDownState(!dropDownState);
@@ -22,8 +23,13 @@ function ProfileHeader() {
         />
       </LogoContainer>
       <SecondDivider>
-        <Link href='/Contact' passHref>
-          <Contact>Contact Us</Contact>
+        <Link href='/projects' passHref>
+          <AiValanchePopUp
+            ButtonText={"Create a new Project"}
+            icon={true}
+            size={14}
+            onData={onData}
+          />
         </Link>
         <PersonalContent>
           <ImageContainer onClick={toggle}>
@@ -42,49 +48,13 @@ const Background = styled.div`
   position: relative;
   width: 100%;
   height: 80px;
-  background: red;
+  background: transparent;
   background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ececf1;
-`;
-const Contact = styled(Button)`
-  && {
-    height: 48px;
-    width: 200px;
-
-    background: linear-gradient(
-      45deg,
-      rgba(59, 173, 227, 1) 0%,
-      rgba(87, 111, 230, 1) 25%,
-      rgba(152, 68, 183, 1) 51%,
-      rgba(255, 53, 127, 1) 100%
-    ); /* box-shadow: 0 0 10px 2px #0ff, 0 0 4px 1px #0ff; */
-    padding: 8px 16px;
-    margin: 10px;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-    border-radius: 4px;
-    color: white;
-    transition: all 0.2s ease 0s;
-    transition: 0.3s;
-    &:hover {
-      /* color: #e5e5e5; */
-      background: linear-gradient(
-        45deg,
-        #53a6e5 0%,
-        #5d70e9 25%,
-        #5d70e9 51%,
-        #5d70e9 100%
-      );
-    }
-
-    @media (max-width: 1000px) {
-      display: none;
-    }
-  }
 `;
 
 const LogoContainer = styled.div`

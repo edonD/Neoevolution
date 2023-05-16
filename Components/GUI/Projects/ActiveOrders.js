@@ -1,33 +1,27 @@
 import React from "react";
-
 import { Grid } from "@mui/material";
-import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import CardInternal from "../../Account/Billing/Card/CardInternal";
 import CardForProjects from "../../Account/Billing/Card/CardForProjects";
 
-function ActiveOrders({ projects }) {
+function ActiveOrders({ projects, onData }) {
   return (
     <WrapperForm>
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit(e);
         }}
       >
         <Grid container spacing={2} columnSpacing={2}>
           <Grid item xs={12}>
-            <Headerh2>Projects</Headerh2>
+            <Headerh2>Projects {projects} </Headerh2>
           </Grid>
-          {Array.from({ length: projects }, (_, index) => (
+
+          {Array.from({ length: projects }, (_) => (
             <Grid item xs={12} md={12} xl={6}>
-              <CardForProjects state={"In Process"} />
+              <CardForProjects onData={onData} state={"In Process"} />
             </Grid>
           ))}
-          <Grid item xs={12} md={12} xl={6}>
-            <CardForProjects state={"In Process"} />
-          </Grid>
         </Grid>
       </Form>
     </WrapperForm>
@@ -56,7 +50,7 @@ const WrapperForm = styled.div`
   border-radius: 15px;
   margin: 20px;
   overflow: hidden;
-
+  background-color: transparent;
   @media screen and (max-width: 1200px), screen and (max-height: 700px) {
     width: 100%;
     display: flex;
@@ -83,7 +77,7 @@ const WrapperForm = styled.div`
   }
 `;
 const Form = styled.form`
-  background: white;
+  background: transparent;
   height: 100%;
   width: 100%;
 

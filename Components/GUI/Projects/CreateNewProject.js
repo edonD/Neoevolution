@@ -17,7 +17,7 @@ function CreateNewProject({ onData }) {
             including models, simulations, model calibrations and more.
           </Description>
           <ButtonContainer>
-            <AiValanchePopUp onData={onData} />
+            <AiValanchePopUp onData={onData} ButtonText={"Create"} size={18} />
           </ButtonContainer>
         </Body>
       </Wrapper>

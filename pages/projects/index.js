@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import ProfileHeader from "../../Components/Account/ProfileHeader/ProfileHeader";
 import SidebarProjects from "../../Components/GUI/SidebarBodies/SideBardProjects";
 import styled from "styled-components";
 
 function index() {
+  const [projects, setProjects] = useState(0);
+  const incrementProjects = (increment) => {
+    // Do something with the received data
+    setProjects(projects + increment);
+  };
+  const decrementProjects = (decrement) => {
+    // Do something with the received data
+    setProjects(projects - decrement);
+  };
   return (
     <Container>
-      <ProfileHeader />
-      <SidebarProjects />
+      <ProfileHeader onData={incrementProjects} />
+      <SidebarProjects
+        projects={projects}
+        increment={incrementProjects}
+        decrement={decrementProjects}
+      />
     </Container>
   );
 }
