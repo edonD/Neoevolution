@@ -17,6 +17,11 @@ function ProfileHeaderDropdown({ isOpen, onToggle }) {
         <IconWrapper>
           <Icon>{isOpen ? <CloseIcon onClick={handleClick} /> : <></>}</Icon>
         </IconWrapper>
+        <Link href='/projects' passHref>
+          <SidebarRoute>
+            <span>Projects</span>
+          </SidebarRoute>
+        </Link>
         <Link href='/account/information' passHref>
           <SidebarRoute>
             <span>Account</span>

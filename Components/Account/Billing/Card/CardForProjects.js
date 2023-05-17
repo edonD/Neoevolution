@@ -12,48 +12,51 @@ import Image from "next/image";
 import { BiLoaderCircle } from "react-icons/bi";
 import { RiCalendar2Line } from "react-icons/ri";
 import { AiOutlineDownload, AiOutlineClockCircle } from "react-icons/ai";
+import Link from "next/link";
 
 function CardForProjects({ state, onData }) {
   return (
-    <Card>
-      <Header>
-        <ImageContainer>
-          <Image
-            src='/images/gggrain.svg'
-            layout='fill'
-            objectFit='contain'
-            alt='brain'
-          />
-        </ImageContainer>
-      </Header>
-      <Box>
-        <CardContent>
-          <ListItem>
-            <h3>Project Name</h3>
-          </ListItem>
-          <ListItem state={state}>
-            <h2>{state}</h2>
-          </ListItem>
-        </CardContent>
-        <CardContent>
-          <ListItemEnd>
-            <h2>Updated at</h2>
-            <h1>7 June, 2022</h1>
-          </ListItemEnd>
-          <ListItemEnd>
-            <Button
-              onClick={() => {
-                const decrement = 1;
-                onData(decrement);
-              }}
-              className='red-white-black'
-            >
-              Cancel
-            </Button>
-          </ListItemEnd>
-        </CardContent>
-      </Box>
-    </Card>
+    <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
+      <Card>
+        <Header>
+          <ImageContainer>
+            <Image
+              src='/images/gggrain.svg'
+              layout='fill'
+              objectFit='contain'
+              alt='brain'
+            />
+          </ImageContainer>
+        </Header>
+        <Box>
+          <CardContent>
+            <ListItem>
+              <h3>Project Name</h3>
+            </ListItem>
+            <ListItem state={state}>
+              <h2>{state}</h2>
+            </ListItem>
+          </CardContent>
+          <CardContent>
+            <ListItemEnd>
+              <h2>Updated at</h2>
+              <h1>7 June, 2022</h1>
+            </ListItemEnd>
+            <ListItemEnd>
+              <Button
+                onClick={() => {
+                  const decrement = 1;
+                  onData(decrement);
+                }}
+                className='red-white-black'
+              >
+                Cancel
+              </Button>
+            </ListItemEnd>
+          </CardContent>
+        </Box>
+      </Card>
+    </Link>
   );
 }
 
