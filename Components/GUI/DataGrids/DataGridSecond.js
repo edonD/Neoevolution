@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import SelectButtons from "../SelectButtons";
 import DropdownMenu from "../DropdownMenu";
+import UploadReferenceData from "../Reference-Data-View/UploadReferenceData";
 const columns = [
   {
     field: "w",
@@ -74,7 +75,7 @@ const rows = [
 function DataGridSecond() {
   return (
     <Container>
-      <LabelContainer>
+      {/* <LabelContainer>
         <Label>Iteration</Label>
         <Label
           style={{
@@ -97,8 +98,9 @@ function DataGridSecond() {
         >
           1.233e+00
         </Label>
-      </LabelContainer>
-      <SelectButtons />
+      </LabelContainer> */}
+      <UploadReferenceData />
+      {/* <SelectButtons /> */}
       <Data>
         <DataGrid
           rows={rows}
@@ -137,8 +139,9 @@ const Container = styled.div`
 `;
 
 const Data = styled.div`
-  height: calc(100vh - 300px);
+  height: calc(100vh - 200px);
   width: 100%;
+  margin: 10px;
 `;
 const LabelContainer = styled.div`
   display: flex;

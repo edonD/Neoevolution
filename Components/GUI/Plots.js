@@ -191,26 +191,6 @@ function Plots() {
       <FirstRow>
         <PlotContainer>
           <Plot
-            data={data}
-            layout={layout}
-            style={{ width: "100%", height: "100%" }}
-            useResizeHandler={true}
-          />
-        </PlotContainer>
-
-        <PlotContainer>
-          <Plot
-            data={data1}
-            layout={layout1}
-            style={{ width: "100%", height: "100%" }}
-            useResizeHandler={true}
-          />
-        </PlotContainer>
-      </FirstRow>
-
-      <FirstRow>
-        <PlotContainer>
-          <Plot
             data={data2}
             layout={layout2}
             style={{ width: "100%", height: "100%" }}
@@ -260,12 +240,14 @@ const PlotContainer = styled.div`
   align-items: center;
   position: relative;
   overflow: hidden;
+  margin: 10px;
 `;
 
 const FirstRow = styled.div`
-  height: 50%;
+  height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
