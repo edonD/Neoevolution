@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import SelectButtons from "../SelectButtons";
-import DropdownMenu from "../DropdownMenu";
+
 import UploadReferenceData from "../Reference-Data-View/UploadReferenceData";
 const columns = [
   {
@@ -113,6 +112,7 @@ function DataGridSecond({ type }) {
           //   },
           // }}
           // pageSizeOptions={[5]}
+          style={{ height: "100%", width: "100%" }}
           checkboxSelection
           disableRowSelectionOnClick
         />
@@ -123,11 +123,12 @@ function DataGridSecond({ type }) {
 
 const Container = styled.div`
   width: 95%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 140px);
 
   position: relative;
   margin: 0px;
   padding-top: 20px;
+
   @media screen and (max-height: 750px) {
     height: 100%;
     background-color: white;
@@ -139,7 +140,7 @@ const Container = styled.div`
 `;
 
 const Data = styled.div`
-  height: calc(100vh - 200px);
+  height: calc(100vh - 260px);
   width: 100%;
   margin: 10px;
 `;

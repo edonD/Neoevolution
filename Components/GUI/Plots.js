@@ -217,7 +217,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 160px);
   padding: 10px;
 
   @media screen and (max-width: 1600px) {

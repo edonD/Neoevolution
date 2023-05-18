@@ -67,7 +67,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: 10px;
+  margin-left: 10px;
+  height: 80px;
 `;
 
 const Dropzone = styled.div`
@@ -80,6 +81,7 @@ const Dropzone = styled.div`
   text-align: center;
   border-radius: 10px;
   width: 100%;
+  height: 100%;
   cursor: pointer;
   background-color: ${(props) => (props.upload ? "white" : "#f7fafe")};
   transition: border-color 0.3s ease-in-out;
