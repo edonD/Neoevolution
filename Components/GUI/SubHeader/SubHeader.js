@@ -7,9 +7,16 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f1f1f1;
+  background-color: transparent;
   height: 50px;
-  width: 100%;
+  width: 80%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+  z-index: 5;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
   /* margin: 10px; */
 `;
 
@@ -87,6 +94,7 @@ function Header() {
             onClick={() =>
               handleNavLinkClick("/projects/project-name/parameters")
             }
+            isDisabled={false}
           >
             Parameters
           </NavLink>
@@ -97,6 +105,7 @@ function Header() {
             onClick={() =>
               handleNavLinkClick("/projects/project-name/optimizer")
             }
+            isDisabled={false}
           >
             Optimizer Settings
           </NavLink>
@@ -105,6 +114,7 @@ function Header() {
           <NavLink
             isActive={activeRoute === "/projects/project-name/results"}
             onClick={() => handleNavLinkClick("/projects/project-name/results")}
+            isDisabled={false}
           >
             Results
           </NavLink>
