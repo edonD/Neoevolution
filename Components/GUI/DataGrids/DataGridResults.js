@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import SelectButtons from "../SelectButtons";
-import DropdownMenu from "../DropdownMenu";
+
 import UploadReferenceData from "../Reference-Data-View/UploadReferenceData";
+import ResultButtons from "../Results-View/ResultButtons";
 const columns = [
   {
     field: "w",
@@ -75,32 +75,7 @@ const rows = [
 function DataGridSecond({ type }) {
   return (
     <Container>
-      {/* <LabelContainer>
-        <Label>Iteration</Label>
-        <Label
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
-          15
-        </Label>
-      </LabelContainer>
-      <LabelContainer>
-        <Label>Accuracy</Label>
-        <Label
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
-          1.233e+00
-        </Label>
-      </LabelContainer> */}
-      <UploadReferenceData type={type} />
-      {/* <SelectButtons /> */}
+      <ResultButtons />
       <Data>
         <DataGrid
           rows={rows}
@@ -127,7 +102,7 @@ const Container = styled.div`
 
   position: relative;
   margin: 0px;
-  padding-top: 20px;
+  padding: 20px 0px 0px 0px;
   @media screen and (max-height: 750px) {
     height: 100%;
     background-color: white;

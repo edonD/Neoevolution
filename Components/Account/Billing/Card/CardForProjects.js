@@ -16,7 +16,8 @@ import Link from "next/link";
 
 function CardForProjects({ state, onData }) {
   return (
-    <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
+    // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
+    <Link href={`/projects/project-name/reference-data`} passHref>
       <Card>
         <Header>
           <ImageContainer>

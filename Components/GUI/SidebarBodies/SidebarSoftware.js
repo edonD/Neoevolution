@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { useState } from "react";
 import styled from "styled-components";
-import { Button } from "@mui/material";
+import SubHeader from "../SubHeader/SubHeader";
 
 import { AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
@@ -58,7 +58,10 @@ function SidebarProjects({ increment, decrement, projects, children }) {
           </ListItem>
         </AccountBody>
       </WrapperDescription>
-      <MainView>{children}</MainView>
+      <MainView>
+        <SubHeader />
+        {children}
+      </MainView>
     </Container>
   );
 }

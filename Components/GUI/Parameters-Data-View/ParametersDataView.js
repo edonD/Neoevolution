@@ -9,13 +9,10 @@ import Plots from "../Plots";
 function ReferenceDataView() {
   return (
     <Grid container spacing={2}>
-      <Grid item xl={6}>
+      <Grid item xl={12}>
         <DataGridSecond
-          type={"Click to upload or drag & drop reference data"}
+          type={"Click to upload or drag & drop parameter data"}
         />
-      </Grid>
-      <Grid item xl={6}>
-        <Plots />
       </Grid>
     </Grid>
   );

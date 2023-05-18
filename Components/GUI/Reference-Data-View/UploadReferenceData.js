@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { css } from "styled-components";
 
-function UploadReferenceData() {
+function UploadReferenceData({ type }) {
   const [file, setFile] = useState(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [upload, setUpload] = useState(false);
@@ -52,9 +52,7 @@ function UploadReferenceData() {
             </GlowingCircle>
 
             <DropzoneText>
-              {isDragActive
-                ? "Drop the file here"
-                : "Click to upload or drag & drop reference data"}
+              {isDragActive ? "Drop the file here" : type}
             </DropzoneText>
           </>
         )}
