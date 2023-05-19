@@ -89,7 +89,7 @@ const Container = styled.div`
     #031224,
     #0f2847
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background-color: #f3f3f8;
+  background-color: white;
 `;
 
 const AccountHeader = styled.div`
@@ -197,7 +197,7 @@ const MainView = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: red;
+  background-color: white;
   justify-content: flex-start;
   padding-top: 0px;
   align-items: center;

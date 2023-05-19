@@ -81,9 +81,14 @@ const FormButton = styled.button`
   transition: background-color 0.2s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   /* font-size: 20px; */
-  @media screen and (max-width: 1000px) {
-    justify-content: flex-start;
-    font-size: 12px;
+  @media screen and (max-width: 900px) {
+    /* justify-content: flex-start; */
+    font-size: 16px;
+    padding: 5px 10px 5px 10px;
+  }
+  @media screen and (max-width: 500px) {
+    /* justify-content: flex-start; */
+    font-size: 14px;
     padding: 5px 10px 5px 10px;
   }
   &:active {
@@ -121,6 +126,9 @@ const FormButton = styled.button`
     background-color: #2196f3;
     color: #fff;
     border: 1px solid #2196f3;
+    @media screen and (max-width: 900px) {
+      width: 200px;
+    }
   }
 
   &.blue-white-lightblue:hover {

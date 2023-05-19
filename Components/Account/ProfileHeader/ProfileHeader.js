@@ -107,9 +107,9 @@ const SecondDivider = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* @media (max-width: 1000px) {
-    display: none;
-  } */
+  @media (max-width: 900px) {
+    width: auto;
+  }
 `;
 const ImageContainer = styled.div`
   width: 100%;
