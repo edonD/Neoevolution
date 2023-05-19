@@ -3,16 +3,17 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import SubHeader from "../SubHeader/SubHeader";
-
+import { useRouter } from "next/router";
 import { AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
 
 function SidebarProjects({ increment, decrement, projects, children }) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
-
+  const router = useRouter();
   const handleListItemClick = (index) => {
     setSelectedItem(index);
+    router.push("/projects");
   };
 
   return (
@@ -83,6 +84,14 @@ const Container = styled.div`
     #0f2847
   ); /* Chrome 10-25, Safari 5.1-6 */
   background-color: #f3f3f8;
+  @media screen and (max-width: 1600px) {
+    width: 100%;
+    background-color: white;
+
+    justify-content: center;
+    /* margin-top: 80px; */
+    align-items: center;
+  }
 `;
 
 const AccountHeader = styled.div`

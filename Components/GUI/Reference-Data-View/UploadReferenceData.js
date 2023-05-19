@@ -57,7 +57,6 @@ function UploadReferenceData({ type }) {
           </>
         )}
       </Dropzone>
-      {uploadSuccess && <UploadSuccess>Upload successful!</UploadSuccess>}
     </Wrapper>
   );
 }

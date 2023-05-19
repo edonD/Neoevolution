@@ -98,7 +98,7 @@ function DataGridSecond({ type }) {
 
 const Container = styled.div`
   width: 95%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 160px);
 
   position: relative;
   margin: 0px;
@@ -114,7 +114,7 @@ const Container = styled.div`
 `;
 
 const Data = styled.div`
-  height: calc(100vh - 200px);
+  height: calc(100vh - 240px);
   width: 100%;
   margin: 10px;
 `;

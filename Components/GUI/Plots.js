@@ -218,7 +218,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: calc(100vh - 160px);
-  padding: 10px;
+  padding-top: 10px;
 
   @media screen and (max-width: 1600px) {
     overflow: hidden;

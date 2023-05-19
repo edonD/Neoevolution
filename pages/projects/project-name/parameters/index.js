@@ -9,13 +9,11 @@ function index() {
     <div>
       <ProfileHeader />
       {/* <Header>Lets check it!</Header> */}
-      <SidebarSoftware children={<ParametersDataView />} />
+      <SidebarSoftware>
+        <ParametersDataView />
+      </SidebarSoftware>
     </div>
   );
 }
 
-const Header = styled.h1`
-  margin-left: 0px;
-  margin-right: 0px;
-`;
 export default index;

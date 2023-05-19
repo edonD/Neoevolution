@@ -123,11 +123,11 @@ function DataGridSecond({ type }) {
 
 const Container = styled.div`
   width: 95%;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 160px);
 
   position: relative;
-  margin: 0px;
-  padding-top: 20px;
+  margin: 20px 20px 0px 20px;
+  padding-top: 10px;
 
   @media screen and (max-height: 750px) {
     height: 100%;
@@ -140,24 +140,9 @@ const Container = styled.div`
 `;
 
 const Data = styled.div`
-  height: calc(100vh - 260px);
+  height: calc(100vh - 280px);
   width: 100%;
   margin: 10px;
-`;
-const LabelContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: fit-content;
-  width: 100%;
-  margin: 5px 0px 5px 0px;
-`;
-const Label = styled.span`
-  font-size: 16px;
-  font-weight: 200;
-  color: #353740;
-  margin-left: 10px;
-  width: 50%;
 `;
 
 export default DataGridSecond;
