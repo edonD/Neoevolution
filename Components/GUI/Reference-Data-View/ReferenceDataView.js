@@ -17,7 +17,18 @@ function ReferenceDataView() {
         alignItems: "center",
       }}
     >
-      <Grid item xs={12} sm={12} lg={12} xl={6}>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        lg={12}
+        xl={6}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <DataGridSecond
           type={"Click to upload or drag & drop reference data"}
         />

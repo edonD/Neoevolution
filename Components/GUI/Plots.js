@@ -4,6 +4,7 @@ import styled from "styled-components";
 // import Plot from "react-plotly.js";
 import dynamic from "next/dynamic";
 import { Grid } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 function Plots() {
   const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
@@ -190,21 +191,41 @@ function Plots() {
     <Container>
       <FirstRow>
         <PlotContainer>
-          <Plot
-            data={data2}
-            layout={layout2}
-            style={{ width: "100%", height: "100%" }}
-            useResizeHandler={true}
-          />
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Plot
+              data={data3}
+              layout={layout3}
+              style={{ width: "100%", height: "100%" }}
+              config={{ responsive: true }}
+            />
+          </Box>
         </PlotContainer>
 
         <PlotContainer>
-          <Plot
-            data={data3}
-            layout={layout3}
-            style={{ width: "100%", height: "100%" }}
-            useResizeHandler={true}
-          />
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Plot
+              data={data3}
+              layout={layout3}
+              style={{ width: "100%", height: "100%" }}
+              config={{ responsive: true }}
+            />
+          </Box>
         </PlotContainer>
       </FirstRow>
     </Container>
