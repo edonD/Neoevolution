@@ -7,6 +7,10 @@ const ButtonRow = styled.div`
   justify-content: center;
   gap: 10px;
   margin-left: 10px;
+  @media screen and (max-width: 900px) {
+    /* flex-direction: column; */
+    margin-top: 30px;
+  }
 `;
 
 const Button = styled.button`
@@ -24,7 +28,10 @@ const Button = styled.button`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-size: 18px;
   width: 30%;
-
+  @media screen and (max-width: 900px) {
+    font-size: 18px;
+    padding: 5px;
+  }
   &:active {
     transform: translateY(2px);
   }

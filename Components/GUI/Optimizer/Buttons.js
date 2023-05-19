@@ -40,11 +40,17 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
 const StartIcon = styled(FaPlay)`
   color: white;
   font-size: 18px;
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const PauseIcon = styled(FaPause)`
   color: white;
   font-size: 18px;
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 const Container = styled.div`
   display: flex;
@@ -54,14 +60,10 @@ const Container = styled.div`
 
   width: 100%;
   gap: 10px;
-`;
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  gap: 10px;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    margin-top: 30px;
+  }
 `;
 
 const Button = styled.button`
@@ -79,6 +81,11 @@ const Button = styled.button`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-size: 24px;
   width: 30%;
+  @media screen and (max-width: 900px) {
+    width: 80%;
+    font-size: 18px;
+    padding: 5px;
+  }
 
   &:active {
     transform: translateY(2px);

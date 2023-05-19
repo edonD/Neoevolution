@@ -11,13 +11,13 @@ function ReferenceDataView() {
     <Grid
       container
       spacing={2}
-      // style={{
-      //   display: "flex",
-      //   justifyContent: "center",
-      //   alignItems: "center",
-      // }}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
-      <Grid itemxs={12} sm={12} lg={12} xl={6}>
+      <Grid item xs={12} sm={12} lg={12} xl={6}>
         <DataGridSecond
           type={"Click to upload or drag & drop reference data"}
         />

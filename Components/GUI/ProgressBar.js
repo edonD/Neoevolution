@@ -12,8 +12,8 @@ const ProgressBarContainer = styled.div`
   position: relative;
   width: 800px;
 
-  @media screen and (max-width: 800px) {
-    width: 90vw;
+  @media screen and (max-width: 1200px) {
+    display: none;
   }
 `;
 

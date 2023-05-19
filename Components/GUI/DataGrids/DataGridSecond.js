@@ -136,6 +136,10 @@ const Container = styled.div`
   @media screen and (max-width: 1200px) {
     height: 100%;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

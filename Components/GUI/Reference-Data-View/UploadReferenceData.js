@@ -24,18 +24,6 @@ function UploadReferenceData({ type }) {
     onDrop: handleDrop,
   });
 
-  useEffect(() => {
-    let timer;
-    if (uploadSuccess) {
-      timer = setTimeout(() => {
-        setUploadSuccess(false);
-      }, 3000); // 3000 milliseconds = 3 seconds
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [uploadSuccess]);
-
   return (
     <Wrapper>
       <Dropzone {...getRootProps()} isDragActive={isDragActive} upload={upload}>
@@ -68,6 +56,9 @@ const Wrapper = styled.div`
   width: 100%;
   margin-left: 10px;
   height: 80px;
+  @media screen and (max-width: 1200px) {
+    margin: 0px;
+  }
 `;
 
 const Dropzone = styled.div`
@@ -78,7 +69,7 @@ const Dropzone = styled.div`
   border: 1px dashed ${(props) => (props.upload ? "#e0e0e0" : "#6e96f6")};
   padding: 20px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 6px;
   width: 100%;
   height: 100%;
   cursor: pointer;

@@ -18,6 +18,12 @@ const HeaderContainer = styled.header`
   border-radius: 10px;
   overflow: hidden;
   /* margin: 10px; */
+  @media screen and (max-width: 900px) {
+    /* flex-direction: column; */
+    width: 90%;
+    border-radius: 0px;
+    text-align: center;
+  }
 `;
 
 const Nav = styled.nav`
@@ -43,7 +49,10 @@ const NavLink = styled.a`
   cursor: ${(props) => (props.isDisabled ? "not-allowed" : "pointer")};
   background-color: ${(props) => (props.isActive ? "#2196f3" : "transparent")};
   color: ${(props) => (props.isActive ? "#fff" : "#2196f3")};
-
+  @media screen and (max-width: 900px) {
+    /* flex-direction: column; */
+    font-size: 12px;
+  }
   &:hover {
     background-color: ${(props) => (props.isActive ? "#3ca7db" : "#e2e2e6")};
     color: ${(props) => (props.isActive ? "#e0e0e0" : "#555")};
@@ -107,7 +116,7 @@ function Header() {
             }
             isDisabled={false}
           >
-            Optimizer Settings
+            Optimizer
           </NavLink>
         </Link>
         <Link href='results' passHref>

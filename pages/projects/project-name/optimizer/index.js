@@ -9,7 +9,9 @@ function index() {
     <div>
       <ProfileHeader />
       {/* <Header>Lets check it!</Header> */}
-      <SidebarSoftware children={<Optimizer />} />
+      <SidebarSoftware>
+        <Optimizer />
+      </SidebarSoftware>
     </div>
   );
 }
