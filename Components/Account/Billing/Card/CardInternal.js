@@ -19,7 +19,7 @@ function CardInternal({ state }) {
       <Header>
         <ImageContainer>
           <Image
-            src='/images/activity-img2.jpg'
+            src='/images/gggrain-2.svg'
             layout='fill'
             objectFit='contain'
             alt='brain'
