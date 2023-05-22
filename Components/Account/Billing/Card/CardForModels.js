@@ -17,7 +17,7 @@ import Link from "next/link";
 function CardForModels({ number, onData }) {
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-    <Link href={`/projects/project-name/create-model/reference-data`} passHref>
+    <Link href={`/projects/project-name/create-model/select-model`} passHref>
       <Card>
         <Header>
           <ImageContainer>
