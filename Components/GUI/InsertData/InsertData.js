@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DataDescription from "./DataDescription";
 import DataContainers from "./DataContainers";
+import ContinueButton from "./ContinueButton";
 
 function InsertData() {
   const handleDrop = (acceptedFiles) => {
@@ -35,6 +36,7 @@ function InsertData() {
           text='Cost Function'
           color={"#9c27b0"}
         />
+        <ContinueButton />
       </InsertDataContainer>
     </Container>
   );
@@ -47,7 +49,7 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: calc(100vh - 80px);
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1200px) {
     height: 100%;
   }
 `;
@@ -60,7 +62,8 @@ const TableContainer = styled.div`
   /* background-color: red; */
   width: 100%;
   height: 65%;
-  @media screen and (max-width: 900px) {
+  padding-top: 10px;
+  @media screen and (max-width: 1200px) {
     height: 100%;
   }
 `;
@@ -73,9 +76,10 @@ const InsertDataContainer = styled.div`
   /* background-color: blue; */
   width: 100%;
   height: 35%;
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1200px) {
     height: 100%;
     flex-direction: column;
   }
 `;
+
 export default InsertData;

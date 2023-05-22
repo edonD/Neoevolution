@@ -15,14 +15,12 @@ import Link from "next/link";
 function CardForSelection({ onData, name }) {
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-
-    <Card
-      onClick={() => {
-        const icrement = 1;
-        onData(icrement);
-      }}
+    <Link
+      href={`/projects/project-name/create-model/select-model/insert-data`}
+      passHref
     >
-      {/* <ImageContainer>
+      <Card>
+        {/* <ImageContainer>
         <Image
           src='/images/plus-svgrepo-com.svg'
           layout='fill'
@@ -30,10 +28,10 @@ function CardForSelection({ onData, name }) {
           alt='brain'
         />
       </ImageContainer> */}
-      <ListItem>
-        <h3>{name}</h3>
-      </ListItem>
-      {/* <Header>
+        <ListItem>
+          <h3>{name}</h3>
+        </ListItem>
+        {/* <Header>
           <ImageContainer>
             <Image
               src='/images/gggrain.svg'
@@ -43,7 +41,7 @@ function CardForSelection({ onData, name }) {
             />
           </ImageContainer>
         </Header> */}
-      {/* <Box>
+        {/* <Box>
           <CardContent>
             <ListItem>
               <h3>Project Name</h3>
@@ -70,7 +68,8 @@ function CardForSelection({ onData, name }) {
             </ListItemEnd>
           </CardContent>
         </Box> */}
-    </Card>
+      </Card>
+    </Link>
   );
 }
 
@@ -121,7 +120,7 @@ const Button = styled.button`
   }
 `;
 const Card = styled.div`
-  width: 250px;
+  width: 100%;
   height: 200px;
   background-color: transparent;
   position: relative;
