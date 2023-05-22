@@ -22,8 +22,8 @@ function Login() {
   return (
     <Container>
       {/* <Header /> */}
-      <WrapperDescription>
-        <FirstContainer>
+      {/* <WrapperDescription> */}
+      {/* <FirstContainer>
           <RowContainer>
             <ImageContainer>
               <StyledImage>
@@ -93,10 +93,10 @@ function Login() {
               </BodyBodyContainer>
             </BodyContainer>
           </RowContainer>
-        </FirstContainer>
+        </FirstContainer> */}
 
-        {/* <Image src='/images/wave.svg' layout='fill' alt='brain' /> */}
-      </WrapperDescription>
+      {/* <Image src='/images/wave.svg' layout='fill' alt='brain' /> */}
+      {/* </WrapperDescription> */}
       <WrapperForm>
         <Form
           onSubmit={(e) => {
@@ -320,7 +320,7 @@ const WrapperDescription = styled.div`
   }
 `;
 const WrapperForm = styled.div`
-  width: 50vw;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;

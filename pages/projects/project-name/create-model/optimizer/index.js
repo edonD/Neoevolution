@@ -1,8 +1,8 @@
 import React from "react";
-import SidebarSoftware from "../../../../Components/GUI/SidebarBodies/SidebarSoftware";
-import ProfileHeader from "../../../../Components/Account/ProfileHeader/ProfileHeader";
+import SidebarSoftware from "../../../../../Components/GUI/SidebarBodies/SidebarSoftware";
+import ProfileHeader from "../../../../../Components/Account/ProfileHeader/ProfileHeader";
 import styled from "styled-components";
-import Optimizer from "../../../../Components/GUI/Optimizer/Optimizer";
+import Optimizer from "../../../../../Components/GUI/Optimizer/Optimizer";
 
 function index() {
   return (

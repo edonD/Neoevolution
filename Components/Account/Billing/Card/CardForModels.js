@@ -14,15 +14,15 @@ import { RiCalendar2Line } from "react-icons/ri";
 import { AiOutlineDownload, AiOutlineClockCircle } from "react-icons/ai";
 import Link from "next/link";
 
-function CardForProjects({ state, onData }) {
+function CardForModels({ number, onData }) {
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-    <Link href={`/projects/project-name/create-model`} passHref>
+    <Link href={`/projects/project-name/create-model/reference-data`} passHref>
       <Card>
         <Header>
           <ImageContainer>
             <Image
-              src='/images/gggrain.svg'
+              src='/images/gggrain-model.svg'
               layout='fill'
               objectFit='contain'
               alt='brain'
@@ -32,18 +32,9 @@ function CardForProjects({ state, onData }) {
         <Box>
           <CardContent>
             <ListItem>
-              <h3>Project Name</h3>
+              <h3>Model Name</h3>
             </ListItem>
-            <ListItem state={state}>
-              <h2>{state}</h2>
-            </ListItem>
-          </CardContent>
-          <CardContent>
-            <ListItemEnd>
-              <h2>Updated at</h2>
-              <h1>7 June, 2022</h1>
-            </ListItemEnd>
-            <ListItemEnd>
+            <ListItem>
               <Button
                 onClick={() => {
                   const decrement = 1;
@@ -53,7 +44,7 @@ function CardForProjects({ state, onData }) {
               >
                 Cancel
               </Button>
-            </ListItemEnd>
+            </ListItem>
           </CardContent>
         </Box>
       </Card>
@@ -150,13 +141,14 @@ const Header = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding-left: 10px;
+  user-select: none;
   @media screen and (max-width: 1200px) {
     display: none;
   }
 `;
 
 const CardContent = styled.div`
-  width: 45%;
+  width: 100%;
   height: 100%;
   background-color: transparent;
   display: flex;
@@ -319,5 +311,4 @@ const DownloadItem = styled.div`
     margin: 0px;
   }
 `;
-
-export default CardForProjects;
+export default CardForModels;

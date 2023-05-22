@@ -12,7 +12,7 @@ import ActiveOrders from "../Projects/ActiveOrders";
 import CreateNewProject from "../Projects/CreateNewProject";
 import NewModel from "../NewModel/NewModel";
 
-function SidebarProjects({ increment, decrement, projects, model }) {
+function SidebarSelectModel({ children, decrement, models }) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
 
   const handleListItemClick = (index) => {
@@ -62,14 +62,7 @@ function SidebarProjects({ increment, decrement, projects, model }) {
           </ListItem>
         </AccountBody>
       </WrapperDescription>
-      <MainView>
-        {projects === 0 ? (
-          <CreateNewProject onData={increment} />
-        ) : (
-          <ActiveOrders projects={projects} onData={decrement} />
-        )}
-        {/* <ActiveOrders /> */}
-      </MainView>
+      <MainView>{children}</MainView>
     </Container>
   );
 }
@@ -90,7 +83,7 @@ const Container = styled.div`
     #031224,
     #0f2847
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background-color: white;
+  background-color: #f3f3f8;
 `;
 
 const AccountHeader = styled.div`
@@ -203,6 +196,16 @@ const MainView = styled.div`
   padding-top: 0px;
   align-items: center;
 
+  @media screen and (max-width: 1400px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0px;
+
+    height: 100%;
+  }
   @media screen and (max-width: 1200px), screen and (max-height: 700px) {
     width: 100%;
     display: flex;
@@ -266,7 +269,7 @@ const ListItem = styled.div`
 const WrapperDescription = styled.div`
   width: 300px;
   min-height: calc(100vh - 80px);
-  /* height: 100%; */
+  height: 100%;
   /* position: relative; */
   display: flex;
   flex-direction: column;
@@ -274,7 +277,7 @@ const WrapperDescription = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  @media screen and (max-width: 1600px) {
+  @media screen and (max-width: 1400px) {
     display: none;
   }
 `;
@@ -291,4 +294,4 @@ const Icon = styled.div`
   background: transparent;
 `;
 
-export default SidebarProjects;
+export default SidebarSelectModel;

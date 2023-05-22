@@ -11,7 +11,6 @@ import styled from "styled-components";
 import { MdOutlineBusinessCenter } from "react-icons/md";
 import { BsPlusCircleFill } from "react-icons/bs";
 import Link from "next/link";
-import { background } from "@chakra-ui/react";
 
 export default function AiValanchePopUp({ onData, ButtonText, icon, size }) {
   const [open, setOpen] = React.useState(false);

@@ -5,8 +5,6 @@ import { FaCheckCircle } from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
-import { useEffect } from "react";
-import { css } from "styled-components";
 
 function UploadReferenceData({ type }) {
   const [file, setFile] = useState(null);
@@ -121,12 +119,6 @@ const SuccessIcon = styled(FaCheckCircle)`
 const FileName = styled.span`
   color: #333;
   font-size: 16px;
-`;
-
-const UploadSuccess = styled.p`
-  color: green;
-  font-size: 16px;
-  margin-top: 10px;
 `;
 
 export default UploadReferenceData;

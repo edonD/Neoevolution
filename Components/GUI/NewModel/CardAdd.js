@@ -9,17 +9,31 @@ import {
 } from "@mui/material";
 import styled from "styled-components";
 import Image from "next/image";
-import { BiLoaderCircle } from "react-icons/bi";
-import { RiCalendar2Line } from "react-icons/ri";
-import { AiOutlineDownload, AiOutlineClockCircle } from "react-icons/ai";
+
 import Link from "next/link";
 
-function CardForProjects({ state, onData }) {
+function CardAdd({ onData }) {
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-    <Link href={`/projects/project-name/create-model`} passHref>
-      <Card>
-        <Header>
+
+    <Card
+      onClick={() => {
+        const icrement = 1;
+        onData(icrement);
+      }}
+    >
+      <ImageContainer>
+        <Image
+          src='/images/plus-svgrepo-com.svg'
+          layout='fill'
+          objectFit='contain'
+          alt='brain'
+        />
+      </ImageContainer>
+      <ListItem>
+        <h3>New Model</h3>
+      </ListItem>
+      {/* <Header>
           <ImageContainer>
             <Image
               src='/images/gggrain.svg'
@@ -28,8 +42,8 @@ function CardForProjects({ state, onData }) {
               alt='brain'
             />
           </ImageContainer>
-        </Header>
-        <Box>
+        </Header> */}
+      {/* <Box>
           <CardContent>
             <ListItem>
               <h3>Project Name</h3>
@@ -55,22 +69,22 @@ function CardForProjects({ state, onData }) {
               </Button>
             </ListItemEnd>
           </CardContent>
-        </Box>
-      </Card>
-    </Link>
+        </Box> */}
+    </Card>
   );
 }
 
 const ImageContainer = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 75px;
+  height: 75px;
   display: flex;
   justify-content: center;
   background-color: transparent;
   align-items: center;
   position: relative;
-  border-radius: 10px;
+  flex-direction: column;
   overflow: hidden;
+  user-select: none;
   @media screen and (max-width: 600px) {
   }
 `;
@@ -107,13 +121,13 @@ const Button = styled.button`
   }
 `;
 const Card = styled.div`
-  width: 100%;
-  height: 220px;
+  width: 300px;
+  height: 150px;
   background-color: transparent;
   position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   /* border: 1px solid black; */
   border-radius: 15px;
@@ -209,16 +223,17 @@ const IconCircle = styled.div`
 `;
 
 const ListItem = styled.div`
-  width: 100%;
-  height: 50%;
+  /* width: 100%;
+  height: 50%; */
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   background: transparent;
-  padding: 0px;
+  padding: 5px 5px 5px 5px;
   background-color: transparent;
-  margin: 0px 0px 0px 0px;
+  user-select: none;
+  //margin: 5px 5px 5px 5px;
   color: black;
   //cursor: pointer;
 
@@ -247,6 +262,7 @@ const ListItem = styled.div`
     color: black;
     font-weight: 200;
     margin: 0px;
+    font-size: 14px;
     @media screen and (max-width: 750px) {
       font-size: 14px;
     }
@@ -320,4 +336,4 @@ const DownloadItem = styled.div`
   }
 `;
 
-export default CardForProjects;
+export default CardAdd;

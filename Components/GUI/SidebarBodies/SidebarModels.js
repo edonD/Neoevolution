@@ -12,7 +12,7 @@ import ActiveOrders from "../Projects/ActiveOrders";
 import CreateNewProject from "../Projects/CreateNewProject";
 import NewModel from "../NewModel/NewModel";
 
-function SidebarProjects({ increment, decrement, projects, model }) {
+function SidebarProjects({ increment, decrement, models }) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
 
   const handleListItemClick = (index) => {
@@ -63,12 +63,7 @@ function SidebarProjects({ increment, decrement, projects, model }) {
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        {projects === 0 ? (
-          <CreateNewProject onData={increment} />
-        ) : (
-          <ActiveOrders projects={projects} onData={decrement} />
-        )}
-        {/* <ActiveOrders /> */}
+        <NewModel models={models} increment={increment} decrement={decrement} />
       </MainView>
     </Container>
   );
