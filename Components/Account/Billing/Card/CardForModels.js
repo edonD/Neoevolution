@@ -1,17 +1,6 @@
 import React from "react";
-import {
-  CardMedia,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
 import styled from "styled-components";
 import Image from "next/image";
-import { BiLoaderCircle } from "react-icons/bi";
-import { RiCalendar2Line } from "react-icons/ri";
-import { AiOutlineDownload, AiOutlineClockCircle } from "react-icons/ai";
 import Link from "next/link";
 
 function CardForModels({ number, onData }) {
