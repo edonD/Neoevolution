@@ -64,10 +64,8 @@ function Header() {
   const [activeRoute, setActiveRoute] = useState(router.pathname);
 
   const handleNavLinkClick = (route) => {
-    if (route !== activeRoute && route !== "/about") {
-      setActiveRoute(route);
-      router.push(route);
-    }
+    setActiveRoute(route);
+    router.push(route);
   };
 
   useEffect(() => {
@@ -80,9 +78,14 @@ function Header() {
       <Nav>
         <Link href='reference-data' passHref>
           <NavLink
-            isActive={activeRoute === "/projects/project-name/reference-data"}
+            isActive={
+              activeRoute ===
+              "/projects/project-name/create-model/select-model/insert-data/reference-data"
+            }
             onClick={() =>
-              handleNavLinkClick("/projects/project-name/reference-data")
+              handleNavLinkClick(
+                "/projects/project-name/create-model/select-model/insert-data/reference-data"
+              )
             }
           >
             Reference Data
@@ -90,18 +93,30 @@ function Header() {
         </Link>
 
         <NavLink
-          isActive={activeRoute === "/about"}
-          onClick={() => handleNavLinkClick("/about")}
-          isDisabled={true}
+          isActive={
+            activeRoute ===
+            "/projects/project-name/create-model/select-model/insert-data/model"
+          }
+          onClick={() =>
+            handleNavLinkClick(
+              "/projects/project-name/create-model/select-model/insert-data/model"
+            )
+          }
+          isDisabled={false}
         >
           Model
         </NavLink>
 
         <Link href='parameters' passHref>
           <NavLink
-            isActive={activeRoute === "/projects/project-name/parameters"}
+            isActive={
+              activeRoute ===
+              "/projects/project-name/create-model/select-model/insert-data/parameters"
+            }
             onClick={() =>
-              handleNavLinkClick("/projects/project-name/parameters")
+              handleNavLinkClick(
+                "/projects/project-name/create-model/select-model/insert-data/parameters"
+              )
             }
             isDisabled={false}
           >
@@ -110,9 +125,14 @@ function Header() {
         </Link>
         <Link href='optimizer' passHref>
           <NavLink
-            isActive={activeRoute === "/projects/project-name/optimizer"}
+            isActive={
+              activeRoute ===
+              "/projects/project-name/create-model/select-model/insert-data/optimizer"
+            }
             onClick={() =>
-              handleNavLinkClick("/projects/project-name/optimizer")
+              handleNavLinkClick(
+                "/projects/project-name/create-model/select-model/insert-data/optimizer"
+              )
             }
             isDisabled={false}
           >
@@ -121,8 +141,15 @@ function Header() {
         </Link>
         <Link href='results' passHref>
           <NavLink
-            isActive={activeRoute === "/projects/project-name/results"}
-            onClick={() => handleNavLinkClick("/projects/project-name/results")}
+            isActive={
+              activeRoute ===
+              "/projects/project-name/create-model/select-model/insert-data/results"
+            }
+            onClick={() =>
+              handleNavLinkClick(
+                "/projects/project-name/create-model/select-model/insert-data/results"
+              )
+            }
             isDisabled={false}
           >
             Results

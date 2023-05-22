@@ -121,8 +121,8 @@ const Button = styled.button`
   }
 `;
 const Card = styled.div`
-  width: 300px;
-  height: 150px;
+  width: 250px;
+  height: 200px;
   background-color: transparent;
   position: relative;
   display: flex;
