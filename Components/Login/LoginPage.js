@@ -263,8 +263,8 @@ const LoginPage = () => {
             <Header>
               <LogoContainer>
                 <Image
-                  src='/images/edon.jpg'
-                  objectFit='cover'
+                  src='/images/TDK-logo.svg'
+                  objectFit='contain'
                   layout='fill'
                   alt='brain'
                 />
