@@ -5,9 +5,8 @@ import { Checkbox } from "primereact/checkbox";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 
-import { LayoutContext } from "./context/layoutcontext";
 import { InputText } from "primereact/inputtext";
-import { classNames } from "primereact/utils";
+
 import styled from "styled-components";
 import Image from "next/image";
 
@@ -15,9 +14,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  min-width: 100vw;
-  overflow: hidden;
+  /* min-height: 100vh; */
+  height: 100%;
+  width: 100%;
+  margin: 20px 0px 20px 0px;
+
   @media screen and (max-width: 1200px) {
     width: 100%;
     height: 100%;
@@ -42,7 +43,7 @@ const StyledCard = styled.div`
   padding: 0.3rem;
   background: linear-gradient(
     180deg,
-    rgba(19, 179, 255, 1) 5%,
+    rgba(238, 205, 161, 1) 5%,
     rgba(33, 150, 243, 0) 25%
   );
 `;
@@ -52,7 +53,7 @@ const CardContent = styled.div`
   /* padding: 2rem; */
   border-radius: 53px;
   background-color: white;
-  padding-top: 5rem; /* 32px */
+  padding-top: 2rem; /* 32px */
   padding-bottom: 5rem; /* 32px */
   padding-left: 32px;
   padding-right: 32px;
@@ -63,7 +64,7 @@ const CardContent = styled.div`
 `;
 const Header = styled.div`
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -113,6 +114,9 @@ const Body = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+  &p {
+    font-weight: 6000;
+  }
 `;
 const FooterContainer = styled.div`
   display: flex;
@@ -247,10 +251,9 @@ const SignInButton = styled(Button)`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 `;
 
-const LoginPage = () => {
+const SignupTest = () => {
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
-  const { layoutConfig } = useContext(LayoutContext);
 
   const router = useRouter();
 
@@ -261,29 +264,30 @@ const LoginPage = () => {
         <StyledCard>
           <CardContent>
             <Header>
-              <LogoContainer>
-                <Image
-                  src='/images/edon.jpg'
-                  objectFit='cover'
-                  layout='fill'
-                  alt='brain'
-                />
-              </LogoContainer>
-              <Title>Welcome, Edon!</Title>
-              <Subtitle>Sign in to continue</Subtitle>
+              <Title>Register</Title>
+              <Subtitle>Let‘s get started</Subtitle>
             </Header>
             <Body>
+              <FormLabel htmlFor='email2'>First Name</FormLabel>
+              <InputText
+                type='text'
+                placeholder='First Name'
+                style={{ padding: "1rem", width: "100%", marginBottom: "20px" }}
+              />
+              <FormLabel htmlFor='email2'>Last Name</FormLabel>
+              <InputText
+                type='text'
+                placeholder='Last Name'
+                style={{ padding: "1rem", width: "100%", marginBottom: "20px" }}
+              />
               <FormLabel htmlFor='email1'>Email</FormLabel>
               <InputText
-                id='email1'
                 type='text'
                 placeholder='Email address'
                 style={{ padding: "1rem", width: "100%", marginBottom: "20px" }}
               />
-
               <FormLabel htmlFor='password1'>Password</FormLabel>
               <Password
-                id='password1'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password'
@@ -291,7 +295,6 @@ const LoginPage = () => {
                 className='w-full mb-5'
                 inputClassName='w-full p-3 md:w-30rem'
               />
-
               {/* <div className='flex align-items-center justify-content-between mb-5 gap-5'> */}
               <FooterContainer>
                 <RememberMeContainer>
@@ -301,15 +304,23 @@ const LoginPage = () => {
                     onChange={(e) => setChecked(e.checked)}
                     className='mr-2'
                   />
-                  <label htmlFor='rememberme1'>Remember me</label>
+                  <label htmlFor='rememberme1'>
+                    I have read the Terms and Conditions
+                  </label>
                 </RememberMeContainer>
-                <ForgotPasswordLink>Forgot password?</ForgotPasswordLink>
+                {/* <ForgotPasswordLink>Forgot password?</ForgotPasswordLink> */}
               </FooterContainer>
               <SignInButton
                 className='blue-white-lightblue'
-                label='Sign In'
+                label='Sign Up'
                 onClick={() => router.push("/projects")}
               />
+              <p>
+                Already have an account?
+                <a style={{ marginLeft: "5px", color: "blue" }} href='./Login'>
+                  Login
+                </a>
+              </p>
             </Body>
           </CardContent>
         </StyledCard>
@@ -320,4 +331,4 @@ const LoginPage = () => {
 // LoginPage.getLayout = function getLayout(page) {
 //   return <>{page}</>;
 // };
-export default LoginPage;
+export default SignupTest;
