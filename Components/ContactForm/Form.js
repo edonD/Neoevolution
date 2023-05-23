@@ -1,14 +1,14 @@
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
+import { Checkbox } from "primereact/checkbox";
 import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Dropdown } from "primereact/dropdown";
+import { useRouter } from "next/router";
 
 function ContactForm() {
   const [email, setEmail] = useState("");
@@ -19,7 +19,21 @@ function ContactForm() {
   const [jobrole, setJobrole] = useState("");
   const [jobtitle, setJobtitle] = useState("");
   const [details, setDetails] = useState("");
+  const [dropdownItem, setDropdownItem] = useState(null);
+  const dropdownItems = [
+    { name: "Option 1", code: "Option 1" },
+    { name: "Option 2", code: "Option 2" },
+    { name: "Option 3", code: "Option 3" },
+  ];
+  const [checkboxValue, setCheckboxValue] = useState([]);
+  const router = useRouter();
+  const onCheckboxChange = (e) => {
+    let selectedValue = [...checkboxValue];
+    if (e.checked) selectedValue.push(e.value);
+    else selectedValue.splice(selectedValue.indexOf(e.value), 1);
 
+    setCheckboxValue(selectedValue);
+  };
   return (
     <Container>
       <WrapperDescription>
@@ -38,7 +52,7 @@ function ContactForm() {
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            handleSubmit(e);
+            //  handleSubmit(e);
           }}
         >
           <Grid container spacing={2} rowSpacing={2}>
@@ -46,27 +60,22 @@ function ContactForm() {
               <h1>Please fill in the form</h1>
             </Grid>
             <Grid item xs={12} md={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='BEmail'
-                label='Please enter your business email.'
-                name='BEmail'
+              <InputText
+                type='text'
+                placeholder='Please enter your business email.'
+                style={{ width: "100%" }}
                 value={email}
                 onChange={(event) => {
                   setEmail(event.target.value);
                 }}
-              />
+              ></InputText>
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
+              <InputText
+                style={{ width: "100%" }}
                 id='name'
-                label='First Name'
+                placeholder='First Name'
                 name='name'
                 value={name}
                 onChange={(event) => {
@@ -75,12 +84,10 @@ function ContactForm() {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
+              <InputText
+                style={{ width: "100%" }}
                 id='last name'
-                label='Last Name'
+                placeholder='Last Name'
                 name='last name'
                 value={lastname}
                 onChange={(event) => {
@@ -89,27 +96,23 @@ function ContactForm() {
               />
             </Grid>
             <Grid item xs={12} md={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                value={company}
-                name='Company'
-                label='Company'
-                type='Company'
+              <InputText
+                style={{ width: "100%" }}
                 id='Company'
+                placeholder='Company'
+                name='Company'
+                type='Company'
+                value={company}
                 onChange={(event) => {
                   setCompany(event.target.value);
                 }}
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
+              <InputText
+                style={{ width: "100%" }}
+                placeholder='Job role'
                 id='jobRole'
-                label='Job role'
                 name='jobRole'
                 value={jobrole}
                 onChange={(event) => {
@@ -118,13 +121,11 @@ function ContactForm() {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
+              <InputText
+                style={{ width: "100%" }}
+                placeholder='Job title'
                 value={jobtitle}
                 name='jobTitle'
-                label='Job title'
                 id='jobTitle'
                 onChange={(event) => {
                   setJobtitle(event.target.value);
@@ -132,31 +133,54 @@ function ContactForm() {
               />
             </Grid>
             <Grid item xs={4} md={4}>
-              <FormGroup>
-                <FormControlLabel control={<Checkbox />} label='Enterprise' />
-              </FormGroup>
+              <Checkbox
+                inputId='checkOption1'
+                name='option'
+                value='Chicago'
+                checked={checkboxValue.indexOf("Chicago") !== -1}
+                onChange={onCheckboxChange}
+              />
+              <label htmlFor='ingredient1' className='ml-2'>
+                Enterprise
+              </label>
             </Grid>
             <Grid item xs={4} md={4}>
-              <FormGroup>
-                <FormControlLabel control={<Checkbox />} label='Academy' />
-              </FormGroup>
+              {/* <FormGroup> */}
+              <Checkbox
+                inputId='checkOption1'
+                name='option'
+                value='Chicago'
+                checked={checkboxValue.indexOf("Chicago") !== -1}
+                onChange={onCheckboxChange}
+              />
+              <label htmlFor='ingredient1' className='ml-2'>
+                Academy
+              </label>
+
+              {/* </FormGroup> */}
             </Grid>
             <Grid item xs={4} md={4}>
-              <FormGroup>
-                <FormControlLabel control={<Checkbox />} label='Person' />
-              </FormGroup>
+              {/* <FormGroup> */}
+              <Checkbox
+                inputId='checkOption1'
+                name='option'
+                value='Chicago'
+                checked={checkboxValue.indexOf("Chicago") !== -1}
+                onChange={onCheckboxChange}
+              />
+              <label htmlFor='ingredient1' className='ml-2'>
+                Person
+              </label>
+              {/* </FormGroup> */}
             </Grid>
 
             <Grid item xs={12} md={12}>
-              <TextField
+              <InputTextarea
                 variant='outlined'
-                required
-                fullWidth
+                rows='5'
+                style={{ width: "100%" }}
                 name='Details'
-                label='Details of your project'
-                multiline
-                rows={5}
-                id='Details'
+                placeholder='Your Message'
                 onChange={(event) => {
                   setDetails(event.target.value);
                 }}
@@ -164,10 +188,10 @@ function ContactForm() {
             </Grid>
             <Grid item xs={12} md={12}>
               <FormButton
-                type='submit'
-                fullWidth
-                variant='contained'
-                color='primary'
+                className='blue-white-lightblue'
+                onClick={() => {
+                  router.push("/");
+                }}
               >
                 Contact Us
               </FormButton>
@@ -196,6 +220,31 @@ const Container = styled.div`
   ); /* Chrome 10-25, Safari 5.1-6 */
 `;
 
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  height: 92%;
+  padding: 10px;
+  /* height:100%; */
+  background-color: lightblue;
+`;
+
+const Body = styled.div`
+  /* p-fluid styles */
+  padding: 0;
+  margin: 0;
+
+  /* formgrid styles */
+  display: grid;
+  //grid-template-columns: repeat(2fr, 12);
+  gap: 1rem;
+
+  /* grid styles */
+  /* Add any additional grid-related styles here */
+`;
 const Form = styled.form`
   background: white;
   height: 92%;
@@ -259,7 +308,7 @@ const WrapperForm = styled.div`
   justify-content: center;
   padding-top: 0px;
   align-items: center;
-
+  background-color: white;
   @media screen and (max-width: 1200px), screen and (max-height: 700px) {
     width: 100%;
     display: flex;
@@ -303,23 +352,76 @@ const FormH1 = styled.h1`
   }
 `;
 
-const FormButton = styled(Button)`
-  && {
-    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: #3f9cf3;
-    color: white;
-    cursor: pointer;
+const FormButton = styled.button`
+  background-color: #1abc9c;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  /* font-size: 35px; */
+  font-size: 18px;
 
-    &:hover {
-      background-color: #388ddb;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  padding: 10px 60px 10px 60px;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* font-size: 20px; */
+  @media screen and (max-width: 900px) {
+    /* justify-content: flex-start; */
+    font-size: 16px;
+    padding: 5px 10px 5px 10px;
+  }
+  @media screen and (max-width: 500px) {
+    /* justify-content: flex-start; */
+    font-size: 14px;
+    padding: 5px 10px 5px 10px;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+  &:focus {
+    outline: none;
+  }
+  &.gray-white-black {
+    background-color: #349a77;
+    color: white;
+    border: 1px solid #349a77;
+  }
+
+  &.gray-white-black:hover {
+    color: #349a77;
+    background-color: white;
+    border: 1px solid #349a77;
+  }
+
+  &.black-gray-white {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #333;
+  }
+
+  &.black-gray-white:hover {
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #333;
+  }
+
+  &.blue-white-lightblue {
+    width: 100%;
+    background-color: #2196f3;
+    color: #fff;
+    border: 1px solid #2196f3;
+    @media screen and (max-width: 900px) {
+      width: 200px;
     }
   }
-  @media screen and (max-width: 400px) {
-    font-size: 12px;
+
+  &.blue-white-lightblue:hover {
+    color: #2196f3;
+    background-color: #fff;
+    border: 1px solid #2196f3;
   }
 `;
-
 export default ContactForm;
