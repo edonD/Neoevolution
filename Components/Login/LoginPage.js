@@ -250,7 +250,6 @@ const SignInButton = styled(Button)`
 const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
-  const { layoutConfig } = useContext(LayoutContext);
 
   const router = useRouter();
 
