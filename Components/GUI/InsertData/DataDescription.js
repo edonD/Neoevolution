@@ -123,7 +123,7 @@ export default function BasicFilterDemo() {
       <DataTable
         value={customers}
         paginator
-        rows={5}
+        rows={4}
         dataKey='id'
         filters={filters}
         responsiveLayout='stack'
@@ -187,9 +187,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: transparent;
   width: 100%;
   height: 100%;
+  padding-top: 10px;
   opacity: 1;
 `;

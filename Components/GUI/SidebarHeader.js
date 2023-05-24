@@ -36,7 +36,7 @@ const Background = styled.div`
   position: relative;
   width: 100%;
   height: 80px;
-  background: red;
+  background: transparent;
   background-color: white;
   display: flex;
   flex-direction: row;

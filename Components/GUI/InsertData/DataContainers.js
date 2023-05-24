@@ -10,8 +10,8 @@ const FileUploaderWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border: 1px dashed ${(props) => (props.hasFiles ? "#e0e0e0" : "#6e96f6")};
   border-radius: 5px;
   margin: 10px;
