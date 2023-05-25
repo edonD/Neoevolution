@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
-import DataGridSecond from "../DataGrids/DataGridSecond";
+import DataGridParameters from "../DataGrids/DataGridParameters";
 import Plots from "../Plots";
 
 // import { Plots } from "plotly.js";
@@ -29,7 +29,7 @@ function ReferenceDataView() {
         lg={12}
         xl={12}
       >
-        <DataGridSecond
+        <DataGridParameters
           type={"Click to upload or drag & drop parameter data"}
         />
       </Grid>

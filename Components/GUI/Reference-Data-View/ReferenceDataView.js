@@ -23,7 +23,7 @@ function ReferenceDataView() {
           item
           xs={12}
           sm={12}
-          lg={12}
+          lg={6}
           xl={6}
           style={{
             display: "flex",
@@ -42,7 +42,7 @@ function ReferenceDataView() {
           item
           xs={12}
           sm={12}
-          lg={12}
+          lg={6}
           xl={6}
           style={{
             display: "flex",

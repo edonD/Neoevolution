@@ -154,7 +154,7 @@ const FileName = styled.span`
 `;
 
 const DropDownContainer = styled.div`
-  width: 65%;
+  width: 80%;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -162,7 +162,7 @@ const DropDownContainer = styled.div`
   align-items: center;
 `;
 const UploadButtonContainer = styled.div`
-  width: 35%;
+  width: 20%;
   height: 100%;
 
   display: flex;
