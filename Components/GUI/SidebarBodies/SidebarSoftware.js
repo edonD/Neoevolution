@@ -85,14 +85,13 @@ function SidebarProjects({ increment, decrement, projects, children }) {
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        <div className='col-12'>
-          <div className='card'>
-            <BreadCrumb
-              home={breadcrumbHome}
-              model={generateBreadcrumbItems(activeRoute)}
-            />
-          </div>
-        </div>
+        <BreadCrumbContainer>
+          <StyledBreadCrumb
+            home={breadcrumbHome}
+            model={generateBreadcrumbItems(activeRoute)}
+          />
+        </BreadCrumbContainer>
+
         <SubHeader />
         {children}
       </MainView>
@@ -117,6 +116,7 @@ const Container = styled.div`
     #0f2847
   ); /* Chrome 10-25, Safari 5.1-6 */
   background-color: #f3f3f8;
+  /* background-color: red; */
   @media screen and (max-width: 1600px) {
     width: 100%;
     background-color: white;
@@ -125,6 +125,17 @@ const Container = styled.div`
     /* margin-top: 80px; */
     align-items: center;
   }
+`;
+const BreadCrumbContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+`;
+const StyledBreadCrumb = styled(BreadCrumb)`
+  width: 100%;
+  border: 0px;
 `;
 
 const AccountHeader = styled.div`
@@ -229,10 +240,10 @@ const AccountBody = styled.div`
 const MainView = styled.div`
   width: calc(100% - 300px);
   min-height: calc(100vh - 80px);
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
-  background-color: red;
+  background-color: #f3f3f8;
   justify-content: flex-start;
   padding-top: 0px;
   align-items: center;

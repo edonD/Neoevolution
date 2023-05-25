@@ -126,7 +126,7 @@ const Container = styled.div`
   height: calc(100vh - 160px);
 
   position: relative;
-  margin: 20px 20px 0px 20px;
+  margin: 60px 20px 0px 20px;
   padding-top: 10px;
 
   @media screen and (max-height: 750px) {
@@ -144,7 +144,7 @@ const Container = styled.div`
 `;
 
 const Data = styled.div`
-  height: calc(100vh - 280px);
+  height: calc(100vh - 340px);
   width: 100%;
   margin: 10px;
 `;

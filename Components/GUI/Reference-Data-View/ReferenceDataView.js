@@ -8,36 +8,58 @@ import Plots from "../Plots";
 
 function ReferenceDataView() {
   return (
-    <Grid
-      container
-      spacing={2}
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Container>
       <Grid
-        item
-        xs={12}
-        sm={12}
-        lg={12}
-        xl={6}
+        container
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "flex-start",
+          height: "100%",
+          backgroundColor: "white",
         }}
       >
-        <DataGridSecond
-          type={"Click to upload or drag & drop reference data"}
-        />
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          lg={12}
+          xl={6}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "transparent",
+          }}
+        >
+          <DataGridSecond
+            type={"Click to upload or drag & drop reference data"}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          lg={12}
+          xl={6}
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            backgroundColor: "transparent",
+          }}
+        >
+          <Plots />
+        </Grid>
       </Grid>
-      <Grid item xs={12} sm={12} lg={12} xl={6}>
-        <Plots />
-      </Grid>
-    </Grid>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  width: 100%;
+  height: calc(100vh - 200px);
+`;
 export default ReferenceDataView;

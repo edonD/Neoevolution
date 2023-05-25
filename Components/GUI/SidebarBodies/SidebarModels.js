@@ -89,14 +89,13 @@ function SidebarProjects({ increment, decrement, models }) {
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        <div className='col-12'>
-          <div className='card'>
-            <BreadCrumb
-              home={breadcrumbHome}
-              model={generateBreadcrumbItems(activeRoute)}
-            />
-          </div>
-        </div>
+        <BreadCrumbContainer>
+          <BreadCrumb
+            home={breadcrumbHome}
+            model={generateBreadcrumbItems(activeRoute)}
+          />
+        </BreadCrumbContainer>
+
         <NewModel models={models} increment={increment} decrement={decrement} />
       </MainView>
     </Container>
@@ -179,6 +178,14 @@ const PersonalContent = styled.div`
       &:hover {
         color: #119bbd;
       } */
+`;
+const BreadCrumbContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  border: 1px solid green;
 `;
 
 const ImageContainer = styled.div`

@@ -238,9 +238,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 240px);
   padding-top: 10px;
-
+  background-color: transparent;
   @media screen and (max-width: 1600px) {
     overflow: hidden;
     padding: 0px;
