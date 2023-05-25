@@ -11,6 +11,8 @@ import { TiTick } from "react-icons/ti";
 import ActiveOrders from "../Projects/ActiveOrders";
 import CreateNewProject from "../Projects/CreateNewProject";
 import NewModel from "../NewModel/NewModel";
+import { BreadCrumb } from "primereact/breadcrumb";
+import { useRouter } from "next/router";
 
 function SidebarProjects({ increment, decrement, projects, model }) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
@@ -18,7 +20,31 @@ function SidebarProjects({ increment, decrement, projects, model }) {
   const handleListItemClick = (index) => {
     setSelectedItem(index);
   };
+  const router = useRouter();
+  const [activeRoute, setActiveRoute] = useState(router.pathname);
 
+  const breadcrumbHome = { icon: "pi pi-home", url: "./" };
+  const generateBreadcrumbItems = (path) => {
+    const pathItems = path.split("/").filter((item) => item !== "");
+
+    let breadcrumbItems = [];
+    let url = "";
+
+    for (let i = 0; i < pathItems.length; i++) {
+      const label = pathItems[i].replace(/-/g, " ");
+      url += `/${pathItems[i]}`;
+
+      breadcrumbItems.push({ label, url });
+    }
+
+    return breadcrumbItems;
+  };
+
+  useEffect(() => {
+    setActiveRoute(router.pathname);
+    // generateBreadcrumbItems(activeRoute);
+    // console.log(breadcrumbItems);
+  }, [router.pathname, activeRoute]);
   return (
     <Container>
       <WrapperDescription>
@@ -63,6 +89,11 @@ function SidebarProjects({ increment, decrement, projects, model }) {
         </AccountBody>
       </WrapperDescription>
       <MainView>
+        {/* <div className='col-12'> */}
+        {/* <div className='card'> */}
+
+        {/* </div> */}
+        {/* </div> */}
         {projects === 0 ? (
           <CreateNewProject onData={increment} />
         ) : (

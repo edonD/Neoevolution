@@ -8,7 +8,7 @@ import Link from "next/link";
 function ContinueButton({ onData }) {
   return (
     <Link
-      href={`/projects/project-name/create-model/select-model/insert-data/reference-data`}
+      href={`/projects/create-model/select-model/insert-data/reference-data`}
       passHref
     >
       <Card>

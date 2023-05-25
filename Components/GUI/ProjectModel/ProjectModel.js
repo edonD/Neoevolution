@@ -95,15 +95,6 @@ function ModelsGrid({ projects, onData }) {
   );
 }
 
-const Headerh2 = styled.h3`
-  font-size: 18px;
-  font-weight: 200;
-  @media screen and (max-width: 700px) {
-    font-weight: 400;
-    font-size: 20px;
-  }
-`;
-
 const WrapperForm = styled.div`
   width: 90%;
   min-height: 10vh;
@@ -164,26 +155,6 @@ const Form = styled.form`
   @media screen and (max-height: 780px) {
     height: 100%;
     background-color: white;
-  }
-`;
-
-const FormButton = styled(Button)`
-  && {
-    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
-    width: 320px;
-    height: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: #3f9cf3;
-    color: white;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #388ddb;
-    }
-  }
-  @media screen and (max-width: 400px) {
-    font-size: 12px;
   }
 `;
 

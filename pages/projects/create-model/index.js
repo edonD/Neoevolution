@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ProfileHeader from "../../../../Components/Account/ProfileHeader/ProfileHeader";
-import SidebarModels from "../../../../Components/GUI/SidebarBodies/SidebarModels";
+import ProfileHeader from "../../../Components/Account/ProfileHeader/ProfileHeader";
+import SidebarModels from "../../../Components/GUI/SidebarBodies/SidebarModels";
 import styled from "styled-components";
 
 function index() {

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
+import { BreadCrumb } from "primereact/breadcrumb";
 
 function SidebarProjects({ increment, decrement, projects, children }) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
@@ -16,6 +17,30 @@ function SidebarProjects({ increment, decrement, projects, children }) {
     router.push("/projects");
   };
 
+  const [activeRoute, setActiveRoute] = useState(router.pathname);
+
+  const breadcrumbHome = { icon: "pi pi-home", to: "/" };
+  const generateBreadcrumbItems = (path) => {
+    const pathItems = path.split("/").filter((item) => item !== "");
+
+    let breadcrumbItems = [];
+    let url = "";
+
+    for (let i = 0; i < pathItems.length; i++) {
+      const label = pathItems[i].replace(/-/g, " ");
+      url += `/${pathItems[i]}`;
+
+      breadcrumbItems.push({ label, url });
+    }
+
+    return breadcrumbItems;
+  };
+
+  useEffect(() => {
+    setActiveRoute(router.pathname);
+    // generateBreadcrumbItems(activeRoute);
+    // console.log(breadcrumbItems);
+  }, [router.pathname, activeRoute]);
   return (
     <Container>
       <WrapperDescription>
@@ -60,6 +85,14 @@ function SidebarProjects({ increment, decrement, projects, children }) {
         </AccountBody>
       </WrapperDescription>
       <MainView>
+        <div className='col-12'>
+          <div className='card'>
+            <BreadCrumb
+              home={breadcrumbHome}
+              model={generateBreadcrumbItems(activeRoute)}
+            />
+          </div>
+        </div>
         <SubHeader />
         {children}
       </MainView>

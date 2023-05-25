@@ -80,11 +80,11 @@ function Header() {
           <NavLink
             isActive={
               activeRoute ===
-              "/projects/project-name/create-model/select-model/insert-data/reference-data"
+              "/projects/create-model/select-model/insert-data/reference-data"
             }
             onClick={() =>
               handleNavLinkClick(
-                "/projects/project-name/create-model/select-model/insert-data/reference-data"
+                "/projects/create-model/select-model/insert-data/reference-data"
               )
             }
           >
@@ -95,11 +95,11 @@ function Header() {
         <NavLink
           isActive={
             activeRoute ===
-            "/projects/project-name/create-model/select-model/insert-data/model"
+            "/projects/create-model/select-model/insert-data/model"
           }
           onClick={() =>
             handleNavLinkClick(
-              "/projects/project-name/create-model/select-model/insert-data/model"
+              "/projects/create-model/select-model/insert-data/model"
             )
           }
           isDisabled={false}
@@ -111,11 +111,11 @@ function Header() {
           <NavLink
             isActive={
               activeRoute ===
-              "/projects/project-name/create-model/select-model/insert-data/parameters"
+              "/projects/create-model/select-model/insert-data/parameters"
             }
             onClick={() =>
               handleNavLinkClick(
-                "/projects/project-name/create-model/select-model/insert-data/parameters"
+                "/projects/create-model/select-model/insert-data/parameters"
               )
             }
             isDisabled={false}
@@ -127,11 +127,11 @@ function Header() {
           <NavLink
             isActive={
               activeRoute ===
-              "/projects/project-name/create-model/select-model/insert-data/optimizer"
+              "/projects/create-model/select-model/insert-data/optimizer"
             }
             onClick={() =>
               handleNavLinkClick(
-                "/projects/project-name/create-model/select-model/insert-data/optimizer"
+                "/projects/create-model/select-model/insert-data/optimizer"
               )
             }
             isDisabled={false}
@@ -143,11 +143,11 @@ function Header() {
           <NavLink
             isActive={
               activeRoute ===
-              "/projects/project-name/create-model/select-model/insert-data/results"
+              "/projects/create-model/select-model/insert-data/results"
             }
             onClick={() =>
               handleNavLinkClick(
-                "/projects/project-name/create-model/select-model/insert-data/results"
+                "/projects/create-model/select-model/insert-data/results"
               )
             }
             isDisabled={false}

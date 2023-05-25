@@ -7,17 +7,40 @@ import { Button } from "@mui/material";
 import { AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
-
-import ActiveOrders from "../Projects/ActiveOrders";
-import CreateNewProject from "../Projects/CreateNewProject";
-import NewModel from "../NewModel/NewModel";
+import { useRouter } from "next/router";
+import { BreadCrumb } from "primereact/breadcrumb";
+import BreadcrumbWithEdit from "../BreadCrumb/BreadcrumbWithEdit ";
 
 function SidebarSelectModel({ children, decrement, models }) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
+  const router = useRouter();
+  const [activeRoute, setActiveRoute] = useState(router.pathname);
 
   const handleListItemClick = (index) => {
     setSelectedItem(index);
   };
+  const breadcrumbHome = { icon: "pi pi-home", to: "/" };
+  const generateBreadcrumbItems = (path) => {
+    const pathItems = path.split("/").filter((item) => item !== "");
+
+    let breadcrumbItems = [];
+    let url = "";
+
+    for (let i = 0; i < pathItems.length; i++) {
+      const label = pathItems[i].replace(/-/g, " ");
+      url += `/${pathItems[i]}`;
+
+      breadcrumbItems.push({ label, url });
+    }
+
+    return breadcrumbItems;
+  };
+
+  useEffect(() => {
+    setActiveRoute(router.pathname);
+    // generateBreadcrumbItems(activeRoute);
+    // console.log(breadcrumbItems);
+  }, [router.pathname, activeRoute]);
 
   return (
     <Container>
@@ -62,7 +85,17 @@ function SidebarSelectModel({ children, decrement, models }) {
           </ListItem>
         </AccountBody>
       </WrapperDescription>
-      <MainView>{children}</MainView>
+      <MainView>
+        <div className='col-12'>
+          <div className='card'>
+            <BreadCrumb
+              home={breadcrumbHome}
+              model={generateBreadcrumbItems(activeRoute)}
+            />
+          </div>
+        </div>
+        {children}
+      </MainView>
     </Container>
   );
 }
