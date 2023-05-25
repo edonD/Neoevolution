@@ -17,7 +17,7 @@ import DropdownMenu from "../DropdownMenu";
 import Link from "next/link";
 import Plots from "../Plots";
 import TestButtons from "../TestButtons";
-import ProgressBar from "../ProgressBar";
+
 import OptimizationScatterPlot from "../DataGrids/OptimizationScatterPlot";
 import MultipleHistograms from "../DataGrids/MultipleHistograms";
 import dynamic from "next/dynamic";
@@ -166,9 +166,6 @@ function SidebarBody() {
             </Grid>
             <Grid item>
               <h1>{text}</h1>
-              {/* <ProgressBarContainer>
-                <ProgressBar now={now} />
-              </ProgressBarContainer> */}
             </Grid>
             <Grid item>
               <Plot data={data} layout={layout} />

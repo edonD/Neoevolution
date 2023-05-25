@@ -86,14 +86,13 @@ function SidebarSelectModel({ children, decrement, models }) {
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        <div className='col-12'>
-          <div className='card'>
-            <BreadCrumb
-              home={breadcrumbHome}
-              model={generateBreadcrumbItems(activeRoute)}
-            />
-          </div>
-        </div>
+        <BreadCrumbContainer>
+          <StyledBreadCrumb
+            home={breadcrumbHome}
+            model={generateBreadcrumbItems(activeRoute)}
+          />
+        </BreadCrumbContainer>
+
         {children}
       </MainView>
     </Container>
@@ -118,7 +117,18 @@ const Container = styled.div`
   ); /* Chrome 10-25, Safari 5.1-6 */
   background-color: #f3f3f8;
 `;
-
+const BreadCrumbContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  border: 0px solid green;
+`;
+const StyledBreadCrumb = styled(BreadCrumb)`
+  width: 100%;
+  border: 0px;
+`;
 const AccountHeader = styled.div`
   width: 100%;
   height: 80px;

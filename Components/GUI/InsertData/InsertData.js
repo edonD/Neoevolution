@@ -48,7 +48,7 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 150px);
   @media screen and (max-width: 1200px) {
     height: 100%;
   }

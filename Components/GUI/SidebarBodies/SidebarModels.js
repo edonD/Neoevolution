@@ -90,7 +90,7 @@ function SidebarProjects({ increment, decrement, models }) {
       </WrapperDescription>
       <MainView>
         <BreadCrumbContainer>
-          <BreadCrumb
+          <StyledBreadCrumb
             home={breadcrumbHome}
             model={generateBreadcrumbItems(activeRoute)}
           />
@@ -120,7 +120,10 @@ const Container = styled.div`
   ); /* Chrome 10-25, Safari 5.1-6 */
   background-color: white;
 `;
-
+const StyledBreadCrumb = styled(BreadCrumb)`
+  width: 100%;
+  border: 0px;
+`;
 const AccountHeader = styled.div`
   width: 100%;
   height: 80px;
@@ -185,7 +188,7 @@ const BreadCrumbContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 60px;
-  border: 1px solid green;
+  border: 0px solid green;
 `;
 
 const ImageContainer = styled.div`
