@@ -12,7 +12,7 @@ function InsertData() {
   const numRowsQueryParam = router.query.numRows;
   const initialNumRows = numRowsQueryParam
     ? parseInt(numRowsQueryParam, 10)
-    : 1;
+    : 0;
   const [numRows, setNumRows] = useState(initialNumRows);
   const handleDrop = (acceptedFiles) => {
     console.log(acceptedFiles);
@@ -53,7 +53,7 @@ function InsertData() {
           text='Cost Function'
           color={"#9c27b0"}
         />
-        {numRows === 0 ? <></> : <ContinueButton />}
+        <ContinueButton show={numRows} />
       </InsertDataContainer>
     </Container>
   );

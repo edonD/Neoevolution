@@ -5,13 +5,13 @@ import Image from "next/image";
 
 import Link from "next/link";
 
-function ContinueButton({ onData }) {
+function ContinueButton({ onData, show }) {
   return (
     <Link
       href={`/projects/create-model/select-model/insert-data/reference-data`}
       passHref
     >
-      <Card>
+      <Card show={show}>
         <ImageContainer>
           <Image
             src='/images/plus-svgrepo-com.svg'
@@ -48,7 +48,7 @@ const Card = styled.div`
   height: 200px;
   background-color: transparent;
   position: relative;
-  display: flex;
+  display: ${(p) => (p.show !== 0 ? "flex" : "none")};
   flex-direction: column;
   justify-content: center;
   align-items: center;

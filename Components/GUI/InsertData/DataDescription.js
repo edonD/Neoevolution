@@ -37,13 +37,11 @@ export default function BasicFilterDemo({ numRows }) {
   };
 
   useEffect(() => {
-    console.log("Check", initialNumRows);
-
     SoftwareService.getCustomersSmall(numRows).then((data) => {
       setCustomers(getCustomers(data));
       setLoading(false);
     });
-  }, [numRows, initialNumRows]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [numRows]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getCustomers = (data) => {
     return [...(data || [])].map((d) => {
