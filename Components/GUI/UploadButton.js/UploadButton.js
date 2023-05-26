@@ -28,7 +28,7 @@ function UploadButton() {
           component='span'
           startIcon={<FiUploadCloud />}
         >
-          Upload New Data
+          <span>Upload New Data</span>
         </StyledButton>
       </label>
     </ButtonContainer>
@@ -45,6 +45,19 @@ const ButtonContainer = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  height: 40px;
+  && {
+    height: 40px;
+
+    @media screen and (min-width: 901px) and (max-width: 1500px) {
+      span {
+        font-size: 11px;
+      }
+    }
+    @media screen and (max-width: 900px) {
+      span {
+        font-size: 12px;
+      }
+    }
+  }
 `;
 export default UploadButton;

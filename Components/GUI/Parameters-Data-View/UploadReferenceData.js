@@ -86,8 +86,10 @@ const Wrapper = styled.div`
   width: 100%;
   margin-left: 10px;
   height: 80px;
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 900px) {
     margin: 0px;
+    height: 100%;
+    flex-direction: column;
   }
 `;
 
@@ -169,6 +171,11 @@ const UploadButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 900px) {
+    margin: 0px;
+    width: 100%;
+    flex-direction: column;
+  }
 `;
 
 export default UploadReferenceData;

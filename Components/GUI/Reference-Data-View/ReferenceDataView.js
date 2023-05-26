@@ -27,16 +27,14 @@ function ReferenceDataView() {
           xl={6}
           style={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
             width: "100%",
             height: "100%",
             backgroundColor: "transparent",
           }}
         >
-          <DataGridSecond
-            type={"Click to upload or drag & drop reference data"}
-          />
+          <DataGridSecond />
         </Grid>
         <Grid
           item
@@ -60,6 +58,9 @@ function ReferenceDataView() {
 
 const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 200px);
+  min-height: calc(100vh - 200px);
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
 `;
 export default ReferenceDataView;

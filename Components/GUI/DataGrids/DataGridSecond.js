@@ -123,30 +123,35 @@ function DataGridSecond({ type }) {
 
 const Container = styled.div`
   width: 95%;
-  height: calc(100vh - 160px);
-
+  /* height: calc(100vh - 200px); */
+  height: 100%;
+  padding-left: 20px;
   position: relative;
-  margin: 60px 20px 0px 20px;
-  padding-top: 10px;
 
   @media screen and (max-height: 750px) {
-    height: 100%;
+    /* height: calc(100vh - 200px); */
     background-color: white;
   }
   @media screen and (max-width: 1200px) {
-    height: 100%;
+    /* height: calc(100vh - 200px); */
     background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    padding-right: 20px;
   }
 `;
 
 const Data = styled.div`
   height: calc(100vh - 340px);
+
   width: 100%;
-  margin: 10px;
+  @media screen and (max-width: 1200px) and (max-height: 750px) {
+    height: 100%;
+  }
+  /* margin: 10px; */
 `;
 
 export default DataGridSecond;

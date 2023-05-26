@@ -117,7 +117,7 @@ const Container = styled.div`
   ); /* Chrome 10-25, Safari 5.1-6 */
   background-color: #f3f3f8;
   /* background-color: red; */
-  @media screen and (max-width: 1600px) {
+  @media screen and (max-width: 900px) {
     width: 100%;
     background-color: white;
 
@@ -132,6 +132,9 @@ const BreadCrumbContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 60px;
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 const StyledBreadCrumb = styled(BreadCrumb)`
   width: 100%;
@@ -240,7 +243,7 @@ const AccountBody = styled.div`
 const MainView = styled.div`
   width: calc(100% - 300px);
   min-height: calc(100vh - 80px);
-  /* height: 100%; */
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #f3f3f8;
@@ -248,7 +251,7 @@ const MainView = styled.div`
   padding-top: 0px;
   align-items: center;
 
-  @media screen and (max-width: 1200px), screen and (max-height: 700px) {
+  @media screen and (max-width: 900px), screen and (max-height: 800px) {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -319,7 +322,7 @@ const WrapperDescription = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  @media screen and (max-width: 1600px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;

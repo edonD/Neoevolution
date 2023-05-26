@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const HeaderContainer = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: transparent;
   height: 50px;
@@ -18,6 +18,12 @@ const HeaderContainer = styled.header`
   border-radius: 10px;
   overflow: hidden;
   /* margin: 10px; */
+  @media screen and (max-width: 1200px) {
+    /* flex-direction: column; */
+    width: 90%;
+    border-radius: 4px;
+    text-align: center;
+  }
   @media screen and (max-width: 900px) {
     /* flex-direction: column; */
     width: 90%;
@@ -49,6 +55,10 @@ const NavLink = styled.a`
   cursor: ${(props) => (props.isDisabled ? "not-allowed" : "pointer")};
   background-color: ${(props) => (props.isActive ? "#2196f3" : "transparent")};
   color: ${(props) => (props.isActive ? "#fff" : "#2196f3")};
+  @media screen and (max-width: 1400px) {
+    /* flex-direction: column; */
+    font-size: 14px;
+  }
   @media screen and (max-width: 900px) {
     /* flex-direction: column; */
     font-size: 12px;
