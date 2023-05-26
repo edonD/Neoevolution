@@ -23,7 +23,7 @@ function InsertData() {
   }, [initialNumRows]);
 
   return (
-    <Container>
+    <Container alignment={numRows}>
       <TableContainer>
         {numRows === 0 ? (
           <ContinueButton />
@@ -61,7 +61,8 @@ function InsertData() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: ${(p) =>
+    p.alignment !== 0 ? "space-between" : "space-evenly"};
   align-items: center;
   position: relative;
   width: 100%;
