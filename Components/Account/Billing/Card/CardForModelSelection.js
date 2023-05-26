@@ -112,19 +112,25 @@ const Card = styled.div`
 `;
 
 const ListItem = styled.div`
-  /* width: 100%;
-  height: 50%; */
+  width: 100%;
+  height: 90%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   background: transparent;
-  padding: 5px 5px 5px 5px;
-  background-color: transparent;
+  /* padding: 5px 5px 5px 5px; */
+
   user-select: none;
+  position: relative;
   //margin: 5px 5px 5px 5px;
   color: black;
   //cursor: pointer;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    height: 90%;
+  }
 
   h1 {
     font-size: 14px;

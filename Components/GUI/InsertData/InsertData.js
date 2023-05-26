@@ -3,18 +3,35 @@ import styled from "styled-components";
 import DataDescription from "./DataDescription";
 import DataContainers from "./DataContainers";
 import ContinueButton from "./ContinueButton";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function InsertData() {
+  const router = useRouter();
+  const numRowsQueryParam = router.query.numRows;
+  const initialNumRows = numRowsQueryParam
+    ? parseInt(numRowsQueryParam, 10)
+    : 1;
+  const [numRows, setNumRows] = useState(initialNumRows);
   const handleDrop = (acceptedFiles) => {
     console.log(acceptedFiles);
     // Handle the dropped files
   };
+  useEffect(() => {
+    setNumRows(initialNumRows);
+  }, [initialNumRows]);
 
   return (
     <Container>
       <TableContainer>
-        <DataDescription />
+        {numRows === 0 ? (
+          <ContinueButton />
+        ) : (
+          <DataDescription numRows={numRows} />
+        )}
       </TableContainer>
+
       <InsertDataContainer>
         <DataContainers
           onDrop={handleDrop}
@@ -36,7 +53,7 @@ function InsertData() {
           text='Cost Function'
           color={"#9c27b0"}
         />
-        <ContinueButton />
+        {numRows === 0 ? <></> : <ContinueButton />}
       </InsertDataContainer>
     </Container>
   );
