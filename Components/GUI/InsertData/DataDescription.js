@@ -7,14 +7,14 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { MultiSelect } from "primereact/multiselect";
 import { Tag } from "primereact/tag";
-import { TriStateCheckbox } from "primereact/tristatecheckbox";
-import { CustomerService } from "./data/CustomerService";
+import { useRouter } from "next/router";
 import { SoftwareService } from "./data/SoftwareService";
 import styled from "styled-components";
 
-export default function BasicFilterDemo() {
+export default function BasicFilterDemo({ numRows }) {
   const [customers, setCustomers] = useState(null);
   const [software, setSoftware] = useState(null);
+
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
@@ -37,11 +37,13 @@ export default function BasicFilterDemo() {
   };
 
   useEffect(() => {
-    SoftwareService.getCustomersSmall().then((data) => {
+    console.log("Check", initialNumRows);
+
+    SoftwareService.getCustomersSmall(numRows).then((data) => {
       setCustomers(getCustomers(data));
       setLoading(false);
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [numRows, initialNumRows]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getCustomers = (data) => {
     return [...(data || [])].map((d) => {
