@@ -2,29 +2,30 @@ import React from "react";
 
 import styled from "styled-components";
 import Image from "next/legacy/image";
-
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 function ContinueButton({ onData, show }) {
+  const router = useRouter();
   return (
-    <Link
-      href={`/projects/create-model/select-model/insert-data/reference-data`}
-      passHref
-    >
-      <Card show={show}>
-        <ImageContainer>
-          <Image
-            src='/images/plus-svgrepo-com.svg'
-            width={100}
-            height={100}
-            alt='brain'
-          />
-        </ImageContainer>
-        <ListItem>
-          <h3>New Calibration</h3>
-        </ListItem>
-      </Card>
-    </Link>
+    <Card show={show}>
+      <ImageContainer
+        onClick={() => {
+          router.push(
+            "/projects/create-model/select-model/insert-data/reference-data"
+          );
+        }}
+      >
+        <Image
+          src='/images/plus-svgrepo-com.svg'
+          width={100}
+          height={100}
+          alt='brain'
+        />
+      </ImageContainer>
+      <ListItem>
+        <h3>New Calibration</h3>
+      </ListItem>
+    </Card>
   );
 }
 
