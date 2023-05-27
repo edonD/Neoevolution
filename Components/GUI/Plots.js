@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 // import Plot from "react-plotly.js";
 import dynamic from "next/dynamic";
-import { Grid } from "@material-ui/core";
+
 import { Box } from "@mui/material";
 
 function Plots() {

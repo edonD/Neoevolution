@@ -7,10 +7,11 @@ import { AiFillCreditCard } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 
 import ActiveOrders from "./Orders/ActiveOrders";
-import Setups from "./Billing/Setups";
-import Link from "next/link";
+
+import { useRouter } from "next/router";
 
 function AccountInformation() {
+  const router = useRouter();
   return (
     <Container>
       <WrapperDescription>
@@ -23,22 +24,28 @@ function AccountInformation() {
           <h2>Edon Derguti</h2>
         </AccountHeader>
         <AccountBody>
-          <Link href='/account/information' passHref>
-            <ListItem>
-              <Icon>
-                <BsPerson size={30} />
-              </Icon>
-              <h1>Account Information</h1>
-            </ListItem>
-          </Link>
-          <Link href='/billing/overview' passHref>
-            <ListItem>
-              <Icon>
-                <AiFillCreditCard size={30} />
-              </Icon>
-              <h1>Billing</h1>
-            </ListItem>
-          </Link>
+          <ListItem
+            onClick={() => {
+              router.push("/account/information");
+            }}
+          >
+            <Icon>
+              <BsPerson size={30} />
+            </Icon>
+            <h1>Account Information</h1>
+          </ListItem>
+
+          <ListItem
+            onClick={() => {
+              router.push("/billing/overview");
+            }}
+          >
+            <Icon>
+              <AiFillCreditCard size={30} />
+            </Icon>
+            <h1>Billing</h1>
+          </ListItem>
+
           <ListItemMain>
             <Icon>
               <BiLoaderCircle size={30} />

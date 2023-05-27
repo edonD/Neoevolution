@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 // import Plot from "react-plotly.js";
-import dynamic from "next/dynamic";
-import { Grid } from "@material-ui/core";
-import Plots from "../../../Components/GUI/Plots";
+
 import SidebarHeader from "../../../Components/GUI/SidebarHeader";
 import SidebarBodyResults from "../../../Components/GUI/SidebarBodies/SidebarBodyResults";
 

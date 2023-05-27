@@ -15,12 +15,7 @@ function ProfileHeader({ onData }) {
   return (
     <Background>
       <LogoContainer>
-        <Image
-          src='/images/logo_blue.png'
-          layout='fill'
-          objectFit='contain'
-          alt='brain'
-        />
+        <Image src='/images/logo_blue.png' width={50} height={50} alt='brain' />
       </LogoContainer>
       <SecondDivider>
         <Link href='/projects' passHref>

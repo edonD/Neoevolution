@@ -3,9 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import Gradient from "rgt";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 function ProjectPricing() {
+  const router = useRouter();
   return (
     <Container>
       <Header>
@@ -17,9 +18,13 @@ function ProjectPricing() {
         <Image src='/images/ai-expert.svg' width={70} height={70} alt='logo' />
       </Description>
       <ButtonDivider>
-        <Link href='/Contact' passHref>
-          <FormButton>Contact US</FormButton>
-        </Link>
+        <FormButton
+          onClick={() => {
+            router.push("/Contact");
+          }}
+        >
+          Contact US
+        </FormButton>
       </ButtonDivider>
       <Divide />
       <Body>
@@ -96,8 +101,8 @@ const Description = styled.div`
   height: 15%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: space-around;
+  justify-content: center;
+  align-items: center;
   color: white;
 
   h1 {

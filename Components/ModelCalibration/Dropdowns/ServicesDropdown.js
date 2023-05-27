@@ -15,14 +15,14 @@ function ServicesDropdown({ children }) {
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
       <HoverCardContent>
         <Container>
-          <Link href='/Services/passive-modeling'>
+          <Link href='/Services/passive-modeling' passHref>
             <RowContainer>
               <ImageContainer>
                 <StyledImage>
                   <Image
                     src='/images/resistor.svg'
-                    width='35px'
-                    height='35px'
+                    width={35}
+                    height={35}
                     alt='MOSFET'
                   />
                 </StyledImage>
@@ -40,14 +40,14 @@ function ServicesDropdown({ children }) {
               </BodyContainer>
             </RowContainer>
           </Link>
-          <Link href='/Services/active-modeling'>
+          <Link href='/Services/active-modeling' passHref>
             <RowContainer>
               <ImageContainer>
                 <StyledImage>
                   <Image
                     src='/images/mosfet.svg'
-                    width='40px'
-                    height='35px'
+                    width={40}
+                    height={35}
                     alt='MOSFET'
                   />
                 </StyledImage>
@@ -65,14 +65,14 @@ function ServicesDropdown({ children }) {
               </BodyContainer>
             </RowContainer>
           </Link>
-          <Link href='/Services/package-modeling'>
+          <Link href='/Services/package-modeling' passHref>
             <RowContainer>
               <ImageContainer>
                 <StyledImage>
                   <Image
                     src='/images/ic.svg'
-                    width='35px'
-                    height='35px'
+                    width={35}
+                    height={35}
                     alt='MOSFET'
                     color='#235fd7'
                   />
@@ -96,8 +96,8 @@ function ServicesDropdown({ children }) {
                 <StyledImage>
                   <Image
                     src='/images/contract.svg'
-                    width='35px'
-                    height='35px'
+                    width={35}
+                    height={35}
                     alt='MOSFET'
                     color='#235fd7'
                   />

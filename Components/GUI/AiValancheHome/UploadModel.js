@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, Grid, TextField } from "@material-ui/core";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import { FiUploadCloud, FiCheck, FiX } from "react-icons/fi";
 import { Typography } from "@mui/material";
 

@@ -16,8 +16,10 @@ import PersonalInformation from "./AccountInfo/PersonalInformation";
 import CompanyInformation from "./BillingInfo/CompanyInformation";
 import EmailInformation from "./AccountInfo/EmailInformation";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function AccountInformation() {
+  const router = useRouter();
   return (
     <Container>
       <WrapperDescription>
@@ -37,22 +39,27 @@ function AccountInformation() {
             <h1>Account</h1>
           </ListItemMain>
 
-          <Link href='/billing/overview' passHref>
-            <ListItem>
-              <Icon>
-                <AiFillCreditCard size={30} />
-              </Icon>
-              <h1>Billing</h1>
-            </ListItem>
-          </Link>
-          <Link href='/active/orders' passHref>
-            <ListItem>
-              <Icon>
-                <BiLoaderCircle size={30} />
-              </Icon>
-              <h1>Orders</h1>
-            </ListItem>
-          </Link>
+          <ListItem
+            onClick={() => {
+              router.push("/billing/overview");
+            }}
+          >
+            <Icon>
+              <AiFillCreditCard size={30} />
+            </Icon>
+            <h1>Billing</h1>
+          </ListItem>
+
+          <ListItem
+            onClick={() => {
+              router.push("/active/orders");
+            }}
+          >
+            <Icon>
+              <BiLoaderCircle size={30} />
+            </Icon>
+            <h1>Orders</h1>
+          </ListItem>
         </AccountBody>
       </WrapperDescription>
       <MainView>
@@ -259,6 +266,7 @@ const ListItem = styled.div`
     font-size: 14px;
     color: black;
     font-weight: 200;
+    user-select: none;
   }
 `;
 const WrapperDescription = styled.div`

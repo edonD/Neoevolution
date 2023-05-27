@@ -25,8 +25,8 @@ function CardAdd({ onData }) {
       <ImageContainer>
         <Image
           src='/images/plus-svgrepo-com.svg'
-          layout='fill'
-          objectFit='contain'
+          width={100}
+          height={100}
           alt='brain'
         />
       </ImageContainer>

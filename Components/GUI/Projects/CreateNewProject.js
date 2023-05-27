@@ -2,8 +2,18 @@ import React from "react";
 import { GiSwirledShell } from "react-icons/gi";
 import AiValanchePopUp from "../../../Components/GUI/AiValancheHome/AiValanchePopUp";
 import styled from "styled-components";
+import { BsPlusCircleFill } from "react-icons/bs";
 
-function CreateNewProject({ onData }) {
+function CreateNewProject({ onData, icon, ButtonText }) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Container>
       <Wrapper>
@@ -17,7 +27,25 @@ function CreateNewProject({ onData }) {
             including models, simulations, model calibrations and more.
           </Description>
           <ButtonContainer>
-            <AiValanchePopUp onData={onData} ButtonText={"Create"} size={18} />
+            <FormButton
+              className='blue-white-lightblue'
+              onClick={() => {
+                const increment = 1;
+                onData(increment);
+                handleClose();
+              }}
+            >
+              {icon ? (
+                <BsPlusCircleFill
+                  size={15}
+                  style={{ marginRight: "10px", background: "transparent" }}
+                />
+              ) : (
+                <></>
+              )}
+              {ButtonText}
+            </FormButton>
+            {/* <AiValanchePopUp onData={onData} ButtonText={"Create"} size={18} /> */}
           </ButtonContainer>
         </Body>
       </Wrapper>
@@ -93,6 +121,79 @@ const Logo = styled.div`
   user-select: none;
   @media (max-width: 1000px) {
     width: 20%;
+  }
+`;
+
+const FormButton = styled.button`
+  background-color: #1abc9c;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  /* font-size: 35px; */
+  font-size: ${(props) => `${props.size}px`};
+
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  padding: 10px 60px 10px 60px;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* font-size: 20px; */
+  @media screen and (max-width: 900px) {
+    /* justify-content: flex-start; */
+    font-size: 16px;
+    padding: 5px 10px 5px 10px;
+  }
+  @media screen and (max-width: 500px) {
+    /* justify-content: flex-start; */
+    font-size: 14px;
+    padding: 5px 10px 5px 10px;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+  &:focus {
+    outline: none;
+  }
+  &.gray-white-black {
+    background-color: #349a77;
+    color: white;
+    border: 1px solid #349a77;
+  }
+
+  &.gray-white-black:hover {
+    color: #349a77;
+    background-color: white;
+    border: 1px solid #349a77;
+  }
+
+  &.black-gray-white {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #333;
+  }
+
+  &.black-gray-white:hover {
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #333;
+  }
+
+  &.blue-white-lightblue {
+    width: 100%;
+    background-color: #2196f3;
+    color: #fff;
+    border: 1px solid #2196f3;
+    @media screen and (max-width: 900px) {
+      width: 200px;
+    }
+  }
+
+  &.blue-white-lightblue:hover {
+    color: #2196f3;
+    background-color: #fff;
+    border: 1px solid #2196f3;
   }
 `;
 

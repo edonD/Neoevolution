@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 function index() {
   const [projects, setProjects] = useState(0);
+
   const incrementProjects = (increment) => {
     // Do something with the received data
     setProjects(projects + increment);
@@ -18,8 +19,8 @@ function index() {
       <ProfileHeader onData={incrementProjects} />
       <SidebarProjects
         projects={projects}
-        increment={incrementProjects}
-        decrement={decrementProjects}
+        incrementProjects={incrementProjects}
+        decrementProjects={decrementProjects}
       />
     </Container>
   );

@@ -3,7 +3,7 @@ import Cards from "react-credit-cards";
 import { useState } from "react";
 import styled from "styled-components";
 import "react-credit-cards/es/styles-compiled.css";
-import { Input } from "@material-ui/core";
+import { Input } from "@mui/material";
 import CardNumberMask from "../MaskedInputs/CardNumberMask";
 import CardExpireMask from "../MaskedInputs/CardExpireMask";
 import CardCVCMask from "../MaskedInputs/CardCVCMask";

@@ -39,7 +39,7 @@ const Nav = styled.nav`
   height: 100%;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled.div`
   color: #333;
 
   font-size: 16px;
@@ -86,21 +86,19 @@ function Header() {
   return (
     <HeaderContainer>
       <Nav>
-        <Link href='reference-data' passHref>
-          <NavLink
-            isActive={
-              activeRoute ===
+        <NavLink
+          isActive={
+            activeRoute ===
+            "/projects/create-model/select-model/insert-data/reference-data"
+          }
+          onClick={() =>
+            handleNavLinkClick(
               "/projects/create-model/select-model/insert-data/reference-data"
-            }
-            onClick={() =>
-              handleNavLinkClick(
-                "/projects/create-model/select-model/insert-data/reference-data"
-              )
-            }
-          >
-            Reference Data
-          </NavLink>
-        </Link>
+            )
+          }
+        >
+          Reference Data
+        </NavLink>
 
         <NavLink
           isActive={
@@ -117,54 +115,50 @@ function Header() {
           Model
         </NavLink>
 
-        <Link href='parameters' passHref>
-          <NavLink
-            isActive={
-              activeRoute ===
+        <NavLink
+          isActive={
+            activeRoute ===
+            "/projects/create-model/select-model/insert-data/parameters"
+          }
+          onClick={() =>
+            handleNavLinkClick(
               "/projects/create-model/select-model/insert-data/parameters"
-            }
-            onClick={() =>
-              handleNavLinkClick(
-                "/projects/create-model/select-model/insert-data/parameters"
-              )
-            }
-            isDisabled={false}
-          >
-            Parameters
-          </NavLink>
-        </Link>
-        <Link href='optimizer' passHref>
-          <NavLink
-            isActive={
-              activeRoute ===
+            )
+          }
+          isDisabled={false}
+        >
+          Parameters
+        </NavLink>
+
+        <NavLink
+          isActive={
+            activeRoute ===
+            "/projects/create-model/select-model/insert-data/optimizer"
+          }
+          onClick={() =>
+            handleNavLinkClick(
               "/projects/create-model/select-model/insert-data/optimizer"
-            }
-            onClick={() =>
-              handleNavLinkClick(
-                "/projects/create-model/select-model/insert-data/optimizer"
-              )
-            }
-            isDisabled={false}
-          >
-            Optimizer
-          </NavLink>
-        </Link>
-        <Link href='results' passHref>
-          <NavLink
-            isActive={
-              activeRoute ===
+            )
+          }
+          isDisabled={false}
+        >
+          Optimizer
+        </NavLink>
+
+        <NavLink
+          isActive={
+            activeRoute ===
+            "/projects/create-model/select-model/insert-data/results"
+          }
+          onClick={() =>
+            handleNavLinkClick(
               "/projects/create-model/select-model/insert-data/results"
-            }
-            onClick={() =>
-              handleNavLinkClick(
-                "/projects/create-model/select-model/insert-data/results"
-              )
-            }
-            isDisabled={false}
-          >
-            Results
-          </NavLink>
-        </Link>
+            )
+          }
+          isDisabled={false}
+        >
+          Results
+        </NavLink>
       </Nav>
     </HeaderContainer>
   );

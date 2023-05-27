@@ -133,8 +133,8 @@ function Third() {
             <StyledImage>
               <Image
                 src='/images/resistorwhite.svg'
-                width='55px'
-                height='55px'
+                width={55}
+                height={55}
                 alt='test-Software.svgare.svgare.svg'
                 color='#235fd7'
               />
@@ -173,8 +173,8 @@ function Third() {
             <StyledImage>
               <Image
                 src='/images/mosfetwhite.svg'
-                width='55px'
-                height='55px'
+                width={55}
+                height={55}
                 alt='MOSFET'
                 color='#235fd7'
               />
@@ -218,8 +218,8 @@ function Third() {
             >
               <Image
                 src='/images/icwhite.svg'
-                width='55px'
-                height='55px'
+                width={55}
+                height={55}
                 alt='MOSFET'
                 color='#235fd7'
               />
@@ -257,8 +257,8 @@ function Third() {
             <StyledImage>
               <Image
                 src='/images/contractwhite.svg'
-                width='45px'
-                height='45px'
+                width={45}
+                height={45}
                 alt='Contract'
                 color='#235fd7'
               />
