@@ -19,7 +19,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import Img1 from "../../../public/images/evolution.jpg";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 function BillingHistory() {
   const [street, setStreet] = useState("");

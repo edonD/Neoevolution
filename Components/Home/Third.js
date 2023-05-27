@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { Button } from "@mui/material";
 
 function Third({ sreverse, header, paragraph, button }) {

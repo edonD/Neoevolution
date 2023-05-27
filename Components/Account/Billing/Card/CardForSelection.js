@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import styled from "styled-components";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import Link from "next/link";
 

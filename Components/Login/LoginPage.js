@@ -9,7 +9,7 @@ import { LayoutContext } from "./context/layoutcontext";
 import { InputText } from "primereact/inputtext";
 import { classNames } from "primereact/utils";
 import styled from "styled-components";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const Container = styled.div`
   display: flex;

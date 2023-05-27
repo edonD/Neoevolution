@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import Gradient from "rgt";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 
 function ProjectPricing() {

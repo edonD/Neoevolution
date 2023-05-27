@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React from "react";
 import styled from "styled-components";
 function First() {

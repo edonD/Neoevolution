@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useInView } from "react-intersection-observer";
 function F2({ stateChanger }) {
   const { ref, inView } = useInView({

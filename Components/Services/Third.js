@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import Track from "./ThirdComponents/Track";
 import { motion, useAnimation } from "framer-motion";
