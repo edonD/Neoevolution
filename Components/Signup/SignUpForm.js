@@ -9,6 +9,8 @@ import { InputText } from "primereact/inputtext";
 import Amplify, { Auth } from "aws-amplify";
 import styled from "styled-components";
 import Image from "next/legacy/image";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/slices/userSlice";
 
 function SignUpForm({ callbackFunction }) {
   const [email, setEmail] = useState("");
@@ -16,6 +18,7 @@ function SignUpForm({ callbackFunction }) {
   const [checked, setChecked] = useState(false);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
 
   async function signUp() {
     try {
@@ -33,6 +36,7 @@ function SignUpForm({ callbackFunction }) {
         },
       });
       console.log(user);
+      dispatch(setUser(email));
       handleConfirmClick();
     } catch (error) {
       console.log("error signing up:", error);

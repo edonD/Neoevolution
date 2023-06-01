@@ -10,6 +10,8 @@ import Amplify, { Auth } from "aws-amplify";
 import styled from "styled-components";
 import { InputNumber } from "primereact/inputnumber";
 import { InputMask } from "primereact/inputmask";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/slices/userSlice";
 
 function ConfirmForm({ callbackFunction }) {
   const [confirmationCode, setConfirmationCode] = useState("");
@@ -17,9 +19,11 @@ function ConfirmForm({ callbackFunction }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const username = useSelector(selectUser);
+
   const confirm = async () => {
     try {
-      await Auth.confirmSignUp("@gmail.com", confirmationCode);
+      await Auth.confirmSignUp(username, confirmationCode);
 
       setErrorMessage("");
       handleConfirmClick();
