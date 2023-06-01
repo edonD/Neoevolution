@@ -13,20 +13,21 @@ import { InputMask } from "primereact/inputmask";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/slices/userSlice";
 
-function ConfirmForm({ callbackFunction }) {
+function ConfirmForm() {
   const [confirmationCode, setConfirmationCode] = useState("");
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const username = useSelector(selectUser);
-
+  const router = useRouter();
   const confirm = async () => {
     try {
+      console.log("username", username);
       await Auth.confirmSignUp(username, confirmationCode);
 
       setErrorMessage("");
-      handleConfirmClick();
+      // handleConfirmClick();
       router.push("/login");
     } catch (err) {
       console.log("error confirming sign up", err);
@@ -55,11 +56,10 @@ function ConfirmForm({ callbackFunction }) {
     confirm();
   };
 
-  const handleConfirmClick = () => {
-    callbackFunction("confirmState");
-  };
+  // const handleConfirmClick = () => {
+  //   callbackFunction("confirmState");
+  // };
 
-  const router = useRouter();
   return (
     <CardContent>
       <Header>
