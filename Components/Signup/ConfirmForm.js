@@ -64,7 +64,7 @@ function ConfirmForm() {
     <CardContent>
       <Header>
         <Title>Verify your email</Title>
-        <Subtitle>We sent an email to edonderguti@gmail.com.</Subtitle>
+        <Subtitle>We sent an email to {username}.</Subtitle>
         <Subtitle>Please set the confirmation code.</Subtitle>
       </Header>
       <Body>
