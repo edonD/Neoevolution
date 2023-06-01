@@ -1,23 +1,22 @@
 import React from "react";
 import styled from "styled-components";
-
-import Signup from "../../Components/Signup/Signup";
-import SignupTest from "../../Components/Signup/SignupTest";
+import ForgotPassword from "../../../Components/Login/ForgotPassword";
 
 function index() {
   return (
     <Container>
-      <SignupTest />
+      <ForgotPassword />
     </Container>
   );
 }
 
 const Container = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* ff 3.6+ */
   background: white;
 `;
 

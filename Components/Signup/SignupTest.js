@@ -1,15 +1,31 @@
-import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
-
-import { Checkbox } from "primereact/checkbox";
+import React, { useState } from "react";
 import { Button } from "primereact/button";
-import { Password } from "primereact/password";
-
-import { InputText } from "primereact/inputtext";
-
 import styled from "styled-components";
-import Image from "next/legacy/image";
+import SignUpForm from "./SignUpForm";
+import ConfirmForm from "./ConfirmForm";
 
+const SignupTest = ({ signUp }) => {
+  const [flowState, setFlowState] = useState("");
+
+  const handleFlowStateChange = (newFlowState) => {
+    setFlowState(newFlowState);
+  };
+
+  return (
+    <Container>
+      <ContentWrapper>
+        <LogoImage src='/images/logo_blue.png' alt='AIValanche logo' />
+        <StyledCard>
+          {flowState === "signUpState" ? (
+            <ConfirmForm />
+          ) : (
+            <SignUpForm callbackFunction={handleFlowStateChange} />
+          )}
+        </StyledCard>
+      </ContentWrapper>
+    </Container>
+  );
+};
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -43,7 +59,7 @@ const StyledCard = styled.div`
   padding: 0.3rem;
   background: linear-gradient(
     180deg,
-    rgba(238, 205, 161, 1) 5%,
+    rgba(157, 206, 247, 1) 5%,
     rgba(33, 150, 243, 0) 25%
   );
 `;
@@ -174,16 +190,16 @@ const FormButton = styled.button`
   &:focus {
     outline: none;
   }
-  &.gray-white-black {
-    background-color: #349a77;
+  &.red-white-black {
+    background-color: #d92d20;
     color: white;
-    border: 1px solid #349a77;
+    border: 1px solid #d92d20;
   }
 
-  &.gray-white-black:hover {
-    color: #349a77;
+  &.red-white-black:hover {
+    color: #d92d20;
     background-color: white;
-    border: 1px solid #349a77;
+    border: 1px solid #d92d20;
   }
 
   &.black-gray-white {
@@ -251,84 +267,4 @@ const SignInButton = styled(Button)`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 `;
 
-const SignupTest = () => {
-  const [password, setPassword] = useState("");
-  const [checked, setChecked] = useState(false);
-
-  const router = useRouter();
-
-  return (
-    <Container>
-      <ContentWrapper>
-        <LogoImage src='/images/logo_blue.png' alt='AIValanche logo' />
-        <StyledCard>
-          <CardContent>
-            <Header>
-              <Title>Register</Title>
-              <Subtitle>Let‘s get started</Subtitle>
-            </Header>
-            <Body>
-              <FormLabel htmlFor='email2'>First Name</FormLabel>
-              <InputText
-                type='text'
-                placeholder='First Name'
-                style={{ padding: "1rem", width: "100%", marginBottom: "20px" }}
-              />
-              <FormLabel htmlFor='email2'>Last Name</FormLabel>
-              <InputText
-                type='text'
-                placeholder='Last Name'
-                style={{ padding: "1rem", width: "100%", marginBottom: "20px" }}
-              />
-              <FormLabel htmlFor='email1'>Email</FormLabel>
-              <InputText
-                type='text'
-                placeholder='Email address'
-                style={{ padding: "1rem", width: "100%", marginBottom: "20px" }}
-              />
-              <FormLabel htmlFor='password1'>Password</FormLabel>
-              <Password
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder='Password'
-                toggleMask
-                className='w-full mb-5'
-                inputClassName='w-full p-3 md:w-30rem'
-              />
-              {/* <div className='flex align-items-center justify-content-between mb-5 gap-5'> */}
-              <FooterContainer>
-                <RememberMeContainer>
-                  <Checkbox
-                    id='rememberme1'
-                    checked={checked}
-                    onChange={(e) => setChecked(e.checked)}
-                    className='mr-2'
-                  />
-                  <label htmlFor='rememberme1'>
-                    I have read the Terms and Conditions
-                  </label>
-                </RememberMeContainer>
-                {/* <ForgotPasswordLink>Forgot password?</ForgotPasswordLink> */}
-              </FooterContainer>
-              <SignInButton
-                className='blue-white-lightblue'
-                label='Sign Up'
-                onClick={() => router.push("/projects")}
-              />
-              <p>
-                Already have an account?
-                <a style={{ marginLeft: "5px", color: "blue" }} href='./Login'>
-                  Login
-                </a>
-              </p>
-            </Body>
-          </CardContent>
-        </StyledCard>
-      </ContentWrapper>
-    </Container>
-  );
-};
-// LoginPage.getLayout = function getLayout(page) {
-//   return <>{page}</>;
-// };
 export default SignupTest;

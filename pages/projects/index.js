@@ -14,9 +14,11 @@ function index() {
     // Do something with the received data
     setProjects(projects - decrement);
   };
+
   return (
     <Container>
       <ProfileHeader onData={incrementProjects} />
+
       <SidebarProjects
         projects={projects}
         incrementProjects={incrementProjects}

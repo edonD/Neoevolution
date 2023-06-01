@@ -19,8 +19,4 @@ function index() {
   );
 }
 
-const Header = styled.h1`
-  margin-left: 0px;
-  margin-right: 0px;
-`;
 export default index;

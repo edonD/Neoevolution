@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 
-function ContinueButton({ onData, show }) {
+function ContinueButton({ show }) {
   const router = useRouter();
   return (
     <Card show={show}>

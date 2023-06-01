@@ -12,152 +12,39 @@ import styled from "styled-components";
 import Image from "next/legacy/image";
 
 import { Auth } from "aws-amplify";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/slices/userSlice";
+import { InputMask } from "primereact/inputmask";
+import ForgotPasswordCard from "../../Components/Login/ForgotPasswordCard/ForgotPasswordCard";
+import NewPasswordCard from "../../Components/Login/NewPasswordCard/NewPasswordCard";
 
-const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [errorDialogVisible, setErrorDialogVisible] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+const ForgotPassword = () => {
+  const [flowState, setFlowState] = useState("forgotPasswordstate"); //
+  const [confirmationCode, setConfirmationCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+  const [toNewPasswordState, setToNewPasswordState] = useState(false);
 
   const router = useRouter();
-  const dispatch = useDispatch();
-
-  async function signIn() {
-    try {
-      const user = await Auth.signIn(username, password);
-      console.log("Yser", username);
-
-      dispatch(setUser(username));
-      router.push("/projects");
-    } catch (error) {
-      console.log("error signing in", error);
-      setErrorMessage(error.message);
-      setErrorDialogVisible(true);
-    }
-  }
-  const SubmitLogIn = (event) => {
-    event.preventDefault();
-    signIn();
+  const handleFlowStateChange = (newFlowState) => {
+    setFlowState(newFlowState);
   };
-
-  const handleRememberMe = (e) => {
-    setChecked(e.checked);
-    checked ? rememberDevice() : null;
-  };
-
-  async function rememberDevice() {
-    try {
-      const result = await Auth.rememberDevice();
-      console.log(result);
-    } catch (error) {
-      console.log("Error remembering device", error);
-    }
-  }
 
   return (
     <Container>
       <ContentWrapper>
         <LogoImage src='/images/logo_blue.png' alt='AIValanche logo' />
         <StyledCard>
-          <CardContent>
-            <Header>
-              <LogoContainer>
-                <Image
-                  src='/images/TDK.svg'
-                  objectFit='contain'
-                  layout='fill'
-                  alt='logo'
-                />
-              </LogoContainer>
-              <Title>Welcome, Edon!</Title>
-              <Subtitle>Sign in to continue</Subtitle>
-            </Header>
-            <Body>
-              <form onSubmit={SubmitLogIn}>
-                <FormLabel htmlFor='email1'>Email</FormLabel>
-                <InputText
-                  id='email1'
-                  type='text'
-                  required
-                  placeholder='Email address'
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  style={{
-                    padding: "1rem",
-                    width: "100%",
-                    marginBottom: "20px",
-                  }}
-                />
-
-                <FormLabel htmlFor='password1'>Password</FormLabel>
-                <Password
-                  id='password1'
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder='Password'
-                  required
-                  toggleMask
-                  className='w-full mb-5'
-                  inputClassName='w-full p-3 md:w-30rem'
-                />
-
-                {/* <div className='flex align-items-center justify-content-between mb-5 gap-5'> */}
-                <FooterContainer>
-                  <RememberMeContainer>
-                    <Checkbox
-                      id='rememberme1'
-                      checked={checked}
-                      onChange={handleRememberMe}
-                      className='mr-2'
-                    />
-                    <label htmlFor='rememberme1'>Remember me</label>
-                  </RememberMeContainer>
-                  <ForgotPasswordLink href='/Login/forgot-password'>
-                    Forgot password?
-                  </ForgotPasswordLink>
-                </FooterContainer>
-                <SignInButton
-                  className='blue-white-lightblue'
-                  label='Sign In'
-                />
-              </form>
-            </Body>
-          </CardContent>
+          {flowState === "forgotPasswordstate" ? (
+            <ForgotPasswordCard callbackFunction={handleFlowStateChange} />
+          ) : (
+            <NewPasswordCard />
+          )}
         </StyledCard>
       </ContentWrapper>
-      <Dialog
-        visible={errorDialogVisible}
-        onHide={() => setErrorDialogVisible(false)}
-        header={<span style={{ color: "red" }}>Error</span>}
-        footer={
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-            }}
-          >
-            <FormButton
-              className='black-gray-white'
-              onClick={() => setErrorDialogVisible(false)}
-            >
-              Continue
-            </FormButton>
-          </div>
-        }
-      >
-        <div>{errorMessage}</div>
-      </Dialog>
     </Container>
   );
 };
-// LoginPage.getLayout = function getLayout(page) {
-//   return <>{page}</>;
-// };
-export default LoginPage;
+
+export default ForgotPassword;
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -187,11 +74,15 @@ const LogoImage = styled.img`
 const StyledCard = styled.div`
   border-radius: 56px;
   padding: 0.3rem;
+  min-width: 500px;
   background: linear-gradient(
     180deg,
     rgba(19, 179, 255, 1) 5%,
     rgba(33, 150, 243, 0) 25%
   );
+  @media screen and (max-width: 500px) {
+    min-width: 0px;
+  }
 `;
 
 const CardContent = styled.div`
@@ -359,8 +250,8 @@ const FormButton = styled.button`
 `;
 const SignInButton = styled(Button)`
   width: 100%;
-  padding: 1rem;
-  font-size: 1.5rem;
+  padding: 0.75rem;
+  font-size: 1.25rem;
   background-color: #1abc9c;
   border: none;
   border-radius: 4px;

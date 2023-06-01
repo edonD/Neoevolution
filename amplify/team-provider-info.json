@@ -1,0 +1,51 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aivalanche-dev-232710-authRole",
+      "UnauthRoleArn": "arn:aws:iam::339557729313:role/amplify-aivalanche-dev-232710-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::339557729313:role/amplify-aivalanche-dev-232710-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-aivalanche-dev-232710-deployment",
+      "UnauthRoleName": "amplify-aivalanche-dev-232710-unauthRole",
+      "StackName": "amplify-aivalanche-dev-232710",
+      "StackId": "arn:aws:cloudformation:eu-central-1:339557729313:stack/amplify-aivalanche-dev-232710/68f41480-fd9e-11ed-9761-061ce495af62",
+      "AmplifyAppId": "d2wkfcgs9s4rfe"
+    },
+    "categories": {
+      "auth": {
+        "aivalanche7fa4a3f1": {}
+      }
+    }
+  },
+  "aiv": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aivalanche-aiv-124037-authRole",
+      "UnauthRoleArn": "arn:aws:iam::339557729313:role/amplify-aivalanche-aiv-124037-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::339557729313:role/amplify-aivalanche-aiv-124037-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-aivalanche-aiv-124037-deployment",
+      "UnauthRoleName": "amplify-aivalanche-aiv-124037-unauthRole",
+      "StackName": "amplify-aivalanche-aiv-124037",
+      "StackId": "arn:aws:cloudformation:eu-central-1:339557729313:stack/amplify-aivalanche-aiv-124037/3fd05040-fe0d-11ed-9f2b-06e311a3bc54",
+      "AmplifyAppId": "d2wkfcgs9s4rfe"
+    }
+  },
+  "aivauth": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aivalanche-aivauth-124606-authRole",
+      "UnauthRoleArn": "arn:aws:iam::339557729313:role/amplify-aivalanche-aivauth-124606-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::339557729313:role/amplify-aivalanche-aivauth-124606-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-aivalanche-aivauth-124606-deployment",
+      "UnauthRoleName": "amplify-aivalanche-aivauth-124606-unauthRole",
+      "StackName": "amplify-aivalanche-aivauth-124606",
+      "StackId": "arn:aws:cloudformation:eu-central-1:339557729313:stack/amplify-aivalanche-aivauth-124606/04521980-fe0e-11ed-9ff1-0ad81486bb92",
+      "AmplifyAppId": "d2wkfcgs9s4rfe"
+    },
+    "categories": {
+      "auth": {
+        "aivalanche5e90a998": {}
+      }
+    }
+  }
+}

@@ -5,11 +5,22 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { Auth } from "aws-amplify";
 
 function ProfileHeaderDropdown({ isOpen, onToggle }) {
   const handleClick = () => {
     onToggle();
   };
+
+  async function signOut() {
+    try {
+      await Auth.signOut();
+      router.push("/", undefined, { shallow: true });
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  }
+
   const router = useRouter();
   return (
     <SidebarContainer isOpen={isOpen}>
@@ -45,7 +56,7 @@ function ProfileHeaderDropdown({ isOpen, onToggle }) {
 
         <StyledButtonPorosit
           onClick={() => {
-            router.push("/", undefined, { shallow: true });
+            signOut();
           }}
         >
           <span>Sign Out</span>

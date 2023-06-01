@@ -100,6 +100,7 @@ const BodyBodyContainer = styled.div`
   color: #989898;
   p {
     font-size: 13px;
+    letter-spacing: 0.5px;
     font-weight: 200;
   }
 `;
@@ -116,6 +117,7 @@ const BodyHeaderContainer = styled.div`
   h1 {
     margin: 0px;
     font-size: 18px;
+    letter-spacing: 0.5px;
     font-weight: 400;
     &:hover {
       color: #235fd7;
