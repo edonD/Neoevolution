@@ -72,7 +72,7 @@ const LoginPage = () => {
                   alt='logo'
                 />
               </LogoContainer>
-              <Title>Welcome, Edon!</Title>
+              <Title>Welcome!</Title>
               <Subtitle>Sign in to continue</Subtitle>
             </Header>
             <Body>

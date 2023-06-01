@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { Checkbox } from "primereact/checkbox";
 import { Button } from "primereact/button";
@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { Message } from "primereact/message";
 import { InputMask } from "primereact/inputmask";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../store/slices/userSlice";
+import { selectUser } from "../../../store/slices/userSlice";
 
 function NewPasswordCard({ callbackFunction }) {
   // const [username, setUsername] = useState("edonderguti@gmail.com");
@@ -76,6 +76,7 @@ function NewPasswordCard({ callbackFunction }) {
             placeholder='New Password'
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+            autoComplete='off'
             // className='w-full mb-5'
             inputClassName='w-full p-3 md:w-30rem'
             style={{
