@@ -28,7 +28,7 @@ function ConfirmForm() {
 
       setErrorMessage("");
       // handleConfirmClick();
-      router.push("/login");
+      router.push("/projects");
     } catch (err) {
       console.log("error confirming sign up", err);
       setErrorDialogVisible(true);
