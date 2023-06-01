@@ -5,20 +5,22 @@ import { Checkbox } from "primereact/checkbox";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { Dialog } from "primereact/dialog";
-import { InputText } from "primereact/inputtext";
-import Amplify, { Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import styled from "styled-components";
 import { Message } from "primereact/message";
 import { InputMask } from "primereact/inputmask";
-import ForgotPassword from "../ForgotPassword";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/slices/userSlice";
 
 function NewPasswordCard({ callbackFunction }) {
-  const [username, setUsername] = useState("edonderguti@gmail.com");
+  // const [username, setUsername] = useState("edonderguti@gmail.com");
   const [confirmationCode, setConfirmationCode] = useState("");
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [messageVisible, setMessageVisible] = useState(false);
+
+  const username = useSelector(selectUser);
 
   async function ForgotPassword() {
     try {

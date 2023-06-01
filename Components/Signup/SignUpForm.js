@@ -37,7 +37,7 @@ function SignUpForm({ callbackFunction }) {
       });
 
       dispatch(setUser(user.username));
-      console.log("Username", user.username);
+
       handleConfirmClick();
     } catch (error) {
       console.log("error signing up:", error);
