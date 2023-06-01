@@ -162,9 +162,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   min-height: 100vh;
+  height: 100%;
   min-width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
+
   @media screen and (max-width: 1200px) {
     width: 100%;
     height: 100%;
@@ -176,11 +179,24 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
+  height: 100%;
+
+  position: relative;
+
+  @media screen and (max-width: 1600px) {
+    margin-top: 3rem;
+  }
+
+  @media screen and (max-height: 800px) {
+    margin-top: 3rem;
+  }
 `;
 
 const LogoImage = styled.img`
   margin-bottom: 1.5rem;
   width: 4rem;
+  height: 4rem;
   flex-shrink: 0;
 `;
 
@@ -192,6 +208,7 @@ const StyledCard = styled.div`
     rgba(19, 179, 255, 1) 5%,
     rgba(33, 150, 243, 0) 25%
   );
+  height: 100%;
 `;
 
 const CardContent = styled.div`
@@ -221,7 +238,7 @@ const LogoContainer = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 60px;
-  overflow: hidden;
+  /* overflow: hidden; */
   background: transparent;
 
   cursor: pointer;
@@ -260,6 +277,7 @@ const Body = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+  height: 100%;
 `;
 const FooterContainer = styled.div`
   display: flex;

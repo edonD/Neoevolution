@@ -1,16 +1,12 @@
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
-
-import { Checkbox } from "primereact/checkbox";
+import React, { useState } from "react";
 import { Button } from "primereact/button";
-import { Password } from "primereact/password";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import Amplify, { Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import styled from "styled-components";
-import { InputNumber } from "primereact/inputnumber";
-import { InputMask } from "primereact/inputmask";
-import ForgotPassword from "../ForgotPassword";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../store/slices/userSlice";
 
 function ForgotPasswordCard({ callbackFunction }) {
   const [username, setUsername] = useState("");
@@ -18,10 +14,12 @@ function ForgotPasswordCard({ callbackFunction }) {
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const dispatch = useDispatch();
+
   async function ForgotPassword() {
     try {
       await Auth.forgotPassword(username);
-      console.log(username);
+      dispatch(setUser(username));
       handleConfirmClick();
     } catch (error) {
       console.log("error signing in", error);
@@ -37,7 +35,7 @@ function ForgotPasswordCard({ callbackFunction }) {
   const handleConfirmClick = () => {
     callbackFunction("newPasswordState");
   };
-  const router = useRouter();
+
   return (
     <CardContent>
       <Header>

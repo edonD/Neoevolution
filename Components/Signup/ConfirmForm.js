@@ -1,14 +1,9 @@
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
-
-import { Checkbox } from "primereact/checkbox";
+import React, { useState } from "react";
 import { Button } from "primereact/button";
-import { Password } from "primereact/password";
 import { Dialog } from "primereact/dialog";
-import { InputText } from "primereact/inputtext";
-import Amplify, { Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import styled from "styled-components";
-import { InputNumber } from "primereact/inputnumber";
 import { InputMask } from "primereact/inputmask";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/slices/userSlice";
@@ -23,7 +18,6 @@ function ConfirmForm() {
   const router = useRouter();
   const confirm = async () => {
     try {
-      console.log("username", username);
       await Auth.confirmSignUp(username, confirmationCode);
 
       setErrorMessage("");

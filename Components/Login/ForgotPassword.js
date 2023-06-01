@@ -18,11 +18,6 @@ import NewPasswordCard from "../../Components/Login/NewPasswordCard/NewPasswordC
 
 const ForgotPassword = () => {
   const [flowState, setFlowState] = useState("forgotPasswordstate"); //
-  const [confirmationCode, setConfirmationCode] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
-  const [toNewPasswordState, setToNewPasswordState] = useState(false);
-
   const router = useRouter();
   const handleFlowStateChange = (newFlowState) => {
     setFlowState(newFlowState);

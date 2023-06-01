@@ -12,7 +12,7 @@ function index() {
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
