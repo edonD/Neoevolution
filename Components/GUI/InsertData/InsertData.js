@@ -6,18 +6,113 @@ import ContinueButton from "./ContinueButton";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
+import { uploadFile } from "../../Storage/UploadFileFunctions";
 
 function InsertData() {
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const router = useRouter();
   const numRowsQueryParam = router.query.numRows;
   const initialNumRows = numRowsQueryParam
     ? parseInt(numRowsQueryParam, 10)
     : 0;
   const [numRows, setNumRows] = useState(initialNumRows);
-  const handleDrop = (acceptedFiles) => {
-    console.log(acceptedFiles);
-    // Handle the dropped files
+
+  const handleReferenceDataDrop = (acceptedFiles) => {
+    try {
+      if (acceptedFiles.length === 0) {
+        console.error("No file selected");
+        return;
+      }
+
+      const userId = "USER_ID"; // Replace with the actual user ID.
+      const folderName = "Reference Data"; // Replace with the desired folder name.
+      acceptedFiles.forEach((file) => {
+        uploadFile(userId, file.path, folderName);
+        console.log("File uploaded successfully:", file.path);
+      });
+    } catch (error) {
+      console.error("Error uploading Reference Data files:", error);
+    }
   };
+
+  const handleModelNetlistDrop = (acceptedFiles) => {
+    try {
+      if (acceptedFiles.length === 0) {
+        console.error("No file selected");
+        return;
+      }
+
+      const userId = "USER_ID"; // Replace with the actual user ID.
+      const folderName = "Model Netlist"; // Replace with the desired folder name.
+
+      acceptedFiles.forEach((file) => {
+        uploadFile(userId, file.path, folderName);
+        console.log("Model Netlist files uploaded successfully");
+      });
+    } catch (error) {
+      console.error("Error uploading Model Netlist files:", error);
+    }
+  };
+
+  const handleModelParametersDrop = (acceptedFiles) => {
+    try {
+      if (acceptedFiles.length === 0) {
+        console.error("No file selected");
+        return;
+      }
+
+      const userId = "USER_ID"; // Replace with the actual user ID.
+      const folderName = "Model Parameters"; // Replace with the desired folder name.
+
+      acceptedFiles.forEach((file) => {
+        uploadFile(userId, file.path, folderName);
+        console.log("Model Parameters files uploaded successfully");
+      });
+    } catch (error) {
+      console.error("Error uploading Model Parameters files:", error);
+    }
+  };
+
+  const handleCostFunctionsDrop = (acceptedFiles) => {
+    try {
+      if (acceptedFiles.length === 0) {
+        console.error("No file selected");
+        return;
+      }
+
+      const userId = "USER_ID"; // Replace with the actual user ID.
+      const folderName = "Cost Functions"; // Replace with the desired folder name.
+
+      acceptedFiles.forEach((file) => {
+        uploadFile(userId, file.path, folderName);
+        console.log("Cost Functions files uploaded successfully");
+      });
+    } catch (error) {
+      console.error("Error uploading Cost Functions files:", error);
+    }
+  };
+
+  function handleFileChange(event) {
+    setSelectedFile(event.target.files[0]);
+  }
+
+  async function handleFileUpload() {
+    try {
+      if (!selectedFile) {
+        console.error("No file selected");
+        return;
+      }
+      const userId = "USER_ID"; // Replace with the actual user ID.
+      const folderName = "Reference Data"; // Replace with the desired folder name.
+
+      uploadFile(userId, selectedFile, folderName);
+      console.log("File uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  }
+
   useEffect(() => {
     setNumRows(initialNumRows);
   }, [initialNumRows]);
@@ -31,25 +126,28 @@ function InsertData() {
           <DataDescription numRows={numRows} />
         )}
       </TableContainer>
-
+      <div>
+        <input type='file' onChange={handleFileChange} />
+        <button onClick={handleFileUpload}>Upload File</button>
+      </div>
       <InsertDataContainer>
         <DataContainers
-          onDrop={handleDrop}
+          onDrop={handleReferenceDataDrop}
           text='Reference Data'
           color={"#2196f3"}
         />
         <DataContainers
-          onDrop={handleDrop}
+          onDrop={handleModelNetlistDrop}
           text='Model Netlist'
           color={"#4caf50"}
         />
         <DataContainers
-          onDrop={handleDrop}
+          onDrop={handleModelParametersDrop}
           text='Model Parameters'
           color={"#ff9800"}
         />
         <DataContainers
-          onDrop={handleDrop}
+          onDrop={handleCostFunctionsDrop}
           text='Cost Function'
           color={"#9c27b0"}
         />

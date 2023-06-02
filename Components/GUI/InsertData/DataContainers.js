@@ -66,24 +66,24 @@ const UploadIcon = styled(AiOutlineUpload)`
 const FileUploader = ({ onDrop, text, color }) => {
   const [fileCount, setFileCount] = useState(0);
   const [showIcon, setShowIcon] = useState(false);
-  // const [iconColor, setIconColor] = useState(generateRandomColor());
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleDrop = (acceptedFiles) => {
-    onDrop(acceptedFiles);
+    const filesWithPath = acceptedFiles.map((file) => ({
+      ...file,
+      path: file.path,
+    }));
+
+    onDrop(filesWithPath);
     setFileCount((prevCount) => prevCount + acceptedFiles.length);
     setShowIcon(true);
-
-    // setTimeout(() => {
-    //   //   setFileCount((prevCount) => prevCount - acceptedFiles.length);
-    //   if (fileCount - acceptedFiles.length === 0) {
-    //     setShowIcon(false);
-    //   }
-    // }, 3000);
+    setSelectedFiles(filesWithPath);
   };
 
   const handleRemoveInputs = () => {
-    setFileCount([]);
+    setFileCount(0);
     setShowIcon(false);
+    setSelectedFiles([]);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -100,6 +100,11 @@ const FileUploader = ({ onDrop, text, color }) => {
         <>
           <AiFillFolderOpen size={128} color={color} />
           {fileCount > 0 && <span className='file-count'>{fileCount}</span>}
+          {selectedFiles.map((file, index) => (
+            <div key={index}>
+              <p>File: {file.path}</p> {/* Display the file path */}
+            </div>
+          ))}
           <p>{text}</p>
           <button className='remove-button' onClick={handleRemoveInputs}>
             Remove Inputs

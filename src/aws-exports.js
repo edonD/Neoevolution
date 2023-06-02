@@ -25,7 +25,9 @@ const awsmobile = {
     },
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
-    ]
+    ],
+    "aws_user_files_s3_bucket": "aivalancheglobal124606-aivauth",
+    "aws_user_files_s3_bucket_region": "eu-central-1"
 };
 
 

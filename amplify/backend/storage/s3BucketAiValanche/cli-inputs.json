@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3BucketAiValanche",
+  "policyUUID": "602bdb0f",
+  "bucketName": "aivalancheglobal",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

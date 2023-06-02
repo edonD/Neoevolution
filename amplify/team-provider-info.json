@@ -45,6 +45,9 @@
     "categories": {
       "auth": {
         "aivalanche5e90a998": {}
+      },
+      "storage": {
+        "s3BucketAiValanche": {}
       }
     }
   }

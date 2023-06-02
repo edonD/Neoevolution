@@ -6,8 +6,11 @@ import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { Auth } from "aws-amplify";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../store/slices/userSlice";
 
 function ProfileHeaderDropdown({ isOpen, onToggle }) {
+  const dispatch = useDispatch();
   const handleClick = () => {
     onToggle();
   };
@@ -15,6 +18,7 @@ function ProfileHeaderDropdown({ isOpen, onToggle }) {
   async function signOut() {
     try {
       await Auth.signOut();
+      dispatch(setUser(null));
       router.push("/", undefined, { shallow: true });
     } catch (error) {
       console.log("error signing out: ", error);

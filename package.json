@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@stitches/react": "^1.2.8",
     "aws-amplify": "^5.2.4",
+    "aws-sdk": "^2.1390.0",
     "axios": "^1.4.0",
     "framer-motion": "^10.12.16",
     "ml-regression": "^5.0.0",
