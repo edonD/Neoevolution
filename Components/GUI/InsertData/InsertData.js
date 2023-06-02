@@ -93,26 +93,6 @@ function InsertData() {
     }
   };
 
-  function handleFileChange(event) {
-    setSelectedFile(event.target.files[0]);
-  }
-
-  async function handleFileUpload() {
-    try {
-      if (!selectedFile) {
-        console.error("No file selected");
-        return;
-      }
-      const userId = "USER_ID"; // Replace with the actual user ID.
-      const folderName = "Reference Data"; // Replace with the desired folder name.
-
-      uploadFile(userId, selectedFile, folderName);
-      console.log("File uploaded successfully");
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  }
-
   useEffect(() => {
     setNumRows(initialNumRows);
   }, [initialNumRows]);
@@ -126,10 +106,7 @@ function InsertData() {
           <DataDescription numRows={numRows} />
         )}
       </TableContainer>
-      <div>
-        <input type='file' onChange={handleFileChange} />
-        <button onClick={handleFileUpload}>Upload File</button>
-      </div>
+
       <InsertDataContainer>
         <DataContainers
           onDrop={handleReferenceDataDrop}
