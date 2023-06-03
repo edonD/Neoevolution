@@ -35,7 +35,7 @@ function InsertData() {
       const folderName = "Reference Data"; // Replace with the desired folder name.
       acceptedFiles.forEach((file) => {
         uploadFile(userId, file.path, folderName);
-        console.log("File uploaded successfully:", file.path);
+        // console.log("File uploaded successfully:", file.path);
       });
     } catch (error) {
       console.error("Error uploading Reference Data files:", error);
@@ -54,7 +54,7 @@ function InsertData() {
 
       acceptedFiles.forEach((file) => {
         uploadFile(userId, file.path, folderName);
-        console.log("Model Netlist files uploaded successfully");
+        // console.log("Model Netlist files uploaded successfully");
       });
     } catch (error) {
       console.error("Error uploading Model Netlist files:", error);
@@ -73,7 +73,7 @@ function InsertData() {
 
       acceptedFiles.forEach((file) => {
         uploadFile(userId, file.path, folderName);
-        console.log("Model Parameters files uploaded successfully");
+        // console.log("Model Parameters files uploaded successfully");
       });
     } catch (error) {
       console.error("Error uploading Model Parameters files:", error);
@@ -92,7 +92,7 @@ function InsertData() {
 
       acceptedFiles.forEach((file) => {
         uploadFile(userId, file.path, folderName);
-        console.log("Cost Functions files uploaded successfully");
+        // console.log("Cost Functions files uploaded successfully");
       });
     } catch (error) {
       console.error("Error uploading Cost Functions files:", error);
