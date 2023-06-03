@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { Auth } from "aws-amplify";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../../store/slices/userSlice";
+import { setUser, setUsernameId } from "../../../store/slices/userSlice";
 
 function ProfileHeaderDropdown({ isOpen, onToggle }) {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ function ProfileHeaderDropdown({ isOpen, onToggle }) {
     try {
       await Auth.signOut();
       dispatch(setUser(null));
+      dispatch(setUsernameId(null));
       router.push("/", undefined, { shallow: true });
     } catch (error) {
       console.log("error signing out: ", error);

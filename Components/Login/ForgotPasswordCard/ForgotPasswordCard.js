@@ -15,11 +15,21 @@ function ForgotPasswordCard({ callbackFunction }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const dispatch = useDispatch();
+  const fetchUserId = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      dispatch(setUsernameId(user.attributes.sub));
 
+      //
+    } catch (error) {
+      console.log("Error fetching user IDx:", error);
+    }
+  };
   async function ForgotPassword() {
     try {
       await Auth.forgotPassword(username);
       dispatch(setUser(username));
+      fetchUserId();
       handleConfirmClick();
     } catch (error) {
       console.log("error signing in", error);
