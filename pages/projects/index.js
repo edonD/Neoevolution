@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ProfileHeader from "../../Components/Account/ProfileHeader/ProfileHeader";
 import SidebarProjects from "../../Components/GUI/SidebarBodies/SideBardProjects";
 import styled from "styled-components";
+import { Auth } from "aws-amplify";
+import { useEffect } from "react";
 
 function index() {
   const [projects, setProjects] = useState(0);

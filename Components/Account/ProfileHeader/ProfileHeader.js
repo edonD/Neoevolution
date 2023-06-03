@@ -6,12 +6,27 @@ import Link from "next/link";
 import { Button } from "@mui/material";
 import Image from "next/legacy/image";
 import AiValanchePopUp from "../../GUI/AiValancheHome/AiValanchePopUp";
+import { useEffect } from "react";
+import { Auth } from "aws-amplify";
 
 function ProfileHeader({ onData }) {
   const [dropDownState, setdropDownState] = useState(false);
   const toggle = () => {
     setdropDownState(!dropDownState);
   };
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        console.log(user.attributes.sub);
+      } catch (error) {
+        console.log("Error fetching user ID:", error);
+      }
+    };
+
+    fetchUserId();
+  }, []);
   return (
     <Background>
       <LogoContainer>
@@ -57,7 +72,7 @@ const LogoContainer = styled.div`
   width: 10%;
   height: 60%;
   background: transparent;
-  margin-left: 5px;
+  margin-left: 20px;
 
   cursor: pointer;
   display: flex;

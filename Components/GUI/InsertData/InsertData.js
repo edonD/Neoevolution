@@ -7,11 +7,16 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
 import { uploadFile } from "../../Storage/UploadFileFunctions";
+import { useSelector } from "react-redux";
+import { selectUserNameId } from "../../../store/slices/userSlice";
 
 function InsertData() {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const router = useRouter();
+
+  const usernameID = useSelector(selectUserNameId);
+
   const numRowsQueryParam = router.query.numRows;
   const initialNumRows = numRowsQueryParam
     ? parseInt(numRowsQueryParam, 10)
@@ -25,7 +30,8 @@ function InsertData() {
         return;
       }
 
-      const userId = "USER_ID"; // Replace with the actual user ID.
+      const userId = usernameID; // Replace with the actual user ID.
+      console.log(userId);
       const folderName = "Reference Data"; // Replace with the desired folder name.
       acceptedFiles.forEach((file) => {
         uploadFile(userId, file.path, folderName);
@@ -43,7 +49,7 @@ function InsertData() {
         return;
       }
 
-      const userId = "USER_ID"; // Replace with the actual user ID.
+      const userId = usernameID; // Replace with the actual user ID.
       const folderName = "Model Netlist"; // Replace with the desired folder name.
 
       acceptedFiles.forEach((file) => {
@@ -62,7 +68,7 @@ function InsertData() {
         return;
       }
 
-      const userId = "USER_ID"; // Replace with the actual user ID.
+      const userId = usernameID; // Replace with the actual user ID.
       const folderName = "Model Parameters"; // Replace with the desired folder name.
 
       acceptedFiles.forEach((file) => {
@@ -81,7 +87,7 @@ function InsertData() {
         return;
       }
 
-      const userId = "USER_ID"; // Replace with the actual user ID.
+      const userId = usernameID; // Replace with the actual user ID.
       const folderName = "Cost Functions"; // Replace with the desired folder name.
 
       acceptedFiles.forEach((file) => {

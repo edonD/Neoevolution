@@ -13,7 +13,7 @@ import Image from "next/legacy/image";
 
 import { Auth } from "aws-amplify";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/slices/userSlice";
+import { setUser, setUsernameId } from "../../store/slices/userSlice";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -24,12 +24,21 @@ const LoginPage = () => {
 
   const router = useRouter();
   const dispatch = useDispatch();
+  const fetchUserId = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      dispatch(setUsernameId(user.attributes.sub));
 
+      //
+    } catch (error) {
+      console.log("Error fetching user IDx:", error);
+    }
+  };
   async function signIn() {
     try {
       const user = await Auth.signIn(username, password);
-      console.log("Yser", username);
 
+      fetchUserId();
       dispatch(setUser(username));
       router.push("/projects");
     } catch (error) {

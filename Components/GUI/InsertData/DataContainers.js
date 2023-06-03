@@ -49,7 +49,7 @@ const FileUploaderWrapper = styled.div`
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 10px 0px 10px 0px;
   }
 `;
 
@@ -100,11 +100,11 @@ const FileUploader = ({ onDrop, text, color }) => {
         <>
           <AiFillFolderOpen size={128} color={color} />
           {fileCount > 0 && <span className='file-count'>{fileCount}</span>}
-          {selectedFiles.map((file, index) => (
+          {/* {selectedFiles.map((file, index) => (
             <div key={index}>
-              <p>File: {file.path}</p> {/* Display the file path */}
+              <p>File: {file.path}</p>
             </div>
-          ))}
+          ))} */}
           <p>{text}</p>
           <button className='remove-button' onClick={handleRemoveInputs}>
             Remove Inputs

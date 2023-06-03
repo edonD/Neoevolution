@@ -16,13 +16,12 @@ function ConfirmForm() {
 
   const username = useSelector(selectUser);
   const router = useRouter();
+
   const confirm = async () => {
     try {
       await Auth.confirmSignUp(username, confirmationCode);
-
       setErrorMessage("");
-      // handleConfirmClick();
-      router.push("/projects");
+      router.push("/Login");
     } catch (err) {
       console.log("error confirming sign up", err);
       setErrorDialogVisible(true);
