@@ -7,14 +7,15 @@ import { useRouter } from "next/router";
 function ContinueButton({ show }) {
   const router = useRouter();
   return (
-    <Card show={show}>
-      <ImageContainer
-        onClick={() => {
-          router.push(
-            "/projects/create-model/select-model/insert-data/reference-data"
-          );
-        }}
-      >
+    <Card
+      onClick={() => {
+        router.push(
+          "/projects/create-model/select-model/insert-data/reference-data"
+        );
+      }}
+      show={show}
+    >
+      <ImageContainer>
         <Image
           src='/images/plus-svgrepo-com.svg'
           width={100}

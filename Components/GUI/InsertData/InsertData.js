@@ -59,45 +59,23 @@ function InsertData() {
   };
 
   const handleRegerenceDataProgressChange = (progress) => {
-    if (progress.total > 6000) {
-      setUploadReferenceDataHeavy(true);
-    } else {
-      setUploadModelParametersHeavy(false);
-    }
-
+    setUploadReferenceDataProgress(0);
     const percentage = Math.round((progress.loaded / progress.total) * 100);
     setUploadReferenceDataProgress(percentage);
     setUploadReferenceDataDone(false);
   };
   const handleModelNetlistProgressChange = (progress) => {
-    if (progress.total > 6000) {
-      setUploadModelNetlistHeavy(true);
-    } else {
-      setUploadModelParametersHeavy(false);
-    }
-
     const percentage = Math.round((progress.loaded / progress.total) * 100);
     setUploadModelNetlistProgress(percentage);
     setUploadModelNetlistDone(false);
   };
 
   const handleModelParametersProgressChange = (progress) => {
-    if (progress.total > 6000) {
-      setUploadModelParametersHeavy(true);
-    } else {
-      setUploadModelParametersHeavy(false);
-    }
     const percentage = Math.round((progress.loaded / progress.total) * 100);
     setUploadModelParametersProgress(percentage);
     setUploadModelParametersDone(false);
   };
   const handleCostFunctionProgressChange = (progress) => {
-    if (progress.total > 6000) {
-      setUploadCostFunctionHeavy(true);
-    } else {
-      setUploadModelParametersHeavy(false);
-    }
-
     const percentage = Math.round((progress.loaded / progress.total) * 100);
     setUploadCostFunctionProgress(percentage);
     setUploadCostFunctionDone(false);
