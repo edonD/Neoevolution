@@ -3,7 +3,9 @@ import { useDropzone } from "react-dropzone";
 import { FcFolder } from "react-icons/fc";
 import { AiFillFolderOpen } from "react-icons/ai";
 import { AiOutlineUpload } from "react-icons/ai";
+import { ProgressBar } from "primereact/progressbar";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const FileUploaderWrapper = styled.div`
   display: flex;
@@ -58,26 +60,29 @@ const UploadIcon = styled(AiOutlineUpload)`
   font-size: 24px;
 `;
 
+const ProgressBarStyled = styled(ProgressBar)`
+  height: 100%;
+  font-size: 10px;
+`;
+
 // const generateRandomColor = () => {
 //   const colors = ["#ff5722", "#2196f3", "#4caf50", "#ff9800", "#9c27b0"];
 //   return colors[Math.floor(Math.random() * colors.length)];
 // };
 
-const FileUploader = ({ onDrop, text, color }) => {
+const FileUploader = ({ onDrop, text, color, value, done, heavy }) => {
   const [fileCount, setFileCount] = useState(0);
   const [showIcon, setShowIcon] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleDrop = (acceptedFiles) => {
-    const filesWithPath = acceptedFiles.map((file) => ({
-      ...file,
-      path: file.path,
-    }));
+    // const acceptedFiles = event;
+    // console.log(acceptedFiles);
 
-    onDrop(filesWithPath);
+    onDrop(acceptedFiles);
     setFileCount((prevCount) => prevCount + acceptedFiles.length);
     setShowIcon(true);
-    setSelectedFiles(filesWithPath);
+    setSelectedFiles([...selectedFiles, ...acceptedFiles]);
   };
 
   const handleRemoveInputs = () => {
@@ -99,13 +104,26 @@ const FileUploader = ({ onDrop, text, color }) => {
       ) : showIcon ? (
         <>
           <AiFillFolderOpen size={128} color={color} />
-          {fileCount > 0 && <span className='file-count'>{fileCount}</span>}
-          {/* {selectedFiles.map((file, index) => (
-            <div key={index}>
-              <p>File: {file.path}</p>
-            </div>
-          ))} */}
+          {fileCount > 0 && done && (
+            <span className='file-count'>{fileCount}</span>
+          )}
+
           <p>{text}</p>
+
+          {!done && heavy && (
+            <div
+              style={{
+                backgroundColor: "white",
+                width: "80%",
+                height: "25px",
+                borderRadius: "3px",
+                marginBottom: "0.15rem",
+                fontWeight: "normal",
+              }}
+            >
+              <ProgressBarStyled value={value}></ProgressBarStyled>
+            </div>
+          )}
           <button className='remove-button' onClick={handleRemoveInputs}>
             Remove Inputs
           </button>

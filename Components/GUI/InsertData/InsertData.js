@@ -11,9 +11,29 @@ import { useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 
 function InsertData() {
-  const [selectedFile, setSelectedFile] = useState(null);
-
   const router = useRouter();
+
+  const [uploadReferenceDataProgress, setUploadReferenceDataProgress] =
+    useState(0);
+  const [uploadModelNetlistProgress, setUploadModelNetlistProgress] =
+    useState(0);
+  const [uploadModelParametersProgress, setUploadModelParametersProgress] =
+    useState(0);
+  const [uploadCostFunctionProgress, setUploadCostFunctionProgress] =
+    useState(0);
+
+  const [uploadReferenceDataDone, setUploadReferenceDataDone] = useState(false);
+  const [uploadModelNetlistDone, setUploadModelNetlistDone] = useState(false);
+  const [uploadModelParametersDone, setUploadModelParametersDone] =
+    useState(false);
+  const [uploadCostFunctionDone, setUploadCostFunctionDone] = useState(false);
+
+  const [uploadReferenceDataHeavy, setUploadReferenceDataHeavy] =
+    useState(false);
+  const [uploadModelNetlistHeavy, setUploadModelNetlistHeavy] = useState(false);
+  const [uploadModelParametersHeavy, setUploadModelParametersHeavy] =
+    useState(false);
+  const [uploadCostFunctionHeavy, setUploadCostFunctionHeavy] = useState(false);
 
   const usernameID = useSelector(selectUserNameId);
 
@@ -23,6 +43,66 @@ function InsertData() {
     : 0;
   const [numRows, setNumRows] = useState(initialNumRows);
 
+  const handleUploadReferenceDataComplete = () => {
+    setUploadReferenceDataDone(true);
+  };
+  const handleUploadModelNetlistComplete = () => {
+    setUploadModelNetlistDone(true);
+  };
+
+  const handleUploadModelParametersComplete = () => {
+    setUploadModelParametersDone(true);
+  };
+
+  const handleUploadCostFunctionComplete = () => {
+    setUploadCostFunctionDone(true);
+  };
+
+  const handleRegerenceDataProgressChange = (progress) => {
+    if (progress.total > 6000) {
+      setUploadReferenceDataHeavy(true);
+    } else {
+      setUploadModelParametersHeavy(false);
+    }
+
+    const percentage = Math.round((progress.loaded / progress.total) * 100);
+    setUploadReferenceDataProgress(percentage);
+    setUploadReferenceDataDone(false);
+  };
+  const handleModelNetlistProgressChange = (progress) => {
+    if (progress.total > 6000) {
+      setUploadModelNetlistHeavy(true);
+    } else {
+      setUploadModelParametersHeavy(false);
+    }
+
+    const percentage = Math.round((progress.loaded / progress.total) * 100);
+    setUploadModelNetlistProgress(percentage);
+    setUploadModelNetlistDone(false);
+  };
+
+  const handleModelParametersProgressChange = (progress) => {
+    if (progress.total > 6000) {
+      setUploadModelParametersHeavy(true);
+    } else {
+      setUploadModelParametersHeavy(false);
+    }
+    const percentage = Math.round((progress.loaded / progress.total) * 100);
+    setUploadModelParametersProgress(percentage);
+    setUploadModelParametersDone(false);
+  };
+  const handleCostFunctionProgressChange = (progress) => {
+    if (progress.total > 6000) {
+      setUploadCostFunctionHeavy(true);
+    } else {
+      setUploadModelParametersHeavy(false);
+    }
+
+    const percentage = Math.round((progress.loaded / progress.total) * 100);
+    setUploadCostFunctionProgress(percentage);
+    setUploadCostFunctionDone(false);
+  };
+
   const handleReferenceDataDrop = (acceptedFiles) => {
     try {
       if (acceptedFiles.length === 0) {
@@ -31,11 +111,15 @@ function InsertData() {
       }
 
       const userId = usernameID; // Replace with the actual user ID.
-      console.log(userId);
       const folderName = "Reference Data"; // Replace with the desired folder name.
       acceptedFiles.forEach((file) => {
-        uploadFile(userId, file.path, folderName);
-        // console.log("File uploaded successfully:", file.path);
+        uploadFile(
+          userId,
+          file,
+          folderName,
+          handleRegerenceDataProgressChange,
+          handleUploadReferenceDataComplete
+        );
       });
     } catch (error) {
       console.error("Error uploading Reference Data files:", error);
@@ -53,7 +137,13 @@ function InsertData() {
       const folderName = "Model Netlist"; // Replace with the desired folder name.
 
       acceptedFiles.forEach((file) => {
-        uploadFile(userId, file.path, folderName);
+        uploadFile(
+          userId,
+          file,
+          folderName,
+          handleModelNetlistProgressChange,
+          handleUploadModelNetlistComplete
+        );
         // console.log("Model Netlist files uploaded successfully");
       });
     } catch (error) {
@@ -72,7 +162,13 @@ function InsertData() {
       const folderName = "Model Parameters"; // Replace with the desired folder name.
 
       acceptedFiles.forEach((file) => {
-        uploadFile(userId, file.path, folderName);
+        uploadFile(
+          userId,
+          file,
+          folderName,
+          handleModelParametersProgressChange,
+          handleUploadModelParametersComplete
+        );
         // console.log("Model Parameters files uploaded successfully");
       });
     } catch (error) {
@@ -91,7 +187,13 @@ function InsertData() {
       const folderName = "Cost Functions"; // Replace with the desired folder name.
 
       acceptedFiles.forEach((file) => {
-        uploadFile(userId, file.path, folderName);
+        uploadFile(
+          userId,
+          file,
+          folderName,
+          handleCostFunctionProgressChange,
+          handleUploadCostFunctionComplete
+        );
         // console.log("Cost Functions files uploaded successfully");
       });
     } catch (error) {
@@ -118,21 +220,33 @@ function InsertData() {
           onDrop={handleReferenceDataDrop}
           text='Reference Data'
           color={"#2196f3"}
+          value={uploadReferenceDataProgress}
+          done={uploadReferenceDataDone}
+          heavy={uploadReferenceDataHeavy}
         />
         <DataContainers
           onDrop={handleModelNetlistDrop}
           text='Model Netlist'
           color={"#4caf50"}
+          value={uploadModelNetlistProgress}
+          done={uploadModelNetlistDone}
+          heavy={uploadModelNetlistHeavy}
         />
         <DataContainers
           onDrop={handleModelParametersDrop}
           text='Model Parameters'
           color={"#ff9800"}
+          value={uploadModelParametersProgress}
+          done={uploadModelParametersDone}
+          heavy={uploadModelParametersHeavy}
         />
         <DataContainers
           onDrop={handleCostFunctionsDrop}
           text='Cost Function'
           color={"#9c27b0"}
+          value={uploadCostFunctionProgress}
+          done={uploadCostFunctionDone}
+          heavy={uploadCostFunctionHeavy}
         />
         <ContinueButton show={numRows} />
       </InsertDataContainer>
