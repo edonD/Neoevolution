@@ -1,10 +1,11 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { selectItems } from "../../store/slices/referenceDataSlice";
 
-const DropdownMenu = ({ items, label }) => {
+const DropdownMenu = ({ label, items }) => {
   const [selectedOption, setSelectedOption] = useState("option1");
-
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -32,15 +33,20 @@ const DropdownMenu = ({ items, label }) => {
             },
           }}
         >
-          {items.map((items) => (
-            <MenuItem
-              style={{ display: "block" }}
-              key={items.value}
-              value={items.value}
-            >
-              {items.label}
-            </MenuItem>
-          ))}
+          {items.map(
+            (items) => (
+              console.log(items),
+              (
+                <MenuItem
+                  style={{ display: "block" }}
+                  key={items.value}
+                  value={items.value}
+                >
+                  {items.label}
+                </MenuItem>
+              )
+            )
+          )}
         </Select>
       </FormControl>
     </Container>

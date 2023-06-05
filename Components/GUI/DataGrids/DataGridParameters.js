@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
-import UploadReferenceData from "../Parameters-Data-View/UploadReferenceData";
+import UploadReferenceData from "../Parameters-Data-View/UploadParametersData";
 const columns = [
   {
     field: "w",
@@ -31,15 +31,6 @@ const columns = [
     align: "center",
     editable: true,
   },
-  // {
-  //   // field: "fullName",
-  //   // headerName: "Full name",
-  //   // description: "This column has a value getter and is not sortable.",
-  //   // sortable: false,
-  //   // width: 160,
-  //   //   valueGetter: () =>
-  //   //     `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  // },
 ];
 
 const rows = [
@@ -71,47 +62,15 @@ const rows = [
   { id: 26, w: "Frances", l: "Rossini", t: 36 },
   { id: 27, w: "Roxie", l: "Harvey", t: 65 },
 ];
-function DataGridSecond({ type }) {
+function DataGridParameters({ type }) {
   return (
     <Container>
-      {/* <LabelContainer>
-        <Label>Iteration</Label>
-        <Label
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
-          15
-        </Label>
-      </LabelContainer>
-      <LabelContainer>
-        <Label>Accuracy</Label>
-        <Label
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
-          1.233e+00
-        </Label>
-      </LabelContainer> */}
       <UploadReferenceData type={type} />
-      {/* <SelectButtons /> */}
+
       <Data>
         <DataGrid
           rows={rows}
           columns={columns}
-          // initialState={{
-          //   pagination: {
-          //     paginationModel: {
-          //       ptSize: 10,
-          //     },
-          //   },
-          // }}
-          // pageSizeOptions={[5]}
           style={{ height: "100%", width: "100%" }}
           checkboxSelection
           disableRowSelectionOnClick
@@ -149,4 +108,4 @@ const Data = styled.div`
   margin: 10px;
 `;
 
-export default DataGridSecond;
+export default DataGridParameters;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 
 import UploadReferenceData from "../Reference-Data-View/UploadReferenceData";
 const columns = [
@@ -71,47 +71,15 @@ const rows = [
   { id: 26, w: "Frances", l: "Rossini", t: 36 },
   { id: 27, w: "Roxie", l: "Harvey", t: 65 },
 ];
-function DataGridSecond({ type }) {
+function DataGridSecond({ type, items }) {
   return (
     <Container>
-      {/* <LabelContainer>
-        <Label>Iteration</Label>
-        <Label
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
-          15
-        </Label>
-      </LabelContainer>
-      <LabelContainer>
-        <Label>Accuracy</Label>
-        <Label
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
-          1.233e+00
-        </Label>
-      </LabelContainer> */}
-      <UploadReferenceData type={type} />
-      {/* <SelectButtons /> */}
+      <UploadReferenceData type={type} items={items} />
+
       <Data>
         <DataGrid
           rows={rows}
           columns={columns}
-          // initialState={{
-          //   pagination: {
-          //     paginationModel: {
-          //       ptSize: 10,
-          //     },
-          //   },
-          // }}
-          // pageSizeOptions={[5]}
           style={{ height: "100%", width: "100%" }}
           checkboxSelection
           disableRowSelectionOnClick

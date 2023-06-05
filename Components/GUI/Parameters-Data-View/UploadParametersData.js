@@ -3,78 +3,50 @@ import React from "react";
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
-import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import DropdownMenu from "../DropdownMenu";
-import UploadButton from "../UploadButton.js/UploadButton";
+import UploadParametersButton from "../UploadButton.js/UploadParametersButton";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectParametersItems,
+  setParameterItems,
+} from "../../../store/slices/parametersDataSlice";
+import { selectUserNameId } from "../../../store/slices/userSlice";
+import { listFiles } from "../../Storage/UploadFileFunctions";
+import { useEffect } from "react";
 
 function UploadReferenceData({ type }) {
-  const [file, setFile] = useState(null);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [upload, setUpload] = useState(false);
+  const items = useSelector(selectParametersItems);
+  const usernameID = useSelector(selectUserNameId);
+  const Parameterslink = `${usernameID}/Model Parameters`;
+  const dispatch = useDispatch();
 
-  const handleDrop = (acceptedFiles) => {
-    setFile(acceptedFiles[0]);
-    setUploadSuccess(true);
-    setUpload(true);
-    // Perform upload logic here
-  };
+  useEffect(() => {
+    const fetchParametersData = async () => {
+      try {
+        const files = await listFiles(Parameterslink);
+        console.log(files); // Do something with the files array
+        files.map((file) => {
+          const result = file.key.replace(/.*\//, "");
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: handleDrop,
-  });
+          dispatch(setParameterItems(result));
+        });
+      } catch (error) {
+        // Handle the error
+        console.error(error);
+      }
+    };
+    fetchParametersData();
+  }, []);
 
   return (
     <Wrapper>
       <DropDownContainer>
-        <DropdownMenu
-          items={[
-            {
-              label: "Model",
-              value: "option1",
-            },
-            {
-              label: "NMOS-BSIM4",
-              value: "option2",
-            },
-            { label: "PMOS-BSIM4", value: "option3" },
-            { label: "PMOS-HiSIM", value: "option4" },
-            { label: "NMOS-HiSIM", value: "option5" },
-            { label: "Diode", value: "option6" },
-            { label: "Resistor", value: "option7" },
-            { label: "Capacitor", value: "option8" },
-            { label: "PMOS-BSIM4", value: "option9" },
-            { label: "PMOS-HiSIM", value: "option10" },
-            { label: "NMOS-HiSIM", value: "option11" },
-            { label: "Diode", value: "option12" },
-            { label: "Capacitor", value: "option13" },
-            { label: "Resistor", value: "option14" },
-          ]}
-        />
+        <DropdownMenu items={items} />
       </DropDownContainer>
       <UploadButtonContainer>
-        <UploadButton />
+        <UploadParametersButton />
       </UploadButtonContainer>
-
-      {/* <Dropzone {...getRootProps()} isDragActive={isDragActive} upload={upload}>
-        <input {...getInputProps()} />
-        {file ? (
-          <>
-            <FileName>{file.name}</FileName>
-            <SuccessIcon style={{ marginLeft: "10px" }} />
-          </>
-        ) : (
-          <>
-            <GlowingCircle>
-              <UploadIcon />
-            </GlowingCircle>
-
-            <DropzoneText>
-              {isDragActive ? "Drop the file here" : type}
-            </DropzoneText>
-          </>
-        )}
-      </Dropzone> */}
     </Wrapper>
   );
 }

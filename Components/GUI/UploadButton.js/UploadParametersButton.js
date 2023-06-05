@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import { Storage } from "aws-amplify";
 
-function UploadButton() {
+function UploadParametersButton() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +27,7 @@ function UploadButton() {
       }
 
       const userId = usernameID; // Replace with the actual user ID.
-      const folderName = "Reference Data"; // Replace with the desired folder name.
+      const folderName = "Model Parameters"; // Replace with the desired folder name.
       setLoading(true);
       await Promise.all(
         selectedFiles.map(async (file) => {
@@ -106,4 +106,4 @@ const StyledButton = styled(Button)`
     }
   }
 `;
-export default UploadButton;
+export default UploadParametersButton;

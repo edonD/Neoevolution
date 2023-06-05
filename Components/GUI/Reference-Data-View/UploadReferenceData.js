@@ -7,74 +7,19 @@ import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import DropdownMenu from "../DropdownMenu";
 import UploadButton from "../UploadButton.js/UploadButton";
+import { useSelector } from "react-redux";
+import { selectItems } from "../../../store/slices/referenceDataSlice";
 
-function UploadReferenceData({ type }) {
-  const [file, setFile] = useState(null);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [upload, setUpload] = useState(false);
-
-  const handleDrop = (acceptedFiles) => {
-    setFile(acceptedFiles[0]);
-    setUploadSuccess(true);
-    setUpload(true);
-    // Perform upload logic here
-  };
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: handleDrop,
-  });
-
+function UploadReferenceData() {
+  const items = useSelector(selectItems);
   return (
     <Wrapper>
       <DropDownContainer>
-        <DropdownMenu
-          items={[
-            {
-              label: "Model",
-              value: "option1",
-            },
-            {
-              label: "NMOS-BSIM4",
-              value: "option2",
-            },
-            { label: "PMOS-BSIM4", value: "option3" },
-            { label: "PMOS-HiSIM", value: "option4" },
-            { label: "NMOS-HiSIM", value: "option5" },
-            { label: "Diode", value: "option6" },
-            { label: "Resistor", value: "option7" },
-            { label: "Capacitor", value: "option8" },
-            { label: "PMOS-BSIM4", value: "option9" },
-            { label: "PMOS-HiSIM", value: "option10" },
-            { label: "NMOS-HiSIM", value: "option11" },
-            { label: "Diode", value: "option12" },
-            { label: "Capacitor", value: "option13" },
-            { label: "Resistor", value: "option14" },
-          ]}
-        />
+        <DropdownMenu items={items} />
       </DropDownContainer>
       <UploadButtonContainer>
         <UploadButton />
       </UploadButtonContainer>
-
-      {/* <Dropzone {...getRootProps()} isDragActive={isDragActive} upload={upload}>
-        <input {...getInputProps()} />
-        {file ? (
-          <>
-            <FileName>{file.name}</FileName>
-            <SuccessIcon style={{ marginLeft: "10px" }} />
-          </>
-        ) : (
-          <>
-            <GlowingCircle>
-              <UploadIcon />
-            </GlowingCircle>
-
-            <DropzoneText>
-              {isDragActive ? "Drop the file here" : type}
-            </DropzoneText>
-          </>
-        )}
-      </Dropzone> */}
     </Wrapper>
   );
 }

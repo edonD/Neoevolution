@@ -32,22 +32,12 @@ export const uploadFile = async function (
     console.error("Error uploading file:", error);
   }
 };
-
-// async function uploadFileToS3(userId, file, folderName) {
-//     const s3 = new AWS.S3();
-//     const bucketName = 'YOUR_S3_BUCKET_NAME';
-//     const folderPath = `${userId}/${folderName}`;
-
-//     const params = {
-//       Bucket: bucketName,
-//       Key: `${folderPath}/${file.name}`,
-//       Body: file.data, // Assuming the file object contains the data.
-//     };
-
-//     try {
-//       await s3.upload(params).promise();
-//       console.log('File uploaded successfully.');
-//     } catch (error) {
-//       console.error('Error uploading file:', error);
-//     }
-//   }
+export const listFiles = async function (path) {
+  try {
+    const { results } = await Storage.list(path); // for listing ALL files without prefix, pass '' instead
+    return results;
+  } catch (err) {
+    console.error(err);
+    // throw err; // Rethrow the error to propagate it to the caller
+  }
+};

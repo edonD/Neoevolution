@@ -3,10 +3,44 @@ import React from "react";
 import styled from "styled-components";
 import DataGridSecond from "../DataGrids/DataGridSecond";
 import Plots from "../Plots";
+import { listFiles } from "../../../Components/Storage/UploadFileFunctions";
+import { useEffect } from "react";
+import { Auth } from "aws-amplify";
+
+import { useDispatch } from "react-redux";
+import { setItems } from "../../../store/slices/referenceDataSlice";
+import { useSelector } from "react-redux";
+import { selectUserNameId } from "../../../store/slices/userSlice";
 
 // import { Plots } from "plotly.js";
 
 function ReferenceDataView() {
+  const usernameID = useSelector(selectUserNameId);
+  console.log("Username", usernameID);
+  const link = `${usernameID}/Reference Data`;
+  console.log("Link", link);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const files = await listFiles(link);
+        console.log(files); // Do something with the files array
+        files.map((file) => {
+          const result = file.key.replace(/.*\//, "");
+
+          dispatch(setItems(result));
+        });
+      } catch (error) {
+        // Handle the error
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Container>
       <Grid
