@@ -1,12 +1,69 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 import styled from "styled-components";
-import { Button } from "@mui/material";
+
 import DropdownMenu from "../DropdownMenu";
 
 import CardForModelSelection from "../../Account/Billing/Card/CardForModelSelection";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectNetlistItems,
+  setTestbenchItems,
+} from "../../../store/slices/modelNetlistSlice";
+import { useEffect } from "react";
+import { listFiles } from "../../Storage/UploadFileFunctions";
+import { selectUserNameId } from "../../../store/slices/userSlice";
+import {
+  setModelItems,
+  selectTestbenchItems,
+} from "../../../store/slices/modelNetlistSlice";
 
-function ModelsGrid({ projects, onData }) {
+function ModelsGrid() {
+  const items = useSelector(selectNetlistItems);
+  const testbenchItems = useSelector(selectTestbenchItems);
+  const usernameID = useSelector(selectUserNameId);
+  console.log("Username", usernameID);
+  const ModelNetlistlink = `${usernameID}/Model Netlist`;
+  const Testbenchestlink = `${usernameID}/Testbenches`;
+  console.log("Link", ModelNetlistlink);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchNetlistData = async () => {
+      try {
+        const files = await listFiles(ModelNetlistlink);
+        console.log(files); // Do something with the files array
+        files.map((file) => {
+          const result = file.key.replace(/.*\//, "");
+
+          dispatch(setModelItems(result));
+        });
+      } catch (error) {
+        // Handle the error
+        console.error(error);
+      }
+    };
+
+    fetchNetlistData();
+
+    const fetchTestbenchData = async () => {
+      try {
+        const files = await listFiles(Testbenchestlink);
+        console.log(files); // Do something with the files array
+        files.map((file) => {
+          const result = file.key.replace(/.*\//, "");
+
+          dispatch(setTestbenchItems(result));
+        });
+      } catch (error) {
+        // Handle the error
+        console.error(error);
+      }
+    };
+
+    fetchTestbenchData();
+  }, []);
+
   const modelArray = [
     "id_vd_vg",
     "id_vd_vg",
@@ -33,56 +90,10 @@ function ModelsGrid({ projects, onData }) {
       >
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <DropdownMenu
-              items={[
-                {
-                  label: "Model",
-                  value: "option1",
-                },
-                {
-                  label: "NMOS-BSIM4",
-                  value: "option2",
-                },
-                { label: "PMOS-BSIM4", value: "option3" },
-                { label: "PMOS-HiSIM", value: "option4" },
-                { label: "NMOS-HiSIM", value: "option5" },
-                { label: "Diode", value: "option6" },
-                { label: "Resistor", value: "option7" },
-                { label: "Capacitor", value: "option8" },
-                { label: "PMOS-BSIM4", value: "option9" },
-                { label: "PMOS-HiSIM", value: "option10" },
-                { label: "NMOS-HiSIM", value: "option11" },
-                { label: "Diode", value: "option12" },
-                { label: "Capacitor", value: "option13" },
-                { label: "Resistor", value: "option14" },
-              ]}
-            />
+            <DropdownMenu items={items} />
           </Grid>
           <Grid item xs={6}>
-            <DropdownMenu
-              items={[
-                {
-                  label: "Testbenches",
-                  value: "option1",
-                },
-                {
-                  label: "NMOS-BSIM4",
-                  value: "option2",
-                },
-                { label: "PMOS-BSIM4", value: "option3" },
-                { label: "PMOS-HiSIM", value: "option4" },
-                { label: "NMOS-HiSIM", value: "option5" },
-                { label: "Diode", value: "option6" },
-                { label: "Resistor", value: "option7" },
-                { label: "Capacitor", value: "option8" },
-                { label: "PMOS-BSIM4", value: "option9" },
-                { label: "PMOS-HiSIM", value: "option10" },
-                { label: "NMOS-HiSIM", value: "option11" },
-                { label: "Diode", value: "option12" },
-                { label: "Capacitor", value: "option13" },
-                { label: "Resistor", value: "option14" },
-              ]}
-            />
+            <DropdownMenu items={testbenchItems} />
           </Grid>
           {modelArray.map((item) => (
             <Grid item xs={12} md={6} lg={4} xl={3} key={item}>
