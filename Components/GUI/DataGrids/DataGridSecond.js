@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { DataGrid } from "@mui/x-data-grid";
-
 import UploadReferenceData from "../Reference-Data-View/UploadReferenceData";
+
 const columns = [
   {
     field: "w",
@@ -31,15 +31,6 @@ const columns = [
     align: "center",
     editable: true,
   },
-  // {
-  //   // field: "fullName",
-  //   // headerName: "Full name",
-  //   // description: "This column has a value getter and is not sortable.",
-  //   // sortable: false,
-  //   // width: 160,
-  //   //   valueGetter: () =>
-  //   //     `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  // },
 ];
 
 const rows = [

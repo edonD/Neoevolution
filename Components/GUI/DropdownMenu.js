@@ -33,20 +33,15 @@ const DropdownMenu = ({ label, items }) => {
             },
           }}
         >
-          {items.map(
-            (items) => (
-              console.log(items),
-              (
-                <MenuItem
-                  style={{ display: "block" }}
-                  key={items.value}
-                  value={items.value}
-                >
-                  {items.label}
-                </MenuItem>
-              )
-            )
-          )}
+          {items.map((items) => (
+            <MenuItem
+              style={{ display: "block" }}
+              key={items.value}
+              value={items.value}
+            >
+              {items.label}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Container>

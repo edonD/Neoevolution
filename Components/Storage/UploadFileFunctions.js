@@ -1,4 +1,5 @@
 import { Storage } from "aws-amplify";
+import axios from "axios";
 
 export const uploadFile = async function (
   userId,
@@ -39,5 +40,17 @@ export const listFiles = async function (path) {
   } catch (err) {
     console.error(err);
     // throw err; // Rethrow the error to propagate it to the caller
+  }
+};
+
+export const retrieveJSONFromS3 = async function (path) {
+  try {
+    const jsonData = await Storage.get(path, { validateObjectExistence: true });
+    const response = await axios.get(jsonData);
+    const result = response.data;
+    return result;
+  } catch (error) {
+    console.error("Error retrieving JSON from S3:", error);
+    return null;
   }
 };

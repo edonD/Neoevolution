@@ -1,45 +1,94 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import DataGridSecond from "../DataGrids/DataGridSecond";
 import Plots from "../Plots";
-import { listFiles } from "../../../Components/Storage/UploadFileFunctions";
-import { useEffect } from "react";
-import { Auth } from "aws-amplify";
-
-import { useDispatch } from "react-redux";
+import {
+  listFiles,
+  retrieveJSONFromS3,
+} from "../../../Components/Storage/UploadFileFunctions";
+import { useDispatch, useSelector } from "react-redux";
 import { setItems } from "../../../store/slices/referenceDataSlice";
-import { useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
-
-// import { Plots } from "plotly.js";
+import { setLayoutfromJSON, setTracesfromJSON } from "./JSONProcessor";
+// export async function getStaticProps() {}
 
 function ReferenceDataView() {
   const usernameID = useSelector(selectUserNameId);
   console.log("Username", usernameID);
   const link = `${usernameID}/Reference Data`;
   console.log("Link", link);
+  const [jsonData, setJsonData] = useState(null);
+  const [totalFile, setTotalFile] = useState(null);
+
+  const [layout, setLayout] = useState({});
+  const [traces, setTraces] = useState([
+    {
+      x: [],
+      y: [],
+      name: "",
+      mode: "lines",
+    },
+  ]);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const files = await listFiles(link);
-        console.log(files); // Do something with the files array
-        files.map((file) => {
-          const result = file.key.replace(/.*\//, "");
+  const fetchLinks = async () => {
+    try {
+      const files = await listFiles(link);
+      console.log("Files,", files); // Do something with the files array
+      files.forEach((file) => {
+        const result = file.key.replace(/.*\//, "");
+        dispatch(setItems(result));
+      });
+    } catch (error) {
+      // Handle the error
+      console.error(error);
+    }
+  };
 
-          dispatch(setItems(result));
-        });
+  useEffect(() => {
+    async function fetchJSONData() {
+      const userId = "498f14b0-b520-4c85-a321-e1a1c620ce66"; // Replace with the actual user ID.
+      const folderName = "Reference Data"; // Replace with the desired folder name
+      const fileName = "reference_data.json"; // Replace with the desired file name.
+      const path = `${userId}/${folderName}/${fileName}`;
+
+      try {
+        const response = await retrieveJSONFromS3(path);
+        console.log("Response from S3", response);
+        if (response) {
+          // const { data } = response;
+          // console.log("Data from Server", data);
+          setJsonData(response);
+          return response;
+        }
       } catch (error) {
-        // Handle the error
         console.error(error);
       }
-    };
-
-    fetchData();
+    }
+    fetchJSONData();
   }, []);
+
+  useEffect(() => {
+    fetchLinks();
+  }, []);
+
+  useEffect(() => {
+    if (jsonData) {
+      const data = setLayoutfromJSON(jsonData);
+      setLayout(data);
+    }
+    console.log("Layout", layout);
+  }, [jsonData]);
+
+  useEffect(() => {
+    if (jsonData) {
+      const processedTraces = setTracesfromJSON(jsonData.data); // Call the external function to process the JSON data
+      setTraces(processedTraces); // Update the traces state based on the processed data
+      console.log("Traces", processedTraces);
+    }
+  }, [jsonData]);
 
   return (
     <Container>
@@ -70,21 +119,27 @@ function ReferenceDataView() {
         >
           <DataGridSecond />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          lg={6}
-          xl={6}
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            backgroundColor: "transparent",
-          }}
-        >
-          <Plots />
-        </Grid>
+        {traces &&
+          traces.map((trace, index) => (
+            <Grid
+              key={index}
+              item
+              xs={12}
+              sm={12}
+              lg={6}
+              xl={6}
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+                backgroundColor: "transparent",
+              }}
+            >
+              {/* {jsonData && layout && <Plots layout={layout} data={traces} />} */}
+
+              <Plots layout={layout} data={[trace]} />
+            </Grid>
+          ))}
       </Grid>
     </Container>
   );
@@ -97,4 +152,5 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-start;
 `;
+
 export default ReferenceDataView;

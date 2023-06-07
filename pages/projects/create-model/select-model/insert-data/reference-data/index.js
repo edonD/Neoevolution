@@ -3,8 +3,9 @@ import SidebarSoftware from "../../../../../../Components/GUI/SidebarBodies/Side
 import ProfileHeader from "../../../../../../Components/Account/ProfileHeader/ProfileHeader";
 
 import ReferenceDataView from "../../../../../../Components/GUI/Reference-Data-View/ReferenceDataView";
+import { retrieveJSONFromS3 } from "../../../../../../Components/Storage/UploadFileFunctions";
 
-function index() {
+function index({ jsonData, totalFile }) {
   return (
     <div>
       <ProfileHeader />
