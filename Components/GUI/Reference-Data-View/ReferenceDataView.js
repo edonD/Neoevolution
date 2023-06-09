@@ -168,8 +168,7 @@ function ReferenceDataView() {
                   // border: "1px solid black",
                 }}
               >
-                <h1>{index}</h1>
-                {/* <Plots layout={layout} data={[trace]} title={index} /> */}
+                <Plots layout={layout} data={[trace]} title={index} />
               </Grid>
             ))}
       </Grid>
