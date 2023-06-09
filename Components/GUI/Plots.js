@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import { Box } from "@mui/material";
 
 function Plots({ layout, data, title }) {
-  const Plot = dynamic(() => import("react-plotly.js"), { ssr: true });
+  const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
   const data3 = [
     {
@@ -67,11 +67,24 @@ function Plots({ layout, data, title }) {
             }}
           >
             <Plot
+              data={[
+                {
+                  x: [1, 2, 3],
+                  y: [2, 6, 3],
+                  type: "scatter",
+                  mode: "lines+markers",
+                  marker: { color: "red" },
+                },
+                { type: "bar", x: [1, 2, 3], y: [2, 5, 3] },
+              ]}
+              layout={{ width: 320, height: 240, title: "A Fancy Plot" }}
+            />
+            {/* <Plot
               data={data}
               layout={layout}
               style={{ width: "100%", height: "100%" }}
               config={{ responsive: true }}
-            />
+            /> */}
           </Box>
         </PlotContainer>
         {/* {console.log("data", data)}
