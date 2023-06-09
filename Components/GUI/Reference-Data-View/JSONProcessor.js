@@ -6,25 +6,25 @@ export const setLayoutfromJSON = function (JSONFile) {
       title: JSONFile.title,
       xaxis: {
         title: JSONFile.data[0].x_name,
-        autorange: true,
-        showgrid: false,
-        zeroline: false,
-        showline: false,
+        // autorange: true,
+        // showgrid: false,
+        // zeroline: false,
+        // showline: false,
       },
       yaxis: {
         title: JSONFile.data[0].y_name,
-        autorange: true,
-        showgrid: false,
-        zeroline: false,
-        showline: false,
+        // autorange: true,
+        // showgrid: false,
+        // zeroline: false,
+        // showline: false,
       },
-      margin: {
-        l: 50,
-        r: 50,
-        b: 50,
-        t: 50,
-        pad: 4,
-      },
+      // margin: {
+      //   l: 50,
+      //   r: 50,
+      //   b: 50,
+      //   t: 50,
+      //   pad: 4,
+      // },
     };
   }
 
@@ -65,4 +65,33 @@ export const setTracesfromJSON = function (jsonData) {
   }
 
   return null;
+};
+
+export const setTableValues = function (jsonData) {
+  if (jsonData) {
+    const tableValues = [];
+
+    for (let i = 0; i < jsonData.length; i++) {
+      const item = jsonData[i];
+      console.log("item", item);
+      const tableValue = {
+        id: i,
+        w: item.instance_parameters.w,
+        l: item.instance_parameters.l,
+        m: item.instance_parameters.m,
+        sa: item.instance_parameters.sa,
+        sb: item.instance_parameters.sb,
+      };
+      console.log("tableValue", tableValue);
+      tableValues.push(tableValue);
+    }
+
+    return tableValues;
+  }
+};
+
+export const setTableColumns = function (jsonData) {
+  const instanceParameters = jsonData[0].instance_parameters;
+  const instanceParameterKeys = Object.keys(instanceParameters);
+  return instanceParameterKeys;
 };

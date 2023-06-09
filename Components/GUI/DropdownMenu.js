@@ -1,8 +1,6 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { selectItems } from "../../store/slices/referenceDataSlice";
 
 const DropdownMenu = ({ label, items }) => {
   const [selectedOption, setSelectedOption] = useState("option1");

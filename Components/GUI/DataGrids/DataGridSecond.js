@@ -11,7 +11,8 @@ const columns = [
     headerAlign: "center",
     align: "center",
     flex: 1,
-    editable: true,
+    editable: false,
+    valueFormatter: ({ value }) => value.toFixed(6),
   },
   {
     field: "l",
@@ -20,49 +21,84 @@ const columns = [
     flex: 1,
     headerAlign: "center",
     align: "center",
-    editable: true,
+    editable: false,
+    valueGetter: (params) =>
+      params.value ? Number(params.value).toFixed(6) : "", // Get the value and format it if it exists
+    valueFormatter: (params) =>
+      params.value ? Number(params.value).toFixed(6) : "", // Format the value if it exists
   },
   {
-    field: "t",
-    headerName: "t",
+    field: "m",
+    headerName: "m",
     type: "number",
     flex: 1,
     headerAlign: "center",
     align: "center",
-    editable: true,
+    editable: false,
+    valueGetter: (params) =>
+      params.value ? Number(params.value).toFixed(2) : "", // Get the value and format it if it exists
+    valueFormatter: (params) =>
+      params.value ? Number(params.value).toFixed(2) : "", // Format the value if it exists
+  },
+  {
+    field: "sa",
+    headerName: "sa",
+    type: "number",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+    editable: false,
+    valueFormatter: ({ value }) => value.toFixed(9),
+  },
+  {
+    field: "sb",
+    headerName: "sb",
+    type: "number",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+    editable: false,
+    valueFormatter: ({ value }) => value.toFixed(9),
   },
 ];
 
-const rows = [
-  { id: 1, w: "Snow", l: "Jon", t: 35 },
-  { id: 2, w: "Lannister", l: "Cersei", t: 42 },
-  { id: 3, w: "Lannister", l: "Jaime", t: 45 },
-  { id: 4, w: "Stark", l: "Arya", t: 16 },
-  { id: 5, w: "Targaryen", l: "Daenerys", t: null },
-  { id: 6, w: "Melisandre", l: null, t: 150 },
-  { id: 7, w: "Clifford", l: "Ferrara", t: 44 },
-  { id: 8, w: "Frances", l: "Rossini", t: 36 },
-  { id: 9, w: "Roxie", l: "Harvey", t: 65 },
-  { id: 10, w: "Snow", l: "Jon", t: 35 },
-  { id: 11, w: "Lannister", l: "Cersei", t: 42 },
-  { id: 12, w: "Lannister", l: "Jaime", t: 45 },
-  { id: 13, w: "Stark", l: "Arya", t: 16 },
-  { id: 14, w: "Targaryen", l: "Daenerys", t: null },
-  { id: 15, w: "Melisandre", l: null, t: 150 },
-  { id: 16, w: "Clifford", l: "Ferrara", t: 44 },
-  { id: 17, w: "Frances", l: "Rossini", t: 36 },
-  { id: 18, w: "Roxie", l: "Harvey", t: 65 },
-  { id: 19, w: "Snow", l: "Jon", t: 35 },
-  { id: 20, w: "Lannister", l: "Cersei", t: 42 },
-  { id: 21, w: "Lannister", l: "Jaime", t: 45 },
-  { id: 22, w: "Stark", l: "Arya", t: 16 },
-  { id: 23, w: "Targaryen", l: "Daenerys", t: null },
-  { id: 24, w: "Melisandre", l: null, t: 150 },
-  { id: 25, w: "Clifford", l: "Ferrara", t: 44 },
-  { id: 26, w: "Frances", l: "Rossini", t: 36 },
-  { id: 27, w: "Roxie", l: "Harvey", t: 65 },
-];
-function DataGridSecond({ type, items }) {
+// const rows = [
+//   { id: 1, w: "Snow", l: "Jon", t: 35 },
+//   { id: 2, w: "Lannister", l: "Cersei", t: 42 },
+//   { id: 3, w: "Lannister", l: "Jaime", t: 45 },
+//   { id: 4, w: "Stark", l: "Arya", t: 16 },
+//   { id: 5, w: "Targaryen", l: "Daenerys", t: null },
+//   { id: 6, w: "Melisandre", l: null, t: 150 },
+//   { id: 7, w: "Clifford", l: "Ferrara", t: 44 },
+//   { id: 8, w: "Frances", l: "Rossini", t: 36 },
+//   { id: 9, w: "Roxie", l: "Harvey", t: 65 },
+//   { id: 10, w: "Snow", l: "Jon", t: 35 },
+//   { id: 11, w: "Lannister", l: "Cersei", t: 42 },
+//   { id: 12, w: "Lannister", l: "Jaime", t: 45 },
+//   { id: 13, w: "Stark", l: "Arya", t: 16 },
+//   { id: 14, w: "Targaryen", l: "Daenerys", t: null },
+//   { id: 15, w: "Melisandre", l: null, t: 150 },
+//   { id: 16, w: "Clifford", l: "Ferrara", t: 44 },
+//   { id: 17, w: "Frances", l: "Rossini", t: 36 },
+//   { id: 18, w: "Roxie", l: "Harvey", t: 65 },
+//   { id: 19, w: "Snow", l: "Jon", t: 35 },
+//   { id: 20, w: "Lannister", l: "Cersei", t: 42 },
+//   { id: 21, w: "Lannister", l: "Jaime", t: 45 },
+//   { id: 22, w: "Stark", l: "Arya", t: 16 },
+//   { id: 23, w: "Targaryen", l: "Daenerys", t: null },
+//   { id: 24, w: "Melisandre", l: null, t: 150 },
+//   { id: 25, w: "Clifford", l: "Ferrara", t: 44 },
+//   { id: 26, w: "Frances", l: "Rossini", t: 36 },
+//   { id: 27, w: "Roxie", l: "Harvey", t: 65 },
+// ];
+function DataGridSecond({ type, items, rows, callback }) {
+  const [selectionModel, setSelectionModel] = React.useState([]);
+
+  const handleSelectionModelChange = (newSelectionModel) => {
+    setSelectionModel(newSelectionModel);
+    callback(newSelectionModel);
+    // console.log(newSelectionModel);
+  };
   return (
     <Container>
       <UploadReferenceData type={type} items={items} />
@@ -73,7 +109,8 @@ function DataGridSecond({ type, items }) {
           columns={columns}
           style={{ height: "100%", width: "100%" }}
           checkboxSelection
-          disableRowSelectionOnClick
+          rowSelection={selectionModel}
+          onRowSelectionModelChange={handleSelectionModelChange}
         />
       </Data>
     </Container>
@@ -84,7 +121,7 @@ const Container = styled.div`
   width: 95%;
   /* height: calc(100vh - 200px); */
   height: 100%;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   position: relative;
 
   @media screen and (max-height: 750px) {
@@ -98,8 +135,6 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    padding-right: 20px;
   }
 `;
 

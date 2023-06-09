@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 
 import { Box } from "@mui/material";
 
-function Plots({ layout, data }) {
+function Plots({ layout, data, title }) {
   const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
   const data3 = [
@@ -74,8 +74,8 @@ function Plots({ layout, data }) {
             />
           </Box>
         </PlotContainer>
-        {console.log("data", data)}
-        {console.log("layout", layout)}
+        {/* {console.log("data", data)}
+        {console.log("layout", layout)} */}
         {/* <PlotContainer>
           <Box
             sx={{
@@ -105,12 +105,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 240px);
-  padding-top: 10px;
+  height: 100%;
+  /* padding-top: 10px; */
   background-color: transparent;
   @media screen and (max-width: 1600px) {
     overflow: hidden;
-    padding: 0px;
+    padding: 10px;
     height: 100%;
   }
 
@@ -118,7 +118,7 @@ const Container = styled.div`
 `;
 
 const PlotContainer = styled.div`
-  height: 90%;
+  height: 100%;
   width: 95%;
   background-color: #f5f5f5;
   border: 1px solid #cccccc;
@@ -128,17 +128,16 @@ const PlotContainer = styled.div`
   align-items: center;
   position: relative;
   overflow: hidden;
-  margin: 10px;
 `;
 
 const FirstRow = styled.div`
-  height: 100%;
+  height: 70%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  background-color: transparent;
   @media screen and (max-width: 1538px) {
     height: 100%;
     width: 90%;
