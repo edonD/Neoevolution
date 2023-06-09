@@ -1,14 +1,15 @@
 import React from "react";
 
 import styled from "styled-components";
-// import Plot from "react-plotly.js";
 import dynamic from "next/dynamic";
 
 import { Box } from "@mui/material";
 
 function Plots({ layout, data, title }) {
-  const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
-
+  // const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
+  const Plot = dynamic(() => import("../../Components/Plotly/Plot"), {
+    ssr: false,
+  });
   const data3 = [
     {
       x: [1, 2, 3, 4, 5],
@@ -66,7 +67,7 @@ function Plots({ layout, data, title }) {
               alignItems: "center",
             }}
           >
-            <h2>"Edon"</h2>
+            <Plot />
             {/* <Plot
               data={data}
               layout={layout}
@@ -75,6 +76,7 @@ function Plots({ layout, data, title }) {
             /> */}
           </Box>
         </PlotContainer>
+
         {/* {console.log("data", data)}
         {console.log("layout", layout)} */}
         {/* <PlotContainer>
