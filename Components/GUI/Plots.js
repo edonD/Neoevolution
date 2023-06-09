@@ -76,27 +76,6 @@ function Plots({ layout, data, title }) {
             /> */}
           </Box>
         </PlotContainer>
-
-        {/* {console.log("data", data)}
-        {console.log("layout", layout)} */}
-        {/* <PlotContainer>
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Plot
-              data={data3}
-              layout={layout3}
-              style={{ width: "100%", height: "100%" }}
-              config={{ responsive: true }}
-            />
-          </Box> 
-        </PlotContainer>*/}
       </FirstRow>
     </Container>
   );

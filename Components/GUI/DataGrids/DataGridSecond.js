@@ -109,7 +109,7 @@ function DataGridSecond({ type, items, rows, callback }) {
           columns={columns}
           style={{ height: "100%", width: "100%" }}
           checkboxSelection
-          rowSelection={selectionModel}
+          // rowSelection={selectionModel}
           onRowSelectionModelChange={handleSelectionModelChange}
         />
       </Data>
