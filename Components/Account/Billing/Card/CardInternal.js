@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import styled from "styled-components";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { BiLoaderCircle } from "react-icons/bi";
 import { RiCalendar2Line } from "react-icons/ri";
 import { AiOutlineDownload, AiOutlineClockCircle } from "react-icons/ai";

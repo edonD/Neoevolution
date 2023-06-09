@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { AiFillLinkedin } from "react-icons/ai";
 // import ImageTransition from "../ImageTransition/ImageTransition";
 import BiographyDialog from "../About/BiographyDialog";

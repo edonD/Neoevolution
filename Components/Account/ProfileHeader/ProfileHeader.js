@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ProfileHeaderDropdown from "../Dropdown/ProfileHeaderDropdown";
 import Link from "next/link";
 import { Button } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import AiValanchePopUp from "../../GUI/AiValancheHome/AiValanchePopUp";
 import { useEffect } from "react";
 import { Auth } from "aws-amplify";

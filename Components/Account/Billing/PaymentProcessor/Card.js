@@ -4,7 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import "react-credit-cards/es/styles-compiled.css";
 import { Button } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { BsCreditCard2Front } from "react-icons/bs";
 import CC from "./CC";
 

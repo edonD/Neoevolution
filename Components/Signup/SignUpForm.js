@@ -8,7 +8,7 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import Amplify, { Auth } from "aws-amplify";
 import styled from "styled-components";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/slices/userSlice";
 

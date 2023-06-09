@@ -9,7 +9,7 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 
 import styled from "styled-components";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import { Auth } from "aws-amplify";
 import { InputMask } from "primereact/inputmask";

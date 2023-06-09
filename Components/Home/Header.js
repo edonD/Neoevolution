@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Image from "next/legacy/image";
+import Image from "next/image";
 // import { Link as ScrollLink } from "react-scroll";
 import { Button } from "@mui/material";
 import { FiAlignJustify } from "react-icons/fi";

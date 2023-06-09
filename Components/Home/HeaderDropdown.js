@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import { SiCoronaengine } from "react-icons/si";
-import Image from "next/legacy/image";
+import Image from "next/image";
 function HeaderDropdown({ isOpen, onToggle }) {
   const handleClick = () => {
     onToggle();

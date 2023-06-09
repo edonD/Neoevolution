@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion, animate } from "framer-motion";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 function Progressbar() {
   const [count, setCount] = useState(0);
