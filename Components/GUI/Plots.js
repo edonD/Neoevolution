@@ -6,10 +6,10 @@ import dynamic from "next/dynamic";
 import { Box } from "@mui/material";
 
 function Plots({ layout, data, title }) {
-  // const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
-  const Plot = dynamic(() => import("../../Components/Plotly/Plot"), {
-    ssr: false,
-  });
+  const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
+  // const Plot = dynamic(() => import("../../Components/Plotly/Plot"), {
+  //   ssr: false,
+  // });
   const data3 = [
     {
       x: [1, 2, 3, 4, 5],
@@ -67,13 +67,12 @@ function Plots({ layout, data, title }) {
               alignItems: "center",
             }}
           >
-            <Plot />
-            {/* <Plot
+            <Plot
               data={data}
               layout={layout}
               style={{ width: "100%", height: "100%" }}
               config={{ responsive: true }}
-            /> */}
+            />
           </Box>
         </PlotContainer>
       </FirstRow>
