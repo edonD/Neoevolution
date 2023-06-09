@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import { Box } from "@mui/material";
 
 function Plots({ layout, data, title }) {
-  const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
+  const Plot = dynamic(() => import("react-plotly.js"), { ssr: true });
 
   const data3 = [
     {
