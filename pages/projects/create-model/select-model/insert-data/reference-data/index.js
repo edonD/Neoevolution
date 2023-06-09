@@ -19,8 +19,6 @@ function index({ jsonData, totalFile }) {
       {/* <Header>Lets check it!</Header> */}
       <SidebarSoftware>
         <ReferenceDataView />
-        <Plot />
-        <Plot />
       </SidebarSoftware>
     </div>
   );

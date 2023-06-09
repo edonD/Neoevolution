@@ -46,6 +46,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
     "rgt": "^1.0.7",
+    "sharp": "^0.32.1",
     "styled-components": "^5.3.11",
     "text-mask-addons": "^3.8.0",
     "three": "^0.152.2",
