@@ -2,6 +2,7 @@ import React from "react";
 import SidebarSoftware from "../../../../../../Components/GUI/SidebarBodies/SidebarSoftware";
 import ProfileHeader from "../../../../../../Components/Account/ProfileHeader/ProfileHeader";
 import ProjectModel from "../../../../../../Components/GUI/ProjectModel/ProjectModel";
+import ProjectModelReplacement from "../../../../../../Components/GUI/ProjectModel/ProjectModelReplacement";
 
 function index() {
   return (
@@ -9,7 +10,7 @@ function index() {
       <ProfileHeader />
       {/* <Header>Lets check it!</Header> */}
       <SidebarSoftware>
-        <ProjectModel />
+        <ProjectModelReplacement />
       </SidebarSoftware>
     </div>
   );

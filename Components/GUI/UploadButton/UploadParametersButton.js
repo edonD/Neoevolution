@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 
-import { FiUploadCloud, FiCheck, FiX } from "react-icons/fi";
-import { CircularProgress, Typography } from "@mui/material";
+import { FiUploadCloud } from "react-icons/fi";
+import { CircularProgress } from "@mui/material";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";

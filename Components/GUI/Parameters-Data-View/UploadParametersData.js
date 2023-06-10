@@ -5,7 +5,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
 import styled from "styled-components";
 import DropdownMenu from "../DropdownMenu";
-import UploadParametersButton from "../UploadButton.js/UploadParametersButton";
+import UploadParametersButton from "../UploadButton/UploadParametersButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectParametersItems,

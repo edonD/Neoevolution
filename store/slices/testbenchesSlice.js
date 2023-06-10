@@ -3,22 +3,27 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [
     {
-      label: "Circuit1.cir",
+      label: "Testbench1.json",
       value: "option1",
     },
     {
-      label: "Circuit2.cir",
+      label: "Testbench2.json",
       value: "option2",
+    },
+    {
+      label: "Testbench3.json",
+      value: "option3",
     },
   ],
 };
 
-export const modelNetlistSlice = createSlice({
-  name: "modelNetlist",
+export const testbenchesSlice = createSlice({
+  name: "testbenches",
   initialState,
   reducers: {
     //Actions
-    setModelItems: (state, action) => {
+
+    setTestbenchItems: (state, action) => {
       const labelExists = state.items.some(
         (item) => item.label === action.payload
       );
@@ -32,15 +37,15 @@ export const modelNetlistSlice = createSlice({
       }
     },
 
-    removeModelItem: (state, action) => {
+    removeTestbenchItem: (state, action) => {
       state.items = state.items.filter((item) => item.label !== action.payload);
     },
   },
 });
-export const { setModelItems } = modelNetlistSlice.actions;
-export const { removeModelItem } = modelNetlistSlice.actions;
 
-//Selectors
-export const selectNetlistItems = (state) => state.modelNetlist.items;
+export const { removeTestbenchItem } = testbenchesSlice.actions;
+export const { setTestbenchItems } = testbenchesSlice.actions;
 
-export default modelNetlistSlice.reducer;
+export const selectTestbenchItems = (state) => state.testbenches.items;
+
+export default testbenchesSlice.reducer;

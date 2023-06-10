@@ -6,7 +6,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import DropdownMenu from "../DropdownMenu";
-import UploadButton from "../UploadButton.js/UploadButton";
+import UploadButton from "../UploadButton/UploadButton";
 import { useSelector } from "react-redux";
 import { selectItems } from "../../../store/slices/referenceDataSlice";
 
