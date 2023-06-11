@@ -5,14 +5,17 @@ const initialState = {
     {
       label: "Testbench1.json",
       value: "option1",
+      key: "TBkey1",
     },
     {
       label: "Testbench2.json",
       value: "option2",
+      key: "TBkey2",
     },
     {
       label: "Testbench3.json",
       value: "option3",
+      key: "TBkey3",
     },
   ],
 };
@@ -32,6 +35,7 @@ export const testbenchesSlice = createSlice({
         const newItem = {
           label: action.payload,
           value: `option${state.items.length + 1}`,
+          key: `TBkey${state.items.length + 1}`,
         };
         state.items.push(newItem);
       }

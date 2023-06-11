@@ -5,10 +5,12 @@ const initialState = {
     {
       label: "Circuit1.cir",
       value: "option1",
+      key: "Modelkey1",
     },
     {
       label: "Circuit2.cir",
       value: "option2",
+      key: "Modelkey2",
     },
   ],
 };
@@ -27,6 +29,7 @@ export const modelNetlistSlice = createSlice({
         const newItem = {
           label: action.payload,
           value: `option${state.items.length + 1}`,
+          key: `Modelkey${state.items.length + 1}`,
         };
         state.items.push(newItem);
       }

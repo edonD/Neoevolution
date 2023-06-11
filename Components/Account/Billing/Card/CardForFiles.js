@@ -10,8 +10,8 @@ import { removeTestbenchItem } from "../../../../store/slices/testbenchesSlice";
 import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 
-function CardForFiles({ number, onData, item, callback }) {
-  const [isSelected, setIsSelected] = useState(false);
+function CardForFiles({ number, onData, item, callback, isSelected, onClick }) {
+  // const [isSelected, setIsSelected] = useState(false);
   const menuRight = useRef(null);
   const toast = useRef(null);
 
@@ -55,10 +55,6 @@ function CardForFiles({ number, onData, item, callback }) {
     },
   ];
 
-  const handleButtonClick = () => {
-    setIsSelected((select) => !select);
-  };
-
   const isJsonFile = item.slice(-5) === ".json";
   return (
     <Card>
@@ -78,7 +74,7 @@ function CardForFiles({ number, onData, item, callback }) {
             <span>{item}</span>
           </SpanContainer>
           <Buttons
-            onClick={handleButtonClick}
+            onClick={onClick}
             className={
               isSelected ? "red-white-black selected" : "red-white-black"
             }
@@ -124,7 +120,7 @@ const Buttons = styled.button`
   flex-direction: center;
   justify-content: center;
   padding: 5px;
-  transition: background-color 0.2s ease;
+  /* transition: background-color 0.2s ease; */
 
   &:active {
     transform: translateY(2px);
@@ -158,6 +154,7 @@ const Buttons = styled.button`
 const SpanContainer = styled.div`
   width: 60%;
   background-color: transparent;
+  user-select: none;
   @media screen and (max-width: 1400px) {
     font-size: 13px;
   }

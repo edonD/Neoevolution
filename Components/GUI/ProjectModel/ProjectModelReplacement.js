@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 
@@ -17,6 +17,8 @@ import {
   setTestbenchItems,
   removeTestbenchItem,
 } from "../../../store/slices/testbenchesSlice";
+
+import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
 import { useEffect } from "react";
 import { listFiles } from "../../Storage/UploadFileFunctions";
 import { selectUserNameId } from "../../../store/slices/userSlice";
@@ -34,12 +36,26 @@ function ProjectModelReplacement() {
   console.log("Link", ModelNetlistlink);
   const dispatch = useDispatch();
 
+  const handleUpdateHeaderIcon = (label, newValue) => {
+    dispatch(updateTestbenchItem({ label, value: newValue }));
+  };
   const handleTestbenchCallback = (item) => {
     dispatch(removeTestbenchItem(item));
   };
 
   const handleModelNetlistCallback = (item) => {
     dispatch(removeModelItem(item));
+  };
+
+  const [selectedTBButtonIndex, setSelectedTBButtonIndex] = useState(null);
+  const [selectedMDButtonIndex, setSelectedMDButtonIndex] = useState(null);
+
+  const handleModelButtonClick = (index) => {
+    setSelectedMDButtonIndex(index);
+  };
+
+  const handleTBButtonClick = (index) => {
+    setSelectedTBButtonIndex(index);
   };
 
   useEffect(() => {
@@ -78,6 +94,12 @@ function ProjectModelReplacement() {
     fetchTestbenchData();
   }, []);
 
+  useEffect(() => {
+    if (selectedTBButtonIndex !== null && selectedMDButtonIndex !== null) {
+      handleUpdateHeaderIcon("Model", "Full");
+    }
+  }, [selectedTBButtonIndex, selectedMDButtonIndex]);
+
   return (
     <WrapperForm>
       <Grid container>
@@ -92,8 +114,6 @@ function ProjectModelReplacement() {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-
-            // margin: "5px",
           }}
         >
           <CardContainer>
@@ -109,9 +129,11 @@ function ProjectModelReplacement() {
             {items.map((item) => (
               // <Grid item xs={12} md={12} lg={12} xl={12} key={item}>
               <CardForFiles
-                key={uuid()}
+                key={item.key}
                 item={item.label}
                 callback={handleModelNetlistCallback}
+                isSelected={selectedMDButtonIndex === item.key}
+                onClick={() => handleModelButtonClick(item.key)}
               />
             ))}
           </CardContainer>
@@ -127,8 +149,6 @@ function ProjectModelReplacement() {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-
-            // margin: "5px",
           }}
         >
           <CardContainer>
@@ -142,10 +162,13 @@ function ProjectModelReplacement() {
             </Header>
             {testbenchItems.map((item) => (
               // <Grid item xs={12} md={12} lg={12} xl={12} key={item}>
+
               <CardForFiles
-                key={uuid()}
+                key={item.key}
                 item={item.label}
                 callback={handleTestbenchCallback}
+                isSelected={selectedTBButtonIndex === item.key}
+                onClick={() => handleTBButtonClick(item.key)}
               />
               // </Grid>
             ))}
