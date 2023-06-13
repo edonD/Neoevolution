@@ -76,3 +76,24 @@ export function convertToFormat(csvData) {
 
   return formattedData;
 }
+
+export function convertToCSV(data) {
+  const header = Object.keys(data[0])
+    .filter((key) => key !== "id")
+    .join(",");
+
+  // Create a header row for the CSV
+  let csvData = `${header}\n`;
+  console.log("CSVData", csvData);
+
+  // Convert each data object to a CSV line
+  for (const key in data) {
+    const item = data[key];
+    const { name, mode, min, default: defaultValue, max, scale } = item;
+
+    const csvLine = `${name},${mode},${min},${defaultValue},${max},${scale}\n`;
+    csvData += csvLine;
+  }
+  console.log(csvData);
+  return csvData;
+}

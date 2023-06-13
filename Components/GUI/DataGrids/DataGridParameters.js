@@ -4,41 +4,20 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { Table } from "rsuite";
 const { Column, HeaderCell, Cell } = Table;
 import UploadParametersData from "../Parameters-Data-View/UploadParametersData";
-import { retrieveCSVromS3 } from "../../Storage/UploadFileFunctions";
+import {
+  retrieveCSVromS3,
+  overwriteFileInStorage,
+} from "../../Storage/UploadFileFunctions";
 import {
   columnExtractor,
+  convertToCSV,
   convertToFormat,
   scientificNotation,
 } from "../Parameters-Data-View/CSVProcessor";
-const columns = [
-  {
-    field: "w",
-    headerName: "w",
-    type: "number",
-    headerAlign: "center",
-    align: "center",
-    flex: 1,
-    editable: true,
-  },
-  {
-    field: "l",
-    headerName: "l",
-    type: "number",
-    flex: 1,
-    headerAlign: "center",
-    align: "center",
-    editable: true,
-  },
-  {
-    field: "t",
-    headerName: "t",
-    type: "number",
-    flex: 1,
-    headerAlign: "center",
-    align: "center",
-    editable: true,
-  },
-];
+import { useSelector } from "react-redux";
+import { selectUserNameId } from "../../../store/slices/userSlice";
+import { selectDropdownItem } from "../../../store/slices/parametersDataSlice";
+import { Dialog } from "primereact/dialog";
 
 const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
   const [editing, setEditing] = useState(false);
@@ -214,6 +193,16 @@ function DataGridParameters({ type }) {
   const [csvData, setCSVData] = useState(null);
   const [columns, setColumns] = useState([]);
   const [parameters, setParameters] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const usernameID = useSelector(selectUserNameId);
+  const [errorDialogVisible, setErrorDialogVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const file = useSelector(selectDropdownItem);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const folderName = "Model Parameters"; // Replace with the desired folder name
+  const fileName = file; // Replace with the desired file name.
+  const path = `${userId}/${folderName}/${fileName}`;
 
   useEffect(() => {
     if (csvData) {
@@ -228,27 +217,31 @@ function DataGridParameters({ type }) {
   }, [csvData]);
 
   useEffect(() => {
+    setParameters([]);
+    setCSVData();
     async function fetchCSVData() {
-      const userId = "498f14b0-b520-4c85-a321-e1a1c620ce66"; // Replace with the actual user ID.
-      const folderName = "Model Parameters"; // Replace with the desired folder name
-      const fileName = "parameters.csv"; // Replace with the desired file name.
-      const path = `${userId}/${folderName}/${fileName}`;
+      if (fileName) {
+        try {
+          setLoading(true);
+          const response = await retrieveCSVromS3(path);
 
-      try {
-        const response = await retrieveCSVromS3(path);
-        console.log("Response from S3", response);
-        if (response) {
-          // const { data } = response;
-          // console.log("Data from Server", data);
-          setCSVData(response);
-          return response;
+          if (response) {
+            setLoading(false);
+            setCSVData(response);
+            console.log("Response from S3", response);
+            return response;
+          }
+        } catch (error) {
+          setErrorMessage(error);
+          setLoading(false);
+          setErrorDialogVisible(true);
         }
-      } catch (error) {
-        console.error(error);
+        setLoading(false);
       }
     }
+
     fetchCSVData();
-  }, []);
+  }, [file]);
 
   const handleCellChange = (id, key, value) => {
     console.log("Item", value);
@@ -259,6 +252,7 @@ function DataGridParameters({ type }) {
 
       return item;
     });
+    console.log("Next Data", nextData);
     setParameters(nextData);
   };
 
@@ -270,10 +264,10 @@ function DataGridParameters({ type }) {
       default: scientificNotation(Number(item.default)),
       max: scientificNotation(Number(item.max)),
     })); // Update the parameters state with the formatted data
-    setParameters(formattedData);
 
     // Save changes logic
-    console.log("Saving changes:", formattedData);
+
+    overwriteFileInStorage(path, convertToCSV(formattedData));
   };
   return (
     <Container>
@@ -286,6 +280,7 @@ function DataGridParameters({ type }) {
           cellBordered={true}
           data={parameters}
           bordered
+          loading={loading}
           // rowHeight={150}
           //   affixHeader
           affixHorizontalScrollbar
@@ -306,9 +301,35 @@ function DataGridParameters({ type }) {
               </Column>
             ))}
         </Table>
+        <Dialog
+          style={{ width: "500px", height: "500px", position: "relative" }}
+          visible={errorDialogVisible}
+          onHide={() => setErrorDialogVisible(false)}
+          header={<span style={{ color: "red" }}>Error</span>}
+          footer={
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                className='black-gray-white'
+                onClick={() => setErrorDialogVisible(false)}
+              >
+                Continue
+              </Button>
+            </div>
+          }
+        >
+          {errorMessage && <div>{errorMessage.message}</div>}
+        </Dialog>
       </TableContainer>
       <ButtonContainer>
-        <Button className='green-white'>Save Changes</Button>
+        <Button onClick={handleSaveChanges} className='green-white'>
+          Save Changes
+        </Button>
         <Button className='green-white'>Continue</Button>
       </ButtonContainer>
     </Container>

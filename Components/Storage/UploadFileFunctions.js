@@ -63,6 +63,17 @@ export const retrieveCSVromS3 = async function (path) {
     return response.data;
   } catch (error) {
     console.error("Error retrieving JSON from S3:", error);
-    return null;
+    throw error; // Throw the error instead of returning null
+  }
+};
+
+export const overwriteFileInStorage = async (filePath, fileData) => {
+  try {
+    await Storage.put(filePath, fileData, {
+      level: "public", // Specify the level and any other options if needed
+    });
+    console.log("File overwritten successfully");
+  } catch (error) {
+    console.error("Error overwriting file:", error);
   }
 };

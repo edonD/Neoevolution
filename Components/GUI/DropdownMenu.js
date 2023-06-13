@@ -1,11 +1,16 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { setDropdownItem } from "../../store/slices/parametersDataSlice";
 
 const DropdownMenu = ({ label, items }) => {
-  const [selectedOption, setSelectedOption] = useState("option1");
+  const dispatch = useDispatch();
+  const [selectedOption, setSelectedOption] = useState("");
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
+
+    dispatch(setDropdownItem(event.target.value));
   };
 
   return (
@@ -22,6 +27,8 @@ const DropdownMenu = ({ label, items }) => {
           labelId='dropdown-label'
           value={selectedOption}
           onChange={handleSelectChange}
+          displayEmpty
+          inputProps={{ "aria-label": "Without label" }}
           MenuProps={{
             PaperProps: {
               style: {
@@ -31,13 +38,16 @@ const DropdownMenu = ({ label, items }) => {
             },
           }}
         >
+          <MenuItem value=''>
+            <em>None</em>
+          </MenuItem>
           {items.map((items) => (
             <MenuItem
               style={{ display: "block" }}
-              key={items.value}
-              value={items.value}
+              key={items.name}
+              value={items.name}
             >
-              {items.label}
+              {items.name}
             </MenuItem>
           ))}
         </Select>

@@ -7,8 +7,11 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import { Storage } from "aws-amplify";
+import { useDispatch } from "react-redux";
+import { setParameterItems } from "../../../store/slices/parametersDataSlice";
 
 function UploadParametersButton() {
+  const dispatch = useDispatch();
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -33,13 +36,13 @@ function UploadParametersButton() {
         selectedFiles.map(async (file) => {
           const fileName = file.name;
           const path = `${userId}/${folderName}/${fileName}`;
-
           await Storage.put(path, file, {
             contentType: file.type,
             progressCallback(progress) {
               console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
             },
           });
+          dispatch(setParameterItems(file.name));
         })
       );
       setLoading(false);

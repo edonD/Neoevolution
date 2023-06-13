@@ -1,18 +1,10 @@
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 
-import { Checkbox } from "primereact/checkbox";
 import { Button } from "primereact/button";
-import { Password } from "primereact/password";
-import { Dialog } from "primereact/dialog";
-
-import { InputText } from "primereact/inputtext";
 
 import styled from "styled-components";
-import Image from "next/image";
 
-import { Auth } from "aws-amplify";
-import { InputMask } from "primereact/inputmask";
 import ForgotPasswordCard from "../../Components/Login/ForgotPasswordCard/ForgotPasswordCard";
 import NewPasswordCard from "../../Components/Login/NewPasswordCard/NewPasswordCard";
 

@@ -25,7 +25,7 @@ function UploadReferenceData({ type }) {
     const fetchParametersData = async () => {
       try {
         const files = await listFiles(Parameterslink);
-        console.log(files); // Do something with the files array
+        console.log("Files", files); // Do something with the files array
         files.map((file) => {
           const result = file.key.replace(/.*\//, "");
 
