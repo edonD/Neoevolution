@@ -41,16 +41,48 @@ const columns = [
 ];
 
 const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
+  const [editing, setEditing] = useState(false);
+  const [displayValue, setDisplayValue] = useState(rowData[dataKey]);
+
+  const [scaleClassName, setScaleClassName] = useState("");
+  const [modeClassName, setModeClassName] = useState("");
+
+  useEffect(() => {
+    // Set the initial className based on the initial value of rowData[dataKey]
+    setScaleClassName(
+      rowData[dataKey] === "lin" ? "orange-white" : "teal-white"
+    );
+  }, [rowData, dataKey]);
+
+  useEffect(() => {
+    // Set the initial className based on the initial value of rowData[dataKey]
+    setModeClassName(
+      rowData[dataKey] === "variable" ? "indigo-white" : "deeporange-white"
+    );
+  }, [rowData, dataKey]);
+
   if (dataKey === "mode") {
     const handleClick = () => {
       const currentValue = rowData[dataKey];
       const updatedValue = currentValue === "variable" ? "fixed" : "variable";
       onChange && onChange(rowData.id, dataKey, updatedValue);
+      setModeClassName(
+        updatedValue === "variable" ? "indigo-white" : "deeporange-white"
+      );
     };
 
     return (
-      <Cell {...props} className='table-content-editing' onClick={handleClick}>
-        <button className='table-button'>{rowData[dataKey]}</button>
+      <Cell
+        {...props}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        className='table-content-editing'
+        onClick={handleClick}
+      >
+        <Button className={modeClassName}>{rowData[dataKey]}</Button>
       </Cell>
     );
   }
@@ -60,6 +92,7 @@ const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
       const currentValue = rowData[dataKey];
       const updatedValue = currentValue === "lin" ? "log" : "lin";
       onChange && onChange(rowData.id, dataKey, updatedValue);
+      setScaleClassName(updatedValue === "lin" ? "orange-white" : "teal-white");
     };
 
     return (
@@ -71,16 +104,14 @@ const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
           justifyContent: "center",
           alignItems: "center",
         }}
-        onClick={handleClick}
       >
-        <Button className='orange-white'>{rowData[dataKey]}</Button>
+        <Button onClick={handleClick} className={scaleClassName}>
+          {rowData[dataKey]}
+        </Button>
       </Cell>
     );
   }
   if (dataKey === "name") {
-    const [editing, setEditing] = useState(false);
-    const [displayValue, setDisplayValue] = useState(rowData[dataKey]);
-
     const handleClick = () => {
       setEditing(true);
     };
@@ -115,8 +146,8 @@ const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
     );
   }
 
-  const [editing, setEditing] = useState(false);
-  const [displayValue, setDisplayValue] = useState(rowData[dataKey]);
+  // const [editing, setEditing] = useState(false);
+  // const [displayValue, setDisplayValue] = useState(rowData[dataKey]);
 
   const formatSmallNumbers = (number) => {
     console.log("SMALL NUMBER");
@@ -327,12 +358,11 @@ const Button = styled.button`
   justify-content: center;
   padding: 8px;
   margin-left: 10px;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.1s cubic-bezier();
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
-  align-self: flex-end;
-  width: 150px;
+
   @media screen and (max-width: 900px) {
-    width: 80%;
+    /* width: 80%; */
     font-size: 18px;
     padding: 5px;
   }
@@ -345,6 +375,7 @@ const Button = styled.button`
   }
 
   &.green-white {
+    width: 150px;
     background-color: #349a77;
     color: #fff;
     border: 1px solid #349a77;
@@ -358,6 +389,51 @@ const Button = styled.button`
       color: #349a77;
     }
   }
+
+  &.indigo-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    width: 50%;
+    background-color: #3f51b5;
+    color: #fff;
+    border: 1px solid #3f51b5;
+  }
+
+  &.indigo-white:hover {
+    opacity: 0.8;
+  }
+
+  &.deeporange-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    width: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    border: 1px solid #ff5722;
+  }
+
+  &.deeporange-white:hover {
+    opacity: 0.8;
+  }
+
   &.orange-white {
     border-radius: 4px;
     color: #fff;

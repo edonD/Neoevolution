@@ -1,11 +1,11 @@
 import React from "react";
-import CSVProcessor from "../../Components/GUI/Parameters-Data-View/CSVProcessor";
+
 import RSuiteTable from "../../Components/GUI/Parameters-Data-View/RSuiteTable";
 
 function index() {
   return (
     <div style={{ width: "100vw", height: "100vh", background: "lightblue" }}>
-      <RSuiteTable />
+      <h1>edon</h1>
     </div>
   );
 }
