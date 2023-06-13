@@ -54,3 +54,15 @@ export const retrieveJSONFromS3 = async function (path) {
     return null;
   }
 };
+
+export const retrieveCSVromS3 = async function (path) {
+  try {
+    const csvData = await Storage.get(path, { validateObjectExistence: true });
+    const response = await axios.get(csvData);
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error retrieving JSON from S3:", error);
+    return null;
+  }
+};

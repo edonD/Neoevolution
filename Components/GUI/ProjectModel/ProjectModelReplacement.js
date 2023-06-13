@@ -59,6 +59,7 @@ function ProjectModelReplacement() {
   };
 
   useEffect(() => {
+    handleUpdateHeaderIcon("Model", "empty");
     const fetchNetlistData = async () => {
       try {
         const files = await listFiles(ModelNetlistlink);
@@ -97,6 +98,8 @@ function ProjectModelReplacement() {
   useEffect(() => {
     if (selectedTBButtonIndex !== null && selectedMDButtonIndex !== null) {
       handleUpdateHeaderIcon("Model", "Full");
+    } else {
+      handleUpdateHeaderIcon("Model", "empty");
     }
   }, [selectedTBButtonIndex, selectedMDButtonIndex]);
 

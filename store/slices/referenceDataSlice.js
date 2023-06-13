@@ -3,18 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [
     {
-      label: "Model",
+      label: "Select Reference Data",
       value: "option1",
     },
     {
-      label: "NMOS-BSIM4",
+      label: "ref_data_1",
       value: "option2",
     },
-    { label: "PMOS-BSIM4", value: "option3" },
-    { label: "PMOS-HiSIM", value: "option4" },
-    { label: "NMOS-HiSIM", value: "option5" },
-    { label: "Diode", value: "option6" },
-    { label: "Resistor", value: "option7" },
+    { label: "ref_data_2", value: "option3" },
+    { label: "ref_data_3", value: "option4" },
+    { label: "ref_data_4", value: "option5" },
+    { label: "ref_data_5", value: "option6" },
+    { label: "ref_data_6", value: "option7" },
   ],
 };
 

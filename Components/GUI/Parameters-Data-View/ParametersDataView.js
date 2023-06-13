@@ -6,7 +6,7 @@ import Plots from "../Plots";
 
 // import { Plots } from "plotly.js";
 
-function ReferenceDataView() {
+function ParametersDataView() {
   return (
     <Grid
       container
@@ -37,4 +37,4 @@ function ReferenceDataView() {
   );
 }
 
-export default ReferenceDataView;
+export default ParametersDataView;
