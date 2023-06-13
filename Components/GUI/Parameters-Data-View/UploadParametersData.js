@@ -63,6 +63,9 @@ const Wrapper = styled.div`
     height: 100%;
     flex-direction: column;
   }
+  @media screen and (max-width: 1200px) {
+    justify-content: space-between;
+  }
 `;
 
 const Dropzone = styled.div`
@@ -134,6 +137,11 @@ const DropDownContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1200px) {
+    width: 70%;
+    height: 100%;
+    flex-direction: column;
+  }
 `;
 const UploadButtonContainer = styled.div`
   width: 20%;
@@ -143,6 +151,10 @@ const UploadButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 1200px) {
+    width: 30%;
+  }
   @media screen and (max-width: 900px) {
     margin: 0px;
     width: 100%;

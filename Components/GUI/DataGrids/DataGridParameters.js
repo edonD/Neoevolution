@@ -280,7 +280,7 @@ function DataGridParameters({ type }) {
       <UploadParametersData type={type} />
       <TableContainer>
         <Table
-          height={500}
+          // height={500}
           fillHeight={true}
           // autoHeight={true}
           cellBordered={true}
@@ -306,11 +306,11 @@ function DataGridParameters({ type }) {
               </Column>
             ))}
         </Table>
-        <ButtonContainer>
-          <Button className='green-white'>Save Changes</Button>
-          <Button className='green-white'>Continue</Button>
-        </ButtonContainer>
       </TableContainer>
+      <ButtonContainer>
+        <Button className='green-white'>Save Changes</Button>
+        <Button className='green-white'>Continue</Button>
+      </ButtonContainer>
     </Container>
   );
 }
@@ -323,10 +323,10 @@ const Container = styled.div`
   margin: 00px 20px 0px 20px;
   padding-top: 10px;
   background-color: white;
-  @media screen and (max-height: 750px) {
+  /* @media screen and (max-height: 750px) {
     height: 100%;
     background-color: white;
-  }
+  } */
   @media screen and (max-width: 1200px) {
     height: 100%;
     background-color: white;
@@ -363,7 +363,7 @@ const Button = styled.button`
 
   @media screen and (max-width: 900px) {
     /* width: 80%; */
-    font-size: 18px;
+    font-size: 12px;
     padding: 5px;
   }
 
@@ -402,10 +402,20 @@ const Button = styled.button`
     padding: 3px;
     transition: background-color 0.2s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
-    width: 50%;
+    width: 80%;
     background-color: #3f51b5;
     color: #fff;
     border: 1px solid #3f51b5;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      font-size: 8px;
+      padding: 5px;
+    }
   }
 
   &.indigo-white:hover {
@@ -424,10 +434,20 @@ const Button = styled.button`
     padding: 3px;
     transition: background-color 0.2s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
-    width: 50%;
+    width: 80%;
     background-color: #ff5722;
     color: #fff;
     border: 1px solid #ff5722;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      font-size: 8px;
+      padding: 5px;
+    }
   }
 
   &.deeporange-white:hover {
@@ -446,10 +466,20 @@ const Button = styled.button`
     padding: 3px;
     transition: background-color 0.2s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
-    width: 50px;
-    background-color: #ee9d00;
+    width: 80%;
+    background-color: #e91e63;
     color: #fff;
-    border: 1px solid #ee9d00;
+    border: 1px solid #e91e63;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      font-size: 8px;
+      padding: 5px;
+    }
   }
   &.orange-white:hover {
     opacity: 0.8;
@@ -466,10 +496,20 @@ const Button = styled.button`
     padding: 3px;
     transition: background-color 0.2s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
-    width: 50px;
+    width: 80%;
     background-color: #009688;
     color: #fff;
     border: 1px solid #009688;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 95%;
+      font-size: 8px;
+      padding: 5px;
+    }
   }
   &.teal-white:hover {
     opacity: 0.8;
@@ -483,7 +523,11 @@ const ButtonContainer = styled.div`
   flex-direction: row;
   background-color: white;
   justify-content: flex-end;
+  padding-right: 10px;
   align-items: center;
+  @media screen and (max-width: 900px) {
+    justify-content: center;
+  }
 `;
 
 export default DataGridParameters;

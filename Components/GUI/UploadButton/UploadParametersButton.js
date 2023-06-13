@@ -99,7 +99,7 @@ const StyledButton = styled(Button)`
         font-size: 11px;
       }
     }
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 1200px) {
       span {
         font-size: 12px;
       }
