@@ -6,17 +6,18 @@ import DropdownMenu from "../DropdownMenu";
 
 import CardForModelSelection from "../../Account/Billing/Card/CardForModelSelection";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectNetlistItems,
-  setTestbenchItems,
-} from "../../../store/slices/modelNetlistSlice";
 import { useEffect } from "react";
 import { listFiles } from "../../Storage/UploadFileFunctions";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import {
   setModelItems,
-  selectTestbenchItems,
+  selectNetlistItems,
 } from "../../../store/slices/modelNetlistSlice";
+
+import {
+  selectTestbenchItems,
+  setTestbenchItems,
+} from "../../../store/slices/testbenchesSlice";
 
 function ModelsGrid() {
   const items = useSelector(selectNetlistItems);
