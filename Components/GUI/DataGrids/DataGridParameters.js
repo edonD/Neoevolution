@@ -378,6 +378,26 @@ const Button = styled.button`
   &.orange-white:hover {
     opacity: 0.8;
   }
+  &.teal-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    width: 50px;
+    background-color: #009688;
+    color: #fff;
+    border: 1px solid #009688;
+  }
+  &.teal-white:hover {
+    opacity: 0.8;
+  }
 `;
 
 const ButtonContainer = styled.div`
