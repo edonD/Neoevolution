@@ -20,9 +20,14 @@ import { selectUserNameId } from "../../../store/slices/userSlice";
 import {
   selectDropdownItem,
   removeParameterItem,
+  selectParametersItems,
 } from "../../../store/slices/parametersDataSlice";
 import { Dialog } from "primereact/dialog";
 import { Oval } from "react-loader-spinner";
+// import "rsuite/dist/rsuite.min.css";
+import "rsuite/dist/rsuite-no-reset.min.css";
+import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
+import { useRouter } from "next/router";
 
 const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
   const [editing, setEditing] = useState(false);
@@ -199,11 +204,14 @@ function DataGridParameters({ type }) {
   const [parameters, setParameters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [continueLoading, setContinueLoading] = useState(false);
   const usernameID = useSelector(selectUserNameId);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const file = useSelector(selectDropdownItem);
-
+  const items = useSelector(selectParametersItems);
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const userId = usernameID; // Replace with the actual user ID.
@@ -226,29 +234,32 @@ function DataGridParameters({ type }) {
   useEffect(() => {
     setParameters([]);
     setCSVData();
-    async function fetchCSVData() {
-      if (fileName !== "") {
-        console.log("Filename: ", fileName);
-        try {
-          setLoading(true);
-          const response = await retrieveCSVromS3(path);
+    if (items.length > 0) {
+      console.log("items: ", items);
+      async function fetchCSVData() {
+        if (fileName !== "") {
+          console.log("Filename: ", fileName);
+          try {
+            setLoading(true);
+            const response = await retrieveCSVromS3(path);
 
-          if (response) {
+            if (response) {
+              setLoading(false);
+              setCSVData(response);
+
+              return response;
+            }
+          } catch (error) {
+            setErrorMessage(error);
             setLoading(false);
-            setCSVData(response);
-
-            return response;
+            setErrorDialogVisible(true);
           }
-        } catch (error) {
-          setErrorMessage(error);
           setLoading(false);
-          setErrorDialogVisible(true);
         }
-        setLoading(false);
       }
-    }
 
-    fetchCSVData();
+      fetchCSVData();
+    }
   }, [file]);
 
   const handleCellChange = (id, key, value) => {
@@ -263,7 +274,8 @@ function DataGridParameters({ type }) {
     setParameters(nextData);
   };
 
-  const handleSaveChanges = () => {
+  async function handleSaveChanges() {
+    handleUpdateHeaderIcon("Parameters", "empty");
     // Format the values with scientific notation before saving changes
     const formattedData = parameters.map((item) => ({
       ...item,
@@ -274,12 +286,36 @@ function DataGridParameters({ type }) {
 
     // Save changes logic
 
-    overwriteFileInStorage(path, convertToCSV(formattedData));
+    try {
+      setSaveLoading(true);
+      await overwriteFileInStorage(path, convertToCSV(formattedData));
+      setSaveLoading(false);
+    } catch (error) {
+      setErrorMessage(error);
+      setSaveLoading(false);
+      setErrorDialogVisible(true);
+    }
+  }
+  const handleUpdateHeaderIcon = (label, newValue) => {
+    dispatch(updateTestbenchItem({ label, value: newValue }));
   };
 
+  function handleContinue() {
+    setContinueLoading(true);
+    // dispatch(setDropdownItem(""));
+    if (parameters.length > 0) {
+      handleUpdateHeaderIcon("Parameters", "full");
+    } else {
+      handleUpdateHeaderIcon("Parameters", "empty");
+    }
+
+    router.push("optimizer");
+    setContinueLoading(false);
+  }
+
   async function handleDeleteChanges() {
-    console.log("File to delete: ", file);
     dispatch(removeParameterItem(file));
+    handleUpdateHeaderIcon("Parameters", "empty");
     try {
       setDeleteLoading(true);
       await deleteFileFromStorage(path);
@@ -376,10 +412,54 @@ function DataGridParameters({ type }) {
             Delete File
           </div>
         </FilesButton>
-        <FilesButton onClick={handleSaveChanges} className='green-white'>
+        <FilesButton
+          onClick={handleSaveChanges}
+          className='green-white'
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: !saveLoading ? "center" : "space-around",
+            alignItems: "center",
+          }}
+        >
+          <Oval
+            height={20}
+            width={20}
+            color='#4fa94d'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={saveLoading}
+            ariaLabel='oval-loading'
+            secondaryColor='#4fa94d'
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
           Save Changes
         </FilesButton>
-        <FilesButton className='green-white'>Continue</FilesButton>
+        <FilesButton
+          className='green-white'
+          onClick={handleContinue}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: !continueLoading ? "center" : "space-around",
+            alignItems: "center",
+          }}
+        >
+          <Oval
+            height={20}
+            width={20}
+            color='#4fa94d'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={continueLoading}
+            ariaLabel='oval-loading'
+            secondaryColor='#4fa94d'
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+          Continue
+        </FilesButton>
       </ButtonContainer>
     </Container>
   );
@@ -468,7 +548,7 @@ const FilesButton = styled.button`
     display: flex;
     flex-direction: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 3px;
     transition: background-color 0.2s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
@@ -500,7 +580,7 @@ const FilesButton = styled.button`
     display: flex;
     flex-direction: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 3px;
     transition: background-color 0.2s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
@@ -532,7 +612,7 @@ const FilesButton = styled.button`
     display: flex;
     flex-direction: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 3px;
     transition: background-color 0.2s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
@@ -562,7 +642,7 @@ const FilesButton = styled.button`
     display: flex;
     flex-direction: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 3px;
     transition: background-color 0.2s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
@@ -597,7 +677,7 @@ const Button = styled.button`
   flex-direction: center;
   justify-content: center;
   padding: 8px;
-
+  font-weight: 300;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 
   @media screen and (max-width: 900px) {
@@ -617,13 +697,13 @@ const Button = styled.button`
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     flex-direction: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 3px;
-    transition: background-color 0.2s ease;
+    /* transition: background-color 0.2s ease; */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 
     background-color: #3f51b5;
@@ -648,13 +728,13 @@ const Button = styled.button`
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     flex-direction: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 3px;
-    transition: background-color 0.2s ease;
+    /* transition: background-color 0.2s ease; */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 
     background-color: #ff5722;
@@ -679,13 +759,13 @@ const Button = styled.button`
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     flex-direction: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 3px;
-    transition: background-color 0.2s ease;
+    /* transition: background-color 0.2s ease; */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 
     background-color: #e91e63;
@@ -708,13 +788,13 @@ const Button = styled.button`
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     flex-direction: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 3px;
-    transition: background-color 0.2s ease;
+    /* transition: background-color 0.2s ease; */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 
     background-color: #009688;

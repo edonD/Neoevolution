@@ -75,6 +75,7 @@ export const overwriteFileInStorage = async (filePath, fileData) => {
     console.log("File overwritten successfully");
   } catch (error) {
     console.error("Error overwriting file:", error);
+    throw error; // Throw the error instead of returning null
   }
 };
 

@@ -5,27 +5,59 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setDropdownItem,
   selectDropdownItem,
+  selectParametersItems,
+  setParameterItems,
 } from "../../store/slices/parametersDataSlice";
+import { selectUserNameId } from "../../store/slices/userSlice";
+import { listFiles } from "../Storage/UploadFileFunctions";
 
-const DropdownMenu = ({ items }) => {
-  const dispatch = useDispatch();
+const DropdownMenu = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const items = useSelector(selectParametersItems);
   const dropDownItem = useSelector(selectDropdownItem);
+  const usernameID = useSelector(selectUserNameId);
+
+  const Parameterslink = `${usernameID}/Model Parameters`;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchParametersData = async () => {
+      try {
+        const files = await listFiles(Parameterslink);
+        console.log("Files", files); // Do something with the files array
+        files.map((file) => {
+          const result = file.key.replace(/.*\//, "");
+
+          dispatch(setParameterItems(result));
+        });
+      } catch (error) {
+        // Handle the error
+        console.error(error);
+      }
+    };
+    fetchParametersData();
+  }, []);
 
   useEffect(() => {
     // Check if the selected option is still available in the items array
-    const selectedItem = items.find((item) => {
-      console.log("Item", item);
-      console.log("Selected Option", selectedOption);
-      item.name === selectedOption;
-    });
-    console.log("Selected Item", selectedItem);
-    if (selectedItem !== undefined && items.length > 0) {
+
+    // console.log("Seleced Option", selectedOption);
+    const selectedItem = items.find((item) => selectedOption === item.name);
+    // console.log("Selected Item", selectedItem);
+    if (
+      selectedItem === undefined &&
+      items.length > 0 &&
+      selectedOption === dropDownItem
+    ) {
       // If the selected option is not available, select the first item in the array
+      // console.log("Selected Undefined aItem", selectedItem);
       setSelectedOption(items[0].name);
       dispatch(setDropdownItem(items[0].name));
     }
+    console.log("Selected Option", selectedOption);
+    console.log("Drop Down Item", dropDownItem);
     if (selectedOption !== dropDownItem) {
+      console.log("Selected Option");
       setSelectedOption(dropDownItem);
     }
   }, [items, selectedOption]);

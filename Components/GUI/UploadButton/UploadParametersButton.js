@@ -20,7 +20,7 @@ function UploadParametersButton() {
   const handleFileSelect = (event) => {
     const files = event.target.files;
     console.log(files);
-    setSelectedFiles([...selectedFiles, ...files]);
+    setSelectedFiles([...files]);
   };
   const handleFileUpload = async () => {
     try {

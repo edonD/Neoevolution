@@ -14,37 +14,10 @@ import { listFiles } from "../../Storage/UploadFileFunctions";
 import { useEffect } from "react";
 
 function UploadReferenceData() {
-  const items = useSelector(selectParametersItems);
-  const dropDownItem = useSelector(selectDropdownItem);
-  const usernameID = useSelector(selectUserNameId);
-
-  const Parameterslink = `${usernameID}/Model Parameters`;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log("Parameters Use effect is executed", dropDownItem);
-
-    const fetchParametersData = async () => {
-      try {
-        const files = await listFiles(Parameterslink);
-        console.log("Files", files); // Do something with the files array
-        files.map((file) => {
-          const result = file.key.replace(/.*\//, "");
-
-          dispatch(setParameterItems(result));
-        });
-      } catch (error) {
-        // Handle the error
-        console.error(error);
-      }
-    };
-    fetchParametersData();
-  }, [items]);
-
   return (
     <Wrapper>
       <DropDownContainer>
-        <DropdownMenu items={items} />
+        <DropdownMenu />
       </DropDownContainer>
       <UploadButtonContainer>
         <UploadParametersButton />

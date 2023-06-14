@@ -31,14 +31,7 @@ export const parametersDataSlice = createSlice({
 
       if (index !== -1) {
         state.parametersItems.splice(index, 1);
-
-        // Rearrange the value property of the remaining items
-        state.parametersItems.forEach((item, idx) => {
-          item.value = idx + 1;
-          console.log("Items Value: ", item.value);
-        });
       }
-      console.log("Updated state:", current(state.parametersItems));
     },
     setDropdownItem: (state, action) => {
       state.dropDownItem = action.payload;

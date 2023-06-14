@@ -3,6 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
+  font-weight: 100;
 }
 
 a {

@@ -3,7 +3,6 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.css"; // core css
 import "primeicons/primeicons.css"; // icons
 import "primeflex/primeflex.css";
-import "rsuite/dist/rsuite.min.css";
 
 import { LayoutProvider } from "../Components/Login/context/layoutcontext";
 import store from "../store/store";
