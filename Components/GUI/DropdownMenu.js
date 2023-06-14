@@ -47,7 +47,7 @@ const DropdownMenu = ({ label, items }) => {
               key={items.name}
               value={items.name}
             >
-              {items.name}
+              <span> {items.name}</span>
             </MenuItem>
           ))}
         </Select>

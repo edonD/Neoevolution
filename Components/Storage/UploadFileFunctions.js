@@ -77,3 +77,13 @@ export const overwriteFileInStorage = async (filePath, fileData) => {
     console.error("Error overwriting file:", error);
   }
 };
+
+export const deleteFileFromStorage = async (filePath) => {
+  try {
+    await Storage.remove(filePath, { level: "public" });
+    console.log("File deleted successfully");
+  } catch (error) {
+    console.error("Error deleting file:", error);
+    throw error; // Throw the error instead of returning null
+  }
+};

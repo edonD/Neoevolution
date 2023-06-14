@@ -7,6 +7,7 @@ import UploadParametersData from "../Parameters-Data-View/UploadParametersData";
 import {
   retrieveCSVromS3,
   overwriteFileInStorage,
+  deleteFileFromStorage,
 } from "../../Storage/UploadFileFunctions";
 import {
   columnExtractor,
@@ -194,6 +195,7 @@ function DataGridParameters({ type }) {
   const [columns, setColumns] = useState([]);
   const [parameters, setParameters] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const usernameID = useSelector(selectUserNameId);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -269,6 +271,18 @@ function DataGridParameters({ type }) {
 
     overwriteFileInStorage(path, convertToCSV(formattedData));
   };
+
+  async function handleDeleteChanges() {
+    try {
+      setDeleteLoading(true);
+      await deleteFileFromStorage(path);
+      setDeleteLoading(false);
+    } catch (error) {
+      setErrorMessage(error);
+      setDeleteLoading(false);
+      setErrorDialogVisible(true);
+    }
+  }
   return (
     <Container>
       <UploadParametersData type={type} />
@@ -302,7 +316,7 @@ function DataGridParameters({ type }) {
             ))}
         </Table>
         <Dialog
-          style={{ width: "500px", height: "500px", position: "relative" }}
+          style={{ width: "500px", height: "200px", position: "relative" }}
           visible={errorDialogVisible}
           onHide={() => setErrorDialogVisible(false)}
           header={<span style={{ color: "red" }}>Error</span>}
@@ -327,6 +341,9 @@ function DataGridParameters({ type }) {
         </Dialog>
       </TableContainer>
       <ButtonContainer>
+        <Button onClick={handleDeleteChanges} className='green-white'>
+          Delete
+        </Button>
         <Button onClick={handleSaveChanges} className='green-white'>
           Save Changes
         </Button>
