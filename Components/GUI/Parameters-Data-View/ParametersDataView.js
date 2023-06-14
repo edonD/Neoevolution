@@ -1,8 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import styled from "styled-components";
+
 import DataGridParameters from "../DataGrids/DataGridParameters";
-import Plots from "../Plots";
 
 // import { Plots } from "plotly.js";
 

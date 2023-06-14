@@ -1,21 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
-  parametersItems: [
-    {
-      name: "parameter1",
-      value: "option1",
-    },
-    {
-      name: "parameter2",
-      value: "option2",
-    },
-    {
-      name: "parameter3",
-      value: "option3",
-    },
-  ],
-  dropDownItem: "parameters.csv",
+  parametersItems: [],
+  dropDownItem: "",
 };
 
 export const parametersDataSlice = createSlice({
@@ -31,23 +18,43 @@ export const parametersDataSlice = createSlice({
       if (!labelExists) {
         const newItem = {
           name: action.payload,
-          value: `option${state.parametersItems.length + 1}`,
+          value: state.parametersItems.length + 1,
         };
         state.parametersItems.push(newItem);
         console.log("action", newItem);
       }
     },
+    removeParameterItem: (state, action) => {
+      const index = state.parametersItems.findIndex(
+        (item) => item.name === action.payload
+      );
+
+      if (index !== -1) {
+        state.parametersItems.splice(index, 1);
+
+        // Rearrange the value property of the remaining items
+        state.parametersItems.forEach((item, idx) => {
+          item.value = idx + 1;
+          console.log("Items Value: ", item.value);
+        });
+      }
+      console.log("Updated state:", current(state.parametersItems));
+    },
     setDropdownItem: (state, action) => {
       state.dropDownItem = action.payload;
     },
-    getDropdownItem: (state, action) => {
+    getDropdownItem: (state) => {
       return state.dropDownItem;
     },
   },
 });
 
-export const { setParameterItems, setDropdownItem, getDropdownItem } =
-  parametersDataSlice.actions;
+export const {
+  setParameterItems,
+  setDropdownItem,
+  getDropdownItem,
+  removeParameterItem,
+} = parametersDataSlice.actions;
 
 //Selectors
 export const selectParametersItems = (state) =>

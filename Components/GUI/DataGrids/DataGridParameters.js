@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+
 import { Table } from "rsuite";
 const { Column, HeaderCell, Cell } = Table;
 import UploadParametersData from "../Parameters-Data-View/UploadParametersData";
@@ -15,9 +15,12 @@ import {
   convertToFormat,
   scientificNotation,
 } from "../Parameters-Data-View/CSVProcessor";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
-import { selectDropdownItem } from "../../../store/slices/parametersDataSlice";
+import {
+  selectDropdownItem,
+  removeParameterItem,
+} from "../../../store/slices/parametersDataSlice";
 import { Dialog } from "primereact/dialog";
 import { Oval } from "react-loader-spinner";
 
@@ -201,19 +204,21 @@ function DataGridParameters({ type }) {
   const [errorMessage, setErrorMessage] = useState(null);
   const file = useSelector(selectDropdownItem);
 
+  const dispatch = useDispatch();
+
   const userId = usernameID; // Replace with the actual user ID.
   const folderName = "Model Parameters"; // Replace with the desired folder name
   const fileName = file; // Replace with the desired file name.
   const path = `${userId}/${folderName}/${fileName}`;
 
   useEffect(() => {
-    if (csvData) {
+    if (csvData && typeof csvData === "string") {
       setColumns(columnExtractor(csvData));
     }
   }, [csvData]);
 
   useEffect(() => {
-    if (csvData) {
+    if (csvData && typeof csvData === "string") {
       setParameters(convertToFormat(csvData));
     }
   }, [csvData]);
@@ -222,7 +227,8 @@ function DataGridParameters({ type }) {
     setParameters([]);
     setCSVData();
     async function fetchCSVData() {
-      if (fileName) {
+      if (fileName !== "") {
+        console.log("Filename: ", fileName);
         try {
           setLoading(true);
           const response = await retrieveCSVromS3(path);
@@ -272,9 +278,12 @@ function DataGridParameters({ type }) {
   };
 
   async function handleDeleteChanges() {
+    console.log("File to delete: ", file);
+    dispatch(removeParameterItem(file));
     try {
       setDeleteLoading(true);
       await deleteFileFromStorage(path);
+
       setDeleteLoading(false);
     } catch (error) {
       setErrorMessage(error);
@@ -294,6 +303,7 @@ function DataGridParameters({ type }) {
           data={parameters}
           bordered
           loading={loading}
+          virtualized
           // rowHeight={150}
           //   affixHeader
           affixHorizontalScrollbar
@@ -340,7 +350,7 @@ function DataGridParameters({ type }) {
         </Dialog>
       </TableContainer>
       <ButtonContainer>
-        <Button onClick={handleDeleteChanges} className='green-white'>
+        <FilesButton onClick={handleDeleteChanges} className='green-white'>
           <div
             style={{
               display: "flex",
@@ -363,13 +373,13 @@ function DataGridParameters({ type }) {
               strokeWidth={2}
               strokeWidthSecondary={2}
             />
-            Delete
+            Delete File
           </div>
-        </Button>
-        <Button onClick={handleSaveChanges} className='green-white'>
+        </FilesButton>
+        <FilesButton onClick={handleSaveChanges} className='green-white'>
           Save Changes
-        </Button>
-        <Button className='green-white'>Continue</Button>
+        </FilesButton>
+        <FilesButton className='green-white'>Continue</FilesButton>
       </ButtonContainer>
     </Container>
   );
@@ -406,7 +416,7 @@ const TableContainer = styled.div`
   }
 `;
 
-const Button = styled.button`
+const FilesButton = styled.button`
   background-color: #1abc9c;
   border: none;
   border-radius: 4px;
@@ -562,6 +572,155 @@ const Button = styled.button`
     border: 1px solid #009688;
     @media screen and (max-width: 900px) {
       width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 95%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+  &.teal-white:hover {
+    opacity: 0.8;
+  }
+`;
+
+const Button = styled.button`
+  background-color: #1abc9c;
+  border-radius: 4px;
+  color: #fff;
+  width: 80%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  padding: 8px;
+
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
+  @media screen and (max-width: 900px) {
+    /* width: 80%; */
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+  &:focus {
+    outline: none;
+  }
+
+  &.indigo-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
+    background-color: #3f51b5;
+    color: #fff;
+    border: 1px solid #3f51b5;
+    @media screen and (max-width: 900px) {
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 95%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+
+  &.indigo-white:hover {
+    opacity: 0.8;
+  }
+
+  &.deeporange-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
+    background-color: #ff5722;
+    color: #fff;
+    border: 1px solid #ff5722;
+    @media screen and (max-width: 900px) {
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 95%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+
+  &.deeporange-white:hover {
+    opacity: 0.8;
+  }
+
+  &.orange-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
+    background-color: #e91e63;
+    color: #fff;
+    border: 1px solid #e91e63;
+    @media screen and (max-width: 900px) {
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 95%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+  &.orange-white:hover {
+    opacity: 0.8;
+  }
+  &.teal-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
+    background-color: #009688;
+    color: #fff;
+    border: 1px solid #009688;
+    @media screen and (max-width: 900px) {
       font-size: 10px;
       padding: 5px;
     }

@@ -1,27 +1,42 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { setDropdownItem } from "../../store/slices/parametersDataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setDropdownItem,
+  selectDropdownItem,
+} from "../../store/slices/parametersDataSlice";
 
-const DropdownMenu = ({ label, items }) => {
+const DropdownMenu = ({ items }) => {
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState("");
+  const dropDownItem = useSelector(selectDropdownItem);
+
+  useEffect(() => {
+    // Check if the selected option is still available in the items array
+    const selectedItem = items.find((item) => {
+      console.log("Item", item);
+      console.log("Selected Option", selectedOption);
+      item.name === selectedOption;
+    });
+    console.log("Selected Item", selectedItem);
+    if (selectedItem !== undefined && items.length > 0) {
+      // If the selected option is not available, select the first item in the array
+      setSelectedOption(items[0].name);
+      dispatch(setDropdownItem(items[0].name));
+    }
+    if (selectedOption !== dropDownItem) {
+      setSelectedOption(dropDownItem);
+    }
+  }, [items, selectedOption]);
+
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
-
     dispatch(setDropdownItem(event.target.value));
   };
 
   return (
     <Container>
-      {label ? (
-        <LabelContainer>
-          <Label>Model Id</Label>
-        </LabelContainer>
-      ) : (
-        <></>
-      )}
       <FormControl fullWidth margin='normal'>
         <Select
           labelId='dropdown-label'
@@ -38,13 +53,13 @@ const DropdownMenu = ({ label, items }) => {
             },
           }}
         >
-          <MenuItem value=''>
-            <em>None</em>
+          <MenuItem disabled value=''>
+            <em>Select File</em>
           </MenuItem>
           {items.map((items) => (
             <MenuItem
               style={{ display: "block" }}
-              key={items.name}
+              key={items.value}
               value={items.name}
             >
               <span> {items.name}</span>
@@ -63,20 +78,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-const LabelContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: 100%;
-  width: 100%;
-  margin: 5px 0px 5px 0px;
-`;
-const Label = styled.span`
-  font-size: 16px;
-  font-weight: 200;
-  color: #353740;
-  margin-left: 10px;
 `;
 
 export default DropdownMenu;

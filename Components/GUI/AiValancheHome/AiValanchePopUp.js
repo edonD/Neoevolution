@@ -8,9 +8,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AiValanchePopUpInformation from "./AiValanchePopUpInformation";
 import styled from "styled-components";
-import { MdOutlineBusinessCenter } from "react-icons/md";
+
 import { BsPlusCircleFill } from "react-icons/bs";
-import Link from "next/link";
 
 export default function AiValanchePopUp({ onData, ButtonText, icon, size }) {
   const [open, setOpen] = React.useState(false);
