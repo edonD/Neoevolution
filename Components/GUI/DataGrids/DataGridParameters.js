@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import { selectDropdownItem } from "../../../store/slices/parametersDataSlice";
 import { Dialog } from "primereact/dialog";
+import { Oval } from "react-loader-spinner";
 
 const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
   const [editing, setEditing] = useState(false);
@@ -130,7 +131,6 @@ const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
   // const [displayValue, setDisplayValue] = useState(rowData[dataKey]);
 
   const formatSmallNumbers = (number) => {
-    console.log("SMALL NUMBER");
     const formatted = number.toLocaleString(undefined, {
       minimumFractionDigits: 10,
     });
@@ -230,7 +230,7 @@ function DataGridParameters({ type }) {
           if (response) {
             setLoading(false);
             setCSVData(response);
-            console.log("Response from S3", response);
+
             return response;
           }
         } catch (error) {
@@ -246,7 +246,6 @@ function DataGridParameters({ type }) {
   }, [file]);
 
   const handleCellChange = (id, key, value) => {
-    console.log("Item", value);
     const nextData = parameters.map((item) => {
       if (item.id === id) {
         return { ...item, [key]: value };
@@ -254,7 +253,7 @@ function DataGridParameters({ type }) {
 
       return item;
     });
-    console.log("Next Data", nextData);
+
     setParameters(nextData);
   };
 
@@ -342,7 +341,30 @@ function DataGridParameters({ type }) {
       </TableContainer>
       <ButtonContainer>
         <Button onClick={handleDeleteChanges} className='green-white'>
-          Delete
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: !deleteLoading ? "center" : "space-around",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Oval
+              height={20}
+              width={20}
+              color='#4fa94d'
+              wrapperStyle={{}}
+              wrapperClass=''
+              visible={deleteLoading}
+              ariaLabel='oval-loading'
+              secondaryColor='#4fa94d'
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+            Delete
+          </div>
         </Button>
         <Button onClick={handleSaveChanges} className='green-white'>
           Save Changes
