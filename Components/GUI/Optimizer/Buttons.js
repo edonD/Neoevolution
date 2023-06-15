@@ -21,17 +21,17 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
   return (
     <Container>
       <Button onClick={handlePlot} className='green-white'>
-        <StartIcon className='icon1' style={{ margin: "5px" }} />
+        <StartIcon className='icon1' style={{ margin: "0px 5px 0px 5px" }} />
         Start Calibration
       </Button>
 
       <Button onClick={handlePlay} className='gray-white-black'>
-        <StartIcon className='icon2' style={{ margin: "5px" }} />
+        <StartIcon className='icon2' style={{ margin: "0px 5px 0px 5px" }} />
         Single Calibration
       </Button>
 
       <Button onClick={handleStop} className='black-gray-white'>
-        <PauseIcon className='icon3' style={{ margin: "5px" }} />
+        <PauseIcon className='icon3' style={{ margin: "0px 5px 0px 5px" }} />
         Stop Calibration
       </Button>
     </Container>
@@ -72,14 +72,13 @@ const Button = styled.button`
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  font-size: 35px;
   display: flex;
   flex-direction: center;
   justify-content: center;
   padding: 10px;
   transition: background-color 0.2s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  font-size: 24px;
+  font-size: 15px;
   width: 30%;
   @media screen and (max-width: 900px) {
     width: 80%;

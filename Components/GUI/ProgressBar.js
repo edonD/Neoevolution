@@ -10,7 +10,8 @@ const ProgressBarContainer = styled.div`
   border-radius: 1px;
   overflow: hidden;
   position: relative;
-  width: 800px;
+  width: 100%;
+  margin: 50px;
 
   @media screen and (max-width: 1200px) {
     display: none;
