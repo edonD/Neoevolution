@@ -18,10 +18,12 @@ function SignUpForm({ callbackFunction }) {
   const [checked, setChecked] = useState(false);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   async function signUp() {
     try {
+      setLoading(true);
       const { user } = await Auth.signUp({
         username: email,
         password: password,
@@ -45,6 +47,7 @@ function SignUpForm({ callbackFunction }) {
       setErrorMessage(error.message);
       setErrorDialogVisible(true);
     }
+    setLoading(false);
   }
 
   const SubmitSignUp = (event) => {
@@ -129,10 +132,11 @@ function SignUpForm({ callbackFunction }) {
           <SignInButton
             className='blue-white-lightblue'
             label='Sign Up'
+            loading={loading}
             // onClick={() => {
             //   signUp();
             // }}
-          />
+          ></SignInButton>
           <p>
             Already have an account?
             <a style={{ marginLeft: "5px", color: "blue" }} href='./Login'>

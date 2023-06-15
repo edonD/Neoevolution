@@ -21,6 +21,7 @@ const LoginPage = () => {
   const [checked, setChecked] = useState(false);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const LoginPage = () => {
   };
   async function signIn() {
     try {
+      setLoading(true);
       const user = await Auth.signIn(username, password);
 
       fetchUserId();
@@ -46,6 +48,7 @@ const LoginPage = () => {
       setErrorMessage(error.message);
       setErrorDialogVisible(true);
     }
+    setLoading(false);
   }
   const SubmitLogIn = (event) => {
     event.preventDefault();
@@ -131,6 +134,7 @@ const LoginPage = () => {
                 <SignInButton
                   className='blue-white-lightblue'
                   label='Sign In'
+                  loading={loading}
                 />
               </form>
             </Body>

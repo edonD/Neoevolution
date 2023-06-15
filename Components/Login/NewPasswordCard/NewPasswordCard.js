@@ -19,11 +19,13 @@ function NewPasswordCard({ callbackFunction }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [messageVisible, setMessageVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const username = useSelector(selectUser);
 
   async function ForgotPassword() {
     try {
+      setLoading(true);
       await Auth.forgotPasswordSubmit(username, confirmationCode, newPassword);
       handleConfirmClick();
     } catch (error) {
@@ -31,6 +33,7 @@ function NewPasswordCard({ callbackFunction }) {
       setErrorMessage(error.message);
       setErrorDialogVisible(true);
     }
+    setLoading(false);
   }
   const handleConfirmClick = () => {
     setMessageVisible(true);
@@ -89,7 +92,11 @@ function NewPasswordCard({ callbackFunction }) {
           <MessageContainer messageVisible={messageVisible}>
             <Message severity='success' text='Password Successfully Changed' />
           </MessageContainer>
-          <SignInButton className='blue-white-lightblue' label='Confirm' />
+          <SignInButton
+            loading={loading}
+            className='blue-white-lightblue'
+            label='Confirm'
+          />
         </form>
       </Body>
       <Dialog

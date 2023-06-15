@@ -7,18 +7,21 @@ import styled from "styled-components";
 import { InputMask } from "primereact/inputmask";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/slices/userSlice";
+import { Oval } from "react-loader-spinner";
 
 function ConfirmForm() {
   const [confirmationCode, setConfirmationCode] = useState("");
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
 
   const username = useSelector(selectUser);
   const router = useRouter();
 
   const confirm = async () => {
     try {
+      setLoading(true);
       await Auth.confirmSignUp(username, confirmationCode);
       setErrorMessage("");
       router.push("/Login");
@@ -27,21 +30,22 @@ function ConfirmForm() {
       setErrorDialogVisible(true);
       setErrorMessage(err.message);
     }
+    setLoading(false);
   };
 
   const resendCode = async () => {
-    setLoading(true);
     try {
+      setResendLoading(true);
       await Auth.resendSignUp(username);
       console.log("code resent successfully");
       setErrorMessage("");
-      setLoading(false);
+      // setLoading(false);
     } catch (err) {
       console.log("error resending code: ", err);
       setErrorMessage(err.message);
       setErrorDialogVisible(true);
-      setLoading(false);
     }
+    setResendLoading(false);
   };
 
   const SubmitConfirmation = (event) => {
@@ -84,8 +88,12 @@ function ConfirmForm() {
             required
           />
 
-          <SignInButton className='blue-white-lightblue' label='Confirm' />
-          <p>
+          <SignInButton
+            className='blue-white-lightblue'
+            loading={loading}
+            label='Confirm'
+          />
+          <p style={{ display: "flex", justifyContent: "space-between" }}>
             <a
               onClick={resendCode}
               style={{
@@ -98,6 +106,18 @@ function ConfirmForm() {
             >
               Resend
             </a>
+            <Oval
+              height={20}
+              width={20}
+              color='#4fa94d'
+              wrapperStyle={{}}
+              wrapperClass=''
+              visible={resendLoading}
+              ariaLabel='oval-loading'
+              secondaryColor='#4fa94d'
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
           </p>
         </form>
       </Body>

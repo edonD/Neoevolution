@@ -13,6 +13,7 @@ function ForgotPasswordCard({ callbackFunction }) {
 
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const fetchUserId = async () => {
@@ -27,6 +28,7 @@ function ForgotPasswordCard({ callbackFunction }) {
   };
   async function ForgotPassword() {
     try {
+      setLoading(true);
       await Auth.forgotPassword(username);
       dispatch(setUser(username));
       fetchUserId();
@@ -36,6 +38,7 @@ function ForgotPasswordCard({ callbackFunction }) {
       setErrorMessage(error.message);
       setErrorDialogVisible(true);
     }
+    setLoading(false);
   }
   const SubmitForgotPassword = (event) => {
     event.preventDefault();
@@ -73,7 +76,11 @@ function ForgotPasswordCard({ callbackFunction }) {
             }}
           />
 
-          <SignInButton className='blue-white-lightblue' label='Confirm' />
+          <SignInButton
+            loading={loading}
+            className='blue-white-lightblue'
+            label='Confirm'
+          />
         </form>
       </Body>
       <Dialog
