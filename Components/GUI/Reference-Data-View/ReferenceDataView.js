@@ -8,7 +8,7 @@ import {
   retrieveJSONFromS3,
 } from "../../../Components/Storage/UploadFileFunctions";
 import { useDispatch, useSelector } from "react-redux";
-import { setItems } from "../../../store/slices/referenceDataSlice";
+import { setReferenceDataItems } from "../../../store/slices/referenceDataSlice";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import {
   setLayoutfromJSON,
@@ -46,20 +46,6 @@ function ReferenceDataView() {
     // ... Other code logic
   };
 
-  const fetchLinks = async () => {
-    try {
-      const files = await listFiles(link);
-      // console.log("Files,", files); // Do something with the files array
-      files.forEach((file) => {
-        const result = file.key.replace(/.*\//, "");
-        dispatch(setItems(result));
-      });
-    } catch (error) {
-      // Handle the error
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
     async function fetchJSONData() {
       const userId = "498f14b0-b520-4c85-a321-e1a1c620ce66"; // Replace with the actual user ID.
@@ -83,9 +69,9 @@ function ReferenceDataView() {
     fetchJSONData();
   }, []);
 
-  useEffect(() => {
-    fetchLinks();
-  }, []);
+  // useEffect(() => {
+  //   fetchLinks();
+  // }, []);
 
   useEffect(() => {
     if (jsonData) {

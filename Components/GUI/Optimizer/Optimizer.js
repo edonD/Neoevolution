@@ -4,7 +4,7 @@ import { Grid, CircularProgress, Box } from "@mui/material";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import "rsuite/dist/rsuite-no-reset.min.css";
-import Test from "./Test";
+import Inputs from "./Inputs";
 
 import { Progress, ButtonGroup, Button } from "rsuite";
 import styled from "styled-components";
@@ -101,29 +101,19 @@ function Optimizer() {
           <Box
             sx={{
               width: "95%",
-              height: "250px",
+              height: "100%",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-evenly",
               alignItems: "center",
               marginTop: "20px",
-              border: "1px solid #ededed",
-              borderRadius: "15px",
+              // border: "1px solid #ededed",
+              // borderRadius: "15px",
               overflow: "hidden",
               marginBottom: "20px",
             }}
           >
-            <Buttons
-            // onClickRunNGSPice={handleClickNGSpice}
-            // onClickRunPython={handleClickPython}
-            // onClickPlot={handleClickPlot}
-            />
-
-            <Progress.Line
-              percent={percent}
-              strokeColor={color}
-              status={status}
-            />
+            <Inputs />
           </Box>
         </Grid>
         <Grid

@@ -11,7 +11,7 @@ import {
 import { selectUserNameId } from "../../store/slices/userSlice";
 import { listFiles } from "../Storage/UploadFileFunctions";
 
-const DropdownMenu = () => {
+const DropdownMenuParameters = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const items = useSelector(selectParametersItems);
   const dropDownItem = useSelector(selectDropdownItem);
@@ -26,6 +26,7 @@ const DropdownMenu = () => {
         const files = await listFiles(Parameterslink);
         console.log("Files", files); // Do something with the files array
         files.map((file) => {
+          console.log("File", file);
           const result = file.key.replace(/.*\//, "");
 
           dispatch(setParameterItems(result));
@@ -112,4 +113,4 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default DropdownMenu;
+export default DropdownMenuParameters;

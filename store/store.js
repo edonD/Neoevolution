@@ -6,6 +6,7 @@ import modelNetlistSlice from "./slices/modelNetlistSlice";
 import parametersDataSlice from "./slices/parametersDataSlice";
 import testbenchesSlice from "./slices/testbenchesSlice";
 import headerIconSlice from "./slices/headerIconsSlice";
+import advancedOptionsSlice from "./slices/advancedOptionsSlice";
 
 // config the store
 const store = configureStore({
@@ -16,6 +17,7 @@ const store = configureStore({
     parametersData: parametersDataSlice,
     testbenches: testbenchesSlice,
     header: headerIconSlice,
+    advancedOptions: advancedOptionsSlice,
   },
 });
 

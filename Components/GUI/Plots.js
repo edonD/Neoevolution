@@ -101,9 +101,9 @@ const Container = styled.div`
 const PlotContainer = styled.div`
   height: 100%;
   width: 95%;
-  background-color: #f5f5f5;
-  border: 1px solid #cccccc;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border: 1px solid #ededed;
+  border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;

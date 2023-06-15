@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Button } from "@mui/material";
 import UploadField from "./UploadFile";
 import UploadModel from "./UploadModel";
-import DropdownMenu from "../DropdownMenu";
+import DropdownMenuParameters from "../DropdownMenuParameters";
 
 function AiValanchePopUpInformation() {
   const [name, setName] = useState("");

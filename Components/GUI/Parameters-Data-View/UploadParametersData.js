@@ -1,23 +1,14 @@
 import React from "react";
 
 import styled from "styled-components";
-import DropdownMenu from "../DropdownMenu";
+import DropdownMenuParameters from "../DropdownMenuParameters";
 import UploadParametersButton from "../UploadButton/UploadParametersButton";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectDropdownItem,
-  selectParametersItems,
-  setParameterItems,
-} from "../../../store/slices/parametersDataSlice";
-import { selectUserNameId } from "../../../store/slices/userSlice";
-import { listFiles } from "../../Storage/UploadFileFunctions";
-import { useEffect } from "react";
 
 function UploadReferenceData() {
   return (
     <Wrapper>
       <DropDownContainer>
-        <DropdownMenu />
+        <DropdownMenuParameters />
       </DropDownContainer>
       <UploadButtonContainer>
         <UploadParametersButton />

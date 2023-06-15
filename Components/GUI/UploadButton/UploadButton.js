@@ -4,9 +4,10 @@ import Button from "@mui/material/Button";
 import { FiUploadCloud, FiCheck, FiX } from "react-icons/fi";
 import { CircularProgress, Typography } from "@mui/material";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import { Storage } from "aws-amplify";
+import { setReferenceDataItems } from "../../../store/slices/referenceDataSlice";
 
 function UploadButton() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -14,10 +15,11 @@ function UploadButton() {
 
   const usernameID = useSelector(selectUserNameId);
 
+  const dispatch = useDispatch();
   const handleFileSelect = (event) => {
     const files = event.target.files;
     console.log(files);
-    setSelectedFiles([...selectedFiles, ...files]);
+    setSelectedFiles([...files]);
   };
   const handleFileUpload = async () => {
     try {
@@ -40,6 +42,7 @@ function UploadButton() {
               console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
             },
           });
+          dispatch(setReferenceDataItems(file.name));
         })
       );
       setLoading(false);

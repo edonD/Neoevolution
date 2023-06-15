@@ -1,21 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: [
-    {
-      label: "Select Reference Data",
-      value: "option1",
-    },
-    {
-      label: "ref_data_1",
-      value: "option2",
-    },
-    { label: "ref_data_2", value: "option3" },
-    { label: "ref_data_3", value: "option4" },
-    { label: "ref_data_4", value: "option5" },
-    { label: "ref_data_5", value: "option6" },
-    { label: "ref_data_6", value: "option7" },
-  ],
+  referenceDataItems: [],
 };
 
 export const referenceDataSlice = createSlice({
@@ -23,25 +9,64 @@ export const referenceDataSlice = createSlice({
   initialState,
   reducers: {
     //Actions
-    setItems: (state, action) => {
-      const labelExists = state.items.some(
-        (item) => item.label === action.payload
+    setReferenceDataItems: (state, action) => {
+      console.log("action", action.payload);
+      const labelExists = state.referenceDataItems.some(
+        (item) => item.name === action.payload
       );
 
       if (!labelExists) {
         const newItem = {
-          label: action.payload,
-          value: `option${state.items.length + 1}`,
+          name: action.payload,
+          value: state.referenceDataItems.length + 1,
         };
-        state.items.push(newItem);
+        state.referenceDataItems.push(newItem);
       }
     },
+    removeReferenceDataItem: (state, action) => {
+      const index = state.referenceDataItems.findIndex(
+        (item) => item.name === action.payload
+      );
+
+      if (index !== -1) {
+        state.items`1`.splice(index, 1);
+      }
+    },
+    setDropdownItem: (state, action) => {
+      state.dropDownItem = action.payload;
+    },
+    getDropdownItem: (state) => {
+      return state.dropDownItem;
+    },
   },
+  // {
+  //   //Actions
+  //   setItems: (state, action) => {
+  //     const labelExists = state.items.some(
+  //       (item) => item.label === action.payload
+  //     );
+
+  //     if (!labelExists) {
+  //       const newItem = {
+  //         label: action.payload,
+  //         value: `option${state.items.length + 1}`,
+  //       };
+  //       state.items.push(newItem);
+  //     }
+  //   },
+  // },
 });
 
-export const { setItems } = referenceDataSlice.actions;
+export const {
+  setReferenceDataItems,
+  removeReferenceDataItem,
+  setDropdownItem,
+  getDropdownItem,
+} = referenceDataSlice.actions;
 
 //Selectors
-export const selectItems = (state) => state.referenceData.items;
+export const selectReferenceDataItems = (state) =>
+  state.referenceData.referenceDataItems;
+export const selectDropdownItem = (state) => state.referenceData.dropDownItem;
 
 export default referenceDataSlice.reducer;

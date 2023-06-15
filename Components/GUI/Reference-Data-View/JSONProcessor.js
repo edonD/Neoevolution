@@ -82,7 +82,7 @@ export const setTableValues = function (jsonData) {
         sa: item.instance_parameters.sa,
         sb: item.instance_parameters.sb,
       };
-      console.log("tableValue", tableValue);
+      // console.log("tableValue", tableValue);
       tableValues.push(tableValue);
     }
 
