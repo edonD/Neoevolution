@@ -8,7 +8,7 @@ import {
   retrieveJSONFromS3,
 } from "../../../Components/Storage/UploadFileFunctions";
 import { useDispatch, useSelector } from "react-redux";
-import { setReferenceDataItems } from "../../../store/slices/referenceDataSlice";
+import { selectDropdownItem } from "../../../store/slices/referenceDataSlice";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import {
   setLayoutfromJSON,
@@ -16,17 +16,14 @@ import {
   setTableValues,
   setTableColumns,
 } from "./JSONProcessor";
-// export async function getStaticProps() {}
 
 function ReferenceDataView() {
-  const usernameID = useSelector(selectUserNameId);
-  // console.log("Username", usernameID);
-  const link = `${usernameID}/Reference Data`;
   // console.log("Link", link);
   const [jsonData, setJsonData] = useState(null);
   const [table, setTable] = useState([]);
   const [layout, setLayout] = useState({});
   const [columns, setColumns] = useState([]);
+  const [path, setPath] = useState("");
   const [checkboxSelection, setCheckboxSelection] = React.useState([]);
   const [traces, setTraces] = useState([
     {
@@ -39,6 +36,10 @@ function ReferenceDataView() {
 
   const dispatch = useDispatch();
 
+  const file = useSelector(selectDropdownItem);
+  const usernameID = useSelector(selectUserNameId);
+  // const link = `${usernameID}/Reference Data`;
+
   const handleSelectionModelChange = (selectionModel) => {
     // Perform actions with the selection model in the parent container
     setCheckboxSelection(selectionModel);
@@ -48,10 +49,11 @@ function ReferenceDataView() {
 
   useEffect(() => {
     async function fetchJSONData() {
-      const userId = "498f14b0-b520-4c85-a321-e1a1c620ce66"; // Replace with the actual user ID.
+      // const userId = "498f14b0-b520-4c85-a321-e1a1c620ce66"; // Replace with the actual user ID.
       const folderName = "Reference Data"; // Replace with the desired folder name
       const fileName = "reference_data.json"; // Replace with the desired file name.
-      const path = `${userId}/${folderName}/${fileName}`;
+      const path = `${usernameID}/${folderName}/${file}`;
+      setPath(path);
 
       try {
         const response = await retrieveJSONFromS3(path);
@@ -67,7 +69,7 @@ function ReferenceDataView() {
       }
     }
     fetchJSONData();
-  }, []);
+  }, [file]);
 
   // useEffect(() => {
   //   fetchLinks();
@@ -100,7 +102,7 @@ function ReferenceDataView() {
   useEffect(() => {
     if (jsonData) {
       const columns = setTableColumns(jsonData.data);
-      console.log("Columns", columns);
+      console.log("Columnsss", columns);
       setColumns(columns);
     }
   }, [jsonData]);
@@ -109,11 +111,11 @@ function ReferenceDataView() {
       <Grid
         container
         style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
+          // display: "flex",
+          // justifyContent: "flex-start",
+          // alignItems: "center",
           height: "100%",
-          backgroundColor: "white",
+          // backgroundColor: "white",
         }}
       >
         <Grid
@@ -126,12 +128,17 @@ function ReferenceDataView() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            width: "100%",
+            width: "90%",
             height: "100%",
             backgroundColor: "transparent",
           }}
         >
-          <DataGridSecond rows={table} callback={handleSelectionModelChange} />
+          <DataGridSecond
+            rows={table}
+            columns={columns}
+            callback={handleSelectionModelChange}
+            path={path}
+          />
         </Grid>
         {traces &&
           traces
@@ -149,6 +156,7 @@ function ReferenceDataView() {
                   justifyContent: "flex-start",
                   alignItems: "flex-start",
                   height: "100%",
+                  width: "90%",
                   marginTop: "10px",
                   // backgroundColor: "lightgrey",
                   // border: "1px solid black",
@@ -164,11 +172,11 @@ function ReferenceDataView() {
 
 const Container = styled.div`
   width: 100%;
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 220px);
   height: 100%;
   display: flex;
-
   justify-content: flex-start;
+  margin-top: 20px;
 `;
 
 export default ReferenceDataView;

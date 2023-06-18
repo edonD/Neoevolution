@@ -29,7 +29,7 @@ export const referenceDataSlice = createSlice({
       );
 
       if (index !== -1) {
-        state.items`1`.splice(index, 1);
+        state.referenceDataItems.splice(index, 1);
       }
     },
     setDropdownItem: (state, action) => {

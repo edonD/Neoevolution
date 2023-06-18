@@ -3,25 +3,30 @@ import SidebarSoftware from "../../../../../../Components/GUI/SidebarBodies/Side
 import ProfileHeader from "../../../../../../Components/Account/ProfileHeader/ProfileHeader";
 
 import ReferenceDataView from "../../../../../../Components/GUI/Reference-Data-View/ReferenceDataView";
-import { retrieveJSONFromS3 } from "../../../../../../Components/Storage/UploadFileFunctions";
-import dynamic from "next/dynamic";
+
+import styled from "styled-components";
 
 function index({ jsonData, totalFile }) {
-  const Plot = dynamic(
-    () => import("../../../../../../Components/Plotly/Plot"),
-    {
-      ssr: false,
-    }
-  );
   return (
-    <div>
+    <Container>
       <ProfileHeader />
       {/* <Header>Lets check it!</Header> */}
       <SidebarSoftware>
         <ReferenceDataView />
       </SidebarSoftware>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  /* padding-right: calc(100vw - 100%); */
+`;
 
 export default index;

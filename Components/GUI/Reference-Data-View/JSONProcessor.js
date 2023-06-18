@@ -1,5 +1,5 @@
 export const setLayoutfromJSON = function (JSONFile) {
-  if (JSONFile !== null) {
+  if (JSONFile !== null && JSONFile.data && JSONFile.data.length > 0) {
     console.log("Data for JSON:", JSONFile);
 
     return {
@@ -91,7 +91,9 @@ export const setTableValues = function (jsonData) {
 };
 
 export const setTableColumns = function (jsonData) {
-  const instanceParameters = jsonData[0].instance_parameters;
-  const instanceParameterKeys = Object.keys(instanceParameters);
-  return instanceParameterKeys;
+  if (jsonData !== null && jsonData && jsonData.length > 0) {
+    const instanceParameters = jsonData[0].instance_parameters;
+    const instanceParameterKeys = Object.keys(instanceParameters);
+    return instanceParameterKeys;
+  }
 };

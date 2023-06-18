@@ -54,6 +54,7 @@ const UploadButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: 10px;
+
   @media screen and (max-width: 900px) {
     margin: 0px;
     width: 100%;

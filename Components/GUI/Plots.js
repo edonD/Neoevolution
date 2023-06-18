@@ -56,26 +56,24 @@ function Plots({ layout, data, title }) {
 
   return (
     <Container>
-      <FirstRow>
-        <PlotContainer>
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Plot
-              data={data}
-              layout={layout}
-              style={{ width: "100%", height: "100%" }}
-              config={{ responsive: true }}
-            />
-          </Box>
-        </PlotContainer>
-      </FirstRow>
+      <PlotContainer>
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Plot
+            data={data}
+            layout={layout}
+            style={{ width: "100%", height: "100%" }}
+            config={{ responsive: true }}
+          />
+        </Box>
+      </PlotContainer>
     </Container>
   );
 }
@@ -109,21 +107,6 @@ const PlotContainer = styled.div`
   align-items: center;
   position: relative;
   overflow: hidden;
-`;
-
-const FirstRow = styled.div`
-  height: 70%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  @media screen and (max-width: 1538px) {
-    height: 100%;
-    width: 90%;
-    flex-direction: column;
-  }
 `;
 
 export default Plots;

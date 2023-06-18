@@ -116,6 +116,8 @@ const Container = styled.div`
     #0f2847
   ); /* Chrome 10-25, Safari 5.1-6 */
   background-color: #f3f3f8;
+  width: 98vw;
+
   /* background-color: red; */
   @media screen and (max-width: 900px) {
     width: 100%;
