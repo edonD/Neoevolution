@@ -1,118 +1,389 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { DataGrid } from "@mui/x-data-grid";
+const { Column, HeaderCell, Cell } = Table;
+import { Checkbox, Table } from "rsuite";
 import UploadReferenceData from "../Reference-Data-View/UploadReferenceData";
+import "rsuite/dist/rsuite-no-reset.min.css";
+import { scientificNotation } from "../Parameters-Data-View/CSVProcessor";
+import { Oval } from "react-loader-spinner";
+import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
+import {
+  removeReferenceDataItem,
+  selectDropdownItem,
+} from "../../../store/slices/referenceDataSlice";
+import { deleteFileFromStorage } from "../../Storage/UploadFileFunctions";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
-const columns = [
-  {
-    field: "w",
-    headerName: "w",
-    type: "number",
-    headerAlign: "center",
-    align: "center",
-    flex: 1,
-    editable: false,
-    valueFormatter: ({ value }) => value.toFixed(6),
-  },
-  {
-    field: "l",
-    headerName: "l",
-    type: "number",
-    flex: 1,
-    headerAlign: "center",
-    align: "center",
-    editable: false,
-    valueGetter: (params) =>
-      params.value ? Number(params.value).toFixed(6) : "", // Get the value and format it if it exists
-    valueFormatter: (params) =>
-      params.value ? Number(params.value).toFixed(6) : "", // Format the value if it exists
-  },
-  {
-    field: "m",
-    headerName: "m",
-    type: "number",
-    flex: 1,
-    headerAlign: "center",
-    align: "center",
-    editable: false,
-    valueGetter: (params) =>
-      params.value ? Number(params.value).toFixed(2) : "", // Get the value and format it if it exists
-    valueFormatter: (params) =>
-      params.value ? Number(params.value).toFixed(2) : "", // Format the value if it exists
-  },
-  {
-    field: "sa",
-    headerName: "sa",
-    type: "number",
-    flex: 1,
-    headerAlign: "center",
-    align: "center",
-    editable: false,
-    valueFormatter: ({ value }) => value.toFixed(9),
-  },
-  {
-    field: "sb",
-    headerName: "sb",
-    type: "number",
-    flex: 1,
-    headerAlign: "center",
-    align: "center",
-    editable: false,
-    valueFormatter: ({ value }) => value.toFixed(9),
-  },
-];
+const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
+  const [editing, setEditing] = useState(false);
+  const [displayValue, setDisplayValue] = useState(rowData[dataKey]);
 
-// const rows = [
-//   { id: 1, w: "Snow", l: "Jon", t: 35 },
-//   { id: 2, w: "Lannister", l: "Cersei", t: 42 },
-//   { id: 3, w: "Lannister", l: "Jaime", t: 45 },
-//   { id: 4, w: "Stark", l: "Arya", t: 16 },
-//   { id: 5, w: "Targaryen", l: "Daenerys", t: null },
-//   { id: 6, w: "Melisandre", l: null, t: 150 },
-//   { id: 7, w: "Clifford", l: "Ferrara", t: 44 },
-//   { id: 8, w: "Frances", l: "Rossini", t: 36 },
-//   { id: 9, w: "Roxie", l: "Harvey", t: 65 },
-//   { id: 10, w: "Snow", l: "Jon", t: 35 },
-//   { id: 11, w: "Lannister", l: "Cersei", t: 42 },
-//   { id: 12, w: "Lannister", l: "Jaime", t: 45 },
-//   { id: 13, w: "Stark", l: "Arya", t: 16 },
-//   { id: 14, w: "Targaryen", l: "Daenerys", t: null },
-//   { id: 15, w: "Melisandre", l: null, t: 150 },
-//   { id: 16, w: "Clifford", l: "Ferrara", t: 44 },
-//   { id: 17, w: "Frances", l: "Rossini", t: 36 },
-//   { id: 18, w: "Roxie", l: "Harvey", t: 65 },
-//   { id: 19, w: "Snow", l: "Jon", t: 35 },
-//   { id: 20, w: "Lannister", l: "Cersei", t: 42 },
-//   { id: 21, w: "Lannister", l: "Jaime", t: 45 },
-//   { id: 22, w: "Stark", l: "Arya", t: 16 },
-//   { id: 23, w: "Targaryen", l: "Daenerys", t: null },
-//   { id: 24, w: "Melisandre", l: null, t: 150 },
-//   { id: 25, w: "Clifford", l: "Ferrara", t: 44 },
-//   { id: 26, w: "Frances", l: "Rossini", t: 36 },
-//   { id: 27, w: "Roxie", l: "Harvey", t: 65 },
+  const handleBlur = () => {
+    setEditing(false);
+    onChange && onChange(rowData.id, dataKey, displayValue);
+  };
+
+  const handleChange = (event) => {
+    setDisplayValue(event.target.value);
+  };
+
+  return (
+    <Cell
+      {...props}
+      className={editing ? "table-content-editing" : ""}
+      onClick={handleClick}
+    >
+      {editing ? (
+        <input
+          // className='rs-input'
+          value={displayValue}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          autoFocus
+        />
+      ) : (
+        <span
+          style={{
+            fontSize: "0.8rem",
+          }}
+        >
+          {rowData[dataKey]}
+        </span>
+      )}
+    </Cell>
+  );
+
+  const formatSmallNumbers = (number) => {
+    const formatted = number.toLocaleString(undefined, {
+      minimumFractionDigits: 10,
+    });
+    return formatted.replace(/\.?0+$/, "");
+    return value;
+  };
+  const handleClick = () => {
+    if (!editing) {
+      const value = Number(rowData[dataKey]);
+
+      const display =
+        (value < 0.001 && value > 0.0000000001) ||
+        (value > -0.001 && value < -0.0000000001)
+          ? formatSmallNumbers(value)
+          : scientificNotation(value);
+      setDisplayValue(display);
+      setEditing(true);
+    }
+  };
+
+  return (
+    <Cell
+      {...props}
+      className={editing ? "table-content-editing" : ""}
+      onClick={handleClick}
+    >
+      {editing ? (
+        <input
+          className='rs-input'
+          value={displayValue}
+          onChange={(event) => {
+            setDisplayValue(event.target.value);
+          }}
+          onBlur={() => {
+            setEditing(false);
+            const formattedValue =
+              dataKey === "name"
+                ? displayValue
+                : scientificNotation(Number(displayValue));
+            onChange && onChange(rowData.id, dataKey, formattedValue);
+          }}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              setEditing(false);
+              const formattedValue =
+                dataKey === "name"
+                  ? displayValue
+                  : scientificNotation(Number(displayValue));
+              onChange && onChange(rowData.id, dataKey, formattedValue);
+            }
+          }}
+          autoFocus
+        />
+      ) : (
+        <span className='table-content-edit-span'>{rowData[dataKey]}</span>
+      )}
+    </Cell>
+  );
+};
+
+const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
+  <Cell {...props} style={{ padding: 0 }}>
+    <div
+      style={{
+        lineHeight: "46px",
+        diplay: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Checkbox
+        value={rowData[dataKey]}
+        onChange={onChange}
+        checked={checkedKeys.some((item) => item === rowData[dataKey])}
+      />
+    </div>
+  </Cell>
+);
 // ];
-function DataGridSecond({ type, items, rows, callback }) {
+function DataGridSecond({ type, items, rows, callback, columns, path }) {
   const [selectionModel, setSelectionModel] = React.useState([]);
+  const [checkedKeys, setCheckedKeys] = React.useState([]);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [continueLoading, setContinueLoading] = useState(false);
+  const file = useSelector(selectDropdownItem);
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  let checked = false;
+  let indeterminate = false;
+
+  if (rows && checkedKeys.length === rows.length) {
+    checked = true;
+  } else if (checkedKeys.length === 0) {
+    checked = false;
+  } else if (checkedKeys.length > 0 && checkedKeys.length < rows.length) {
+    indeterminate = true;
+  }
+
+  useEffect(() => {
+    console.log("Checked Keys", checkedKeys);
+    handleSelectionModelChange(checkedKeys);
+  }, [checkedKeys]);
+
+  const handleCheckAll = (value, checked) => {
+    console.log("Keys", checkedKeys);
+    const keys = checked ? rows.map((item) => item.id) : [];
+    setCheckedKeys(keys);
+    // handleSelectionModelChange(checkedKeys);
+  };
+  const handleCheck = (value, checked) => {
+    console.log("Keys", checkedKeys);
+    const keys = checked
+      ? [...checkedKeys, value]
+      : checkedKeys.filter((item) => item !== value);
+    setCheckedKeys(keys);
+    // handleSelectionModelChange(checkedKeys);
+  };
 
   const handleSelectionModelChange = (newSelectionModel) => {
     setSelectionModel(newSelectionModel);
     callback(newSelectionModel);
-    // console.log(newSelectionModel);
+    console.log(newSelectionModel);
   };
+  useEffect(() => {
+    console.log("Columns", columns);
+    console.log("Rows", rows);
+  }, [columns, rows]);
+
+  async function handleSaveChanges() {
+    // Save changes logic
+
+    try {
+      setSaveLoading(true);
+      await overwriteFileInStorage(path, convertToCSV(formattedData));
+      setSaveLoading(false);
+    } catch (error) {
+      setErrorMessage(error);
+      setSaveLoading(false);
+      setErrorDialogVisible(true);
+    }
+  }
+
+  const handleUpdateHeaderIcon = (label, newValue) => {
+    dispatch(updateTestbenchItem({ label, value: newValue }));
+  };
+
+  function handleContinue() {
+    setContinueLoading(true);
+
+    // dispatch(setDropdownItem(""));
+    if (rows.length > 0) {
+      handleUpdateHeaderIcon("Reference Data", "full");
+      console.log("Array is not empty");
+    } else {
+      handleUpdateHeaderIcon("Reference Data", "full");
+      console.log("Array is empty");
+    }
+
+    router.push("model");
+    setContinueLoading(false);
+  }
+
+  async function handleDeleteChanges() {
+    dispatch(removeReferenceDataItem(file));
+    handleUpdateHeaderIcon("Parameters", "empty");
+    try {
+      setDeleteLoading(true);
+      await deleteFileFromStorage(path);
+
+      setDeleteLoading(false);
+    } catch (error) {
+      setErrorMessage(error);
+      setDeleteLoading(false);
+      setErrorDialogVisible(true);
+    }
+  }
+
   return (
     <Container>
       <UploadReferenceData type={type} items={items} />
 
       <Data>
-        <DataGrid
+        <Table
+          // height={100}
+          fillHeight
+          className='custom-table'
+          cellBordered
+          data={rows}
+          bordered
+          // autoHeight
+          // loading={loading}
+          // virtualized
+          // rowHeight={150}
+          // affixHeader
+          affixHorizontalScrollbar={false}
+          // onRowClick={(rowData) => {
+          //   console.log(rowData);
+          // }}
+        >
+          <Column align='center' width={50} fixed>
+            <HeaderCell style={{ padding: 0 }}>
+              <Checkbox
+                // inline
+                checked={checked}
+                indeterminate={indeterminate}
+                onChange={handleCheckAll}
+              />
+            </HeaderCell>
+            <CheckCell
+              dataKey='id'
+              checkedKeys={checkedKeys}
+              onChange={handleCheck}
+            />
+          </Column>
+          {columns &&
+            columns.map(
+              (column, index) => (
+                console.log("Inside Loop", column),
+                (
+                  <Column
+                    key={index}
+                    align='center'
+                    fixed='right'
+                    fullText
+                    resizable
+                    flexGrow={1}
+                  >
+                    <HeaderCell>{column}</HeaderCell>
+
+                    <EditableCell
+                      dataKey={column}
+                      // data={rows}
+                      // onChange={handleCellChange}
+                      // editing={cellEditing[`${row.id}_${column.field}`]}
+                    />
+                  </Column>
+                )
+              )
+            )}
+        </Table>
+
+        {/* <DataGrid
           rows={rows}
           columns={columns}
           style={{ height: "100%", width: "100%" }}
           checkboxSelection
           // rowSelection={selectionModel}
           onRowSelectionModelChange={handleSelectionModelChange}
-        />
+        /> */}
       </Data>
+      <ButtonContainer>
+        <FilesButton onClick={handleDeleteChanges} className='green-white'>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: !deleteLoading ? "center" : "space-around",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Oval
+              height={20}
+              width={20}
+              color='#4fa94d'
+              wrapperStyle={{}}
+              wrapperClass=''
+              visible={deleteLoading}
+              ariaLabel='oval-loading'
+              secondaryColor='#4fa94d'
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+            Delete File
+          </div>
+        </FilesButton>
+        <FilesButton
+          // onClick={handleSaveChanges}
+          className='green-white'
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: !saveLoading ? "center" : "space-around",
+            alignItems: "center",
+          }}
+        >
+          <Oval
+            height={20}
+            width={20}
+            color='#4fa94d'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={saveLoading}
+            ariaLabel='oval-loading'
+            secondaryColor='#4fa94d'
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+          Save Changes
+        </FilesButton>
+        <FilesButton
+          className='green-white'
+          onClick={handleContinue}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: !continueLoading ? "center" : "space-around",
+            alignItems: "center",
+          }}
+        >
+          <Oval
+            height={20}
+            width={20}
+            color='#4fa94d'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={continueLoading}
+            ariaLabel='oval-loading'
+            secondaryColor='#4fa94d'
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+          Continue
+        </FilesButton>
+      </ButtonContainer>
     </Container>
   );
 }
@@ -123,7 +394,13 @@ const Container = styled.div`
   height: 100%;
   /* padding-left: 20px; */
   position: relative;
-
+  border: 1px solid #e5e5ea;
+  border-radius: 15px;
+  overflow: hidden;
+  &.custom-table {
+    width: 100%;
+    background-color: yellow;
+  }
   @media screen and (max-height: 750px) {
     /* height: calc(100vh - 200px); */
     background-color: white;
@@ -138,10 +415,200 @@ const Container = styled.div`
   }
 `;
 
-const Data = styled.div`
-  height: calc(100vh - 340px);
+const FilesButton = styled.button`
+  background-color: #1abc9c;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  padding: 8px;
+  margin-left: 10px;
+  transition: background-color 0.1s cubic-bezier();
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 
+  @media screen and (max-width: 900px) {
+    /* width: 80%; */
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+  &:focus {
+    outline: none;
+  }
+
+  &.green-white {
+    width: 150px;
+    background-color: #349a77;
+    color: #fff;
+    border: 1px solid #349a77;
+  }
+
+  &.green-white:hover {
+    color: #349a77;
+    background-color: #fff;
+    border: 1px solid #349a77;
+    .icon1 {
+      color: #349a77;
+    }
+  }
+
+  &.indigo-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    /* text-transform: uppercase; */
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    width: 80%;
+    background-color: #3f51b5;
+    color: #fff;
+    border: 1px solid #3f51b5;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+
+  &.indigo-white:hover {
+    opacity: 0.8;
+  }
+
+  &.deeporange-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    /* text-transform: uppercase; */
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    width: 80%;
+    background-color: #ff5722;
+    color: #fff;
+    border: 1px solid #ff5722;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+
+  &.deeporange-white:hover {
+    opacity: 0.8;
+  }
+
+  &.orange-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    /* text-transform: uppercase; */
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    width: 80%;
+    background-color: #e91e63;
+    color: #fff;
+    border: 1px solid #e91e63;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+  &.orange-white:hover {
+    opacity: 0.8;
+  }
+  &.teal-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    /* text-transform: uppercase; */
+    padding: 3px;
+    transition: background-color 0.2s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    width: 80%;
+    background-color: #009688;
+    color: #fff;
+    border: 1px solid #009688;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 95%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+  &.teal-white:hover {
+    opacity: 0.8;
+  }
+`;
+
+const ButtonContainer = styled.div`
   width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  justify-content: flex-end;
+  padding-right: 10px;
+  align-items: center;
+  @media screen and (max-width: 900px) {
+    justify-content: center;
+  }
+`;
+const Data = styled.div`
+  height: calc(50vh - 80px);
+  /* height: 100%; */
+  background-color: transparent;
+  width: 100%;
+
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+
   @media screen and (max-width: 1200px) and (max-height: 750px) {
     height: 100%;
   }
