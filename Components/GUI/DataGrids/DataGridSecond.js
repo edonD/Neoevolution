@@ -12,21 +12,52 @@ import {
   removeReferenceDataItem,
   selectDropdownItem,
 } from "../../../store/slices/referenceDataSlice";
-import { deleteFileFromStorage } from "../../Storage/UploadFileFunctions";
+import {
+  deleteFileFromStorage,
+  overwriteFileInStorage,
+  retrieveJSONFromS3,
+} from "../../Storage/UploadFileFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { selectUserNameId } from "../../../store/slices/userSlice";
+import {
+  setJSONInstanceParameters,
+  setTableColumns,
+  setTableValues,
+} from "../Reference-Data-View/JSONProcessor";
+import { json } from "react-router-dom";
 
 const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
   const [editing, setEditing] = useState(false);
   const [displayValue, setDisplayValue] = useState(rowData[dataKey]);
 
-  const handleBlur = () => {
-    setEditing(false);
-    onChange && onChange(rowData.id, dataKey, displayValue);
-  };
+  // const handleBlur = () => {
+  //   setEditing(false);
+  //   onChange && onChange(rowData.id, dataKey, displayValue);
+  // };
 
-  const handleChange = (event) => {
-    setDisplayValue(event.target.value);
+  // const handleChange = (event) => {
+  //   setDisplayValue(event.target.value);
+  // };
+  const handleClick = () => {
+    if (!editing) {
+      const value = Number(rowData[dataKey]);
+
+      const display =
+        (value < 0.001 && value > 0.0000000001) ||
+        (value > -0.001 && value < -0.0000000001)
+          ? formatSmallNumbers(value)
+          : scientificNotation(value);
+      setDisplayValue(display);
+      setEditing(true);
+    }
+  };
+  const formatSmallNumbers = (number) => {
+    const formatted = number.toLocaleString(undefined, {
+      minimumFractionDigits: 10,
+    });
+    return formatted.replace(/\.?0+$/, "");
+    return value;
   };
 
   return (
@@ -37,10 +68,29 @@ const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
     >
       {editing ? (
         <input
-          // className='rs-input'
+          className='rs-input'
           value={displayValue}
-          onChange={handleChange}
-          onBlur={handleBlur}
+          onChange={(event) => {
+            setDisplayValue(event.target.value);
+          }}
+          onBlur={() => {
+            setEditing(false);
+            const formattedValue =
+              dataKey === "name"
+                ? displayValue
+                : scientificNotation(Number(displayValue));
+            onChange && onChange(rowData.id, dataKey, formattedValue);
+          }}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              setEditing(false);
+              const formattedValue =
+                dataKey === "name"
+                  ? displayValue
+                  : scientificNotation(Number(displayValue));
+              onChange && onChange(rowData.id, dataKey, formattedValue);
+            }
+          }}
           autoFocus
         />
       ) : (
@@ -55,26 +105,26 @@ const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
     </Cell>
   );
 
-  const formatSmallNumbers = (number) => {
-    const formatted = number.toLocaleString(undefined, {
-      minimumFractionDigits: 10,
-    });
-    return formatted.replace(/\.?0+$/, "");
-    return value;
-  };
-  const handleClick = () => {
-    if (!editing) {
-      const value = Number(rowData[dataKey]);
+  // const formatSmallNumbers = (number) => {
+  //   const formatted = number.toLocaleString(undefined, {
+  //     minimumFractionDigits: 10,
+  //   });
+  //   return formatted.replace(/\.?0+$/, "");
+  //   return value;
+  // };
+  // const handleClick = () => {
+  //   if (!editing) {
+  //     const value = Number(rowData[dataKey]);
 
-      const display =
-        (value < 0.001 && value > 0.0000000001) ||
-        (value > -0.001 && value < -0.0000000001)
-          ? formatSmallNumbers(value)
-          : scientificNotation(value);
-      setDisplayValue(display);
-      setEditing(true);
-    }
-  };
+  //     const display =
+  //       (value < 0.001 && value > 0.0000000001) ||
+  //       (value > -0.001 && value < -0.0000000001)
+  //         ? formatSmallNumbers(value)
+  //         : scientificNotation(value);
+  //     setDisplayValue(display);
+  //     setEditing(true);
+  //   }
+  // };
 
   return (
     <Cell
@@ -135,26 +185,72 @@ const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
   </Cell>
 );
 // ];
-function DataGridSecond({ type, items, rows, callback, columns, path }) {
+function DataGridSecond({ type, items, callback, path }) {
   const [selectionModel, setSelectionModel] = React.useState([]);
   const [checkedKeys, setCheckedKeys] = React.useState([]);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
   const [continueLoading, setContinueLoading] = useState(false);
+  const [jsonData, setJsonData] = useState(null);
+  const [table, setTable] = useState([]);
+  const [columns, setColumns] = useState([]);
   const file = useSelector(selectDropdownItem);
+  const usernameID = useSelector(selectUserNameId);
   const router = useRouter();
   const dispatch = useDispatch();
 
   let checked = false;
   let indeterminate = false;
 
-  if (rows && checkedKeys.length === rows.length) {
+  if (table && checkedKeys.length === table.length) {
     checked = true;
   } else if (checkedKeys.length === 0) {
     checked = false;
-  } else if (checkedKeys.length > 0 && checkedKeys.length < rows.length) {
+  } else if (
+    table &&
+    checkedKeys.length > 0 &&
+    checkedKeys.length < table.length
+  ) {
     indeterminate = true;
   }
+
+  useEffect(() => {
+    async function fetchJSONData() {
+      const folderName = "Reference Data"; // Replace with the desired folder name
+
+      const path = `${usernameID}/${folderName}/${file}`;
+
+      console.log("Path", path);
+
+      try {
+        const response = await retrieveJSONFromS3(path);
+
+        if (response) {
+          setJsonData(response);
+          return response;
+        }
+      } catch (error) {
+        console.error("FETCHING", error);
+      }
+    }
+    fetchJSONData();
+  }, [file, usernameID]);
+
+  useEffect(() => {
+    if (jsonData) {
+      const table = setTableValues(jsonData.data);
+      console.log("Table", table);
+      setTable(table);
+    }
+  }, [jsonData]);
+
+  useEffect(() => {
+    if (jsonData) {
+      const columns = setTableColumns(jsonData.data);
+      console.log("Columnsss", columns);
+      setColumns(columns);
+    }
+  }, [jsonData]);
 
   useEffect(() => {
     console.log("Checked Keys", checkedKeys);
@@ -163,7 +259,7 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
 
   const handleCheckAll = (value, checked) => {
     console.log("Keys", checkedKeys);
-    const keys = checked ? rows.map((item) => item.id) : [];
+    const keys = checked ? table.map((item) => item.id) : [];
     setCheckedKeys(keys);
     // handleSelectionModelChange(checkedKeys);
   };
@@ -181,22 +277,22 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
     callback(newSelectionModel);
     console.log(newSelectionModel);
   };
-  useEffect(() => {
-    console.log("Columns", columns);
-    console.log("Rows", rows);
-  }, [columns, rows]);
 
   async function handleSaveChanges() {
     // Save changes logic
-
+    handleUpdateHeaderIcon("Reference Data", "empty");
+    setJSONInstanceParameters(jsonData, table);
     try {
       setSaveLoading(true);
-      await overwriteFileInStorage(path, convertToCSV(formattedData));
+      await overwriteFileInStorage(
+        path,
+        setJSONInstanceParameters(jsonData, table)
+      );
       setSaveLoading(false);
     } catch (error) {
-      setErrorMessage(error);
+      // setErrorMessage(error);
       setSaveLoading(false);
-      setErrorDialogVisible(true);
+      // setErrorDialogVisible(true);
     }
   }
 
@@ -208,7 +304,7 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
     setContinueLoading(true);
 
     // dispatch(setDropdownItem(""));
-    if (rows.length > 0) {
+    if (table && table.length > 0) {
       handleUpdateHeaderIcon("Reference Data", "full");
       console.log("Array is not empty");
     } else {
@@ -235,6 +331,18 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
     }
   }
 
+  const handleCellChange = (id, key, value) => {
+    const nextData = table.map((item) => {
+      if (item.id === id) {
+        return { ...item, [key]: value };
+      }
+
+      return item;
+    });
+
+    setTable(nextData);
+  };
+
   return (
     <Container>
       <UploadReferenceData type={type} items={items} />
@@ -245,7 +353,7 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
           fillHeight
           className='custom-table'
           cellBordered
-          data={rows}
+          data={table}
           bordered
           // autoHeight
           // loading={loading}
@@ -282,15 +390,14 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
                     align='center'
                     fixed='right'
                     fullText
-                    resizable
                     flexGrow={1}
                   >
                     <HeaderCell>{column}</HeaderCell>
 
                     <EditableCell
                       dataKey={column}
-                      // data={rows}
-                      // onChange={handleCellChange}
+                      data={table}
+                      onChange={handleCellChange}
                       // editing={cellEditing[`${row.id}_${column.field}`]}
                     />
                   </Column>
@@ -321,8 +428,8 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
             }}
           >
             <Oval
-              height={20}
-              width={20}
+              height={10}
+              width={10}
               color='#4fa94d'
               wrapperStyle={{}}
               wrapperClass=''
@@ -336,7 +443,7 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
           </div>
         </FilesButton>
         <FilesButton
-          // onClick={handleSaveChanges}
+          onClick={handleSaveChanges}
           className='green-white'
           style={{
             display: "flex",
@@ -346,8 +453,8 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
           }}
         >
           <Oval
-            height={20}
-            width={20}
+            height={10}
+            width={10}
             color='#4fa94d'
             wrapperStyle={{}}
             wrapperClass=''
@@ -370,8 +477,8 @@ function DataGridSecond({ type, items, rows, callback, columns, path }) {
           }}
         >
           <Oval
-            height={20}
-            width={20}
+            height={10}
+            width={10}
             color='#4fa94d'
             wrapperStyle={{}}
             wrapperClass=''

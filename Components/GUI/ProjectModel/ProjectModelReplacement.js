@@ -11,11 +11,15 @@ import {
   selectNetlistItems,
   setModelItems,
   removeModelItem,
+  selectedModel,
+  setModel,
 } from "../../../store/slices/modelNetlistSlice";
 import {
   selectTestbenchItems,
   setTestbenchItems,
   removeTestbenchItem,
+  selectedTestbench,
+  setTestbench,
 } from "../../../store/slices/testbenchesSlice";
 
 import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
@@ -30,10 +34,13 @@ function ProjectModelReplacement() {
   const items = useSelector(selectNetlistItems);
   const testbenchItems = useSelector(selectTestbenchItems);
   const usernameID = useSelector(selectUserNameId);
-  console.log("Username", usernameID);
+
   const ModelNetlistlink = `${usernameID}/Model Netlist`;
   const Testbenchestlink = `${usernameID}/Testbenches`;
-  console.log("Link", ModelNetlistlink);
+
+  const Testbench = useSelector(selectedTestbench);
+  const Model = useSelector(selectedModel);
+
   const dispatch = useDispatch();
 
   const handleUpdateHeaderIcon = (label, newValue) => {
@@ -41,25 +48,39 @@ function ProjectModelReplacement() {
   };
   const handleTestbenchCallback = (item) => {
     dispatch(removeTestbenchItem(item));
+    dispatch(setTestbench(null));
+  };
+
+  const handleTestbenchClearCallback = () => {
+    dispatch(setTestbench(null));
+  };
+
+  const handleModelClearCallback = () => {
+    dispatch(setModel(null));
   };
 
   const handleModelNetlistCallback = (item) => {
     dispatch(removeModelItem(item));
+    dispatch(setModel(null));
   };
 
   const [selectedTBButtonIndex, setSelectedTBButtonIndex] = useState(null);
   const [selectedMDButtonIndex, setSelectedMDButtonIndex] = useState(null);
 
-  const handleModelButtonClick = (index) => {
+  const handleModelButtonClick = (index, label) => {
     setSelectedMDButtonIndex(index);
+    dispatch(setModel(label));
+    console.log("Model", Model);
   };
 
-  const handleTBButtonClick = (index) => {
+  const handleTBButtonClick = (index, label) => {
     setSelectedTBButtonIndex(index);
+    dispatch(setTestbench(label));
+    console.log("Testbench", Testbench);
   };
 
   useEffect(() => {
-    handleUpdateHeaderIcon("Model", "empty");
+    // handleUpdateHeaderIcon("Model", "empty");
     const fetchNetlistData = async () => {
       try {
         const files = await listFiles(ModelNetlistlink);
@@ -96,12 +117,12 @@ function ProjectModelReplacement() {
   }, []);
 
   useEffect(() => {
-    if (selectedTBButtonIndex !== null && selectedMDButtonIndex !== null) {
+    if (Testbench !== null && Model !== null) {
       handleUpdateHeaderIcon("Model", "Full");
     } else {
       handleUpdateHeaderIcon("Model", "empty");
     }
-  }, [selectedTBButtonIndex, selectedMDButtonIndex]);
+  }, [Testbench, Model]);
 
   return (
     <WrapperForm>
@@ -132,11 +153,13 @@ function ProjectModelReplacement() {
             {items.map((item) => (
               // <Grid item xs={12} md={12} lg={12} xl={12} key={item}>
               <CardForFiles
+                type='Model'
                 key={item.key}
                 item={item.label}
                 callback={handleModelNetlistCallback}
-                isSelected={selectedMDButtonIndex === item.key}
-                onClick={() => handleModelButtonClick(item.key)}
+                clearCallback={handleModelClearCallback}
+                isSelected={Model === item.label}
+                onClick={() => handleModelButtonClick(item.key, item.label)}
               />
             ))}
           </CardContainer>
@@ -167,11 +190,13 @@ function ProjectModelReplacement() {
               // <Grid item xs={12} md={12} lg={12} xl={12} key={item}>
 
               <CardForFiles
+                type='Testbench'
                 key={item.key}
                 item={item.label}
                 callback={handleTestbenchCallback}
-                isSelected={selectedTBButtonIndex === item.key}
-                onClick={() => handleTBButtonClick(item.key)}
+                clearCallback={handleTestbenchClearCallback}
+                isSelected={Testbench === item.label}
+                onClick={() => handleTBButtonClick(item.key, item.label)}
               />
               // </Grid>
             ))}

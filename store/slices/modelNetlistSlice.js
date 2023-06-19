@@ -13,6 +13,7 @@ const initialState = {
       key: "Modelkey2",
     },
   ],
+  selectedModel: null,
 };
 
 export const modelNetlistSlice = createSlice({
@@ -38,12 +39,17 @@ export const modelNetlistSlice = createSlice({
     removeModelItem: (state, action) => {
       state.items = state.items.filter((item) => item.label !== action.payload);
     },
+    setModel: (state, action) => {
+      console.log("Model", action.payload);
+      state.selectedModel = action.payload;
+    },
   },
 });
-export const { setModelItems } = modelNetlistSlice.actions;
+export const { setModelItems, setModel } = modelNetlistSlice.actions;
 export const { removeModelItem } = modelNetlistSlice.actions;
 
 //Selectors
 export const selectNetlistItems = (state) => state.modelNetlist.items;
+export const selectedModel = (state) => state.modelNetlist.selectedModel;
 
 export default modelNetlistSlice.reducer;

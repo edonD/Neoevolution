@@ -6,12 +6,20 @@ import { Menu } from "primereact/menu";
 import { BsFiletypeJson } from "react-icons/bs";
 import { RiFileList2Fill } from "react-icons/ri";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import { removeTestbenchItem } from "../../../../store/slices/testbenchesSlice";
+
 import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 
-function CardForFiles({ number, onData, item, callback, isSelected, onClick }) {
-  // const [isSelected, setIsSelected] = useState(false);
+function CardForFiles({
+  type,
+  number,
+  onData,
+  item,
+  callback,
+  clearCallback,
+  isSelected,
+  onClick,
+}) {
   const menuRight = useRef(null);
   const toast = useRef(null);
 
@@ -30,21 +38,24 @@ function CardForFiles({ number, onData, item, callback, isSelected, onClick }) {
     callback(item);
   };
 
+  const handleClear = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "Updated",
+      detail: "Data Updated",
+      life: 3000,
+    });
+    clearCallback(item);
+  };
+
   const MenuItems = [
     {
       label: "Options",
       items: [
         {
-          label: "Update",
+          label: "Clear",
           icon: "pi pi-refresh",
-          command: () => {
-            toast.current.show({
-              severity: "success",
-              summary: "Updated",
-              detail: "Data Updated",
-              life: 3000,
-            });
-          },
+          command: handleClear,
         },
         {
           label: "Delete",

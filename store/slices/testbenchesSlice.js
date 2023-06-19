@@ -18,6 +18,7 @@ const initialState = {
       key: "TBkey3",
     },
   ],
+  selectedTestbench: null,
 };
 
 export const testbenchesSlice = createSlice({
@@ -44,12 +45,18 @@ export const testbenchesSlice = createSlice({
     removeTestbenchItem: (state, action) => {
       state.items = state.items.filter((item) => item.label !== action.payload);
     },
+
+    setTestbench: (state, action) => {
+      console.log("SETT", action.payload);
+      state.selectedTestbench = action.payload;
+    },
   },
 });
 
 export const { removeTestbenchItem } = testbenchesSlice.actions;
-export const { setTestbenchItems } = testbenchesSlice.actions;
+export const { setTestbenchItems, setTestbench } = testbenchesSlice.actions;
 
 export const selectTestbenchItems = (state) => state.testbenches.items;
+export const selectedTestbench = (state) => state.testbenches.selectedTestbench;
 
 export default testbenchesSlice.reducer;

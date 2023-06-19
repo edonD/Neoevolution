@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const setLayoutfromJSON = function (JSONFile) {
   if (JSONFile !== null && JSONFile.data && JSONFile.data.length > 0) {
     console.log("Data for JSON:", JSONFile);
@@ -88,6 +90,21 @@ export const setTableValues = function (jsonData) {
 
     return tableValues;
   }
+};
+
+export const setJSONInstanceParameters = function (jsonData, tableValues) {
+  for (let i = 0; i < jsonData.data.length; i++) {
+    const item = jsonData.data[i];
+    const tableValue = tableValues[i];
+    // console.log("itemsss", item, "tableValue", tableValue);
+    item.instance_parameters.w = tableValue.w;
+    item.instance_parameters.l = tableValue.l;
+    item.instance_parameters.m = tableValue.m;
+    item.instance_parameters.sa = tableValue.sa;
+    item.instance_parameters.sb = tableValue.sb;
+  }
+  console.log("jsonDataUpdated", jsonData);
+  return jsonData;
 };
 
 export const setTableColumns = function (jsonData) {
