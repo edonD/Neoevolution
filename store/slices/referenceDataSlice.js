@@ -67,6 +67,7 @@ export const {
 //Selectors
 export const selectReferenceDataItems = (state) =>
   state.referenceData.referenceDataItems;
-export const selectDropdownItem = (state) => state.referenceData.dropDownItem;
+export const selectedReferenceData = (state) =>
+  state.referenceData.dropDownItem;
 
 export default referenceDataSlice.reducer;

@@ -47,7 +47,6 @@ export const testbenchesSlice = createSlice({
     },
 
     setTestbench: (state, action) => {
-      console.log("SETT", action.payload);
       state.selectedTestbench = action.payload;
     },
   },

@@ -21,7 +21,6 @@ export const parametersDataSlice = createSlice({
           value: state.parametersItems.length + 1,
         };
         state.parametersItems.push(newItem);
-        console.log("action", newItem);
       }
     },
     removeParameterItem: (state, action) => {
@@ -52,6 +51,7 @@ export const {
 //Selectors
 export const selectParametersItems = (state) =>
   state.parametersData.parametersItems;
-export const selectDropdownItem = (state) => state.parametersData.dropDownItem;
+export const selectedParametersData = (state) =>
+  state.parametersData.dropDownItem;
 
 export default parametersDataSlice.reducer;

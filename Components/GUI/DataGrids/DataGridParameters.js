@@ -18,7 +18,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import {
-  selectDropdownItem,
+  selectedParametersData,
   removeParameterItem,
   selectParametersItems,
 } from "../../../store/slices/parametersDataSlice";
@@ -209,7 +209,7 @@ function DataGridParameters({ type }) {
   const usernameID = useSelector(selectUserNameId);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const file = useSelector(selectDropdownItem);
+  const file = useSelector(selectedParametersData);
   const items = useSelector(selectParametersItems);
   const router = useRouter();
   const dispatch = useDispatch();

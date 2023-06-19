@@ -93,17 +93,19 @@ export const setTableValues = function (jsonData) {
 };
 
 export const setJSONInstanceParameters = function (jsonData, tableValues) {
-  for (let i = 0; i < jsonData.data.length; i++) {
-    const item = jsonData.data[i];
-    const tableValue = tableValues[i];
-    // console.log("itemsss", item, "tableValue", tableValue);
-    item.instance_parameters.w = tableValue.w;
-    item.instance_parameters.l = tableValue.l;
-    item.instance_parameters.m = tableValue.m;
-    item.instance_parameters.sa = tableValue.sa;
-    item.instance_parameters.sb = tableValue.sb;
+  if (jsonData && jsonData.data) {
+    for (let i = 0; i < jsonData.data.length; i++) {
+      const item = jsonData.data[i];
+      const tableValue = tableValues[i];
+      // console.log("itemsss", item, "tableValue", tableValue);
+      item.instance_parameters.w = tableValue.w;
+      item.instance_parameters.l = tableValue.l;
+      item.instance_parameters.m = tableValue.m;
+      item.instance_parameters.sa = tableValue.sa;
+      item.instance_parameters.sb = tableValue.sb;
+    }
   }
-  console.log("jsonDataUpdated", jsonData);
+  // console.log("jsonDataUpdated", jsonData);
   return jsonData;
 };
 

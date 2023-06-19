@@ -3,15 +3,27 @@ import React, { useState } from "react";
 import { FaPlay, FaPause, FaStop } from "react-icons/fa";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import styled from "styled-components";
+import {
+  setReferenceData,
+  setNetlist,
+  setParametersData,
+  setTestBench,
+  addAdvancedOption,
+  selectAdvancedOptions,
+  selectNetlist,
+  selectParametersData,
+  selectReferenceData,
+  selectTestBench,
+} from "../../../store/slices/calibrationSlice";
+
+import { useDispatch, useSelector } from "react-redux";
 
 function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
   const handlePlay = () => {
     onClickRunNGSPice();
   };
 
-  const handlePlot = () => {
-    onClickPlot();
-  };
+  const startCalibrationHandle = () => {};
 
   const handleStop = () => {
     // handle stop button click
@@ -20,7 +32,7 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
 
   return (
     <Container>
-      <Button onClick={handlePlot} className='green-white'>
+      <Button onClick={startCalibrationHandle} className='green-white'>
         <StartIcon className='icon1' style={{ margin: "0px 5px 0px 5px" }} />
         Start Calibration
       </Button>

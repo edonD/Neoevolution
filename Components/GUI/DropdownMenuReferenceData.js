@@ -7,7 +7,7 @@ import {
   selectReferenceDataItems,
   setReferenceDataItems,
   setDropdownItem,
-  selectDropdownItem,
+  selectedReferenceData,
 } from "../../store/slices/referenceDataSlice";
 import { selectUserNameId } from "../../store/slices/userSlice";
 import { listFiles } from "../Storage/UploadFileFunctions";
@@ -15,7 +15,7 @@ import { listFiles } from "../Storage/UploadFileFunctions";
 const DropDownMenuReferenceData = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const items = useSelector(selectReferenceDataItems);
-  const dropDownItem = useSelector(selectDropdownItem);
+  const dropDownItem = useSelector(selectedReferenceData);
   const usernameID = useSelector(selectUserNameId);
 
   const ReferenceDataLink = `${usernameID}/Reference Data`;
@@ -52,8 +52,7 @@ const DropDownMenuReferenceData = () => {
       setSelectedOption(items[0].name);
       dispatch(setDropdownItem(items[0].name));
     }
-    console.log("Selected Option", selectedOption);
-    console.log("Drop Down Item", dropDownItem);
+
     if (selectedOption !== dropDownItem) {
       console.log("Selected Option");
       setSelectedOption(dropDownItem);

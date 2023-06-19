@@ -40,7 +40,6 @@ export const modelNetlistSlice = createSlice({
       state.items = state.items.filter((item) => item.label !== action.payload);
     },
     setModel: (state, action) => {
-      console.log("Model", action.payload);
       state.selectedModel = action.payload;
     },
   },

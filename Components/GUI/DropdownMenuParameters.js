@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setDropdownItem,
-  selectDropdownItem,
+  selectedParametersData,
   selectParametersItems,
   setParameterItems,
 } from "../../store/slices/parametersDataSlice";
@@ -14,7 +14,7 @@ import { listFiles } from "../Storage/UploadFileFunctions";
 const DropdownMenuParameters = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const items = useSelector(selectParametersItems);
-  const dropDownItem = useSelector(selectDropdownItem);
+  const dropDownItem = useSelector(selectedParametersData);
   const usernameID = useSelector(selectUserNameId);
 
   const Parameterslink = `${usernameID}/Model Parameters`;
@@ -55,8 +55,7 @@ const DropdownMenuParameters = () => {
       setSelectedOption(items[0].name);
       dispatch(setDropdownItem(items[0].name));
     }
-    console.log("Selected Option", selectedOption);
-    console.log("Drop Down Item", dropDownItem);
+
     if (selectedOption !== dropDownItem) {
       console.log("Selected Option");
       setSelectedOption(dropDownItem);

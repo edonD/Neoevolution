@@ -8,7 +8,7 @@ import {
   retrieveJSONFromS3,
 } from "../../../Components/Storage/UploadFileFunctions";
 import { useDispatch, useSelector } from "react-redux";
-import { selectDropdownItem } from "../../../store/slices/referenceDataSlice";
+import { selectedReferenceData } from "../../../store/slices/referenceDataSlice";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import {
   setLayoutfromJSON,
@@ -36,14 +36,14 @@ function ReferenceDataView() {
 
   const dispatch = useDispatch();
 
-  const file = useSelector(selectDropdownItem);
+  const file = useSelector(selectedReferenceData);
   const usernameID = useSelector(selectUserNameId);
   // const link = `${usernameID}/Reference Data`;
 
   const handleSelectionModelChange = (selectionModel) => {
     // Perform actions with the selection model in the parent container
     setCheckboxSelection(selectionModel);
-    console.log("Selection Model:", selectionModel);
+
     // ... Other code logic
   };
 
@@ -102,7 +102,7 @@ function ReferenceDataView() {
   useEffect(() => {
     if (jsonData) {
       const columns = setTableColumns(jsonData.data);
-      console.log("Columnsss", columns);
+
       setColumns(columns);
     }
   }, [jsonData]);

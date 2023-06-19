@@ -7,6 +7,7 @@ import parametersDataSlice from "./slices/parametersDataSlice";
 import testbenchesSlice from "./slices/testbenchesSlice";
 import headerIconSlice from "./slices/headerIconsSlice";
 import advancedOptionsSlice from "./slices/advancedOptionsSlice";
+import calibrationSlice from "./slices/calibrationSlice";
 
 // config the store
 const store = configureStore({
@@ -18,6 +19,7 @@ const store = configureStore({
     testbenches: testbenchesSlice,
     header: headerIconSlice,
     advancedOptions: advancedOptionsSlice,
+    calibration: calibrationSlice,
   },
 });
 

@@ -10,7 +10,7 @@ import { Oval } from "react-loader-spinner";
 import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
 import {
   removeReferenceDataItem,
-  selectDropdownItem,
+  selectedReferenceData,
 } from "../../../store/slices/referenceDataSlice";
 import {
   deleteFileFromStorage,
@@ -194,7 +194,7 @@ function DataGridSecond({ type, items, callback, path }) {
   const [jsonData, setJsonData] = useState(null);
   const [table, setTable] = useState([]);
   const [columns, setColumns] = useState([]);
-  const file = useSelector(selectDropdownItem);
+  const file = useSelector(selectedReferenceData);
   const usernameID = useSelector(selectUserNameId);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -219,8 +219,6 @@ function DataGridSecond({ type, items, callback, path }) {
       const folderName = "Reference Data"; // Replace with the desired folder name
 
       const path = `${usernameID}/${folderName}/${file}`;
-
-      console.log("Path", path);
 
       try {
         const response = await retrieveJSONFromS3(path);
@@ -247,13 +245,12 @@ function DataGridSecond({ type, items, callback, path }) {
   useEffect(() => {
     if (jsonData) {
       const columns = setTableColumns(jsonData.data);
-      console.log("Columnsss", columns);
+
       setColumns(columns);
     }
   }, [jsonData]);
 
   useEffect(() => {
-    console.log("Checked Keys", checkedKeys);
     handleSelectionModelChange(checkedKeys);
   }, [checkedKeys]);
 
@@ -308,7 +305,7 @@ function DataGridSecond({ type, items, callback, path }) {
       handleUpdateHeaderIcon("Reference Data", "full");
       console.log("Array is not empty");
     } else {
-      handleUpdateHeaderIcon("Reference Data", "full");
+      handleUpdateHeaderIcon("Reference Data", "empty");
       console.log("Array is empty");
     }
 
