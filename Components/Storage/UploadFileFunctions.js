@@ -33,6 +33,39 @@ export const uploadFile = async function (
     console.error("Error uploading file:", error);
   }
 };
+
+export const uploadJSONToS3 = async (
+  userId,
+  folderName,
+  file,
+  handleProgressChange,
+  handleProgressResult
+) => {
+  try {
+    // Upload the file to S3 using Amplify Storage API
+    const result = await Storage.put(
+      `${userId}/${folderName}/Final.json`,
+      file,
+      {
+        contentType: "application/json",
+        progressCallback(progress) {
+          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+          // Invoke the progressCallback function with the progress value
+          if (handleProgressChange) {
+            handleProgressChange(progress);
+          }
+        },
+      }
+    );
+    console.log("File uploaded successfully:", result);
+
+    if (handleProgressResult) {
+      handleProgressResult(result);
+    }
+  } catch (error) {
+    console.error("Error uploading file:", error);
+  }
+};
 export const listFiles = async function (path) {
   try {
     const { results } = await Storage.list(path); // for listing ALL files without prefix, pass '' instead

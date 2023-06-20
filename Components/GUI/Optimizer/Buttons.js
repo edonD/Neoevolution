@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { FaPlay, FaPause, FaStop } from "react-icons/fa";
 import { BsFillPlayCircleFill } from "react-icons/bs";
@@ -16,28 +16,150 @@ import {
   selectTestBench,
 } from "../../../store/slices/calibrationSlice";
 
+import { Toast } from "primereact/toast";
+import { uploadFile, uploadJSONToS3 } from "../../Storage/UploadFileFunctions";
+
+import { selectedModel } from "../../../store/slices/modelNetlistSlice";
+import { selectedReferenceData } from "../../../store/slices/referenceDataSlice";
+import { selectedTestbench } from "../../../store/slices/testbenchesSlice";
+import { selectedParametersData } from "../../../store/slices/parametersDataSlice";
+import { getAdvancedOptionsDefaultValues } from "../../../store/slices/advancedOptionsSlice";
+
+import { selectheaderIcon } from "../../../store/slices/headerIconsSlice";
+
 import { useDispatch, useSelector } from "react-redux";
+import { selectUserNameId } from "../../../store/slices/userSlice";
 
 function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
-  const handlePlay = () => {
-    onClickRunNGSPice();
+  const [startSimulation, setStartSimulation] = useState(false);
+  const Model = useSelector(selectedModel);
+  const ReferenceData = useSelector(selectedReferenceData);
+  const TestBench = useSelector(selectedTestbench);
+  const ParametersData = useSelector(selectedParametersData);
+  const advancedOptions = useSelector(getAdvancedOptionsDefaultValues);
+  const usernameID = useSelector(selectUserNameId);
+  const RDfolderName = "Reference Data";
+  const TBfolderName = "Testbenches";
+  const PDfolderName = "Model Parameters";
+  const NLfolderName = "Model Netlist";
+
+  const Icons = useSelector(selectheaderIcon);
+
+  const JSONReferendeData = `${usernameID}/${RDfolderName}/${ReferenceData}`;
+  const JSONTestBench = `${usernameID}/${TBfolderName}/${TestBench}`;
+  const JSONParametersData = `${usernameID}/${PDfolderName}/${ParametersData}`;
+  const JSONNetlist = `${usernameID}/${NLfolderName}/${Model}`;
+
+  const show = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "Success",
+      detail: "Simulation Started",
+      life: 3000,
+    });
+  };
+  const dispatch = useDispatch();
+
+  const checkFirstThreeItems = () => {
+    const firstThreeItems = Icons.slice(0, 3);
+    console.log("firstThreeItems", firstThreeItems);
+
+    const isEmpty = firstThreeItems.some((item) => item.value === "empty");
+    console.log("isEmpty", isEmpty);
+
+    return !isEmpty; // Returns true if none of the first three items are empty, false otherwise
+  };
+  const singleCalibrationHandle = () => {
+    if (checkFirstThreeItems()) {
+      console.log(checkFirstThreeItems());
+      dispatch(setReferenceData(ReferenceData));
+      dispatch(setNetlist(Model));
+      dispatch(setParametersData(ParametersData));
+      dispatch(setTestBench(TestBench));
+      dispatch(addAdvancedOption(advancedOptions));
+      const jsonData = {
+        ReferenceData: JSONReferendeData,
+        Model: JSONNetlist,
+        ParametersData: JSONParametersData,
+        TestBenches: JSONTestBench,
+        advancedOptions,
+        type: "Single Calibration",
+      };
+      const jsonString = JSON.stringify(jsonData, null, 2);
+      uploadJSONToS3(
+        usernameID,
+        "Start Simulation",
+        jsonString,
+        handleRegerenceDataProgressChange,
+        handleUploadReferenceDataComplete
+      );
+    } else {
+      toast.current.show({
+        severity: "error",
+        summary: "Error",
+        detail: "Please make sure that all the files are correctly set",
+        life: 3000,
+      });
+    }
   };
 
-  const startCalibrationHandle = () => {};
+  const handleRegerenceDataProgressChange = (progress) => {
+    setStartSimulation(true);
+  };
+  const handleUploadReferenceDataComplete = () => {
+    setStartSimulation(false);
+    show();
+  };
+
+  const startCalibrationHandle = () => {
+    if (checkFirstThreeItems()) {
+      console.log(checkFirstThreeItems());
+      dispatch(setReferenceData(ReferenceData));
+      dispatch(setNetlist(Model));
+      dispatch(setParametersData(ParametersData));
+      dispatch(setTestBench(TestBench));
+      dispatch(addAdvancedOption(advancedOptions));
+      const jsonData = {
+        ReferenceData: JSONReferendeData,
+        Model: JSONNetlist,
+        ParametersData: JSONParametersData,
+        TestBenches: JSONTestBench,
+        advancedOptions,
+        type: "Complete Calibration",
+      };
+      const jsonString = JSON.stringify(jsonData, null, 2);
+      uploadJSONToS3(
+        usernameID,
+        "Start Simulation",
+        jsonString,
+        handleRegerenceDataProgressChange,
+        handleUploadReferenceDataComplete
+      );
+    } else {
+      toast.current.show({
+        severity: "error",
+        summary: "Error",
+        detail: "Please make sure that all the files are correctly set",
+        life: 3000,
+      });
+    }
+  };
 
   const handleStop = () => {
     // handle stop button click
-    onClickRunPython();
   };
+
+  const toast = useRef(null);
 
   return (
     <Container>
+      <Toast ref={toast} position='bottom-right' />
       <Button onClick={startCalibrationHandle} className='green-white'>
         <StartIcon className='icon1' style={{ margin: "0px 5px 0px 5px" }} />
         Start Calibration
       </Button>
 
-      <Button onClick={handlePlay} className='gray-white-black'>
+      <Button onClick={singleCalibrationHandle} className='gray-white-black'>
         <StartIcon className='icon2' style={{ margin: "0px 5px 0px 5px" }} />
         Single Calibration
       </Button>

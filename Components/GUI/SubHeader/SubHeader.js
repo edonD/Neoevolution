@@ -170,7 +170,7 @@ const NavLink = styled.div`
   transition: background-color 0.3s ease;
   display: flex;
   align-items: center;
-
+  user-select: none;
   /* flex: 1; */
   padding: ${(props) => (props.icon === "empty" ? "0px" : "0 20px")};
   justify-content: ${(props) =>
@@ -195,7 +195,7 @@ const NavLink = styled.div`
   }
   &:hover {
     background-color: ${(props) => (props.isActive ? "#3ca7db" : "#e2e2e6")};
-    color: ${(props) => (props.isActive ? "#e0e0e0" : "#555")};
+    /* color: ${(props) => (props.isActive ? "#e0e0e0" : "#222")}; */
   }
 `;
 

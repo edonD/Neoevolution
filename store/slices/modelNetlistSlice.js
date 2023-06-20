@@ -1,18 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: [
-    {
-      label: "Circuit1.cir",
-      value: "option1",
-      key: "Modelkey1",
-    },
-    {
-      label: "Circuit2.cir",
-      value: "option2",
-      key: "Modelkey2",
-    },
-  ],
+  items: [],
   selectedModel: null,
 };
 

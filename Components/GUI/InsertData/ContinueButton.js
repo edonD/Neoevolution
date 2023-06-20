@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { TailSpin } from "react-loader-spinner";
 
 function ContinueButton({ show }) {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
   const router = useRouter();
   return (
     <Card
@@ -12,17 +17,31 @@ function ContinueButton({ show }) {
         router.push(
           "/projects/create-model/select-model/insert-data/reference-data"
         );
+        setLoading(true);
       }}
       show={show}
     >
-      <ImageContainer>
-        <Image
-          src='/images/plus-svgrepo-com.svg'
-          width={100}
-          height={100}
-          alt='brain'
+      {loading ? (
+        <TailSpin
+          height='80'
+          width='80'
+          color='#3e89ff'
+          ariaLabel='rotating-square-loading'
+          strokeWidth='4'
+          wrapperStyle={{}}
+          wrapperClass=''
+          visible={true}
         />
-      </ImageContainer>
+      ) : (
+        <ImageContainer>
+          <Image
+            src='/images/plus-svgrepo-com.svg'
+            width={100}
+            height={100}
+            alt='brain'
+          />
+        </ImageContainer>
+      )}
       <ListItem>
         <h3>New Calibration</h3>
       </ListItem>
