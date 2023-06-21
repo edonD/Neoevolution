@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import CardForProjects from "../../Account/Billing/Card/CardForProjects";
+import CardAdd from "./CardAdd";
 
 function ActiveOrders({ projects, onData }) {
   return (
@@ -14,14 +15,37 @@ function ActiveOrders({ projects, onData }) {
       >
         <Grid container spacing={2} columnSpacing={2}>
           <Grid item xs={12}>
-            <Headerh2>Projects {projects} </Headerh2>
+            <Headerh2>Projects </Headerh2>
           </Grid>
 
-          {Array.from({ length: projects }, (_) => (
-            <Grid item xs={12} md={12} xl={6}>
-              <CardForProjects onData={onData} state={"In Process"} />
-            </Grid>
-          ))}
+          {projects &&
+            projects
+              .slice() // Create a shallow copy of the array to avoid modifying the original
+              .sort((a, b) => a.value - b.value)
+              .map((project) => (
+                <Grid item xs={12} md={12} xl={6} key={project}>
+                  <CardForProjects
+                    name={project.name}
+                    date={project.date}
+                    time={project.time}
+                    onData={onData}
+                    state={"In Process"}
+                  />
+                </Grid>
+              ))}
+          <Grid
+            item
+            xs={12}
+            md={12}
+            xl={6}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CardAdd />
+          </Grid>
         </Grid>
       </Form>
     </WrapperForm>

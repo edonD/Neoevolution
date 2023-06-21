@@ -8,6 +8,7 @@ import testbenchesSlice from "./slices/testbenchesSlice";
 import headerIconSlice from "./slices/headerIconsSlice";
 import advancedOptionsSlice from "./slices/advancedOptionsSlice";
 import calibrationSlice from "./slices/calibrationSlice";
+import projectListSlice from "./slices/projectListSlice";
 
 // config the store
 const store = configureStore({
@@ -20,6 +21,7 @@ const store = configureStore({
     header: headerIconSlice,
     advancedOptions: advancedOptionsSlice,
     calibration: calibrationSlice,
+    projectList: projectListSlice,
   },
 });
 

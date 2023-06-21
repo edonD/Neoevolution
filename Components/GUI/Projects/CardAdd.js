@@ -1,89 +1,81 @@
 import React from "react";
 import {
-  CardMedia,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
+  setProjectItem,
+  selectedProjects,
+} from "../../../store/slices/projectListSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserNameId } from "../../../store/slices/userSlice.js";
 import styled from "styled-components";
 import Image from "next/image";
-import { BiLoaderCircle } from "react-icons/bi";
-import { RiCalendar2Line } from "react-icons/ri";
-import { AiOutlineDownload, AiOutlineClockCircle } from "react-icons/ai";
-import Link from "next/link";
-import { useEffect } from "react";
 
-function CardForProjects({ name, state, onData, date, time }) {
+import Link from "next/link";
+import { uploadFolderToS3 } from "../../Storage/UploadFileFunctions.js";
+
+function CardAdd({ onData }) {
+  const dispatch = useDispatch();
+  const usernameId = useSelector(selectUserNameId);
+
+  const projects = useSelector(selectedProjects);
+
+  const findHighestProjectNumber = (projects) => {
+    let maxExtension = 0;
+    let projectNameWithMaxExtension = "";
+
+    for (const project of projects) {
+      if (project && project.name.startsWith("New Project")) {
+        const extension = parseInt(project.name.split(" ")[2]);
+
+        if (extension > maxExtension) {
+          maxExtension = extension;
+          projectNameWithMaxExtension = project.name;
+        }
+      }
+    }
+    console.log(
+      `Project with the highest extension: ${projectNameWithMaxExtension}`
+    );
+    return maxExtension;
+  };
+
+  const handleClick = () => {
+    uploadFolderToS3(
+      usernameId,
+      `New Project ${findHighestProjectNumber(projects) + 1}`
+    );
+    dispatch(
+      setProjectItem(`New Project ${findHighestProjectNumber(projects) + 1}`)
+    );
+  };
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-    <Link href={`/projects/create-model`} passHref>
-      <Card>
-        <Header>
-          <ImageContainer>
-            <Image
-              src='/images/gggrain.svg'
-              layout='fill'
-              objectFit='contain'
-              alt='brain'
-            />
-          </ImageContainer>
-        </Header>
-        <Box>
-          <CardContent>
-            <ListItem>
-              <h3>{name}</h3>
-            </ListItem>
-            <ListItem state={state}>
-              <h2>{state}</h2>
-            </ListItem>
-          </CardContent>
-          <CardContent>
-            <ListItemEnd style={{ justifyContent: "center" }}>
-              {/* <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }} 
-              >*/}
-              <h2>Updated at</h2>
-              <h1>{date} </h1>
-              {/* </div> */}
-              <h1>{time}</h1>
-            </ListItemEnd>
 
-            <ListItemEnd>
-              <Button
-                onClick={() => {
-                  const decrement = 1;
-                  onData(decrement);
-                }}
-                className='red-white-black'
-              >
-                Cancel
-              </Button>
-            </ListItemEnd>
-          </CardContent>
-        </Box>
-      </Card>
-    </Link>
+    <Card onClick={handleClick}>
+      <ImageContainer>
+        <Image
+          src='/images/plus-svgrepo-com.svg'
+          width={100}
+          height={100}
+          alt='brain'
+        />
+      </ImageContainer>
+      <ListItem>
+        <h3>Create New Project</h3>
+      </ListItem>
+    </Card>
   );
 }
 
 const ImageContainer = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 75px;
+  height: 75px;
   display: flex;
   justify-content: center;
   background-color: transparent;
   align-items: center;
   position: relative;
-  border-radius: 10px;
+  flex-direction: column;
   overflow: hidden;
+  user-select: none;
   @media screen and (max-width: 600px) {
   }
 `;
@@ -101,7 +93,6 @@ const Button = styled.button`
   transition: background-color 0.2s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
-  margin-bottom: 20px;
   &:active {
     transform: translateY(2px);
   }
@@ -126,9 +117,10 @@ const Card = styled.div`
   background-color: transparent;
   position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+
   /* border: 1px solid black; */
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
@@ -223,16 +215,17 @@ const IconCircle = styled.div`
 `;
 
 const ListItem = styled.div`
-  width: 100%;
-  height: 50%;
+  /* width: 100%;
+  height: 50%; */
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   background: transparent;
-  padding: 0px;
+  padding: 5px 5px 5px 5px;
   background-color: transparent;
-  margin: 0px 0px 0px 0px;
+  user-select: none;
+  //margin: 5px 5px 5px 5px;
   color: black;
   //cursor: pointer;
 
@@ -261,6 +254,7 @@ const ListItem = styled.div`
     color: black;
     font-weight: 200;
     margin: 0px;
+    font-size: 14px;
     @media screen and (max-width: 750px) {
       font-size: 14px;
     }
@@ -271,7 +265,7 @@ const ListItemEnd = styled.div`
   width: 100%;
   height: 50%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   background: transparent;
@@ -334,4 +328,4 @@ const DownloadItem = styled.div`
   }
 `;
 
-export default CardForProjects;
+export default CardAdd;

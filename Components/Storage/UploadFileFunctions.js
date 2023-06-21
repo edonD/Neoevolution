@@ -76,6 +76,32 @@ export const listFiles = async function (path) {
   }
 };
 
+export const listFolders = async function (path) {
+  try {
+    const { results } = await Storage.list(path);
+
+    const folders = [];
+    results.forEach((result) => {
+      const keyParts = result.key.split("/");
+      if (keyParts.length > 1) {
+        const folder = keyParts[1];
+        const lastModifiedDate = new Date(
+          result.lastModified
+        ).toLocaleDateString();
+        const lastModifiedTime = new Date(
+          result.lastModified
+        ).toLocaleTimeString();
+        folders.push({ folder, lastModifiedDate, lastModifiedTime });
+      }
+    });
+
+    return folders;
+  } catch (err) {
+    console.error(err);
+    // throw err; // Rethrow the error to propagate it to the caller
+  }
+};
+
 export const retrieveJSONFromS3 = async function (path) {
   try {
     const jsonData = await Storage.get(path, { validateObjectExistence: true });
@@ -88,6 +114,14 @@ export const retrieveJSONFromS3 = async function (path) {
   }
 };
 
+// export const getFileProperties = async function (path) {
+//   try {
+//     const result = await Storage.getProperties(path);
+//     console.log("File Properties ", result);
+//   } catch (error) {
+//     console.log("Error ", error);
+//   }
+// };
 export const retrieveCSVromS3 = async function (path) {
   try {
     const csvData = await Storage.get(path, { validateObjectExistence: true });
@@ -97,6 +131,15 @@ export const retrieveCSVromS3 = async function (path) {
   } catch (error) {
     console.error("Error retrieving JSON from S3:", error);
     throw error; // Throw the error instead of returning null
+  }
+};
+
+export const uploadFolderToS3 = async function (userId, folderName) {
+  try {
+    const result = await Storage.put(`${userId}/${folderName}`, {});
+    console.log("Folder uploaded successfully:", result);
+  } catch (error) {
+    console.error("Error uploading folder:", error);
   }
 };
 

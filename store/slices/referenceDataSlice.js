@@ -10,7 +10,6 @@ export const referenceDataSlice = createSlice({
   reducers: {
     //Actions
     setReferenceDataItems: (state, action) => {
-      console.log("action", action.payload);
       const labelExists = state.referenceDataItems.some(
         (item) => item.name === action.payload
       );

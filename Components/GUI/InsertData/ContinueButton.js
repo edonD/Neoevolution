@@ -30,7 +30,7 @@ function ContinueButton({ show }) {
           strokeWidth='4'
           wrapperStyle={{}}
           wrapperClass=''
-          visible={true}
+          visible={loading}
         />
       ) : (
         <ImageContainer>

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import { useState } from "react";
 import styled from "styled-components";
-import { Button } from "@mui/material";
 
 import { AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
@@ -10,16 +9,53 @@ import { TiTick } from "react-icons/ti";
 
 import ActiveOrders from "../Projects/ActiveOrders";
 import CreateNewProject from "../Projects/CreateNewProject";
-import NewModel from "../NewModel/NewModel";
-import { BreadCrumb } from "primereact/breadcrumb";
-import { useRouter } from "next/router";
+import {
+  setProjectItem,
+  selectedProjects,
+  setCurrentProject,
+} from "../../../store/slices/projectListSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserNameId } from "../../../store/slices/userSlice";
+import {
+  listFiles,
+  listFolders,
+  getFileProperties,
+} from "../../Storage/UploadFileFunctions";
+import { Storage } from "aws-amplify";
 
 function SidebarProjects({ incrementProjects, decrementProjects, projects }) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
+  // const [projectList, setProjectList] = useState([]);
+
+  const projectList = useSelector(selectedProjects);
+  const dispatch = useDispatch();
+  const userNameId = useSelector(selectUserNameId);
+  // const projectsList = useSelector(selectedProjects);
 
   const handleListItemClick = (index) => {
     setSelectedItem(index);
   };
+
+  useEffect(
+    () => {
+      async function getFoldersInRootDirectory(path) {
+        try {
+          const folders = await listFolders(path);
+
+          console.log("Creation Date", folders);
+          folders.map((folder) => {
+            dispatch(setProjectItem(folder));
+          });
+          console.log("Folders", folders);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      getFoldersInRootDirectory(userNameId);
+    },
+    [userNameId],
+    projectList
+  );
 
   return (
     <Container>
@@ -40,7 +76,7 @@ function SidebarProjects({ incrementProjects, decrementProjects, projects }) {
             <Icon>
               <AiFillFolderOpen size={30} />
             </Icon>
-            <h1>Projects</h1>
+            <h1>Projects </h1>
           </ListItem>
 
           <ListItem
@@ -65,11 +101,11 @@ function SidebarProjects({ incrementProjects, decrementProjects, projects }) {
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        {projects === 0 ? (
+        {/* {projectList.length === 0 ? (
           <CreateNewProject onData={incrementProjects} ButtonText={"Create"} />
-        ) : (
-          <ActiveOrders projects={projects} onData={decrementProjects} />
-        )}
+        ) : ( */}
+        <ActiveOrders projects={projectList} onData={decrementProjects} />
+        {/* )} */}
         {/* <ActiveOrders /> */}
       </MainView>
     </Container>
@@ -92,7 +128,7 @@ const Container = styled.div`
     #031224,
     #0f2847
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background-color: white;
+  background-color: #f3f3f8;
 `;
 
 const AccountHeader = styled.div`
