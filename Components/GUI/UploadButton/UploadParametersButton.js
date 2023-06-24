@@ -9,6 +9,8 @@ import { selectUserNameId } from "../../../store/slices/userSlice";
 import { Storage } from "aws-amplify";
 import { useDispatch } from "react-redux";
 import { setParameterItems } from "../../../store/slices/parametersDataSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
 
 function UploadParametersButton() {
   const dispatch = useDispatch();
@@ -16,6 +18,15 @@ function UploadParametersButton() {
   const [loading, setLoading] = useState(false);
 
   const usernameID = useSelector(selectUserNameId);
+
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
 
   const handleFileSelect = (event) => {
     const files = event.target.files;
@@ -29,13 +40,12 @@ function UploadParametersButton() {
         return;
       }
 
-      const userId = usernameID; // Replace with the actual user ID.
       const folderName = "Model Parameters"; // Replace with the desired folder name.
       setLoading(true);
       await Promise.all(
         selectedFiles.map(async (file) => {
           const fileName = file.name;
-          const path = `${userId}/${folderName}/${fileName}`;
+          const path = `${subPath}/${folderName}/${fileName}`;
           await Storage.put(path, file, {
             contentType: file.type,
             progressCallback(progress) {

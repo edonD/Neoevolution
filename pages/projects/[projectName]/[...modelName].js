@@ -9,13 +9,13 @@ import { InData } from "./insert-data/InData";
 import { Model } from "./insert-data/model/index";
 import { Opti } from "./insert-data/optimizer/index";
 import { Parameters } from "./insert-data/parameters/index";
+import { Results } from "./insert-data/results/index";
 import { ReferenceData } from "./insert-data/reference-data/";
 
 function ModelName() {
   const router = useRouter();
 
   const { modelName } = router.query; // Access the dynamic segment value from router.query
-  modelName && console.log("Edon: ", modelName);
 
   const renderScreen = () => {
     switch (modelName[1]) {
@@ -29,6 +29,8 @@ function ModelName() {
             return <Model />;
           case "optimizer":
             return <Opti />;
+          case "results":
+            return <Results />;
           default:
             return <InData />;
         }

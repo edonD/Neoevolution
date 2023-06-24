@@ -13,6 +13,7 @@ import {
   removeModelItem,
   selectedModel,
   setModel,
+  cleanAllState,
 } from "../../../store/slices/modelNetlistSlice";
 import {
   selectTestbenchItems,
@@ -20,26 +21,37 @@ import {
   removeTestbenchItem,
   selectedTestbench,
   setTestbench,
+  cleanAllTestbenchesState,
 } from "../../../store/slices/testbenchesSlice";
 
 import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
 import { useEffect } from "react";
 import { listFiles } from "../../Storage/UploadFileFunctions";
 import { selectUserNameId } from "../../../store/slices/userSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 import UploadTestbenchButton from "../Models/UploadTestbenchButton";
-import { useRef } from "react";
 
 function ProjectModelReplacement() {
   const items = useSelector(selectNetlistItems);
   const testbenchItems = useSelector(selectTestbenchItems);
   const usernameID = useSelector(selectUserNameId);
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
 
-  const ModelNetlistlink = `${usernameID}/Model Netlist`;
-  const Testbenchestlink = `${usernameID}/Testbenches`;
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
+
+  const ModelNetlistlink = `${subPath}/Model Netlist`;
+  const Testbenchestlink = `${subPath}/Testbenches`;
 
   const Testbench = useSelector(selectedTestbench);
   const Model = useSelector(selectedModel);
+  console.log("Model", Model);
 
   const dispatch = useDispatch();
 
@@ -70,19 +82,19 @@ function ProjectModelReplacement() {
   const handleModelButtonClick = (index, label) => {
     setSelectedMDButtonIndex(index);
     dispatch(setModel(label));
-    console.log("Model", Model);
+    console.log("Model", label);
   };
 
   const handleTBButtonClick = (index, label) => {
     setSelectedTBButtonIndex(index);
     dispatch(setTestbench(label));
-    console.log("Testbench", Testbench);
   };
 
   useEffect(() => {
     // handleUpdateHeaderIcon("Model", "empty");
     const fetchNetlistData = async () => {
       try {
+        dispatch(cleanAllState());
         const files = await listFiles(ModelNetlistlink);
         console.log(files); // Do something with the files array
         files.map((file) => {
@@ -97,7 +109,7 @@ function ProjectModelReplacement() {
     };
 
     fetchNetlistData();
-
+    dispatch(cleanAllTestbenchesState());
     const fetchTestbenchData = async () => {
       try {
         const files = await listFiles(Testbenchestlink);

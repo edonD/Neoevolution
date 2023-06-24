@@ -1,10 +1,10 @@
 import React from "react";
-import SidebarSoftware from "../../../../../../Components/GUI/SidebarBodies/SidebarSoftware";
-import ProfileHeader from "../../../../../../Components/Account/ProfileHeader/ProfileHeader";
+import SidebarSoftware from "../../../../../Components/GUI/SidebarBodies/SidebarSoftware";
+import ProfileHeader from "../../../../../Components/Account/ProfileHeader/ProfileHeader";
 import styled from "styled-components";
-import ResultsView from "../../../../../../Components/GUI/Results-View/ResultsView";
+import ResultsView from "../../../../../Components/GUI/Results-View/ResultsView";
 
-function index() {
+export const Results = function () {
   return (
     <div>
       <ProfileHeader />
@@ -14,10 +14,10 @@ function index() {
       </SidebarSoftware>
     </div>
   );
-}
+};
 
 const Header = styled.h1`
   margin-left: 0px;
   margin-right: 0px;
 `;
-export default index;
+export default Results;

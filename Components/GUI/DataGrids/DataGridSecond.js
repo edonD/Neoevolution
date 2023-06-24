@@ -223,14 +223,15 @@ function DataGridSecond({ type, items, callback }) {
   const projectId = project;
   const modelId = model;
 
+  const folderName = "Reference Data"; // Replace with the desired folder name
   const subPath = `${userId}/${projectId}/${modelId}`;
+  const path = `${subPath}/${folderName}/${file}`;
+
+  const { projectName, modelName } = router.query;
 
   useEffect(() => {
     async function fetchJSONData() {
-      const folderName = "Reference Data"; // Replace with the desired folder name
-
       // const path = `${usernameID}/${folderName}/${file}`;
-      const path = `${subPath}/${folderName}/${file}`;
 
       try {
         const response = await retrieveJSONFromS3(path);
@@ -318,7 +319,7 @@ function DataGridSecond({ type, items, callback }) {
       console.log("Array is empty");
     }
 
-    router.push("model");
+    router.push(`/projects/${projectName}/${modelName[0]}/insert-data/model`);
     setContinueLoading(false);
   }
 

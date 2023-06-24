@@ -33,11 +33,15 @@ export const testbenchesSlice = createSlice({
     setTestbench: (state, action) => {
       state.selectedTestbench = action.payload;
     },
+    cleanAllTestbenchesState: (state) => {
+      state.items = []; // Set items array to an empty array;
+    },
   },
 });
 
 export const { removeTestbenchItem } = testbenchesSlice.actions;
-export const { setTestbenchItems, setTestbench } = testbenchesSlice.actions;
+export const { setTestbenchItems, setTestbench, cleanAllTestbenchesState } =
+  testbenchesSlice.actions;
 
 export const selectTestbenchItems = (state) => state.testbenches.items;
 export const selectedTestbench = (state) => state.testbenches.selectedTestbench;

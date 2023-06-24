@@ -38,7 +38,7 @@ function Optimizer() {
     // Simulating plot data loading
     if (percent < 100) {
       setTimeout(() => {
-        setPercent((percent) => percent + 1);
+        setPercent((percent) => percent + 10);
         setPlotLoaded(true);
       }, 100);
     } else {

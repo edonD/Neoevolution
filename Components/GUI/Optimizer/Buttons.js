@@ -29,6 +29,8 @@ import { selectheaderIcon } from "../../../store/slices/headerIconsSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
   const [startSimulation, setStartSimulation] = useState(false);
@@ -45,10 +47,19 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
 
   const Icons = useSelector(selectheaderIcon);
 
-  const JSONReferendeData = `${usernameID}/${RDfolderName}/${ReferenceData}`;
-  const JSONTestBench = `${usernameID}/${TBfolderName}/${TestBench}`;
-  const JSONParametersData = `${usernameID}/${PDfolderName}/${ParametersData}`;
-  const JSONNetlist = `${usernameID}/${NLfolderName}/${Model}`;
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
+
+  const JSONReferendeData = `${subPath}/${RDfolderName}/${ReferenceData}`;
+  const JSONTestBench = `${subPath}/${TBfolderName}/${TestBench}`;
+  const JSONParametersData = `${subPath}/${PDfolderName}/${ParametersData}`;
+  const JSONNetlist = `${subPath}/${NLfolderName}/${Model}`;
 
   const show = () => {
     toast.current.show({
@@ -84,7 +95,7 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
       };
       const jsonString = JSON.stringify(jsonData, null, 2);
       uploadJSONToS3(
-        usernameID,
+        subPath,
         "Start Simulation",
         jsonString,
         handleRegerenceDataProgressChange,
@@ -125,7 +136,7 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
       };
       const jsonString = JSON.stringify(jsonData, null, 2);
       uploadJSONToS3(
-        usernameID,
+        subPath,
         "Start Simulation",
         jsonString,
         handleRegerenceDataProgressChange,

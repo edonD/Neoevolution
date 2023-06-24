@@ -10,14 +10,26 @@ import {
 } from "../../store/slices/parametersDataSlice";
 import { selectUserNameId } from "../../store/slices/userSlice";
 import { listFiles } from "../Storage/UploadFileFunctions";
+import { currentProject } from "../../store/slices/projectListSlice";
+import { currentModel } from "../../store/slices/modelListSlice";
 
 const DropdownMenuParameters = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const items = useSelector(selectParametersItems);
   const dropDownItem = useSelector(selectedParametersData);
   const usernameID = useSelector(selectUserNameId);
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
 
-  const Parameterslink = `${usernameID}/Model Parameters`;
+  const userId = usernameID; // Replace with the actual user ID.
+  const folderName = "Model Parameters"; // Replace with the desired folder name
+
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
+
+  const Parameterslink = `${subPath}/Model Parameters`;
   const dispatch = useDispatch();
 
   useEffect(() => {

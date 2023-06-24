@@ -31,9 +31,13 @@ export const modelNetlistSlice = createSlice({
     setModel: (state, action) => {
       state.selectedModel = action.payload;
     },
+    cleanAllState: (state) => {
+      state.items = []; // Set items array to an empty array;
+    },
   },
 });
-export const { setModelItems, setModel } = modelNetlistSlice.actions;
+export const { setModelItems, setModel, cleanAllState } =
+  modelNetlistSlice.actions;
 export const { removeModelItem } = modelNetlistSlice.actions;
 
 //Selectors

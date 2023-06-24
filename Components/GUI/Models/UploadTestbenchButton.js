@@ -10,12 +10,22 @@ import {
   selectTestbenchItems,
   setTestbenchItems,
 } from "../../../store/slices/testbenchesSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 function UploadTestbenchButton() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const usernameID = useSelector(selectUserNameId);
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
 
   const handleFiles = (event) => {
     const files = event.target.files;
@@ -39,7 +49,7 @@ function UploadTestbenchButton() {
       await Promise.all(
         Array.from(selectedFiles).map(async (file) => {
           const fileName = file.name;
-          const path = `${userId}/${folderName}/${fileName}`;
+          const path = `${subPath}/${folderName}/${fileName}`;
 
           await Storage.put(path, file, {
             contentType: file.type,

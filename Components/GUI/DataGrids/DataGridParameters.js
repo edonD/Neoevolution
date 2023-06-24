@@ -28,6 +28,8 @@ import { Oval } from "react-loader-spinner";
 import "rsuite/dist/rsuite-no-reset.min.css";
 import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
 import { useRouter } from "next/router";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
   const [editing, setEditing] = useState(false);
@@ -217,7 +219,17 @@ function DataGridParameters({ type }) {
   const userId = usernameID; // Replace with the actual user ID.
   const folderName = "Model Parameters"; // Replace with the desired folder name
   const fileName = file; // Replace with the desired file name.
-  const path = `${userId}/${folderName}/${fileName}`;
+
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
+  const path = `${subPath}/${folderName}/${fileName}`;
+
+  const { projectName, modelName } = router.query;
 
   useEffect(() => {
     if (csvData && typeof csvData === "string") {
@@ -307,7 +319,9 @@ function DataGridParameters({ type }) {
       handleUpdateHeaderIcon("Parameters", "empty");
     }
 
-    router.push("optimizer");
+    router.push(
+      `/projects/${projectName}/${modelName[0]}/insert-data/optimizer`
+    );
     setContinueLoading(false);
   }
 

@@ -9,12 +9,22 @@ import { selectUserNameId } from "../../../store/slices/userSlice";
 import { Storage } from "aws-amplify";
 import { useDispatch } from "react-redux";
 import { setModelItems } from "../../../store/slices/modelNetlistSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 function UploadNetlistButton() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const usernameID = useSelector(selectUserNameId);
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
 
   const handleFileSelect = (event) => {
     const files = event.target.files;
@@ -35,8 +45,8 @@ function UploadNetlistButton() {
       await Promise.all(
         selectedFiles.map(async (file) => {
           const fileName = file.name;
-          const path = `${userId}/${folderName}/${fileName}`;
 
+          const path = `${subPath}/${folderName}/${fileName}`;
           await Storage.put(path, file, {
             contentType: file.type,
             progressCallback(progress) {

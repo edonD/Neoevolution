@@ -107,11 +107,11 @@ function Header() {
           icon={headerIcon[4].value}
           isActive={
             activeRoute ===
-            "/projects/create-model/select-model/insert-data/results"
+            `/projects/${projectName}/${modelName[0]}/insert-data/results`
           }
           onClick={() =>
             handleNavLinkClick(
-              "/projects/create-model/select-model/insert-data/results"
+              `/projects/${projectName}/${modelName[0]}/insert-data/results`
             )
           }
           isDisabled={false}
