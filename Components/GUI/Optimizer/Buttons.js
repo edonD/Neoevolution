@@ -62,16 +62,13 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
 
   const checkFirstThreeItems = () => {
     const firstThreeItems = Icons.slice(0, 3);
-    console.log("firstThreeItems", firstThreeItems);
 
     const isEmpty = firstThreeItems.some((item) => item.value === "empty");
-    console.log("isEmpty", isEmpty);
 
     return !isEmpty; // Returns true if none of the first three items are empty, false otherwise
   };
   const singleCalibrationHandle = () => {
     if (checkFirstThreeItems()) {
-      console.log(checkFirstThreeItems());
       dispatch(setReferenceData(ReferenceData));
       dispatch(setNetlist(Model));
       dispatch(setParametersData(ParametersData));
@@ -113,7 +110,6 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
 
   const startCalibrationHandle = () => {
     if (checkFirstThreeItems()) {
-      console.log(checkFirstThreeItems());
       dispatch(setReferenceData(ReferenceData));
       dispatch(setNetlist(Model));
       dispatch(setParametersData(ParametersData));

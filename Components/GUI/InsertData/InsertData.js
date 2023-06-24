@@ -7,13 +7,14 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
 import { uploadFile } from "../../Storage/UploadFileFunctions";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import { currentProject } from "../../../store/slices/projectListSlice";
 import { currentModel } from "../../../store/slices/modelListSlice";
 
 function InsertData() {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [uploadReferenceDataProgress, setUploadReferenceDataProgress] =
     useState(0);
@@ -94,7 +95,6 @@ function InsertData() {
   const modelId = model;
   const path = `${userId}/${projectId}/${modelId}`;
   const handleReferenceDataDrop = (acceptedFiles) => {
-    console.log("PAATTH", path);
     try {
       if (acceptedFiles.length === 0) {
         console.error("No file selected");

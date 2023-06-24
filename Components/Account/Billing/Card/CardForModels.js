@@ -2,11 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function CardForModels({ name, onData }) {
+  const router = useRouter();
+
+  const { projectName } = router.query;
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-    <Link href={`/projects/create-model/select-model`} passHref>
+    <Link href={`/projects/${projectName}/${name}`} passHref>
       <Card>
         <Header>
           <ImageContainer>

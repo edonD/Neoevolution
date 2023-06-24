@@ -8,12 +8,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import { Storage } from "aws-amplify";
 import { setReferenceDataItems } from "../../../store/slices/referenceDataSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 function UploadButton() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const usernameID = useSelector(selectUserNameId);
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
 
   const dispatch = useDispatch();
   const handleFileSelect = (event) => {
@@ -34,7 +44,7 @@ function UploadButton() {
       await Promise.all(
         selectedFiles.map(async (file) => {
           const fileName = file.name;
-          const path = `${userId}/${folderName}/${fileName}`;
+          const path = `${subPath}/${folderName}/${fileName}`;
 
           await Storage.put(path, file, {
             contentType: file.type,

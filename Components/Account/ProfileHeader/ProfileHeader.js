@@ -19,7 +19,6 @@ function ProfileHeader() {
     const fetchUserId = async () => {
       try {
         const user = await Auth.currentAuthenticatedUser();
-        console.log(user.attributes.sub);
       } catch (error) {
         console.log("Error fetching user ID:", error);
       }

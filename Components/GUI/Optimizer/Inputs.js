@@ -25,8 +25,6 @@ function Inputs() {
 
   const dispatch = useDispatch();
   const handleUpdateItem = (label, value) => {
-    console.log("Function", label, value);
-
     switch (label) {
       case "Population Size":
         setPopulationSize(value);
@@ -51,7 +49,6 @@ function Inputs() {
   };
 
   useEffect(() => {
-    console.log(defaultValues);
     setPopulationSize(defaultValues[0].value);
     setNumberOfIterations(defaultValues[1].value);
     setNumberOfIterationsWithoutImprovement(defaultValues[2].value);

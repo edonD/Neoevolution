@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 function CardForSelection({ onData, name }) {
   const router = useRouter();
-  console.log("CardForSelection: ", router.query);
+
   const { projectName, modelName } = router.query;
 
   return (

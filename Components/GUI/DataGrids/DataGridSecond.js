@@ -26,6 +26,8 @@ import {
   setTableValues,
 } from "../Reference-Data-View/JSONProcessor";
 import { json } from "react-router-dom";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 const EditableCell = ({ rowData, dataKey, onChange, ...props }) => {
   const [editing, setEditing] = useState(false);
@@ -185,7 +187,7 @@ const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
   </Cell>
 );
 // ];
-function DataGridSecond({ type, items, callback, path }) {
+function DataGridSecond({ type, items, callback }) {
   const [selectionModel, setSelectionModel] = React.useState([]);
   const [checkedKeys, setCheckedKeys] = React.useState([]);
   const [deleteLoading, setDeleteLoading] = useState(false);
@@ -214,11 +216,21 @@ function DataGridSecond({ type, items, callback, path }) {
     indeterminate = true;
   }
 
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
+
   useEffect(() => {
     async function fetchJSONData() {
       const folderName = "Reference Data"; // Replace with the desired folder name
 
-      const path = `${usernameID}/${folderName}/${file}`;
+      // const path = `${usernameID}/${folderName}/${file}`;
+      const path = `${subPath}/${folderName}/${file}`;
 
       try {
         const response = await retrieveJSONFromS3(path);
@@ -237,7 +249,7 @@ function DataGridSecond({ type, items, callback, path }) {
   useEffect(() => {
     if (jsonData) {
       const table = setTableValues(jsonData.data);
-      console.log("Table", table);
+
       setTable(table);
     }
   }, [jsonData]);
@@ -255,13 +267,11 @@ function DataGridSecond({ type, items, callback, path }) {
   }, [checkedKeys]);
 
   const handleCheckAll = (value, checked) => {
-    console.log("Keys", checkedKeys);
     const keys = checked ? table.map((item) => item.id) : [];
     setCheckedKeys(keys);
     // handleSelectionModelChange(checkedKeys);
   };
   const handleCheck = (value, checked) => {
-    console.log("Keys", checkedKeys);
     const keys = checked
       ? [...checkedKeys, value]
       : checkedKeys.filter((item) => item !== value);
@@ -272,7 +282,6 @@ function DataGridSecond({ type, items, callback, path }) {
   const handleSelectionModelChange = (newSelectionModel) => {
     setSelectionModel(newSelectionModel);
     callback(newSelectionModel);
-    console.log(newSelectionModel);
   };
 
   async function handleSaveChanges() {
@@ -378,39 +387,25 @@ function DataGridSecond({ type, items, callback, path }) {
             />
           </Column>
           {columns &&
-            columns.map(
-              (column, index) => (
-                console.log("Inside Loop", column),
-                (
-                  <Column
-                    key={index}
-                    align='center'
-                    fixed='right'
-                    fullText
-                    flexGrow={1}
-                  >
-                    <HeaderCell>{column}</HeaderCell>
+            columns.map((column, index) => (
+              <Column
+                key={index}
+                align='center'
+                fixed='right'
+                fullText
+                flexGrow={1}
+              >
+                <HeaderCell>{column}</HeaderCell>
 
-                    <EditableCell
-                      dataKey={column}
-                      data={table}
-                      onChange={handleCellChange}
-                      // editing={cellEditing[`${row.id}_${column.field}`]}
-                    />
-                  </Column>
-                )
-              )
-            )}
+                <EditableCell
+                  dataKey={column}
+                  data={table}
+                  onChange={handleCellChange}
+                  // editing={cellEditing[`${row.id}_${column.field}`]}
+                />
+              </Column>
+            ))}
         </Table>
-
-        {/* <DataGrid
-          rows={rows}
-          columns={columns}
-          style={{ height: "100%", width: "100%" }}
-          checkboxSelection
-          // rowSelection={selectionModel}
-          onRowSelectionModelChange={handleSelectionModelChange}
-        /> */}
       </Data>
       <ButtonContainer>
         <FilesButton onClick={handleDeleteChanges} className='green-white'>

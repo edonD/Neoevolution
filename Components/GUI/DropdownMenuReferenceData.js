@@ -8,9 +8,12 @@ import {
   setReferenceDataItems,
   setDropdownItem,
   selectedReferenceData,
+  cleanAllStates,
 } from "../../store/slices/referenceDataSlice";
 import { selectUserNameId } from "../../store/slices/userSlice";
 import { listFiles } from "../Storage/UploadFileFunctions";
+import { currentProject } from "../../store/slices/projectListSlice";
+import { currentModel } from "../../store/slices/modelListSlice";
 
 const DropDownMenuReferenceData = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -18,15 +21,27 @@ const DropDownMenuReferenceData = () => {
   const dropDownItem = useSelector(selectedReferenceData);
   const usernameID = useSelector(selectUserNameId);
 
-  const ReferenceDataLink = `${usernameID}/Reference Data`;
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
+
+  const ReferenceDataLink = `${subPath}/Reference Data`;
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchReferenceData = async () => {
+      dispatch(cleanAllStates());
       try {
         const files = await listFiles(ReferenceDataLink);
+
         files.map((file) => {
           const result = file.key.replace(/.*\//, "");
+          console.log("Items<", items);
           dispatch(setReferenceDataItems(result));
         });
       } catch (error) {
@@ -41,20 +56,19 @@ const DropDownMenuReferenceData = () => {
     // Check if the selected option is still available in the items array
 
     const selectedItem = items.find((item) => selectedOption === item.name);
-    // console.log("Selected Item", selectedItem);
+
     if (
       selectedItem === undefined &&
       items.length > 0 &&
       selectedOption === dropDownItem
     ) {
       // If the selected option is not available, select the first item in the array
-      // console.log("Selected Undefined aItem", selectedItem);
+
       setSelectedOption(items[0].name);
       dispatch(setDropdownItem(items[0].name));
     }
 
     if (selectedOption !== dropDownItem) {
-      console.log("Selected Option");
       setSelectedOption(dropDownItem);
     }
   }, [items, selectedOption]);

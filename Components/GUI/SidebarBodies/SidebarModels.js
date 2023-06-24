@@ -26,9 +26,6 @@ function SidebarProjects() {
   useEffect(() => {
     const newPath = `${router.pathname}`;
     setActiveRoute(newPath);
-    console.log(router.pathname);
-    // generateBreadcrumbItems(activeRoute);
-    // console.log(breadcrumbItems);
   }, [router.pathname, activeRoute]);
 
   return (

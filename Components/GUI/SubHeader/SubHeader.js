@@ -18,11 +18,10 @@ function Header() {
 
   useEffect(() => {
     setActiveRoute(router.pathname);
-    console.log("headerIcon", headerIcon);
   }, [router.pathname]);
 
   const { projectName, modelName } = router.query;
-  console.log("ROUTER", projectName, modelName);
+
   return (
     <HeaderContainer>
       <Nav>

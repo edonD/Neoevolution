@@ -35,7 +35,7 @@ function SidebarBody() {
       //setNow("start");
       const res = await fetch("https://aivalancheapi.com/run-python");
       const text = await res.text();
-      console.log(text);
+
       setText(text);
       /*
       setResponse(text);*/
@@ -50,10 +50,8 @@ function SidebarBody() {
         "https://aivalancheapi.com/run-ngspice?file=/home/ubuntu/Desktop/ngspice/examples/measure/MOScharacteristics.sp"
       );
       const text = await res.text();
-      console.log(text);
+
       setText(text);
-      /*console.log(text);
-      setResponse(text);*/
     } catch (error) {
       console.error(error);
     }
@@ -63,8 +61,6 @@ function SidebarBody() {
     try {
       const res = await fetch("https://aivalancheapi.com/show-result");
       const text = await res.text();
-      /*console.log(text);
-      setResponse(text);*/
 
       const rows = text.trim().split("\n").slice(1); // remove header row
       const columns = rows[0].trim().split(/\s+/); // split by whitespace

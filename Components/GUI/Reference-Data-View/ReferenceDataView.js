@@ -16,6 +16,8 @@ import {
   setTableValues,
   setTableColumns,
 } from "./JSONProcessor";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 function ReferenceDataView() {
   // console.log("Link", link);
@@ -38,26 +40,33 @@ function ReferenceDataView() {
 
   const file = useSelector(selectedReferenceData);
   const usernameID = useSelector(selectUserNameId);
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
+
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+
+  const subPath = `${userId}/${projectId}/${modelId}`;
   // const link = `${usernameID}/Reference Data`;
 
   const handleSelectionModelChange = (selectionModel) => {
     // Perform actions with the selection model in the parent container
     setCheckboxSelection(selectionModel);
-
-    // ... Other code logic
   };
 
   useEffect(() => {
     async function fetchJSONData() {
       // const userId = "498f14b0-b520-4c85-a321-e1a1c620ce66"; // Replace with the actual user ID.
       const folderName = "Reference Data"; // Replace with the desired folder name
-      const fileName = "reference_data.json"; // Replace with the desired file name.
-      const path = `${usernameID}/${folderName}/${file}`;
+      const fileName = "reference_data (1) (1).json"; // Replace with the desired file name.
+      const path = `${subPath}/${folderName}/${fileName}`;
+      console.log("path", path);
       setPath(path);
 
       try {
         const response = await retrieveJSONFromS3(path);
-        // console.log("Response from S3", response);
+
         if (response) {
           // const { data } = response;
           // console.log("Data from Server", data);
@@ -94,7 +103,7 @@ function ReferenceDataView() {
   useEffect(() => {
     if (jsonData) {
       const table = setTableValues(jsonData.data);
-      console.log("Table", table);
+
       setTable(table);
     }
   }, [jsonData]);
@@ -133,12 +142,7 @@ function ReferenceDataView() {
             backgroundColor: "transparent",
           }}
         >
-          <DataGridSecond
-            rows={table}
-            columns={columns}
-            callback={handleSelectionModelChange}
-            path={path}
-          />
+          <DataGridSecond callback={handleSelectionModelChange} />
         </Grid>
         {traces &&
           traces

@@ -25,9 +25,6 @@ function SidebarProjects({ increment, decrement, projects, children }) {
   useEffect(() => {
     const newPath = `${router.pathname}`;
     setActiveRoute(newPath);
-
-    // generateBreadcrumbItems(activeRoute);
-    // console.log(breadcrumbItems);
   }, [router.pathname, activeRoute]);
   return (
     <Container>

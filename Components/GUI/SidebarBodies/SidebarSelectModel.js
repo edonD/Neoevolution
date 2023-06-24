@@ -26,8 +26,6 @@ function SidebarSelectModel({ children, decrement, models }) {
 
     setActiveRoute(newPath);
     // generateBreadcrumbItems(activeRoute);
-    // console.log(breadcrumbItems);
-    console.log("activeRoute", activeRoute);
   }, [router.pathname, activeRoute]);
 
   return (

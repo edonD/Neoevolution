@@ -24,9 +24,8 @@ const DropdownMenuParameters = () => {
     const fetchParametersData = async () => {
       try {
         const files = await listFiles(Parameterslink);
-        console.log("Files", files); // Do something with the files array
+
         files.map((file) => {
-          console.log("File", file);
           const result = file.key.replace(/.*\//, "");
 
           dispatch(setParameterItems(result));
@@ -42,22 +41,20 @@ const DropdownMenuParameters = () => {
   useEffect(() => {
     // Check if the selected option is still available in the items array
 
-    // console.log("Seleced Option", selectedOption);
     const selectedItem = items.find((item) => selectedOption === item.name);
-    // console.log("Selected Item", selectedItem);
+
     if (
       selectedItem === undefined &&
       items.length > 0 &&
       selectedOption === dropDownItem
     ) {
       // If the selected option is not available, select the first item in the array
-      // console.log("Selected Undefined aItem", selectedItem);
+
       setSelectedOption(items[0].name);
       dispatch(setDropdownItem(items[0].name));
     }
 
     if (selectedOption !== dropDownItem) {
-      console.log("Selected Option");
       setSelectedOption(dropDownItem);
     }
   }, [items, selectedOption]);

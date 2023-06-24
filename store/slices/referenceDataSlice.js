@@ -37,23 +37,10 @@ export const referenceDataSlice = createSlice({
     getDropdownItem: (state) => {
       return state.dropDownItem;
     },
+    cleanAllStates: () => {
+      return initialState; // Reset the state to the initial state
+    },
   },
-  // {
-  //   //Actions
-  //   setItems: (state, action) => {
-  //     const labelExists = state.items.some(
-  //       (item) => item.label === action.payload
-  //     );
-
-  //     if (!labelExists) {
-  //       const newItem = {
-  //         label: action.payload,
-  //         value: `option${state.items.length + 1}`,
-  //       };
-  //       state.items.push(newItem);
-  //     }
-  //   },
-  // },
 });
 
 export const {
@@ -61,6 +48,7 @@ export const {
   removeReferenceDataItem,
   setDropdownItem,
   getDropdownItem,
+  cleanAllStates,
 } = referenceDataSlice.actions;
 
 //Selectors

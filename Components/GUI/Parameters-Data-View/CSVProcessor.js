@@ -84,7 +84,6 @@ export function convertToCSV(data) {
 
   // Create a header row for the CSV
   let csvData = `${header}\n`;
-  console.log("CSVData", csvData);
 
   // Convert each data object to a CSV line
   for (const key in data) {
@@ -94,6 +93,6 @@ export function convertToCSV(data) {
     const csvLine = `${name},${mode},${min},${defaultValue},${max},${scale}\n`;
     csvData += csvLine;
   }
-  console.log(csvData);
+
   return csvData;
 }

@@ -235,10 +235,8 @@ function DataGridParameters({ type }) {
     setParameters([]);
     setCSVData();
     if (items.length > 0) {
-      console.log("items: ", items);
       async function fetchCSVData() {
         if (fileName !== "") {
-          console.log("Filename: ", fileName);
           try {
             setLoading(true);
             const response = await retrieveCSVromS3(path);
@@ -344,7 +342,7 @@ function DataGridParameters({ type }) {
           //   affixHeader
           affixHorizontalScrollbar
           // onRowClick={(rowData) => {
-          //   console.log(rowData);
+
           // }}
         >
           {columns &&

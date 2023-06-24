@@ -62,7 +62,6 @@ function CardForProjects({ name, state, onData, date, time, key }) {
   };
 
   const setProjectName = (name) => {
-    console.log("Setting current project", name);
     dispatch(setCurrentProject(name));
   };
 

@@ -11,10 +11,9 @@ export const generateBreadcrumbItems = (path, router) => {
   let label = "";
 
   for (let i = 0; i < pathItems.length; i++) {
-    console.log("Pathname", pathItems, "length", pathItems.length);
     if (pathItems[i] === "[projectName]") {
       const { projectName } = router.query; // Access the dynamic segment value from router.query
-      console.log("PathItems-i", router.query);
+
       label = projectName;
       url += `/${projectName}`;
       subBreadCrumbItemsForprojectName.push({ label, url });
@@ -24,7 +23,6 @@ export const generateBreadcrumbItems = (path, router) => {
     } else if (pathItems[i] === "[...modelName]") {
       const { modelName } = router.query; // Access the dynamic segment value from router.query
       if (Array.isArray(modelName)) {
-        console.log("PathItems-i", modelName);
         modelName.forEach((item, index) => {
           label = item;
           url += `/${item}`;
@@ -35,7 +33,6 @@ export const generateBreadcrumbItems = (path, router) => {
         });
         // continue;
       } else {
-        console.log("PathItems-i", modelName);
         label = modelName;
         url += `/${modelName}`;
 
@@ -44,7 +41,6 @@ export const generateBreadcrumbItems = (path, router) => {
         // continue;
       }
     } else if (pathItems[i] === "projects") {
-      console.log("NEXT", pathItems[i]);
       label = pathItems[i].replace(/-/g, " ");
       url += `/${pathItems[i]}`;
       subBreadCrumbItemsForProjects.push({ label, url });
