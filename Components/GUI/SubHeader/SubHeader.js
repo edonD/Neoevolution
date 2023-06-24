@@ -21,18 +21,23 @@ function Header() {
     console.log("headerIcon", headerIcon);
   }, [router.pathname]);
 
+  const { projectName, modelName } = router.query;
+  console.log("ROUTER", projectName, modelName);
   return (
     <HeaderContainer>
       <Nav>
+        {/* <Link
+          href={`/projects/${projectName}/${modelName}/insert-data/reference-data`}
+        > */}
         <NavLink
           icon={headerIcon[0].value}
           isActive={
             activeRoute ===
-            "/projects/create-model/select-model/insert-data/reference-data"
+            `/projects/${projectName}/${modelName[0]}/insert-data/reference-data`
           }
           onClick={() =>
             handleNavLinkClick(
-              "/projects/create-model/select-model/insert-data/reference-data"
+              `/projects/${projectName}/${modelName[0]}/insert-data/reference-data`
             )
           }
         >
@@ -41,16 +46,16 @@ function Header() {
             <StyledIcon color='#6cd17a' />
           ) : null}
         </NavLink>
-
+        {/* </Link> */}
         <NavLink
           icon={headerIcon[1].value}
           isActive={
             activeRoute ===
-            "/projects/create-model/select-model/insert-data/model"
+            `/projects/${projectName}/${modelName[0]}/insert-data/model`
           }
           onClick={() =>
             handleNavLinkClick(
-              "/projects/create-model/select-model/insert-data/model"
+              `/projects/${projectName}/${modelName[0]}/insert-data/model`
             )
           }
           isDisabled={false}
@@ -65,11 +70,11 @@ function Header() {
           icon={headerIcon[2].value}
           isActive={
             activeRoute ===
-            "/projects/create-model/select-model/insert-data/parameters"
+            `/projects/${projectName}/${modelName[0]}/insert-data/parameters`
           }
           onClick={() =>
             handleNavLinkClick(
-              "/projects/create-model/select-model/insert-data/parameters"
+              `/projects/${projectName}/${modelName[0]}/insert-data/parameters`
             )
           }
           isDisabled={false}
@@ -84,11 +89,11 @@ function Header() {
           icon={headerIcon[3].value}
           isActive={
             activeRoute ===
-            "/projects/create-model/select-model/insert-data/optimizer"
+            `/projects/${projectName}/${modelName[0]}/insert-data/optimizer`
           }
           onClick={() =>
             handleNavLinkClick(
-              "/projects/create-model/select-model/insert-data/optimizer"
+              `/projects/${projectName}/${modelName[0]}/insert-data/optimizer`
             )
           }
           isDisabled={false}

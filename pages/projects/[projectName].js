@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import ProfileHeader from "../../Components/Account/ProfileHeader/ProfileHeader";
-import SidebarProjects from "../../Components/GUI/SidebarBodies/SideBardProjects";
+import SidebarModels from "../../Components/GUI/SidebarBodies/SidebarModels";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
-function index() {
+function ProjectName() {
+  const router = useRouter();
+
   return (
     <Container>
       <ProfileHeader />
 
-      <SidebarProjects />
+      <SidebarModels />
     </Container>
   );
 }
@@ -22,4 +25,4 @@ const Container = styled.div`
 
   /* overflow-y: scr; */
 `;
-export default index;
+export default ProjectName;

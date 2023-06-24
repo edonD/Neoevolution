@@ -1,11 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import CardAdd from "../../GUI/NewModel/CardAdd";
 import CardForModels from "../../Account/Billing/Card/CardForModels";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  cleanAllStates,
+  selectedModels,
+  setNewModeltItem,
+} from "../../../store/slices/modelListSlice";
+import { selectUserNameId } from "../../../store/slices/userSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import {
+  listFolders,
+  listModelFolders,
+} from "../../Storage/UploadFileFunctions";
 
-function NewModel({ models, increment, decrement }) {
+function NewModel() {
+  const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
+
+  const [path, setPath] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const modelList = useSelector(selectedModels);
+  const dispatch = useDispatch();
+  const userNameId = useSelector(selectUserNameId);
+  const currentProjectName = useSelector(currentProject);
+  // const projectsList = useSelector(selectedProjects);
+
+  const handleListItemClick = (index) => {
+    setSelectedItem(index);
+  };
+
+  useEffect(() => {
+    setPath(`${userNameId}/${currentProjectName}/`);
+  }, [userNameId]);
+
+  useEffect(() => {
+    if (path) {
+      setLoading(true);
+      dispatch(cleanAllStates());
+      async function getFoldersInRootDirectory() {
+        try {
+          const folders = await listModelFolders(path);
+
+          folders.map((folder) => {
+            dispatch(setNewModeltItem(folder));
+          });
+          setLoading(false);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      getFoldersInRootDirectory();
+    }
+    // setLoading(false);
+  }, [path, dispatch]);
+
   return (
     <WrapperForm>
       <Form
@@ -14,18 +67,31 @@ function NewModel({ models, increment, decrement }) {
         }}
       >
         <Grid container spacing={2} columnSpacing={2}>
-          <Grid item xs={12}>
-            <Headerh2>Models + {models} </Headerh2>
-          </Grid>
+          <Grid item xs={12}></Grid>
 
           <Grid item xs={12}>
-            <CardAdd onData={increment} />
+            <CardAdd />
           </Grid>
-          {Array.from({ length: models }, (_) => (
-            <Grid item xs={6} md={6} xl={4}>
-              <CardForModels onData={decrement} number={length} />
-            </Grid>
-          ))}
+
+          {modelList &&
+            modelList
+              .slice() // Create a shallow copy of the array to avoid modifying the original
+              .sort((a, b) => a.value - b.value)
+              .map(
+                (project) =>
+                  project.name !== "config.txt" && (
+                    <Grid item xs={12} md={12} xl={6} key={project}>
+                      <CardForModels
+                        name={project.name}
+                        // date={project.date}
+                        // time={project.time}
+                        // key={project.value}
+                        // onData={onData}
+                        // state={"In Process"}
+                      />
+                    </Grid>
+                  )
+              )}
         </Grid>
       </Form>
     </WrapperForm>

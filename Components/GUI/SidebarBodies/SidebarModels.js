@@ -8,13 +8,13 @@ import { AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
 
-import ActiveOrders from "../Projects/ActiveOrders";
-import CreateNewProject from "../Projects/CreateNewProject";
+import { generateBreadcrumbItems } from "../BreadCrumb/BreadcrumbFunctions";
+import { breadcrumbHome } from "../BreadCrumb/BreadcrumbFunctions";
 import NewModel from "../NewModel/NewModel";
 import { useRouter } from "next/router";
 import { BreadCrumb } from "primereact/breadcrumb";
 
-function SidebarProjects({ increment, decrement, models }) {
+function SidebarProjects() {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
 
   const router = useRouter();
@@ -22,25 +22,11 @@ function SidebarProjects({ increment, decrement, models }) {
   const handleListItemClick = (index) => {
     setSelectedItem(index);
   };
-  const breadcrumbHome = { icon: "pi pi-home", to: "/" };
-  const generateBreadcrumbItems = (path) => {
-    const pathItems = path.split("/").filter((item) => item !== "");
-
-    let breadcrumbItems = [];
-    let url = "";
-
-    for (let i = 0; i < pathItems.length; i++) {
-      const label = pathItems[i].replace(/-/g, " ");
-      url += `/${pathItems[i]}`;
-
-      breadcrumbItems.push({ label, url });
-    }
-
-    return breadcrumbItems;
-  };
 
   useEffect(() => {
-    setActiveRoute(router.pathname);
+    const newPath = `${router.pathname}`;
+    setActiveRoute(newPath);
+    console.log(router.pathname);
     // generateBreadcrumbItems(activeRoute);
     // console.log(breadcrumbItems);
   }, [router.pathname, activeRoute]);
@@ -92,11 +78,11 @@ function SidebarProjects({ increment, decrement, models }) {
         <BreadCrumbContainer>
           <StyledBreadCrumb
             home={breadcrumbHome}
-            model={generateBreadcrumbItems(activeRoute)}
+            model={generateBreadcrumbItems(activeRoute, router)}
           />
         </BreadCrumbContainer>
 
-        <NewModel models={models} increment={increment} decrement={decrement} />
+        <NewModel />
       </MainView>
     </Container>
   );

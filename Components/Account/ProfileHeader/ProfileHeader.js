@@ -9,7 +9,7 @@ import AiValanchePopUp from "../../GUI/AiValancheHome/AiValanchePopUp";
 import { useEffect } from "react";
 import { Auth } from "aws-amplify";
 
-function ProfileHeader({ onData }) {
+function ProfileHeader() {
   const [dropDownState, setdropDownState] = useState(false);
   const toggle = () => {
     setdropDownState(!dropDownState);
@@ -33,14 +33,14 @@ function ProfileHeader({ onData }) {
         <Image src='/images/logo_blue.png' width={50} height={50} alt='brain' />
       </LogoContainer>
       <SecondDivider>
-        <Link href='/projects' passHref>
+        {/* <Link href='/projects' passHref>
           <AiValanchePopUp
             ButtonText={"Create a new Project"}
             icon={true}
             size={14}
-            onData={onData}
+            // onData={onData}
           />
-        </Link>
+        </Link> */}
         <PersonalContent>
           <ImageContainer onClick={toggle}>
             <h1>ED</h1>

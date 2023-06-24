@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  setProjectItem,
-  selectedProjects,
-} from "../../../store/slices/projectListSlice.js";
+import { selectedProjects } from "../../../store/slices/projectListSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice.js";
 import styled from "styled-components";
@@ -10,18 +7,21 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { uploadFolderToS3 } from "../../Storage/UploadFileFunctions.js";
+import { setCurrentProject } from "../../../store/slices/projectListSlice.js";
+import { TailSpin } from "react-loader-spinner";
 
-function CardAdd({ onData }) {
-  const dispatch = useDispatch();
+function CardAdd() {
   const usernameId = useSelector(selectUserNameId);
-
   const projects = useSelector(selectedProjects);
+  const [loading, setLoading] = React.useState(false);
+  const dispatch = useDispatch();
 
   const findHighestProjectNumber = (projects) => {
     let maxExtension = 0;
-    let projectNameWithMaxExtension = "";
+    let projectNameWithMaxExtension = "1";
 
     for (const project of projects) {
+      console.log("Project", project);
       if (project && project.name.startsWith("New Project")) {
         const extension = parseInt(project.name.split(" ")[2]);
 
@@ -38,30 +38,53 @@ function CardAdd({ onData }) {
   };
 
   const handleClick = () => {
+    setLoading(true);
+
     uploadFolderToS3(
       usernameId,
       `New Project ${findHighestProjectNumber(projects) + 1}`
     );
     dispatch(
-      setProjectItem(`New Project ${findHighestProjectNumber(projects) + 1}`)
+      setCurrentProject(`New Project ${findHighestProjectNumber(projects) + 1}`)
     );
   };
   return (
-    // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-
-    <Card onClick={handleClick}>
-      <ImageContainer>
-        <Image
-          src='/images/plus-svgrepo-com.svg'
-          width={100}
-          height={100}
-          alt='brain'
-        />
-      </ImageContainer>
-      <ListItem>
-        <h3>Create New Project</h3>
-      </ListItem>
-    </Card>
+    <Link
+      href={`/projects/${encodeURIComponent(
+        `New Project ${findHighestProjectNumber(projects) + 1}`
+      )}`}
+    >
+      <Card
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        <ImageContainer>
+          {loading ? (
+            <TailSpin
+              height='50'
+              width='50'
+              color='#3e89ff'
+              ariaLabel='rotating-square-loading'
+              strokeWidth='4'
+              wrapperStyle={{}}
+              wrapperClass=''
+              visible={loading}
+            />
+          ) : (
+            <Image
+              src='/images/plus-svgrepo-com.svg'
+              width={100}
+              height={100}
+              alt='brain'
+            />
+          )}
+        </ImageContainer>
+        <ListItem>
+          <h3>Create New Project</h3>
+        </ListItem>
+      </Card>
+    </Link>
   );
 }
 

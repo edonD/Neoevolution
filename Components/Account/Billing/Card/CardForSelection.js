@@ -1,21 +1,18 @@
 import React from "react";
-import {
-  CardMedia,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
+
 import styled from "styled-components";
-import Image from "next/image";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function CardForSelection({ onData, name }) {
+  const router = useRouter();
+  console.log("CardForSelection: ", router.query);
+  const { projectName, modelName } = router.query;
+
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-    <Link href={`/projects/create-model/select-model/insert-data`} passHref>
+    <Link href={`/projects/${projectName}/${modelName[0]}/insert-data`}>
       <Card>
         {/* <ImageContainer>
         <Image

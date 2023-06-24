@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { TailSpin } from "react-loader-spinner";
+import Link from "next/link";
 
 function ContinueButton({ show }) {
   const [loading, setLoading] = useState(false);
@@ -11,41 +12,44 @@ function ContinueButton({ show }) {
     setLoading(false);
   }, []);
   const router = useRouter();
+
+  const { projectName, modelName } = router.query;
   return (
-    <Card
-      onClick={() => {
-        router.push(
-          "/projects/create-model/select-model/insert-data/reference-data"
-        );
-        setLoading(true);
-      }}
-      show={show}
+    <Link
+      href={`/projects/${projectName}/${modelName[0]}/insert-data/reference-data`}
     >
-      {loading ? (
-        <TailSpin
-          height='80'
-          width='80'
-          color='#3e89ff'
-          ariaLabel='rotating-square-loading'
-          strokeWidth='4'
-          wrapperStyle={{}}
-          wrapperClass=''
-          visible={loading}
-        />
-      ) : (
-        <ImageContainer>
-          <Image
-            src='/images/plus-svgrepo-com.svg'
-            width={100}
-            height={100}
-            alt='brain'
+      <Card
+        onClick={() => {
+          setLoading(true);
+        }}
+        show={show}
+      >
+        {loading ? (
+          <TailSpin
+            height='80'
+            width='80'
+            color='#3e89ff'
+            ariaLabel='rotating-square-loading'
+            strokeWidth='4'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={loading}
           />
-        </ImageContainer>
-      )}
-      <ListItem>
-        <h3>New Calibration</h3>
-      </ListItem>
-    </Card>
+        ) : (
+          <ImageContainer>
+            <Image
+              src='/images/plus-svgrepo-com.svg'
+              width={100}
+              height={100}
+              alt='brain'
+            />
+          </ImageContainer>
+        )}
+        <ListItem>
+          <h3>New Calibration</h3>
+        </ListItem>
+      </Card>
+    </Link>
   );
 }
 

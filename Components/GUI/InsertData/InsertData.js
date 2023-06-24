@@ -9,6 +9,8 @@ import { useState } from "react";
 import { uploadFile } from "../../Storage/UploadFileFunctions";
 import { useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
+import { currentModel } from "../../../store/slices/modelListSlice";
 
 function InsertData() {
   const router = useRouter();
@@ -31,6 +33,8 @@ function InsertData() {
   const [uploadCostFunctionDone, setUploadCostFunctionDone] = useState(false);
 
   const usernameID = useSelector(selectUserNameId);
+  const project = useSelector(currentProject);
+  const model = useSelector(currentModel);
 
   const numRowsQueryParam = router.query.numRows;
   const initialNumRows = numRowsQueryParam
@@ -85,19 +89,22 @@ function InsertData() {
     setUploadCostFunctionProgress(percentage);
     setUploadCostFunctionDone(false);
   };
-
+  const userId = usernameID; // Replace with the actual user ID.
+  const projectId = project;
+  const modelId = model;
+  const path = `${userId}/${projectId}/${modelId}`;
   const handleReferenceDataDrop = (acceptedFiles) => {
+    console.log("PAATTH", path);
     try {
       if (acceptedFiles.length === 0) {
         console.error("No file selected");
         return;
       }
 
-      const userId = usernameID; // Replace with the actual user ID.
       const folderName = "Reference Data"; // Replace with the desired folder name.
       acceptedFiles.forEach((file) => {
         uploadFile(
-          userId,
+          path,
           file,
           folderName,
           handleRegerenceDataProgressChange,
@@ -121,7 +128,7 @@ function InsertData() {
 
       acceptedFiles.forEach((file) => {
         uploadFile(
-          userId,
+          path,
           file,
           folderName,
           handleModelNetlistProgressChange,
@@ -146,7 +153,7 @@ function InsertData() {
 
       acceptedFiles.forEach((file) => {
         uploadFile(
-          userId,
+          path,
           file,
           folderName,
           handleTestbenchesProgressChange,
@@ -171,7 +178,7 @@ function InsertData() {
 
       acceptedFiles.forEach((file) => {
         uploadFile(
-          userId,
+          path,
           file,
           folderName,
           handleModelParametersProgressChange,
@@ -196,7 +203,7 @@ function InsertData() {
 
       acceptedFiles.forEach((file) => {
         uploadFile(
-          userId,
+          path,
           file,
           folderName,
           handleCostFunctionProgressChange,

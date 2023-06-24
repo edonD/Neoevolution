@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 
-function CardForModels({ number, onData }) {
+function CardForModels({ name, onData }) {
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
     <Link href={`/projects/create-model/select-model`} passHref>
@@ -21,16 +21,10 @@ function CardForModels({ number, onData }) {
         <Box>
           <CardContent>
             <ListItem>
-              <h3>Model Name</h3>
+              <h3>{name}</h3>
             </ListItem>
             <ListItem>
-              <Button
-                onClick={() => {
-                  const decrement = 1;
-                  onData(decrement);
-                }}
-                className='red-white-black'
-              >
+              <Button onClick={() => {}} className='red-white-black'>
                 Cancel
               </Button>
             </ListItem>

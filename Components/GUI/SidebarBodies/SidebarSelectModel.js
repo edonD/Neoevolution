@@ -9,7 +9,8 @@ import { BiLoaderCircle } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
 import { useRouter } from "next/router";
 import { BreadCrumb } from "primereact/breadcrumb";
-import BreadcrumbWithEdit from "../BreadCrumb/BreadcrumbWithEdit ";
+import { generateBreadcrumbItems } from "../BreadCrumb/BreadcrumbFunctions";
+import { breadcrumbHome } from "../BreadCrumb/BreadcrumbFunctions";
 
 function SidebarSelectModel({ children, decrement, models }) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
@@ -19,27 +20,14 @@ function SidebarSelectModel({ children, decrement, models }) {
   const handleListItemClick = (index) => {
     setSelectedItem(index);
   };
-  const breadcrumbHome = { icon: "pi pi-home", to: "/" };
-  const generateBreadcrumbItems = (path) => {
-    const pathItems = path.split("/").filter((item) => item !== "");
-
-    let breadcrumbItems = [];
-    let url = "";
-
-    for (let i = 0; i < pathItems.length; i++) {
-      const label = pathItems[i].replace(/-/g, " ");
-      url += `/${pathItems[i]}`;
-
-      breadcrumbItems.push({ label, url });
-    }
-
-    return breadcrumbItems;
-  };
 
   useEffect(() => {
-    setActiveRoute(router.pathname);
+    const newPath = `${router.pathname}`;
+
+    setActiveRoute(newPath);
     // generateBreadcrumbItems(activeRoute);
     // console.log(breadcrumbItems);
+    console.log("activeRoute", activeRoute);
   }, [router.pathname, activeRoute]);
 
   return (
@@ -89,7 +77,7 @@ function SidebarSelectModel({ children, decrement, models }) {
         <BreadCrumbContainer>
           <StyledBreadCrumb
             home={breadcrumbHome}
-            model={generateBreadcrumbItems(activeRoute)}
+            model={generateBreadcrumbItems(activeRoute, router)}
           />
         </BreadCrumbContainer>
 

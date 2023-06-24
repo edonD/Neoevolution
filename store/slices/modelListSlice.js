@@ -2,24 +2,17 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   projects: [],
-  currentProject: null,
+  currentModel: null,
 };
 
-export const projectListSlice = createSlice({
-  name: "projectList",
+export const modelListSlice = createSlice({
+  name: "modelList",
   initialState,
   reducers: {
     //Actions
-    setProjectItem: (state, action) => {
+    setNewModeltItem: (state, action) => {
       const { folder, lastModifiedDate, lastModifiedTime } = action.payload;
-      console.log(
-        "Folder Inside action",
-        folder,
-        "date",
-        lastModifiedDate,
-        "time",
-        lastModifiedTime
-      );
+
       const labelExists = state.projects.some((item) => item.name === folder);
 
       if (!labelExists) {
@@ -33,7 +26,7 @@ export const projectListSlice = createSlice({
       }
       console.log("State", current(state.projects));
     },
-    removeProjectItem: (state, action) => {
+    removeModelItem: (state, action) => {
       const index = state.projects.findIndex(
         (item) => item.name === action.payload
       );
@@ -42,11 +35,10 @@ export const projectListSlice = createSlice({
         state.projects.splice(index, 1);
       }
     },
-    setCurrentProject: (state, action) => {
-      console.log("Current Project", action.payload);
+    setCurrentModel: (state, action) => {
       state.currentProject = action.payload;
     },
-    getCurrentProject: (state) => {
+    getCurrentModel: (state) => {
       return state.currentProject;
     },
     cleanAllStates: () => {
@@ -56,15 +48,15 @@ export const projectListSlice = createSlice({
 });
 
 export const {
-  setProjectItem,
-  removeProjectItem,
-  setCurrentProject,
-  getCurrentProject,
+  setNewModeltItem,
+  removeModelItem,
+  setCurrentModel,
+  getCurrentModel,
   cleanAllStates,
-} = projectListSlice.actions;
+} = modelListSlice.actions;
 
 //Selectors
-export const selectedProjects = (state) => state.projectList.projects;
-export const currentProject = (state) => state.projectList.currentProject;
+export const selectedModels = (state) => state.modelList.projects;
+export const currentModel = (state) => state.modelList.currentProject;
 
-export default projectListSlice.reducer;
+export default modelListSlice.reducer;

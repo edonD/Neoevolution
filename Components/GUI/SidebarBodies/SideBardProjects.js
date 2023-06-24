@@ -13,6 +13,7 @@ import {
   setProjectItem,
   selectedProjects,
   setCurrentProject,
+  cleanAllStates,
 } from "../../../store/slices/projectListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
@@ -22,10 +23,13 @@ import {
   getFileProperties,
 } from "../../Storage/UploadFileFunctions";
 import { Storage } from "aws-amplify";
+import { RotatingSquare } from "react-loader-spinner";
 
-function SidebarProjects({ incrementProjects, decrementProjects, projects }) {
+function SidebarProjects({}) {
   const [selectedItem, setSelectedItem] = useState(0); // Add new state variable
-  // const [projectList, setProjectList] = useState([]);
+
+  const [path, setPath] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const projectList = useSelector(selectedProjects);
   const dispatch = useDispatch();
@@ -36,27 +40,30 @@ function SidebarProjects({ incrementProjects, decrementProjects, projects }) {
     setSelectedItem(index);
   };
 
-  useEffect(
-    () => {
-      async function getFoldersInRootDirectory(path) {
+  useEffect(() => {
+    setPath(`${userNameId}/`);
+  }, [userNameId]);
+
+  useEffect(() => {
+    if (path) {
+      setLoading(true);
+      dispatch(cleanAllStates());
+      async function getFoldersInRootDirectory() {
         try {
           const folders = await listFolders(path);
-
-          console.log("Creation Date", folders);
           folders.map((folder) => {
             dispatch(setProjectItem(folder));
           });
-          console.log("Folders", folders);
+          setLoading(false);
         } catch (err) {
           console.log(err);
         }
       }
-      getFoldersInRootDirectory(userNameId);
-    },
-    [userNameId],
-    projectList
-  );
 
+      getFoldersInRootDirectory();
+    }
+    // setLoading(false);
+  }, [path, dispatch]);
   return (
     <Container>
       <WrapperDescription>
@@ -101,12 +108,26 @@ function SidebarProjects({ incrementProjects, decrementProjects, projects }) {
         </AccountBody>
       </WrapperDescription>
       <MainView>
-        {/* {projectList.length === 0 ? (
-          <CreateNewProject onData={incrementProjects} ButtonText={"Create"} />
-        ) : ( */}
-        <ActiveOrders projects={projectList} onData={decrementProjects} />
-        {/* )} */}
-        {/* <ActiveOrders /> */}
+        {!loading ? (
+          <>
+            {projectList.length === 0 ? (
+              <CreateNewProject ButtonText={"Create"} />
+            ) : (
+              <ActiveOrders projects={projectList} />
+            )}
+          </>
+        ) : (
+          <RotatingSquare
+            height='100'
+            width='100'
+            color='#2488ff'
+            ariaLabel='rotating-square-loading'
+            strokeWidth='4'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={true}
+          />
+        )}
       </MainView>
     </Container>
   );

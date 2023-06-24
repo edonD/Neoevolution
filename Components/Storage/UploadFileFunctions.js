@@ -10,6 +10,7 @@ export const uploadFile = async function (
 ) {
   const fileName = file.name;
   try {
+    console.log("UserID:", userId);
     const result = await Storage.put(
       `${userId}/${folderName}/${fileName}`,
       file,
@@ -79,6 +80,7 @@ export const listFiles = async function (path) {
 export const listFolders = async function (path) {
   try {
     const { results } = await Storage.list(path);
+    console.log("Results", results, "Path", path);
 
     const folders = [];
     results.forEach((result) => {
@@ -91,6 +93,33 @@ export const listFolders = async function (path) {
         const lastModifiedTime = new Date(
           result.lastModified
         ).toLocaleTimeString();
+        folders.push({ folder, lastModifiedDate, lastModifiedTime });
+      }
+    });
+
+    return folders;
+  } catch (err) {
+    console.error(err);
+    // throw err; // Rethrow the error to propagate it to the caller
+  }
+};
+
+export const listModelFolders = async function (path) {
+  try {
+    const { results } = await Storage.list(path);
+
+    const folders = [];
+    results.forEach((result) => {
+      const keyParts = result.key.split("/");
+      if (keyParts.length > 1) {
+        const folder = keyParts[2];
+        const lastModifiedDate = new Date(
+          result.lastModified
+        ).toLocaleDateString();
+        const lastModifiedTime = new Date(
+          result.lastModified
+        ).toLocaleTimeString();
+        console.log("FolderModels", folder, "Path", path);
         folders.push({ folder, lastModifiedDate, lastModifiedTime });
       }
     });
@@ -135,8 +164,9 @@ export const retrieveCSVromS3 = async function (path) {
 };
 
 export const uploadFolderToS3 = async function (userId, folderName) {
+  console.log("User Id", userId, "Folder Name", folderName);
   try {
-    const result = await Storage.put(`${userId}/${folderName}`, {});
+    const result = await Storage.put(`${userId}/${folderName}/config.txt`, {});
     console.log("Folder uploaded successfully:", result);
   } catch (error) {
     console.error("Error uploading folder:", error);

@@ -1,19 +1,13 @@
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
-import { useState } from "react";
+
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import { BsPerson } from "react-icons/bs";
+
 import { AiFillCreditCard, AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 import DataGridFirst from "../DataGrids/DataGridFirst";
-import DropdownMenu from "../DropdownMenu";
+
 import Link from "next/link";
 import Plots from "../Plots";
 

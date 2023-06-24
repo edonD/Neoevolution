@@ -1,25 +1,81 @@
 import React from "react";
-import {
-  CardMedia,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
+import { InputBase, TextField } from "@mui/material";
 import styled from "styled-components";
 import Image from "next/image";
-import { BiLoaderCircle } from "react-icons/bi";
-import { RiCalendar2Line } from "react-icons/ri";
-import { AiOutlineDownload, AiOutlineClockCircle } from "react-icons/ai";
-import Link from "next/link";
-import { useEffect } from "react";
 
-function CardForProjects({ name, state, onData, date, time }) {
+import Link from "next/link";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeProjectItem,
+  setCurrentProject,
+} from "../../../../store/slices/projectListSlice";
+import { deleteFileFromStorage } from "../../../Storage/UploadFileFunctions";
+import { selectUserNameId } from "../../../../store/slices/userSlice";
+
+function ConditionalLink({ href, editing, children }) {
+  if (editing) {
+    return <div>{children}</div>;
+  }
+
+  return <Link href={href}>{children}</Link>;
+}
+
+function CardForProjects({ name, state, onData, date, time, key }) {
+  const [editing, setEditing] = useState(false);
+  const [editedName, setEditedName] = useState(name);
+  const dispatch = useDispatch();
+  const usernameId = useSelector(selectUserNameId);
+  const path = `${usernameId}/${name}`;
+
+  const handleNameClick = () => {
+    setEditing(true);
+  };
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    dispatch(removeProjectItem(name));
+    deleteFileFromStorage(path);
+  };
+
+  const handleNameChange = (e) => {
+    setEditedName(e.target.value);
+  };
+
+  const handleNameBlur = () => {
+    if (editedName.trim() === "") {
+      setEditedName("empty");
+    }
+    setEditing(false);
+  };
+
+  const handleNameKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleNameBlur();
+    }
+  };
+
+  const handleNameInputClick = (e) => {
+    e.stopPropagation();
+    setEditing(true);
+  };
+
+  const setProjectName = (name) => {
+    console.log("Setting current project", name);
+    dispatch(setCurrentProject(name));
+  };
+
   return (
-    // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
-    <Link href={`/projects/create-model`} passHref>
-      <Card>
+    <ConditionalLink
+      href={`/projects/${encodeURIComponent(name)}`}
+      editing={editing}
+    >
+      <Card
+        onClick={() => {
+          setProjectName(name);
+        }}
+      >
         <Header>
           <ImageContainer>
             <Image
@@ -33,11 +89,22 @@ function CardForProjects({ name, state, onData, date, time }) {
         <Box>
           <CardContent>
             <ListItem>
-              <h3>{name}</h3>
+              {editing ? (
+                <NameInput
+                  color='secondary'
+                  value={editedName}
+                  onChange={handleNameChange}
+                  onBlur={handleNameBlur}
+                  onClick={handleNameInputClick}
+                  onKeyDown={handleNameKeyPress}
+                />
+              ) : (
+                <NameText onClick={handleNameInputClick}>{editedName}</NameText>
+              )}
             </ListItem>
-            <ListItem state={state}>
+            {/* <ListItem state={state}>
               <h2>{state}</h2>
-            </ListItem>
+            </ListItem> */}
           </CardContent>
           <CardContent>
             <ListItemEnd style={{ justifyContent: "center" }}>
@@ -57,20 +124,14 @@ function CardForProjects({ name, state, onData, date, time }) {
             </ListItemEnd>
 
             <ListItemEnd>
-              <Button
-                onClick={() => {
-                  const decrement = 1;
-                  onData(decrement);
-                }}
-                className='red-white-black'
-              >
-                Cancel
+              <Button onClick={handleDeleteClick} className='red-white-black'>
+                <p>Delete Project</p>
               </Button>
             </ListItemEnd>
           </CardContent>
         </Box>
       </Card>
-    </Link>
+    </ConditionalLink>
   );
 }
 
@@ -94,14 +155,18 @@ const Button = styled.button`
   color: #fff;
   cursor: pointer;
   font-size: 15px;
+  font-weight: 400;
   display: flex;
   flex-direction: center;
   justify-content: center;
-  padding: 5px;
+  padding: 10px;
   transition: background-color 0.2s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
   margin-bottom: 20px;
+  p {
+    margin: 0;
+    user-select: none;
+  }
   &:active {
     transform: translateY(2px);
   }
@@ -180,61 +245,18 @@ const CardContent = styled.div`
   margin-left: 10px;
 `;
 
-const IconContainer = styled.div`
-  width: 20%;
-  height: 100%;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-const Icon = styled.div`
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #909aff;
-  background: transparent;
-`;
-
-const IconCircle = styled.div`
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  border-radius: 40px;
-  /* border: 1px solid green; */
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${(check) => (check.state === "Delivered" ? "green" : " #ee7b87")};
-  background: ${(check) =>
-    check.state === "Delivered" ? "#ececa3" : " #fce4e7"};
-  cursor: pointer;
-  :hover {
-    background: ${(check) =>
-      check.state === "Delivered" ? "#abc32f" : " #e84b5b"};
-    color: white;
-  }
-`;
-
 const ListItem = styled.div`
   width: 100%;
-  height: 50%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   background: transparent;
-  padding: 0px;
+  padding-top: 20px;
   background-color: transparent;
   margin: 0px 0px 0px 0px;
   color: black;
-  //cursor: pointer;
 
   h1 {
     font-size: 14px;
@@ -312,25 +334,21 @@ const ListItemEnd = styled.div`
   }
 `;
 
-const DownloadItem = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  padding: 0px;
-  background-color: transparent;
-  margin: 0px 0px 0px 0px;
+const NameInput = styled(InputBase)`
+  && {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 300;
+    background-color: white;
+  }
+`;
 
-  //cursor: pointer;
-
-  h1 {
-    font-size: 14px;
-    color: black;
-    font-weight: 200;
-    margin: 0px;
+const NameText = styled.h3`
+  cursor: pointer;
+  padding: 10px 0px;
+  &:hover {
+    text-decoration: underline;
   }
 `;
 

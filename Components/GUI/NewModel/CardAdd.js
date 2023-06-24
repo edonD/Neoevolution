@@ -1,76 +1,101 @@
-import React from "react";
-import {
-  CardMedia,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
+import React, { useEffect } from "react";
+
 import styled from "styled-components";
 import Image from "next/image";
-
+import { uploadFolderToS3 } from "../../Storage/UploadFileFunctions";
+import { selectUserNameId } from "../../../store/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectedModels,
+  setCurrentModel,
+} from "../../../store/slices/modelListSlice";
+import { currentProject } from "../../../store/slices/projectListSlice";
 import Link from "next/link";
+import { TailSpin } from "react-loader-spinner";
 
 function CardAdd({ onData }) {
-  return (
-    // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
+  const usernameId = useSelector(selectUserNameId);
+  const models = useSelector(selectedModels);
+  const currentProjectName = useSelector(currentProject);
+  const [loading, setLoading] = React.useState(false);
+  const [currentProjectState, setCurrentProjectState] = React.useState(null);
 
-    <Card
-      onClick={() => {
-        const icrement = 1;
-        onData(icrement);
-      }}
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (currentProjectName) {
+      setCurrentProjectState(currentProjectName);
+    }
+  }, [currentProjectName]);
+  const findHighestModelNumber = (models) => {
+    console.log("Current Project", currentProjectName);
+    let maxExtension = 0;
+    let projectNameWithMaxExtension = "1";
+
+    for (const project of models) {
+      if (project && project.name.startsWith("New Model")) {
+        const extension = parseInt(project.name.split(" ")[2]);
+
+        if (extension > maxExtension) {
+          maxExtension = extension;
+          projectNameWithMaxExtension = project.name;
+        }
+      }
+    }
+    console.log(
+      `Project with the highest extension: ${projectNameWithMaxExtension}`
+    );
+    return maxExtension;
+  };
+
+  const handleClick = () => {
+    setLoading(true);
+    uploadFolderToS3(
+      `${usernameId}/${currentProjectState}`,
+      `New Model ${findHighestModelNumber(models) + 1}`
+    );
+    dispatch(
+      setCurrentModel(`New Model ${findHighestModelNumber(models) + 1}`)
+    );
+  };
+
+  return (
+    <Link
+      href={`/projects/${currentProjectName}/${encodeURIComponent(
+        `New Model ${findHighestModelNumber(models) + 1}`
+      )}`}
     >
-      <ImageContainer>
-        <Image
-          src='/images/plus-svgrepo-com.svg'
-          width={100}
-          height={100}
-          alt='brain'
-        />
-      </ImageContainer>
-      <ListItem>
-        <h3>New Model</h3>
-      </ListItem>
-      {/* <Header>
-          <ImageContainer>
+      <Card
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        <ImageContainer>
+          {loading ? (
+            <TailSpin
+              height='50'
+              width='50'
+              color='#3e89ff'
+              ariaLabel='rotating-square-loading'
+              strokeWidth='4'
+              wrapperStyle={{}}
+              wrapperClass=''
+              visible={loading}
+            />
+          ) : (
             <Image
-              src='/images/gggrain.svg'
-              layout='fill'
-              objectFit='contain'
+              src='/images/plus-svgrepo-com.svg'
+              width={100}
+              height={100}
               alt='brain'
             />
-          </ImageContainer>
-        </Header> */}
-      {/* <Box>
-          <CardContent>
-            <ListItem>
-              <h3>Project Name</h3>
-            </ListItem>
-            <ListItem state={state}>
-              <h2>{state}</h2>
-            </ListItem>
-          </CardContent>
-          <CardContent>
-            <ListItemEnd>
-              <h2>Updated at</h2>
-              <h1>7 June, 2022</h1>
-            </ListItemEnd>
-            <ListItemEnd>
-              <Button
-                onClick={() => {
-                  const decrement = 1;
-                  onData(decrement);
-                }}
-                className='red-white-black'
-              >
-                Cancel
-              </Button>
-            </ListItemEnd>
-          </CardContent>
-        </Box> */}
-    </Card>
+          )}
+        </ImageContainer>
+        <ListItem>
+          <h3>New Model</h3>
+        </ListItem>
+      </Card>
+    </Link>
   );
 }
 

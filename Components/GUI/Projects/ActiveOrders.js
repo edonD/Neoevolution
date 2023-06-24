@@ -22,17 +22,21 @@ function ActiveOrders({ projects, onData }) {
             projects
               .slice() // Create a shallow copy of the array to avoid modifying the original
               .sort((a, b) => a.value - b.value)
-              .map((project) => (
-                <Grid item xs={12} md={12} xl={6} key={project}>
-                  <CardForProjects
-                    name={project.name}
-                    date={project.date}
-                    time={project.time}
-                    onData={onData}
-                    state={"In Process"}
-                  />
-                </Grid>
-              ))}
+              .map(
+                (project) =>
+                  project.name !== "config.txt" && (
+                    <Grid item xs={12} md={12} xl={6} key={project}>
+                      <CardForProjects
+                        name={project.name}
+                        date={project.date}
+                        time={project.time}
+                        key={project.value}
+                        onData={onData}
+                        state={"In Process"}
+                      />
+                    </Grid>
+                  )
+              )}
           <Grid
             item
             xs={12}

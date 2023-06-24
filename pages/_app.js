@@ -4,6 +4,8 @@ import "primereact/resources/primereact.css"; // core css
 import "primeicons/primeicons.css"; // icons
 import "primeflex/primeflex.css";
 
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "../store/store";
 import { LayoutProvider } from "../Components/Login/context/layoutcontext";
 import store from "../store/store";
 import { Provider } from "react-redux";
@@ -14,9 +16,11 @@ Amplify.configure({ ...awsconfig, ssr: true });
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <LayoutProvider>
-        <Component {...pageProps} />
-      </LayoutProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <LayoutProvider>
+          <Component {...pageProps} />
+        </LayoutProvider>
+      </PersistGate>
     </Provider>
   );
 }

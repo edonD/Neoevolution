@@ -1,30 +1,21 @@
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
 import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import { BsPerson } from "react-icons/bs";
+
 import { AiFillCreditCard, AiFillFolderOpen } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
-import DataGridFirst from "../DataGrids/DataGridFirst";
-import DropdownMenu from "../DropdownMenu";
-import Link from "next/link";
-import Plots from "../Plots";
-import TestButtons from "../TestButtons";
 
-import OptimizationScatterPlot from "../DataGrids/OptimizationScatterPlot";
+import Link from "next/link";
+
+import TestButtons from "../TestButtons";
 import MultipleHistograms from "../DataGrids/MultipleHistograms";
 import dynamic from "next/dynamic";
 
 function SidebarBody() {
   const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
-  const [now, setNow] = useState(false);
+
   const [text, setText] = useState("");
 
   const [data, setData] = useState([]);

@@ -1,12 +1,12 @@
 import React from "react";
-import SidebarSoftware from "../../../../../../Components/GUI/SidebarBodies/SidebarSoftware";
-import ProfileHeader from "../../../../../../Components/Account/ProfileHeader/ProfileHeader";
+import SidebarSoftware from "../../../../../Components/GUI/SidebarBodies/SidebarSoftware";
+import ProfileHeader from "../../../../../Components/Account/ProfileHeader/ProfileHeader";
 
-import ReferenceDataView from "../../../../../../Components/GUI/Reference-Data-View/ReferenceDataView";
+import ReferenceDataView from "../../../../../Components/GUI/Reference-Data-View/ReferenceDataView";
 
 import styled from "styled-components";
 
-function index({ jsonData, totalFile }) {
+export const ReferenceData = function () {
   return (
     <Container>
       <ProfileHeader />
@@ -16,7 +16,7 @@ function index({ jsonData, totalFile }) {
       </SidebarSoftware>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   display: flex;
@@ -28,5 +28,3 @@ const Container = styled.div`
   height: 100%;
   /* padding-right: calc(100vw - 100%); */
 `;
-
-export default index;

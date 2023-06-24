@@ -1,19 +1,34 @@
 import React from "react";
 import { GiSwirledShell } from "react-icons/gi";
-import AiValanchePopUp from "../../../Components/GUI/AiValancheHome/AiValanchePopUp";
+import {
+  selectedProjects,
+  setCurrentProject,
+} from "../../../store/slices/projectListSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserNameId } from "../../../store/slices/userSlice.js";
 import styled from "styled-components";
 import { BsPlusCircleFill } from "react-icons/bs";
 
+import Link from "next/link";
+import { uploadFolderToS3 } from "../../Storage/UploadFileFunctions.js";
+import { useRouter } from "next/router.js";
+import { TailSpin } from "react-loader-spinner";
+import { Button } from "primereact/button";
+
 function CreateNewProject({ onData, icon, ButtonText }) {
-  const [open, setOpen] = React.useState(false);
+  const usernameId = useSelector(selectUserNameId);
+  const dispatch = useDispatch();
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const projects = useSelector(selectedProjects);
+
+  const [loading, setLoading] = React.useState(false);
+
+  const handleClick = () => {
+    setLoading(true);
+    uploadFolderToS3(usernameId, `New Project 1`);
+    dispatch(setCurrentProject(`New Project 1`));
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <Container>
       <Wrapper>
@@ -27,24 +42,17 @@ function CreateNewProject({ onData, icon, ButtonText }) {
             including models, simulations, model calibrations and more.
           </Description>
           <ButtonContainer>
-            <FormButton
-              className='blue-white-lightblue'
-              onClick={() => {
-                const increment = 1;
-                onData(increment);
-                handleClose();
-              }}
-            >
-              {icon ? (
-                <BsPlusCircleFill
-                  size={15}
-                  style={{ marginRight: "10px", background: "transparent" }}
-                />
-              ) : (
-                <></>
-              )}
-              {ButtonText}
-            </FormButton>
+            <Link href={`/projects/${encodeURIComponent(`New Project 1`)}`}>
+              <FormButton
+                className='blue-white-lightblue'
+                onClick={() => {
+                  handleClick();
+                }}
+                loading={loading}
+                label={ButtonText}
+                icon='pi pi-plus'
+              ></FormButton>
+            </Link>
             {/* <AiValanchePopUp onData={onData} ButtonText={"Create"} size={18} /> */}
           </ButtonContainer>
         </Body>
@@ -124,14 +132,14 @@ const Logo = styled.div`
   }
 `;
 
-const FormButton = styled.button`
+const FormButton = styled(Button)`
   background-color: #1abc9c;
   border: none;
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  /* font-size: 35px; */
-  font-size: ${(props) => `${props.size}px`};
+  font-size: 15px;
+  /* font-size: ${(props) => `${props.size}px`}; */
 
   display: flex;
   flex-direction: center;
