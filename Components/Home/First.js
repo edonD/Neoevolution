@@ -138,13 +138,13 @@ const Header = styled.div`
     text-align: center;
     margin: 0px;
     margin-top: 15px;
-    font-size: 18px;
+    font-size: 24px;
     text-shadow: 3px 3px 5px black;
     @media screen and (max-width: 1200px) {
-      font-size: 14px;
+      font-size: 20px;
     }
     @media screen and (max-width: 600px) {
-      font-size: 13px;
+      font-size: 18px;
     }
   }
 `;
