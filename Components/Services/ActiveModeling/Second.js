@@ -24,30 +24,34 @@ const Container = styled.div`
   width: 100%;
   height: 35vh;
   display: flex;
+  min-height: 350px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f3f4f8;
-  background: #f3f4f8;
+  background-color: #f2f4f7;
+  background: #f2f4f7;
   position: relative;
+
+  padding: 20px;
+  border-radius: 15px;
 `;
 
 const HeaderDivider = styled.div`
   width: 70%;
-  height: 50%;
+  height: 30%;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-start;
-  color: black;
+  color: #101419;
   @media screen and (max-width: 1200px) {
     justify-content: center;
     align-items: center;
   }
   h1 {
     margin: 0px;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 400;
     text-align: left;
     @media screen and (max-width: 1200px) {
@@ -60,26 +64,27 @@ const HeaderDivider = styled.div`
 `;
 const BodyDivider = styled.div`
   width: 70%;
-  height: 50%;
+  height: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
-  color: black;
+
+  color: #333841;
   @media screen and (max-width: 1200px) {
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
   }
   h1 {
     margin: 0px;
-    font-size: 15px;
-    font-weight: 200;
+    font-size: 22px;
+    font-weight: 300;
     text-align: left;
     @media screen and (max-width: 1200px) {
-      font-size: 14px;
+      font-size: 18px;
     }
     @media screen and (max-width: 600px) {
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 `;

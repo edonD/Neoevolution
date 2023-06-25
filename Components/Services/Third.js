@@ -84,11 +84,10 @@ function Third() {
     visible: {
       width: "130px",
       height: "90px",
-      background: "#030610",
-      backgroundImage: "#030610",
+      background: "#2196f3",
+      backgroundImage: "#2196f3",
       boxShadow: "0px 0px 25px 1px rgba(190, 190, 190, 1)",
       transition: { duration: 0.5 },
-      color: "white",
     },
   };
 
@@ -99,17 +98,22 @@ function Third() {
       background: "#d0d2e3",
       backgroundImage: "#d0d2e3",
 
+      // border: "0px solid #2196f3",
+      color: "white",
+      // background-color: #fff;
+      // border: 1px solid #2196f3;
+      borderRadius: "5px",
       boxShadow: "0px 0px 0px 0px rgba(190, 190, 190, 1)",
     },
     visible: {
       width: "100%",
       height: "48px",
 
-      background: "#030610",
-      backgroundImage: "#030610",
+      background: "#2196f3",
+      // backgroundImage: "#2196f3",
+      borderRadius: "5px",
       boxShadow: "0px 0px 25px 1px rgba(190, 190, 190, 1)",
       transition: { duration: 0.5 },
-      color: "white",
     },
   };
 
@@ -136,7 +140,6 @@ function Third() {
                 width={55}
                 height={55}
                 alt='test-Software.svgare.svgare.svg'
-                color='#235fd7'
               />
             </StyledImage>
 
@@ -234,15 +237,15 @@ function Third() {
                   Machine learning methodology for package model extraction.
                 </p>
               </BodyBodyContainer>
-              <ButtonAnimatedDivider
-                initial='hidden'
-                animate={controls3}
-                variants={buttonUpload}
-              >
-                <Link href='Services/package-modeling' passHref>
+              <Link href='Services/package-modeling' passHref>
+                <ButtonAnimatedDivider
+                  initial='hidden'
+                  animate={controls3}
+                  variants={buttonUpload}
+                >
                   <StyledButton>Check Details</StyledButton>
-                </Link>
-              </ButtonAnimatedDivider>
+                </ButtonAnimatedDivider>
+              </Link>
             </BodyContainer>
           </RowContainer>
           <Track />
@@ -260,7 +263,7 @@ function Third() {
                 width={45}
                 height={45}
                 alt='Contract'
-                color='#235fd7'
+                // color='#305cff'
               />
             </StyledImage>
 
@@ -327,6 +330,7 @@ const Container = styled.div`
   background-color: #242331;
   position: relative;
   background: white;
+  padding-bottom: 20px;
   @media screen and (max-width: 1200px) {
     display: none;
   }
@@ -367,9 +371,11 @@ const ImageContainer = styled.div`
   height: 90px;
   width: 90px;
   user-select: none;
-  color: #232331;
+
+  /* color: #232331; */
   background-color: "linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)";
   background: "linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)";
+  /* background-color: #305cff; */
   top: 0;
   left: 0;
   margin: 5px;
@@ -385,8 +391,6 @@ const BodyContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #232331;
-
   margin-left: 15px;
 `;
 const BodyBodyContainer = styled.div`
@@ -496,8 +500,7 @@ const ButtonAnimatedDivider = styled(motion.div)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: red;
-  background: red;
+
   position: "relative";
   border-radius: 2px;
 `;
@@ -517,14 +520,22 @@ const StyledButton = styled(Button)`
     width: 100%;
     height: 48px;
     color: white;
-    font-weight: 600;
 
-    border-radius: 2px;
+    /* color: transparent; */
+    font-weight: 300;
+    /* border: 1px solid #2196f3; */
+    border-radius: 4px;
 
     &:hover {
-      background-color: #04111e;
+      background-color: #305cff;
+      color: white;
     }
-
+    &:focus {
+      color: white;
+    }
+    &:active {
+      color: white;
+    }
     @media screen and (max-width: 1000px) {
       width: 100px;
       margin-right: 0;

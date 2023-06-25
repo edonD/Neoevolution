@@ -36,9 +36,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #242331;
+  background-color: white;
   position: relative;
-  background: black;
+  background: white;
   @media screen and (max-width: 1200px) {
     padding-top: 50px;
   }
@@ -58,6 +58,9 @@ const RowContainer = styled.div`
   @media screen and (max-width: 1200px) {
     flex-direction: column;
     width: 100%;
+    height: 400px;
+  }
+  @media screen and (max-height: 750px) {
     height: 400px;
   }
 `;
@@ -98,15 +101,15 @@ const BodyBodyContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  color: white;
+  color: #101419;
   p {
-    font-size: 18px;
-    font-weight: 200;
+    font-size: 22px;
+    font-weight: 300;
     @media screen and (max-width: 1200px) {
-      font-size: 14px;
+      font-size: 18px;
     }
     @media screen and (max-width: 600px) {
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 `;
@@ -123,8 +126,8 @@ const BodyHeaderContainer = styled.div`
   h1 {
     margin: 0px;
     font-size: 38px;
-    font-weight: 200;
-    color: white;
+    font-weight: 400;
+    color: black;
     @media screen and (max-width: 1200px) {
       font-size: 32px;
     }

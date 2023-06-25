@@ -44,7 +44,7 @@ function ThirdReplacement() {
                 width={55}
                 height={55}
                 alt='MOSFET'
-                color='#235fd7'
+                color='#305cff'
               />
             </StyledImage>
           </ImageContainer>
@@ -180,9 +180,13 @@ const StyledImage = styled.div`
   justify-content: center;
   align-items: center;
   margin: 5px;
-  background-color: #030610;
+  background-color: #305cff;
   border-radius: 4px;
   cursor: pointer;
+  @media screen and (max-width: 1200px) {
+    height: 70px;
+    width: 70px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -292,7 +296,7 @@ const ButtonDivider = styled.div`
 
 const StyledButton = styled(Button)`
   && {
-    background-color: #030610;
+    background-color: #2196f3;
     width: 150px;
     height: 48px;
     color: white;
@@ -301,7 +305,7 @@ const StyledButton = styled(Button)`
     border-radius: 2px;
 
     &:hover {
-      background-color: #04111e;
+      background-color: #305cff;
     }
   }
 `;

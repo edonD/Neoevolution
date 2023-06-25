@@ -52,6 +52,12 @@ const Container = styled.div`
     #1e2538 0%,
     #17181d 100%
   );
+  @media screen and (max-height: 750px) {
+    height: 100vh;
+  }
+  @media screen and (max-height: 750px) and (min-width: 1000px) {
+    height: 500px;
+  }
 `;
 const ButtonContainer = styled.div`
   position: relative;
@@ -65,6 +71,7 @@ const ButtonContainer = styled.div`
   color: white;
   padding-left: 50px;
 `;
+
 const StyledButton = styled(Button)`
   && {
     font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
@@ -132,7 +139,6 @@ const Header = styled.div`
     text-align: left;
     margin: 0px;
     font-size: 58px;
-    font-weight: 400;
     @media screen and (max-width: 1200px) {
       font-size: 48px;
     }
@@ -144,12 +150,12 @@ const Header = styled.div`
     text-align: left;
     margin: 0px;
     margin-top: 15px;
-    font-size: 18px;
+    font-size: 24px;
     @media screen and (max-width: 1200px) {
-      font-size: 14px;
+      font-size: 20px;
     }
     @media screen and (max-width: 600px) {
-      font-size: 13px;
+      font-size: 18px;
     }
   }
 `;
@@ -194,4 +200,5 @@ const Wrapper = styled.div`
   background: linear-gradient(90deg, #091936 30%, #8e54e900 100%);
   z-index: 3;
 `;
+
 export default First;

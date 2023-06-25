@@ -115,7 +115,7 @@ const ItemContainer = styled.div`
   span {
     color: ${(p) => (p.headerdown === false ? "#f3f4f8" : "white")};
 
-    font-size: 16px;
+    font-size: 20px;
     letter-spacing: 1.42px;
     line-height: 1.08;
     font-weight: 650;
