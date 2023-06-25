@@ -66,6 +66,9 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   background-color: black;
+  @media screen and (max-height: 750px) {
+    height: 550px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -161,6 +164,9 @@ const SecondWrapper = styled.div`
   user-select: none;
 
   background-color: transparent;
+  /* @media screen and (max-height: 850px) {
+    height: 400px;
+  } */
 `;
 
 const AbsoluteImage2 = styled.div`
@@ -294,7 +300,7 @@ const Wrapper = styled.div`
   @media screen and (max-width: 800px) {
     justify-content: flex-start;
     padding-top: 100px;
-    padding-left: 5vh;
+    padding-left: 0vh;
   }
   z-index: 3;
 `;

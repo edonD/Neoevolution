@@ -67,7 +67,7 @@ const RowContainer = styled.div`
     width: 100%;
     height: 100%;
   }
-  @media screen and (max-height: 850px) {
+  @media screen and (max-height: 750px) {
     height: 100%;
   }
 `;
@@ -211,10 +211,15 @@ const OnePart = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: transparent;
-  position: "relative";
+
+  position: relative;
 
   @media screen and (max-width: 1200px) {
+    width: 95%;
+    justify-content: center;
+    height: 400px;
+  }
+  @media screen and (max-height: 650px) {
     width: 95%;
     justify-content: center;
     height: 400px;

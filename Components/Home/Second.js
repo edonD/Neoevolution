@@ -36,6 +36,9 @@ const Container = styled.div`
   @media screen and (max-width: 1200px) {
     height: 100%;
   }
+  @media screen and (max-height: 850px) {
+    height: 100%;
+  }
 `;
 
 const HeaderDivider = styled.div`
