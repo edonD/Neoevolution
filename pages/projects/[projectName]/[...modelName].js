@@ -5,12 +5,12 @@ import styled from "styled-components";
 import ModelsGrid from "../../../Components/GUI/Models/ModelsGrid";
 import SidebarSelectModel from "../../../Components/GUI/SidebarBodies/SidebarSelectModel";
 import { useRouter } from "next/router";
-import { InData } from "./insert-data/InData";
-import { Model } from "./insert-data/model/index";
-import { Opti } from "./insert-data/optimizer/index";
-import { Parameters } from "./insert-data/parameters/index";
-import { Results } from "./insert-data/results/index";
-import { ReferenceData } from "./insert-data/reference-data/";
+import { InData } from "../../../Components/GUIViews/insert-data/InData";
+import { Model } from "../../../Components/GUIViews/insert-data/model/index";
+import { Opti } from "../../../Components/GUIViews/insert-data/optimizer/index";
+import { Parameters } from "../../../Components/GUIViews/insert-data/parameters/index";
+import { Results } from "../../../Components/GUIViews/insert-data/results/index";
+import { ReferenceData } from "../../../Components/GUIViews/insert-data/reference-data/";
 
 function ModelName() {
   const router = useRouter();

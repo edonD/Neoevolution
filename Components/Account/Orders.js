@@ -18,10 +18,10 @@ function AccountInformation() {
         <AccountHeader>
           <PersonalContent>
             <ImageContainer>
-              <h2>ED</h2>
+              <h2>JS</h2>
             </ImageContainer>
           </PersonalContent>
-          <h2>Edon Derguti</h2>
+          <h2>John Smith</h2>
         </AccountHeader>
         <AccountBody>
           <ListItem

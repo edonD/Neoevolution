@@ -42,7 +42,7 @@ function ProfileHeader() {
         </Link> */}
         <PersonalContent>
           <ImageContainer onClick={toggle}>
-            <h1>ED</h1>
+            <h1>JS</h1>
           </ImageContainer>
           <ProfileHeaderDropdown isOpen={dropDownState} onToggle={toggle} />
         </PersonalContent>
