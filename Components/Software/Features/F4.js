@@ -91,14 +91,18 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   color: white;
+  @media screen and (max-width: 650px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const Header = styled.div`
   width: 100%;
   height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   margin-left: 10px;
   @media screen and (min-width: 1200px) {
     display: none;
@@ -147,7 +151,7 @@ const SoftwareContianer = styled.div`
     text-align: left;
     margin: 0px;
   }
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 1200px) {
     justify-content: center;
     align-items: center;
   }
@@ -181,7 +185,7 @@ const Wrapper = styled.div`
 
   h1 {
     margin: 0px;
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 500;
     color: black;
   }
@@ -189,21 +193,22 @@ const Wrapper = styled.div`
     margin: 0px;
     margin-top: 10px;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
     color: #8144aa;
   }
 `;
 
 const BenefitsContainer = styled.div`
-  width: 60%;
+  width: 550px;
   height: 20%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   @media screen and (min-width: 650px) and (max-width: 1200px) {
-    width: 550px;
+    width: 100%;
+    justify-content: center;
   }
   @media screen and (max-width: 650px) and (max-width: 1200px) {
     width: 100%;

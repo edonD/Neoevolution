@@ -33,7 +33,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #1945ad;
-  background: #1945ad;
+  background: #2196f3;
   user-select: none;
   position: relative;
   @media screen and (max-width: 650px) {
@@ -48,17 +48,18 @@ const Divider = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #43ffff;
-  @media screen and (max-width: 650px) {
+  color: white;
+  @media screen and (max-width: 900px) {
     width: 30%;
   }
   h1 {
+    font-size: 24px;
     font-weight: 500;
-    @media screen and (min-width: 650px) and (max-width: 1200px) {
-      font-size: 18px;
+    @media screen and (max-width: 1200px) {
+      font-size: 20px;
     }
     @media screen and (max-width: 650px) {
-      font-size: 12px;
+      font-size: 18px;
     }
   }
 `;

@@ -68,9 +68,11 @@ function Third() {
       backgroundColor: "transparent",
       boxShadow: "0px 0px 25px 1px rgba(190, 190, 190, 0)",
       color: "#a2a8bd",
+      borderRadius: "4px",
     },
     visible: {
-      backgroundColor: "#1945ad",
+      backgroundColor: "#2196f3",
+      borderRadius: "4px",
       boxShadow: "0px 0px 25px 1px rgba(190, 190, 190, 1)",
       transition: { duration: 0.5 },
       color: "white",
@@ -168,6 +170,8 @@ const SecondHalfWrapper = styled.div`
   @media screen and (max-width: 1200px) {
     padding-left: 0px;
     width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -213,20 +217,20 @@ const AnimationWrapper = styled.div`
   }
 `;
 const AnimatedDivider = styled(motion.div)`
-  height: 20%;
-  width: 40%;
+  height: 68px;
+  width: 300px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   background-color: transparent;
-  padding: 10px;
+  padding-left: 20px;
 
   margin: 5px;
   margin-right: 50px;
 
   h1 {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 20px;
   }
 `;
 

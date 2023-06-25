@@ -46,6 +46,10 @@ const Container = styled.div`
     rgba(6, 20, 41, 1) 53%,
     rgba(4, 33, 77, 1) 99%
   );
+
+  @media screen and (max-height: 750px) {
+    height: 750px;
+  }
 `;
 const ImageContainer = styled.div`
   position: relative;
@@ -80,7 +84,7 @@ const StyledButton = styled(Button)`
     height: 50px;
     background-color: #235fd7;
     padding: 8px 16px;
-    margin-top: 100px;
+    margin-top: 20px;
     letter-spacing: 1.5px;
     font-weight: 600;
     font-size: 18px;
@@ -114,24 +118,24 @@ const Header = styled.div`
     margin: 0px;
     font-size: 58px;
     @media screen and (max-width: 1200px) {
-      font-size: 52px;
+      font-size: 48px;
     }
-    @media screen and (max-width: 650px) {
-      font-size: 38px;
+    @media screen and (max-width: 600px) {
+      font-size: 42px;
     }
   }
   p {
     text-align: left;
     margin: 0px;
     margin-top: 15px;
-    font-size: 18px;
+    font-size: 24px;
     @media screen and (max-width: 1200px) {
       margin-top: 15px;
-      font-size: 14px;
+      font-size: 20px;
     }
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 600px) {
       margin-top: 5px;
-      font-size: 10px;
+      font-size: 18px;
     }
   }
   @media screen and (max-width: 1200px) {
