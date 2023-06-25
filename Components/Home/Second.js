@@ -31,7 +31,11 @@ const Container = styled.div`
   background-color: transparent;
   /* background-color: #f3f4f8;
   background: #f3f4f8; */
+  margin: 10px;
   position: relative;
+  @media screen and (max-width: 1200px) {
+    height: 100%;
+  }
 `;
 
 const HeaderDivider = styled.div`

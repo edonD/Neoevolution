@@ -23,6 +23,7 @@ function Third({ sreverse, header, paragraph, button }) {
             <Image
               src='/images/test-Software.svg'
               layout='fill'
+              objectFit='contain'
               alt='test-Software.svg'
               color='#235fd7'
             />
@@ -64,19 +65,26 @@ const RowContainer = styled.div`
   @media screen and (max-width: 1200px) {
     flex-direction: column;
     width: 100%;
-    height: 400px;
+    height: 100%;
+  }
+  @media screen and (max-height: 850px) {
+    height: 100%;
   }
 `;
 const ButtonContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 10%;
+  height: 50px;
   margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   color: white;
+  @media (max-width: 900px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const RequestButton = styled(Button)`
@@ -101,7 +109,7 @@ const RequestButton = styled(Button)`
       border-color: transparent;
     }
     @media (max-width: 1000px) {
-      display: none;
+      height: 30px;
     }
   }
 `;
@@ -135,25 +143,33 @@ const SecondPart = styled.div`
   @media screen and (max-width: 1200px) {
     width: 95%;
     height: auto;
+    padding: 0px;
   }
 `;
 const BodyBodyContainer = styled.div`
-  height: 30%;
+  height: fit-content;
   width: 100%;
   user-select: none;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   color: black;
+  margin-top: 10px;
   p {
     font-size: 20px;
     font-weight: 200;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1400px) {
       font-size: 14px;
     }
     @media screen and (max-width: 600px) {
       font-size: 12px;
     }
+  }
+  @media screen and (max-width: 900px) {
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 100%;
   }
 `;
 const BodyHeaderContainer = styled.div`
@@ -168,15 +184,19 @@ const BodyHeaderContainer = styled.div`
 
   h1 {
     margin: 0px;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 200;
     color: black;
-    @media screen and (max-width: 1200px) {
-      font-size: 32px;
+    @media screen and (max-width: 1400px) {
+      font-size: 26px;
     }
     @media screen and (max-width: 600px) {
       font-size: 24px;
     }
+  }
+  @media screen and (max-width: 900px) {
+    height: 100%;
+    justify-content: center;
   }
 `;
 const Divider = styled.div`
@@ -197,7 +217,7 @@ const OnePart = styled.div`
   @media screen and (max-width: 1200px) {
     width: 95%;
     justify-content: center;
-    height: 70%;
+    height: 400px;
   }
 `;
 
