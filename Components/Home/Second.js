@@ -56,7 +56,7 @@ const HeaderDivider = styled.div`
   }
   h1 {
     margin: 0px;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 400;
     text-align: left;
     @media screen and (max-width: 1200px) {
@@ -81,14 +81,14 @@ const BodyDivider = styled.div`
   }
   h1 {
     margin: 0px;
-    font-size: 15px;
+    font-size: 22px;
     font-weight: 200;
     text-align: left;
     @media screen and (max-width: 1200px) {
-      font-size: 14px;
+      font-size: 18px;
     }
     @media screen and (max-width: 600px) {
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 `;
