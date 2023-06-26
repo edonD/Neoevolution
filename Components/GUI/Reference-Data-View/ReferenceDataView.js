@@ -59,9 +59,9 @@ function ReferenceDataView() {
     async function fetchJSONData() {
       // const userId = "498f14b0-b520-4c85-a321-e1a1c620ce66"; // Replace with the actual user ID.
       const folderName = "Reference Data"; // Replace with the desired folder name
-      const fileName = "reference_data (1) (1).json"; // Replace with the desired file name.
+      const fileName = file; // Replace with the desired file name.
       const path = `${subPath}/${folderName}/${fileName}`;
-      console.log("path", path);
+
       setPath(path);
 
       try {
@@ -96,7 +96,7 @@ function ReferenceDataView() {
     if (jsonData) {
       const processedTraces = setTracesfromJSON(jsonData.data); // Call the external function to process the JSON data
       setTraces(processedTraces); // Update the traces state based on the processed data
-      // console.log("Traces", processedTraces);
+      console.log("Traces", processedTraces);
     }
   }, [jsonData]);
 
