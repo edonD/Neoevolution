@@ -47,15 +47,6 @@ function ProjectPricing() {
           <ItemDescription>
             <p>You will get the result in 3 hours.</p>
           </ItemDescription>
-          <ItemDescription>
-            <p>You will get the result in 3 hours.</p>
-          </ItemDescription>
-          <ItemDescription>
-            <p>You will get the result in 3 hours.</p>
-          </ItemDescription>
-          <ItemDescription>
-            <p>You will get the result in 3 hours.</p>
-          </ItemDescription>
         </ItemContainer>
       </Body>
     </Container>
@@ -75,12 +66,12 @@ const Container = styled.div`
   background: white;
   user-select: none;
   box-shadow: 0 0 16px rgb(0, 0, 0, 50%);
-  background: rgb(24, 37, 43);
+  background: rgb(29, 26, 62);
   background: linear-gradient(
     130deg,
-    rgba(24, 37, 43, 1) 0%,
-    rgba(12, 20, 23, 1) 47%,
-    rgba(2, 5, 7, 1) 100%
+    rgba(29, 26, 62, 1) 0%,
+    rgba(14, 13, 39, 1) 47%,
+    rgba(2, 2, 9, 1) 100%
   );
   @media screen and (max-height: 800px) {
     /* height: 450px; */
@@ -101,20 +92,20 @@ const Description = styled.div`
   height: 15%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: space-around;
   color: white;
 
   h1 {
     font-weight: 200;
-    font-size: 40px;
+    font-size: 38px;
     margin: 0px;
     text-align: center;
     padding: 0px;
   }
   h3 {
     font-weight: 200;
-    font-size: 10px;
+    font-size: 14px;
     margin: 0px;
     text-align: center;
     padding: 0px;
@@ -187,10 +178,10 @@ const ItemDescription = styled.div`
     font-weight: 100;
     margin-top: 5px;
     margin-left: 10px;
-    font-size: 13px;
+    font-size: 14px;
 
     @media screen and (max-width: 400px) {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 `;
@@ -209,7 +200,7 @@ const ItemHeader = styled.div`
     font-weight: 300;
     margin: 0px;
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 22px;
   }
 `;
 const FormButton = styled(Button)`
@@ -217,18 +208,18 @@ const FormButton = styled(Button)`
     font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
     width: 80%;
     margin-bottom: 10px;
-    background-color: #2b393f;
+    background-color: #2f2e4a;
     color: white;
     cursor: pointer;
     box-shadow: 0 0 16px rgb(0, 0, 0, 0%);
     font-weight: 700;
     &:hover {
-      background: rgb(70, 76, 71);
+      background: rgb(73, 61, 87);
       background: linear-gradient(
         130deg,
-        rgba(70, 76, 71, 1) 0%,
-        rgba(72, 65, 90, 1) 47%,
-        rgba(48, 66, 79, 1) 100%
+        rgba(73, 61, 87, 1) 0%,
+        rgba(72, 51, 106, 1) 47%,
+        rgba(50, 57, 95, 1) 100%
       );
     }
 

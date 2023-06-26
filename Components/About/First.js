@@ -115,8 +115,11 @@ const Header = styled.div`
     text-align: left;
     margin: 0px;
     font-size: 58px;
-    @media screen and (max-width: 1000px) {
-      font-size: 36px;
+    @media screen and (max-width: 1200px) {
+      font-size: 48px;
+    }
+    @media screen and (max-width: 600px) {
+      font-size: 42px;
     }
   }
   p {
@@ -124,9 +127,13 @@ const Header = styled.div`
     text-align: left;
     margin: 0px;
     margin-top: 15px;
-    font-size: 18px;
+    font-size: 24px;
     @media screen and (max-width: 1200px) {
       width: 100%;
+      font-size: 20px;
+    }
+    @media screen and (max-width: 600px) {
+      font-size: 16px;
     }
   }
   z-index: 3;
@@ -174,6 +181,9 @@ const Wrapper = styled.div`
   background-color: #020610;
   justify-content: center;
   align-items: center;
+  @media screen and (max-height: 750px) {
+    height: 100%;
+  }
 `;
 
 export default First;

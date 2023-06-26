@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import Gradient from "rgt";
+import Link from "next/link";
 
 function SinglePricing() {
   return (
@@ -16,15 +17,16 @@ function SinglePricing() {
         <h3>per model, billed when delivered</h3>
       </Description>
       <ButtonDivider>
-        <FormButton
-          type='submit'
-          variant='contained'
-          component='label'
-          color='primary'
-        >
-          <input type='file' hidden />
-          Upload Data
-        </FormButton>
+        <Link href='/Signup' passHref>
+          <FormButton
+            type='submit'
+            variant='contained'
+            component='label'
+            color='primary'
+          >
+            Sign Up
+          </FormButton>
+        </Link>
       </ButtonDivider>
       <Divide />
       <Body>
@@ -32,15 +34,6 @@ function SinglePricing() {
           <ItemHeader>
             <h3>Fast Delivery</h3>
           </ItemHeader>
-          <ItemDescription>
-            <p>You will get the result in 3 hours.</p>
-          </ItemDescription>
-          <ItemDescription>
-            <p>You will get the result in 3 hours.</p>
-          </ItemDescription>
-          <ItemDescription>
-            <p>You will get the result in 3 hours.</p>
-          </ItemDescription>
           <ItemDescription>
             <p>You will get the result in 3 hours.</p>
           </ItemDescription>
@@ -107,14 +100,14 @@ const Description = styled.div`
 
   h1 {
     font-weight: 200;
-    font-size: 40px;
+    font-size: 38px;
     margin: 0px;
     text-align: center;
     padding: 0px;
   }
   h3 {
     font-weight: 200;
-    font-size: 10px;
+    font-size: 14px;
     margin: 0px;
     text-align: center;
     padding: 0px;
@@ -187,10 +180,10 @@ const ItemDescription = styled.div`
     font-weight: 100;
     margin-top: 5px;
     margin-left: 10px;
-    font-size: 13px;
+    font-size: 14px;
 
     @media screen and (max-width: 400px) {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 `;
@@ -209,7 +202,7 @@ const ItemHeader = styled.div`
     font-weight: 300;
     margin: 0px;
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 22px;
   }
 `;
 const FormButton = styled(Button)`

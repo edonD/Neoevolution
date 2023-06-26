@@ -52,18 +52,22 @@ const CardContent = styled.div`
 `;
 
 const BiographyContainer = styled.div`
-  width: 108px;
-  height: 36px;
+  width: 128px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: black;
   background: transparent;
   margin: 5px;
-  border: 2px solid #999999;
+  color: #2196f3;
+  background-color: #fff;
+  border: 1px solid #2196f3;
   border-radius: 4px;
   :hover {
-    background: #f6f6f6;
+    background-color: #2196f3;
+    color: #fff;
+    border: 1px solid #2196f3;
   }
   span {
     font-size: 17px;

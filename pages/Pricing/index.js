@@ -34,27 +34,28 @@ const Description = styled.div`
   margin-top: 80px;
   user-select: none;
   h1 {
+    font-size: 38px;
+    margin: 0px;
+    font-weight: 300;
     @media screen and (max-width: 1200px),
       screen and (max-height: 800px) and (min-width: 1200px) {
-      font-size: 34px;
+      font-size: 32px;
     }
     @media screen and (max-width: 600px), screen and (max-height: 800px) {
-      font-size: 22px;
+      font-size: 24px;
     }
-    font-size: 48px;
-    margin: 0px;
-    font-weight: 400;
   }
   h3 {
+    font-size: 22px;
+    font-weight: 300;
+    color: #b3b3b3;
     @media screen and (max-width: 1200px),
       screen and (max-height: 800px) and (min-width: 1200px) {
-      font-size: 16px;
+      font-size: 18px;
     }
     @media screen and (max-width: 600px), screen and (max-height: 800px) {
-      font-size: 14px;
+      font-size: 16px;
     }
-    font-size: 18px;
-    color: #b3b3b3;
   }
 `;
 const Container = styled.div`
@@ -102,7 +103,7 @@ const PricingContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-height: 800px) and (min-width: 1200px) {
+  @media screen and (max-height: 600px) and (min-width: 1200px) {
     margin-bottom: 100px;
     width: 100%;
 

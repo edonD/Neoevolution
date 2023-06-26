@@ -28,7 +28,7 @@ function Third() {
             </DescriptionHeader>
             <DescriptionBody>
               <LogoContainer>
-                <AiFillLinkedin size={50} />
+                <AiFillLinkedin size={50} color={"#2196f3"} />
               </LogoContainer>
 
               <BiographyDialog
@@ -56,7 +56,7 @@ function Third() {
             </DescriptionHeader>
             <DescriptionBody>
               <LogoContainer>
-                <AiFillLinkedin size={50} />
+                <AiFillLinkedin size={50} color={"#2196f3"} />
               </LogoContainer>
 
               <BiographyDialog
@@ -84,7 +84,7 @@ function Third() {
             </DescriptionHeader>
             <DescriptionBody>
               <LogoContainer>
-                <AiFillLinkedin size={50} />
+                <AiFillLinkedin size={50} color={"#2196f3"} />
               </LogoContainer>
 
               <BiographyDialog
