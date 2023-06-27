@@ -8,7 +8,7 @@ import {
   setReferenceDataItems,
   setDropdownItem,
   selectedReferenceData,
-  cleanAllStates,
+  cleanAllStatesReferenceData,
 } from "../../store/slices/referenceDataSlice";
 import { selectUserNameId } from "../../store/slices/userSlice";
 import { listFiles } from "../Storage/UploadFileFunctions";
@@ -35,7 +35,7 @@ const DropDownMenuReferenceData = () => {
 
   useEffect(() => {
     const fetchReferenceData = async () => {
-      dispatch(cleanAllStates());
+      dispatch(cleanAllStatesReferenceData());
       try {
         const files = await listFiles(ReferenceDataLink);
 

@@ -34,9 +34,12 @@ export const modelNetlistSlice = createSlice({
     cleanAllState: (state) => {
       state.items = []; // Set items array to an empty array;
     },
+    cleanAllStatesNetlist: () => {
+      return initialState;
+    },
   },
 });
-export const { setModelItems, setModel, cleanAllState } =
+export const { setModelItems, setModel, cleanAllState, cleanAllStatesNetlist } =
   modelNetlistSlice.actions;
 export const { removeModelItem } = modelNetlistSlice.actions;
 

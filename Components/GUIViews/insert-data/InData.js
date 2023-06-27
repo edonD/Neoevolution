@@ -8,6 +8,11 @@ import SidebarSelectModel from "../../../Components/GUI/SidebarBodies/SidebarSel
 import InsertData from "../../../Components/GUI/InsertData/InsertData";
 import { useDispatch } from "react-redux";
 import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
+import { cleanAllStatesNetlist } from "../../../store/slices/modelNetlistSlice";
+import { cleanAllStatesReferenceData } from "../../../store/slices/referenceDataSlice";
+import { cleanAllStatesProject } from "../../../store/slices/projectListSlice";
+import { cleanAllStatesModel } from "../../../store/slices/modelListSlice";
+import { cleanAllStatesParameters } from "../../../store/slices/parametersDataSlice";
 
 export const InData = function () {
   const dispatch = useDispatch();
@@ -20,6 +25,11 @@ export const InData = function () {
     handleUpdateHeaderIcon("Optimizer", "empty");
     handleUpdateHeaderIcon("Parameters", "empty");
     handleUpdateHeaderIcon("Results", "empty");
+    dispatch(cleanAllStatesNetlist());
+    dispatch(cleanAllStatesReferenceData());
+    dispatch(cleanAllStatesProject());
+    dispatch(cleanAllStatesModel());
+    dispatch(cleanAllStatesParameters());
   }, []);
 
   return (

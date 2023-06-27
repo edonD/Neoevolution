@@ -6,7 +6,7 @@ import CardAdd from "../../GUI/NewModel/CardAdd";
 import CardForModels from "../../Account/Billing/Card/CardForModels";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  cleanAllStates,
+  cleanAllStatesModel,
   selectedModels,
   setNewModeltItem,
 } from "../../../store/slices/modelListSlice";
@@ -40,7 +40,7 @@ function NewModel() {
   useEffect(() => {
     if (path) {
       setLoading(true);
-      dispatch(cleanAllStates());
+      dispatch(cleanAllStatesModel());
       async function getFoldersInRootDirectory() {
         try {
           const folders = await listModelFolders(path);

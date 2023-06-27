@@ -13,7 +13,7 @@ import {
   setProjectItem,
   selectedProjects,
   setCurrentProject,
-  cleanAllStates,
+  cleanAllStatesProject,
 } from "../../../store/slices/projectListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
@@ -47,7 +47,7 @@ function SidebarProjects({}) {
   useEffect(() => {
     if (path) {
       setLoading(true);
-      dispatch(cleanAllStates());
+      dispatch(cleanAllStatesProject());
       async function getFoldersInRootDirectory() {
         try {
           const folders = await listFolders(path);

@@ -49,7 +49,7 @@ export const projectListSlice = createSlice({
     getCurrentProject: (state) => {
       return state.currentProject;
     },
-    cleanAllStates: () => {
+    cleanAllStatesProject: () => {
       return initialState; // Reset the state to the initial state
     },
   },
@@ -60,7 +60,7 @@ export const {
   removeProjectItem,
   setCurrentProject,
   getCurrentProject,
-  cleanAllStates,
+  cleanAllStatesProject,
 } = projectListSlice.actions;
 
 //Selectors

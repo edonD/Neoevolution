@@ -2,6 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   referenceDataItems: [],
+  dropDownItem: "",
 };
 
 export const referenceDataSlice = createSlice({
@@ -37,7 +38,7 @@ export const referenceDataSlice = createSlice({
     getDropdownItem: (state) => {
       return state.dropDownItem;
     },
-    cleanAllStates: () => {
+    cleanAllStatesReferenceData: () => {
       return initialState; // Reset the state to the initial state
     },
   },
@@ -48,7 +49,7 @@ export const {
   removeReferenceDataItem,
   setDropdownItem,
   getDropdownItem,
-  cleanAllStates,
+  cleanAllStatesReferenceData,
 } = referenceDataSlice.actions;
 
 //Selectors

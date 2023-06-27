@@ -38,6 +38,9 @@ export const parametersDataSlice = createSlice({
     getDropdownItem: (state) => {
       return state.dropDownItem;
     },
+    cleanAllStatesParameters: () => {
+      return initialState;
+    },
   },
 });
 
@@ -46,6 +49,7 @@ export const {
   setDropdownItem,
   getDropdownItem,
   removeParameterItem,
+  cleanAllStatesParameters,
 } = parametersDataSlice.actions;
 
 //Selectors

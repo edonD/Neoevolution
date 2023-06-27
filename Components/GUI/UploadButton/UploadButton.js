@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import { Storage } from "aws-amplify";
 import {
-  cleanAllStates,
+  cleanAllStatesReferenceData,
   setReferenceDataItems,
 } from "../../../store/slices/referenceDataSlice";
 import { currentProject } from "../../../store/slices/projectListSlice";
@@ -40,7 +40,7 @@ function UploadButton() {
         console.error("No files selected");
         return;
       }
-      dispatch(cleanAllStates());
+      dispatch(cleanAllStatesReferenceData());
       const userId = usernameID; // Replace with the actual user ID.
       const folderName = "Reference Data"; // Replace with the desired folder name.
       setLoading(true);

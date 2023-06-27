@@ -41,7 +41,7 @@ export const modelListSlice = createSlice({
     getCurrentModel: (state) => {
       return state.currentProject;
     },
-    cleanAllStates: () => {
+    cleanAllStatesModel: () => {
       return initialState; // Reset the state to the initial state
     },
   },
@@ -52,7 +52,7 @@ export const {
   removeModelItem,
   setCurrentModel,
   getCurrentModel,
-  cleanAllStates,
+  cleanAllStatesModel,
 } = modelListSlice.actions;
 
 //Selectors
