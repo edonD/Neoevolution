@@ -41,7 +41,7 @@ const DropDownMenuReferenceData = () => {
 
         files.map((file) => {
           const result = file.key.replace(/.*\//, "");
-          console.log("Items<", items);
+
           dispatch(setReferenceDataItems(result));
         });
       } catch (error) {

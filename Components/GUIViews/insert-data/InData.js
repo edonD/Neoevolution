@@ -6,8 +6,22 @@ import styled from "styled-components";
 import SidebarSelectModel from "../../../Components/GUI/SidebarBodies/SidebarSelectModel";
 
 import InsertData from "../../../Components/GUI/InsertData/InsertData";
+import { useDispatch } from "react-redux";
+import { updateTestbenchItem } from "../../../store/slices/headerIconsSlice";
 
 export const InData = function () {
+  const dispatch = useDispatch();
+  const handleUpdateHeaderIcon = (label, newValue) => {
+    dispatch(updateTestbenchItem({ label, value: newValue }));
+  };
+  useEffect(() => {
+    handleUpdateHeaderIcon("Reference Data", "empty");
+    handleUpdateHeaderIcon("Model", "empty");
+    handleUpdateHeaderIcon("Optimizer", "empty");
+    handleUpdateHeaderIcon("Parameters", "empty");
+    handleUpdateHeaderIcon("Results", "empty");
+  }, []);
+
   return (
     <div>
       <ProfileHeader />

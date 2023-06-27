@@ -268,7 +268,7 @@ function DataGridSecond({ type, items, callback }) {
   }, [checkedKeys]);
 
   const handleCheckAll = (value, checked) => {
-    const keys = checked ? table.map((item) => item.id) : [];
+    const keys = checked && table ? table.map((item) => item.id) : [];
     setCheckedKeys(keys);
     // handleSelectionModelChange(checkedKeys);
   };

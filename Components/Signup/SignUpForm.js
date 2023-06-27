@@ -317,8 +317,8 @@ const RememberMeContainer = styled.div`
 `;
 const SignInButton = styled(Button)`
   width: 100%;
-  padding: 1rem;
-  font-size: 1.5rem;
+  padding: 0.8rem;
+  font-size: 1.15rem;
   background-color: #1abc9c;
   border: none;
   border-radius: 4px;
