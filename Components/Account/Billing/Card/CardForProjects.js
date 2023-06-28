@@ -10,7 +10,10 @@ import {
   removeProjectItem,
   setCurrentProject,
 } from "../../../../store/slices/projectListSlice";
-import { deleteFileFromStorage } from "../../../Storage/UploadFileFunctions";
+import {
+  deleteFileFromStorage,
+  deleteFolderFromStorage,
+} from "../../../Storage/UploadFileFunctions";
 import { selectUserNameId } from "../../../../store/slices/userSlice";
 
 function ConditionalLink({ href, editing, children }) {
@@ -35,7 +38,7 @@ function CardForProjects({ name, state, onData, date, time, key }) {
   const handleDeleteClick = (e) => {
     e.stopPropagation();
     dispatch(removeProjectItem(name));
-    deleteFileFromStorage(path);
+    deleteFolderFromStorage(path);
   };
 
   const handleNameChange = (e) => {

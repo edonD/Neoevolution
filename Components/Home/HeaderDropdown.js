@@ -4,7 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
-import { SiCoronaengine } from "react-icons/si";
+
 import Image from "next/image";
 function HeaderDropdown({ isOpen, onToggle }) {
   const handleClick = () => {
@@ -17,7 +17,12 @@ function HeaderDropdown({ isOpen, onToggle }) {
         <IconWrapper>
           <Logo>
             <Link href='/' passHref>
-              <SiCoronaengine size={50} />
+              <Image
+                src='/images/logo_white.png'
+                layout='fill'
+                objectFit='contain'
+                alt='brain'
+              />
             </Link>
           </Logo>
 
@@ -116,18 +121,19 @@ const CloseIcon = styled(FaTimes)`
 
 const Logo = styled.div`
   position: relative;
-  width: 10%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
   background: transparent;
-  padding-left: 40px;
+
   cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   color: white;
+
   @media (max-width: 1000px) {
-    width: 20%;
+    width: 50px;
   }
 `;
 const IconWrapper = styled.div`
@@ -136,9 +142,11 @@ const IconWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
+  padding-left: 50px;
   justify-content: space-between;
   width: 100%;
+
   background: transparent;
 `;
 

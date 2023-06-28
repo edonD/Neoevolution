@@ -194,3 +194,37 @@ export const deleteFileFromStorage = async (filePath) => {
     throw error; // Throw the error instead of returning null
   }
 };
+
+export const deleteFolderFromStorage = async (folderPath) => {
+  try {
+    const files = await listFilesInFolder(folderPath);
+    console.log("Files in folder:", files, "Folder Path", folderPath);
+    for (const file of files) {
+      await deleteFile(file.key);
+    }
+    console.log("All files in folder deleted successfully");
+  } catch (error) {
+    console.error("Error deleting files:", error);
+    throw error;
+  }
+};
+const deleteFile = async (fileKey) => {
+  try {
+    await Storage.remove(fileKey);
+    console.log("File deleted:", fileKey);
+  } catch (error) {
+    console.error("Error deleting file:", fileKey, error);
+    throw error;
+  }
+};
+const listFilesInFolder = async (folder) => {
+  try {
+    const response = await Storage.list(folder);
+
+    const files = response.results;
+    return files;
+  } catch (error) {
+    console.error("Error listing files:", error);
+    throw error;
+  }
+};

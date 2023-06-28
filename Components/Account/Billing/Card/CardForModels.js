@@ -2,12 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { selectUserNameId } from "../../../../store/slices/userSlice";
+import { removeModelItem } from "../../../../store/slices/modelListSlice";
+import { deleteFolderFromStorage } from "../../../Storage/UploadFileFunctions";
 
 function CardForModels({ name, onData }) {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const { projectName } = router.query;
+
+  const usernameId = useSelector(selectUserNameId);
+  const path = `${usernameId}/${projectName}/${name}`;
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    dispatch(removeModelItem(name));
+    deleteFolderFromStorage(path);
+  };
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
     <Link href={`/projects/${projectName}/${name}`} passHref>
@@ -28,8 +43,8 @@ function CardForModels({ name, onData }) {
               <h3>{name}</h3>
             </ListItem>
             <ListItem>
-              <Button onClick={() => {}} className='red-white-black'>
-                Cancel
+              <Button onClick={handleDeleteClick} className='red-white-black'>
+                Delete Model
               </Button>
             </ListItem>
           </CardContent>
@@ -59,13 +74,18 @@ const Button = styled.button`
   color: #fff;
   cursor: pointer;
   font-size: 15px;
+  font-weight: 400;
   display: flex;
   flex-direction: center;
   justify-content: center;
-  padding: 5px;
+  padding: 10px;
   transition: background-color 0.2s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
+  margin-bottom: 20px;
+  p {
+    margin: 0;
+    user-select: none;
+  }
   &:active {
     transform: translateY(2px);
   }

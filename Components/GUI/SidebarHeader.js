@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SiCoronaengine } from "react-icons/si";
+
 // import ProfileHeaderDropdown from "../Dropdown/ProfileHeaderDropdown";
 import Link from "next/link";
 import { Button } from "@mui/material";
+import Image from "next/image";
 
 function SidebarHeader() {
   const [dropDownState, setdropDownState] = useState(false);
@@ -13,7 +14,12 @@ function SidebarHeader() {
   return (
     <Background>
       <LogoContainer>
-        <SiCoronaengine size={50} />
+        <Image
+          src='/images/logo_white.png'
+          layout='fill'
+          objectFit='contain'
+          alt='brain'
+        />
       </LogoContainer>
       <SecondDivider>
         <Link href='/Contact' passHref>
