@@ -15,6 +15,8 @@ import { setUser } from "../../store/slices/userSlice";
 function SignUpForm({ callbackFunction }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState(" ");
+  const [lastName, setLastName] = useState(" ");
   const [checked, setChecked] = useState(false);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -29,8 +31,8 @@ function SignUpForm({ callbackFunction }) {
         password: password,
         attributes: {
           email, // optional
-          // phone_number, // optional - E.164 number convention
-          // other custom attributes
+          given_name: name, // optional - first name
+          family_name: lastName, // optional - last name
         },
         autoSignIn: {
           // optional - enables auto sign in after user is confirmed
@@ -71,6 +73,8 @@ function SignUpForm({ callbackFunction }) {
         <form onSubmit={SubmitSignUp}>
           <FormLabel htmlFor='email2'>First Name</FormLabel>
           <InputText
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             type='text'
             placeholder='First Name'
             style={{
@@ -82,6 +86,8 @@ function SignUpForm({ callbackFunction }) {
           />
           <FormLabel htmlFor='email2'>Last Name</FormLabel>
           <InputText
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             type='text'
             placeholder='Last Name'
             style={{
