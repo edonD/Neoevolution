@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import CardForProjects from "../../Account/Billing/Card/CardForProjects";
 import CardForSelection from "../../Account/Billing/Card/CardForSelection";
 
 function ModelsGrid({ projects, onData }) {

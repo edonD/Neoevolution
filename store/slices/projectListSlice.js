@@ -44,13 +44,15 @@ export const projectListSlice = createSlice({
     },
     renameProjectItem: (state, action) => {
       const { oldName, newName } = action.payload;
-
+      console.log("Old Name", oldName, "New Name", newName);
+      console.log("State", state.projects);
       // Find the project item with the old name
       const projectItem = state.projects.find((item) => item.name === oldName);
-
+      console.log("Project Item", projectItem);
       if (projectItem) {
         // Update the name of the project item
         projectItem.name = newName;
+        console.log("Project Item", projectItem);
       }
     },
     setCurrentProject: (state, action) => {

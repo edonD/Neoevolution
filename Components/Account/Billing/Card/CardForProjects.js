@@ -17,6 +17,7 @@ import {
   renameFolder,
 } from "../../../Storage/UploadFileFunctions";
 import { selectUserNameId } from "../../../../store/slices/userSlice";
+import { useEffect } from "react";
 
 function ConditionalLink({ href, editing, children }) {
   if (editing) {
@@ -29,14 +30,15 @@ function ConditionalLink({ href, editing, children }) {
 function CardForProjects({ name, state, onData, date, time, key }) {
   const [editing, setEditing] = useState(false);
   const [editedName, setEditedName] = useState(name);
+  const [newPath, setNewPath] = useState("");
   const dispatch = useDispatch();
   const usernameId = useSelector(selectUserNameId);
   const path = `${usernameId}/${name}`;
 
-  const handleNameClick = () => {
-    setEditing(true);
-  };
-
+  useEffect(() => {
+    console.log("Check if the project name is changed", name);
+    console.log("PAth is", path);
+  }, [name, path]);
   const handleDeleteClick = (e) => {
     e.stopPropagation();
     dispatch(removeProjectItem(name));
@@ -48,13 +50,13 @@ function CardForProjects({ name, state, onData, date, time, key }) {
     // Example usage of the renameProjectItem action
 
     try {
-      await renameFolder(currentFolderPath, newFolderPath);
       dispatch(
         renameProjectItem({
-          oldName: currentFolderPath,
-          newName: newFolderPath,
+          oldName: name,
+          newName: editedName,
         })
       );
+      await renameFolder(currentFolderPath, newFolderPath);
 
       console.log("Project folder renamed successfully!");
     } catch (error) {
@@ -64,8 +66,7 @@ function CardForProjects({ name, state, onData, date, time, key }) {
 
   const handleNameChange = (e) => {
     setEditedName(e.target.value);
-    const Newpath = `${usernameId}/${e.target.value}`;
-    handleRenameProject(path, Newpath);
+    setNewPath(`${usernameId}/${e.target.value}`);
   };
 
   const handleNameBlur = () => {
@@ -73,12 +74,14 @@ function CardForProjects({ name, state, onData, date, time, key }) {
       setEditedName("empty");
     }
     setEditing(false);
+    handleRenameProject(path, newPath);
   };
 
   const handleNameKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       handleNameBlur();
+      handleRenameProject(path, newPath);
     }
   };
 
