@@ -17,19 +17,53 @@ import CompanyInformation from "./BillingInfo/CompanyInformation";
 import EmailInformation from "./AccountInfo/EmailInformation";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Auth } from "aws-amplify";
 
 function AccountInformation() {
   const router = useRouter();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [firstNameInitial, setFirstNameInitial] = useState("");
+  const [lastNameInitial, setLastNameInitial] = useState("");
+
+  useEffect(() => {
+    async function fetchUserProfile() {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        const { given_name, family_name } = user.attributes;
+        setFirstName(given_name);
+        setLastName(family_name);
+
+        if (given_name) {
+          setFirstNameInitial(given_name.charAt(0));
+        }
+
+        if (family_name) {
+          setLastNameInitial(family_name.charAt(0));
+        }
+      } catch (error) {
+        console.log("error fetching user profile:", error);
+      }
+    }
+
+    fetchUserProfile();
+  }, []);
   return (
     <Container>
       <WrapperDescription>
         <AccountHeader>
           <PersonalContent>
             <ImageContainer>
-              <h2>JS</h2>
+              <h2>
+                {firstNameInitial}
+                {lastNameInitial}
+              </h2>
             </ImageContainer>
           </PersonalContent>
-          <h2>John Smith</h2>
+          <h2>
+            {firstName} {lastName}
+          </h2>
         </AccountHeader>
         <AccountBody>
           <ListItemMain>

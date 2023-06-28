@@ -15,16 +15,32 @@ function ProfileHeader() {
     setdropDownState(!dropDownState);
   };
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [firstNameInitial, setFirstNameInitial] = useState("");
+  const [lastNameInitial, setLastNameInitial] = useState("");
+
   useEffect(() => {
-    const fetchUserId = async () => {
+    async function fetchUserProfile() {
       try {
         const user = await Auth.currentAuthenticatedUser();
-      } catch (error) {
-        console.log("Error fetching user ID:", error);
-      }
-    };
+        const { given_name, family_name } = user.attributes;
+        setFirstName(given_name);
+        setLastName(family_name);
 
-    fetchUserId();
+        if (given_name) {
+          setFirstNameInitial(given_name.charAt(0));
+        }
+
+        if (family_name) {
+          setLastNameInitial(family_name.charAt(0));
+        }
+      } catch (error) {
+        console.log("error fetching user profile:", error);
+      }
+    }
+
+    fetchUserProfile();
   }, []);
   return (
     <Background>
@@ -42,7 +58,10 @@ function ProfileHeader() {
         </Link> */}
         <PersonalContent>
           <ImageContainer onClick={toggle}>
-            <h1>JS</h1>
+            <h1>
+              {firstNameInitial}
+              {lastNameInitial}
+            </h1>
           </ImageContainer>
           <ProfileHeaderDropdown isOpen={dropDownState} onToggle={toggle} />
         </PersonalContent>
