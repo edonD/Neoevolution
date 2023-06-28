@@ -8,11 +8,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeProjectItem,
+  renameProjectItem,
   setCurrentProject,
 } from "../../../../store/slices/projectListSlice";
 import {
   deleteFileFromStorage,
   deleteFolderFromStorage,
+  renameFolder,
 } from "../../../Storage/UploadFileFunctions";
 import { selectUserNameId } from "../../../../store/slices/userSlice";
 
@@ -40,9 +42,30 @@ function CardForProjects({ name, state, onData, date, time, key }) {
     dispatch(removeProjectItem(name));
     deleteFolderFromStorage(path);
   };
+  const handleRenameProject = async (currentFolderPath, newFolderPath) => {
+    // const currentFolderPath = 'path/to/current/project';
+    // const newFolderPath = 'path/to/new/project';
+    // Example usage of the renameProjectItem action
+
+    try {
+      await renameFolder(currentFolderPath, newFolderPath);
+      dispatch(
+        renameProjectItem({
+          oldName: currentFolderPath,
+          newName: newFolderPath,
+        })
+      );
+
+      console.log("Project folder renamed successfully!");
+    } catch (error) {
+      console.error("Error renaming project folder:", error);
+    }
+  };
 
   const handleNameChange = (e) => {
     setEditedName(e.target.value);
+    const Newpath = `${usernameId}/${e.target.value}`;
+    handleRenameProject(path, Newpath);
   };
 
   const handleNameBlur = () => {

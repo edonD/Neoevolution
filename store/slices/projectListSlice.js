@@ -42,6 +42,17 @@ export const projectListSlice = createSlice({
         state.projects.splice(index, 1);
       }
     },
+    renameProjectItem: (state, action) => {
+      const { oldName, newName } = action.payload;
+
+      // Find the project item with the old name
+      const projectItem = state.projects.find((item) => item.name === oldName);
+
+      if (projectItem) {
+        // Update the name of the project item
+        projectItem.name = newName;
+      }
+    },
     setCurrentProject: (state, action) => {
       console.log("Current Project", action.payload);
       state.currentProject = action.payload;
@@ -61,6 +72,7 @@ export const {
   setCurrentProject,
   getCurrentProject,
   cleanAllStatesProject,
+  renameProjectItem,
 } = projectListSlice.actions;
 
 //Selectors

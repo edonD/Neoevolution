@@ -27,8 +27,8 @@ export const InData = function () {
     handleUpdateHeaderIcon("Results", "empty");
     dispatch(cleanAllStatesNetlist());
     dispatch(cleanAllStatesReferenceData());
-    dispatch(cleanAllStatesProject());
-    dispatch(cleanAllStatesModel());
+    // dispatch(cleanAllStatesProject());
+    // dispatch(cleanAllStatesModel());
     dispatch(cleanAllStatesParameters());
   }, []);
 

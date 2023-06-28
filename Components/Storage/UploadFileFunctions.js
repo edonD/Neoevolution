@@ -228,3 +228,44 @@ const listFilesInFolder = async (folder) => {
     throw error;
   }
 };
+
+export const renameFolder = async (currentFolderPath, newFolderPath) => {
+  try {
+    // Get the list of items in the current folder
+    const { results } = await Storage.list(currentFolderPath);
+
+    for (const item of results) {
+      const { key } = item;
+
+      if (key.endsWith("/")) {
+        // It's a subfolder, rename it and its contents recursively
+        const subfolderPath = key.replace(currentFolderPath, "");
+        const newSubfolderPath = newFolderPath + subfolderPath;
+        await renameProjectFolder(key, newSubfolderPath);
+        console.log("Subfolder renamed:", key, "->", newSubfolderPath);
+      } else {
+        // It's a file, rename it
+        const newKey = key.replace(currentFolderPath, newFolderPath);
+        await Storage.copy(
+          { level: "public", key },
+          { level: "public", key: newKey }
+        );
+        await Storage.remove(key);
+        console.log("File renamed:", key, "->", newKey);
+      }
+    }
+
+    // Rename the current folder after renaming its contents
+    if (currentFolderPath !== newFolderPath) {
+      await Storage.copy(
+        { level: "public", key: currentFolderPath + "/" },
+        { level: "public", key: newFolderPath + "/" }
+      );
+      await Storage.remove(currentFolderPath + "/");
+      console.log("Folder renamed:", currentFolderPath, "->", newFolderPath);
+    }
+  } catch (error) {
+    console.error("Error renaming project folder:", error);
+    throw error;
+  }
+};
