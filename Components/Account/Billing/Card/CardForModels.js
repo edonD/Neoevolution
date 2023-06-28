@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { selectUserNameId } from "../../../../store/slices/userSlice";
-import { removeModelItem } from "../../../../store/slices/modelListSlice";
+import {
+  removeModelItem,
+  setCurrentModel,
+} from "../../../../store/slices/modelListSlice";
 import { deleteFolderFromStorage } from "../../../Storage/UploadFileFunctions";
 
 function CardForModels({ name, onData }) {
@@ -23,10 +26,14 @@ function CardForModels({ name, onData }) {
     dispatch(removeModelItem(name));
     deleteFolderFromStorage(path);
   };
+
+  const setModelName = (name) => {
+    dispatch(setCurrentModel(name));
+  };
   return (
     // <Link href={`/projects/project-name?input=${"New Project"}`} passHref>
     <Link href={`/projects/${projectName}/${name}`} passHref>
-      <Card>
+      <Card onClick={setModelName(name)}>
         <Header>
           <ImageContainer>
             <Image

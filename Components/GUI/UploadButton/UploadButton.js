@@ -40,7 +40,7 @@ function UploadButton() {
         console.error("No files selected");
         return;
       }
-      dispatch(cleanAllStatesReferenceData());
+      // dispatch(cleanAllStatesReferenceData());
       const userId = usernameID; // Replace with the actual user ID.
       const folderName = "Reference Data"; // Replace with the desired folder name.
       setLoading(true);

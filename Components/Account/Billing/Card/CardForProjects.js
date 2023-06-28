@@ -87,18 +87,18 @@ function CardForProjects({ name, state, onData, date, time, key }) {
     setEditing(true);
   };
 
-  const setProjectName = (name) => {
-    dispatch(setCurrentProject(name));
+  const setProjectName = (editedName) => {
+    dispatch(setCurrentProject(editedName));
   };
 
   return (
     <ConditionalLink
-      href={`/projects/${encodeURIComponent(name)}`}
+      href={`/projects/${encodeURIComponent(editedName)}`}
       editing={editing}
     >
       <Card
         onClick={() => {
-          setProjectName(name);
+          setProjectName(editedName);
         }}
       >
         <Header>

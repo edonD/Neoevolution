@@ -35,7 +35,7 @@ const DropDownMenuReferenceData = () => {
 
   useEffect(() => {
     const fetchReferenceData = async () => {
-      dispatch(cleanAllStatesReferenceData());
+      // dispatch(cleanAllStatesReferenceData());
       try {
         const files = await listFiles(ReferenceDataLink);
 
