@@ -13,7 +13,7 @@ function index() {
       <First />
       <Second />
       {/* <Roadmap /> */}
-      <Third />
+      {/* <Third /> */}
     </Container>
   );
 }

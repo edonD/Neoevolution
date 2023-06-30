@@ -7,9 +7,9 @@ function CardExpireMask(props) {
   return (
     <MaskedInput
       {...other}
-      ref={(ref) => {
-        inputRef(ref ? ref.inputElement : null);
-      }}
+      // ref={(ref) => {
+      //   inputRef(ref ? ref.inputElement : null);
+      // }}
       mask={[/\d/, /\d/, "/", /\d/, /\d/]}
       pipe={autoCorrectedDatePipe}
       guide

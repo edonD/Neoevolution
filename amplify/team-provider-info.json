@@ -50,5 +50,29 @@
         "s3BucketAiValanche": {}
       }
     }
+  },
+  "aival": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aivalanche-aival-181936-authRole",
+      "UnauthRoleArn": "arn:aws:iam::339557729313:role/amplify-aivalanche-aival-181936-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::339557729313:role/amplify-aivalanche-aival-181936-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-aivalanche-aival-181936-deployment",
+      "UnauthRoleName": "amplify-aivalanche-aival-181936-unauthRole",
+      "StackName": "amplify-aivalanche-aival-181936",
+      "StackId": "arn:aws:cloudformation:eu-central-1:339557729313:stack/amplify-aivalanche-aival-181936/e844e5c0-1761-11ee-b650-02755b4bda78",
+      "AmplifyAppId": "d2wkfcgs9s4rfe"
+    },
+    "categories": {
+      "auth": {
+        "aivalanche5e90a998": {}
+      },
+      "api": {
+        "aivalanche": {}
+      },
+      "storage": {
+        "s3BucketAiValanche": {}
+      }
+    }
   }
 }
