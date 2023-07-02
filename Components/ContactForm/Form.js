@@ -246,11 +246,11 @@ function ContactForm() {
 
             <Grid item xs={12} md={12}>
               <InputTextarea
-                variant='outlined'
-                rows='5'
+                rows={5}
+                cols={30}
                 style={{ width: "100%" }}
-                name='Details'
                 placeholder='Your Message'
+                value={details}
                 onChange={(event) => {
                   setDetails(event.target.value);
                 }}
