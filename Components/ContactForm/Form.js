@@ -324,6 +324,9 @@ const Form = styled.form`
   box-shadow: 0 0 16px rgb(0, 0, 0, 10%);
   position: relative;
   @media screen and (max-width: 900px) {
+    height: fit-content;
+  }
+  @media screen and (max-width: 450px) and (max-height: 700px) {
     height: 100%;
   }
   @media screen and (max-width: 600px) {
@@ -453,7 +456,7 @@ const WrapperForm = styled.div`
     background-color: white;
     height: 100%;
   }
-  @media screen and (max-height: 600px) {
+  @media screen and (max-height: 700px) {
     width: 100%;
     display: flex;
     flex-direction: column;
