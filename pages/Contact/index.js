@@ -6,7 +6,7 @@ import Header from "../../Components/Home/Header";
 function Contact() {
   return (
     <Container>
-      <Background />
+      {/* <Background /> */}
       <Form />
     </Container>
   );
@@ -14,18 +14,10 @@ function Contact() {
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   position: relative;
   margin: 0px;
-  @media screen and (max-height: 750px) {
-    height: 100%;
-    background-color: white;
-  }
-  @media screen and (max-width: 1200px) {
-    height: 100%;
-    background-color: white;
-  }
 `;
 
 const Background = styled.div`

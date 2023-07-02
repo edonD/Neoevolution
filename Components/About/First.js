@@ -139,38 +139,6 @@ const Header = styled.div`
   z-index: 3;
 `;
 
-const Description = styled.div`
-  position: relative;
-  width: 100%;
-  height: 180px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  color: #2350ef;
-
-  background-color: #eeeeee;
-  background: #eeeeee;
-  p {
-    text-align: center;
-    margin: 0px;
-    font-weight: 200;
-    font-size: 24px;
-    color: #030610;
-
-    @media screen and (min-width: 400px) and (max-width: 1200px) {
-      font-size: 12px;
-    }
-    @media screen and (min-width: 200px) and (max-width: 400px) {
-      font-size: 10px;
-    }
-  }
-  @media screen and (max-width: 1200px) {
-    height: 90px;
-  }
-`;
-
 const Wrapper = styled.div`
   position: relative;
 
