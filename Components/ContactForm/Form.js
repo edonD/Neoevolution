@@ -171,30 +171,7 @@ function ContactForm() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <InputText
-                style={{ width: "100%" }}
-                placeholder='Job role'
-                id='jobRole'
-                name='jobRole'
-                value={jobrole}
-                onChange={(event) => {
-                  setJobrole(event.target.value);
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <InputText
-                style={{ width: "100%" }}
-                placeholder='Job title'
-                value={jobtitle}
-                name='jobTitle'
-                id='jobTitle'
-                onChange={(event) => {
-                  setJobtitle(event.target.value);
-                }}
-              />
-            </Grid>
+
             <Grid item xs={4} md={4}>
               <Checkbox
                 inputId='checkOption1'
@@ -304,7 +281,7 @@ const Form = styled.form`
   background: white;
   height: 550px;
   width: 550px;
-  min-height: 650px;
+  min-height: 550px;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -417,14 +394,14 @@ const WrapperDescription = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: 1200px), screen and (max-height: 650px) {
+  @media screen and (max-width: 1200px), screen and (max-height: 750px) {
     justify-content: center;
     align-items: center;
   }
 `;
 const WrapperForm = styled.div`
   width: 60%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -469,18 +446,18 @@ const FormH1 = styled.h1`
   height: 100%;
   position: relative;
   color: #303030;
-  font-size: 58px;
+
   font-weight: 700;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0px;
-  font-size: 52px;
+  font-size: 48px;
   @media screen and (max-width: 1200px), screen and (max-height: 850px) {
-    font-size: 48px;
+    font-size: 44px;
   }
   @media screen and (max-width: 600px), screen and (max-height: 750px) {
-    font-size: 42px;
+    font-size: 38px;
   }
 `;
 const StampIcon = styled.div`
