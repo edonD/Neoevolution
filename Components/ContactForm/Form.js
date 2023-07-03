@@ -1,13 +1,11 @@
 import { Checkbox } from "primereact/checkbox";
-import React, { useEffect } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 // import { Button } from "@mui/material
 import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
 import { InputTextarea } from "primereact/inputtextarea";
-import { Dropdown } from "primereact/dropdown";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -20,12 +18,7 @@ function ContactForm() {
   const [jobrole, setJobrole] = useState("");
   const [jobtitle, setJobtitle] = useState("");
   const [details, setDetails] = useState("");
-  const [dropdownItem, setDropdownItem] = useState(null);
-  const dropdownItems = [
-    { name: "Option 1", code: "Option 1" },
-    { name: "Option 2", code: "Option 2" },
-    { name: "Option 3", code: "Option 3" },
-  ];
+
   const [checkboxValue, setCheckboxValue] = useState([]);
   const router = useRouter();
   const onCheckboxChange = (e) => {
@@ -45,7 +38,7 @@ function ContactForm() {
           <p>
             Let us help you deliver better outcomes by finding innovative
             solutions to your challenging business use cases. Complete the form
-            to talk to sales. We're here to help you:
+            to talk to sales. We are here to help you:
           </p>
         </FormHeaderDescription>
 

@@ -181,7 +181,7 @@ const FirstDivider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 1000px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 `;
@@ -191,7 +191,7 @@ const SecondDivider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 1000px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 `;
@@ -264,7 +264,7 @@ const PersonalContent = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1200px) {
     display: none;
   }
   &:hover {

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
+
 function Second() {
   return (
     <Container>
@@ -78,6 +78,9 @@ const BodyDivider = styled.div`
   @media screen and (max-width: 1200px) {
     justify-content: flex-start;
     align-items: center;
+  }
+  @medina screen and (max-height: 770px) {
+    margin-bottom: 20px;
   }
   h1 {
     margin: 0px;
