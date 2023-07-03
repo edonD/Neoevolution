@@ -14,7 +14,6 @@ const SignupTest = ({ signUp }) => {
   return (
     <Container>
       <ContentWrapper>
-        <LogoImage src='/images/logo_blue.png' alt='AIValanche logo' />
         <StyledCard>
           {flowState === "signUpState" ? (
             <ConfirmForm />
@@ -33,7 +32,7 @@ const Container = styled.div`
   /* min-height: 100vh; */
   height: 100%;
   width: 100%;
-  margin: 20px 0px 20px 0px;
+  padding: 20px 0px 20px 0px;
 
   @media screen and (max-width: 1200px) {
     width: 100%;
@@ -46,6 +45,8 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 90%;
+  max-width: 500px;
 `;
 
 const LogoImage = styled.img`
@@ -55,13 +56,14 @@ const LogoImage = styled.img`
 `;
 
 const StyledCard = styled.div`
-  border-radius: 56px;
+  border-radius: 26px;
   padding: 0.3rem;
   background: linear-gradient(
     180deg,
     rgba(157, 206, 247, 1) 5%,
     rgba(33, 150, 243, 0) 25%
   );
+  width: 100%;
 `;
 
 const CardContent = styled.div`

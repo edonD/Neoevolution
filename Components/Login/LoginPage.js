@@ -72,13 +72,13 @@ const LoginPage = () => {
   return (
     <Container>
       <ContentWrapper>
-        <LogoImage src='/images/logo_blue.png' alt='AIValanche logo' />
+        {/* <LogoImage src='/images/logo_blue.png' alt='AIValanche logo' /> */}
         <StyledCard>
           <CardContent>
             <Header>
               <LogoContainer>
                 <Image
-                  src='/images/TDK.svg'
+                  src='/images/logo_blue.png'
                   objectFit='contain'
                   layout='fill'
                   alt='logo'
@@ -88,7 +88,7 @@ const LoginPage = () => {
               <Subtitle>Sign in to continue</Subtitle>
             </Header>
             <Body>
-              <form onSubmit={SubmitLogIn}>
+              <FormStyled onSubmit={SubmitLogIn}>
                 <FormLabel htmlFor='email1'>Email</FormLabel>
                 <InputText
                   id='email1'
@@ -105,7 +105,7 @@ const LoginPage = () => {
                 />
 
                 <FormLabel htmlFor='password1'>Password</FormLabel>
-                <Password
+                <PasswordStyled
                   id='password1'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -136,7 +136,7 @@ const LoginPage = () => {
                   label='Sign In'
                   loading={loading}
                 />
-              </form>
+              </FormStyled>
             </Body>
           </CardContent>
         </StyledCard>
@@ -196,7 +196,8 @@ const ContentWrapper = styled.div`
   height: 100%;
 
   position: relative;
-
+  width: 90%;
+  max-width: 500px;
   @media screen and (max-width: 1600px) {
     margin-top: 3rem;
   }
@@ -211,10 +212,21 @@ const LogoImage = styled.img`
   width: 4rem;
   height: 4rem;
   flex-shrink: 0;
+  border: 1px solid red;
 `;
 
+const PasswordStyled = styled(Password)`
+  width: 100%;
+
+  border: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+`;
+
+const FormStyled = styled.form`
+  width: 100%;
+`;
 const StyledCard = styled.div`
-  border-radius: 56px;
+  border-radius: 26px;
   padding: 0.3rem;
   background: linear-gradient(
     180deg,
@@ -222,15 +234,16 @@ const StyledCard = styled.div`
     rgba(33, 150, 243, 0) 25%
   );
   height: 100%;
+  width: 100%;
 `;
 
 const CardContent = styled.div`
   width: 100%;
   /* padding: 2rem; */
-  border-radius: 53px;
+  border-radius: 23px;
   background-color: white;
-  padding-top: 5rem; /* 32px */
-  padding-bottom: 5rem; /* 32px */
+  padding-top: 2rem; /* 32px */
+  padding-bottom: 2rem; /* 32px */
   padding-left: 32px;
   padding-right: 32px;
   display: flex;

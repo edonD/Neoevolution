@@ -70,7 +70,7 @@ function SignUpForm({ callbackFunction }) {
         <Subtitle>Let‘s get started</Subtitle>
       </Header>
       <Body>
-        <form onSubmit={SubmitSignUp}>
+        <FormStyled onSubmit={SubmitSignUp}>
           <FormLabel htmlFor='email2'>First Name</FormLabel>
           <InputText
             value={name}
@@ -111,7 +111,7 @@ function SignUpForm({ callbackFunction }) {
             required
           />
           <FormLabel htmlFor='password1'>Password</FormLabel>
-          <Password
+          <PasswordStyled
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder='Password'
@@ -149,7 +149,7 @@ function SignUpForm({ callbackFunction }) {
               Login
             </a>
           </p>
-        </form>
+        </FormStyled>
       </Body>
       <Dialog
         visible={errorDialogVisible}
@@ -254,10 +254,10 @@ const FormButton = styled.button`
 const CardContent = styled.div`
   width: 100%;
   /* padding: 2rem; */
-  border-radius: 53px;
+  border-radius: 23px;
   background-color: white;
   padding-top: 2rem; /* 32px */
-  padding-bottom: 5rem; /* 32px */
+  padding-bottom: 2rem; /* 32px */
   padding-left: 32px;
   padding-right: 32px;
   display: flex;
@@ -265,10 +265,19 @@ const CardContent = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const FormStyled = styled.form`
+  width: 100%;
+`;
+const PasswordStyled = styled(Password)`
+  width: 100%;
+
+  border: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+`;
 
 const Header = styled.div`
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -277,15 +286,27 @@ const Header = styled.div`
 
 const Title = styled.div`
   font-weight: 600;
-  font-size: 2.5rem;
+  font-size: 38px;
   margin-bottom: 1rem;
   color: #495057;
+  @media screen and (max-width: 1200px) {
+    font-size: 32px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 24px;
+  }
 `;
 
 const Subtitle = styled.div`
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 300;
   color: #495057;
+  @media screen and (max-width: 1200px) {
+    font-size: 18px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 16px;
+  }
 `;
 
 const Body = styled.div`
