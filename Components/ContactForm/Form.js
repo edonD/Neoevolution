@@ -412,7 +412,7 @@ const WrapperForm = styled.div`
   background: radial-gradient(circle at left center, #d4e5f9 0%, #f7f7f7 100%);
 
   @media screen and (max-width: 1200px) {
-    width: 100%;
+    width: 55%;
   }
   @media screen and (max-height: 600px) {
     width: 100%;
