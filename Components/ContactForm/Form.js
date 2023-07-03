@@ -327,7 +327,7 @@ const BodyHeaderContainer = styled.div`
     margin: 0px;
 
     color: #3fa4f9;
-    font-size: 22px;
+    font-size: 20px;
 
     @media screen and (max-width: 1200px) {
       width: 100%;
@@ -348,7 +348,7 @@ const BodyBodyContainer = styled.div`
   color: #989898;
 
   p {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 200;
     margin: 0px;
   }
@@ -370,13 +370,13 @@ const FormHeaderDescription = styled.div`
   }
   p {
     color: rgba(26, 26, 26, 0.9);
-    font-size: 24px;
+    font-size: 22px;
     @media screen and (max-width: 1200px), screen and (max-height: 850px) {
       width: 100%;
-      font-size: 20px;
+      font-size: 18px;
     }
     @media screen and (max-width: 600px), screen and (max-height: 750px) {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 `;
@@ -452,12 +452,12 @@ const FormH1 = styled.h1`
   flex-direction: column;
   justify-content: center;
   margin: 0px;
-  font-size: 48px;
+  font-size: 44px;
   @media screen and (max-width: 1200px), screen and (max-height: 850px) {
-    font-size: 44px;
+    font-size: 40px;
   }
   @media screen and (max-width: 600px), screen and (max-height: 750px) {
-    font-size: 38px;
+    font-size: 34px;
   }
 `;
 const StampIcon = styled.div`
