@@ -381,7 +381,7 @@ const FormHeaderDescription = styled.div`
   }
 `;
 const WrapperDescription = styled.div`
-  width: 40%;
+  width: 45%;
   height: 550px;
   display: flex;
   flex-direction: column;
@@ -400,7 +400,7 @@ const WrapperDescription = styled.div`
   }
 `;
 const WrapperForm = styled.div`
-  width: 60%;
+  width: 55%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
