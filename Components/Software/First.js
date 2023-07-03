@@ -50,6 +50,9 @@ const Container = styled.div`
   @media screen and (max-height: 550px) and (min-width: 1200px) {
     height: 550px;
   }
+  @media screen and (max-width: 1200px) {
+    height: 700px;
+  }
 `;
 const ImageContainer = styled.div`
   position: relative;
@@ -105,7 +108,7 @@ const Header = styled.div`
   position: relative;
   width: 40%;
   height: 80%;
-
+  border: 1px solid green;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -154,6 +157,7 @@ const SoftwareContianer = styled.div`
   align-items: flex-start;
   color: white;
   user-select: none;
+  border: 1px solid yellow;
   /* padding-top: 50px; */
 
   h1 {
@@ -170,7 +174,7 @@ const SoftwareContianer = styled.div`
     height: 60%;
   }
   @media screen and (min-width: 1200px) and (max-width: 1400px) {
-    width: 60%;
+    width: 50%;
   }
 
   @media screen and (max-width: 1200px) {
