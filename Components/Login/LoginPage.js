@@ -81,6 +81,8 @@ const LoginPage = () => {
                   src='/images/logo_blue.png'
                   objectFit='contain'
                   layout='fill'
+                  width={60}
+                  height={60}
                   alt='logo'
                 />
               </LogoContainer>
@@ -218,7 +220,6 @@ const LogoImage = styled.img`
 const PasswordStyled = styled(Password)`
   width: 100%;
 
-  border: 1px solid #e0e0e0;
   margin-bottom: 20px;
 `;
 
@@ -258,12 +259,16 @@ const Header = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+  height: 100%;
 `;
 const LogoContainer = styled.div`
   position: relative;
   width: 60px;
   height: 60px;
   border-radius: 60px;
+  margin: 0px;
   /* overflow: hidden; */
   background: transparent;
 
@@ -272,13 +277,14 @@ const LogoContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   user-select: none;
 `;
 const Title = styled.div`
   font-weight: 600;
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+
+  margin-bottom: 0rem;
   color: #495057;
 `;
 
