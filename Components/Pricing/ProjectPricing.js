@@ -54,7 +54,7 @@ function ProjectPricing() {
 }
 
 const Container = styled.div`
-  width: 400px;
+  width: 350px;
   height: 500px;
   display: flex;
   margin: 10px;
