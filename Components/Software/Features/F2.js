@@ -22,7 +22,7 @@ function F2({ stateChanger }) {
       <SoftwareContianer>
         <ImageContainer>
           <Image
-            src='/images/software-1.png'
+            src='/images/test-Software.svg'
             layout='fill'
             objectFit='contain' // Scale your image down to fit into the container
             alt='MOSFET'

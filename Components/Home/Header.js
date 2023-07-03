@@ -115,13 +115,19 @@ const ItemContainer = styled.div`
   span {
     color: ${(p) => (p.headerdown === false ? "#f3f4f8" : "white")};
 
-    font-size: 20px;
     letter-spacing: 1.42px;
     line-height: 1.08;
     font-weight: 650;
     padding: 2px 0px;
     white-space: nowrap;
     position: relative;
+    font-size: 20px;
+    @media screen and (max-width: 1600px) {
+      font-size: 18px;
+    }
+    @media screen and (max-width: 1400px) {
+      font-size: 16px;
+    }
     &:before {
       background-color: rgb(249, 249, 249);
       border-radius: 0px 0px 4px 4px;
@@ -217,26 +223,35 @@ const Logo = styled.div`
 
 const Login = styled(Button)`
   && {
-    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
+    font-family: Soehne, system-ui, -apple-system, "Helvetica Neue", Arial,
+      sans-serif;
+    font-weight: 650;
+    text-transform: none;
     background-color: transparent;
     height: 48px;
     width: 150px;
     justify-self: flex-end;
     color: white;
     letter-spacing: 1.5px;
-    font-weight: 600;
+
+    font-size: 18px;
+    @media screen and (max-width: 1600px) {
+      font-size: 16px;
+    }
+    @media screen and (max-width: 1400px) {
+      font-size: 14px;
+    }
     &:hover {
       color: #3360da;
-    }
-
-    @media (max-width: 1200px), screen and (max-height: 770px) {
-      font-size: 12px;
     }
   }
 `;
 const SignUpButton = styled(Button)`
   && {
-    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
+    font-family: Soehne, system-ui, -apple-system, "Helvetica Neue", Arial,
+      sans-serif;
+    font-weight: 650;
+    text-transform: none;
     background-color: white;
     height: 48px;
     width: 150px;
@@ -244,13 +259,16 @@ const SignUpButton = styled(Button)`
     color: black;
     margin: 10px;
     letter-spacing: 1.5px;
-    font-weight: 600;
+
+    font-size: 18px;
+    @media screen and (max-width: 1600px) {
+      font-size: 16px;
+    }
+    @media screen and (max-width: 1400px) {
+      font-size: 14px;
+    }
     &:hover {
       background-color: #e5e5e5;
-    }
-
-    @media (max-width: 1200px), screen and (max-height: 770px) {
-      font-size: 12px;
     }
   }
 `;
@@ -328,6 +346,10 @@ const NavMenu = styled.div`
 
 const Contact = styled(Button)`
   && {
+    font-family: Soehne, system-ui, -apple-system, "Helvetica Neue", Arial,
+      sans-serif;
+    font-weight: 650;
+    text-transform: none;
     height: 48px;
     width: 200px;
 
@@ -346,6 +368,13 @@ const Contact = styled(Button)`
     color: white;
     transition: all 0.2s ease 0s;
     transition: 0.3s;
+    font-size: 18px;
+    @media screen and (max-width: 1600px) {
+      font-size: 16px;
+    }
+    @media screen and (max-width: 1400px) {
+      font-size: 14px;
+    }
     &:hover {
       /* color: #e5e5e5; */
       background: linear-gradient(
@@ -355,10 +384,6 @@ const Contact = styled(Button)`
         #5d70e9 51%,
         #5d70e9 100%
       );
-    }
-
-    @media (max-width: 1200px), screen and (max-height: 770px) {
-      font-size: 12px;
     }
   }
 `;

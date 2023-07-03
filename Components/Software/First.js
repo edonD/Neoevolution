@@ -47,8 +47,8 @@ const Container = styled.div`
     rgba(4, 33, 77, 1) 99%
   );
 
-  @media screen and (max-height: 750px) {
-    height: 750px;
+  @media screen and (max-height: 550px) and (min-width: 1200px) {
+    height: 550px;
   }
 `;
 const ImageContainer = styled.div`
@@ -155,7 +155,7 @@ const SoftwareContianer = styled.div`
   color: white;
   user-select: none;
   /* padding-top: 50px; */
-  /* border: 1px solid red; */
+
   h1 {
     text-align: left;
     margin: 0px;
@@ -166,6 +166,9 @@ const SoftwareContianer = styled.div`
     margin: 0px;
   }
   z-index: 3;
+  @media screen and (max-height: 670px) {
+    height: 60%;
+  }
   @media screen and (min-width: 1200px) and (max-width: 1400px) {
     width: 60%;
   }
