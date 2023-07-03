@@ -1,9 +1,8 @@
 import { Button } from "@mui/material";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import Gradient from "rgt";
 
 // import Fluid from "webgl-fluid";
 function First() {
