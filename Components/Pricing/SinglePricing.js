@@ -57,10 +57,10 @@ function SinglePricing() {
 
 const Container = styled.div`
   width: 400px;
-  height: 600px;
+  height: 500px;
   display: flex;
   margin: 10px;
-  border-radius: 4px 0px 0px 4px;
+  border-radius: 4px 4px 4px 4px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -156,7 +156,7 @@ const Divide = styled.div`
   height: 1px;
   width: 80%;
   background-color: #2a293f;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 `;
 const ItemContainer = styled.div`
   height: 100%;
@@ -191,7 +191,7 @@ const ItemHeader = styled.div`
   height: fit-content;
   width: 100%;
 
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   margin-top: 20px;
   flex-direction: column;
   justify-content: center;

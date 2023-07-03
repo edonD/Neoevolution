@@ -5,20 +5,15 @@ function Second() {
   return (
     <Container>
       <Divider>
-        <Image src='/images/simple.svg' width={100} height={100} alt='MOSFET' />
+        <Image src='/images/simple.svg' width={75} height={75} alt='MOSFET' />
         <h1>Simple to use</h1>
       </Divider>
       <Divider>
-        <Image
-          src='/images/MLandAI.svg'
-          width={100}
-          height={100}
-          alt='MOSFET'
-        />
+        <Image src='/images/MLandAI.svg' width={75} height={75} alt='MOSFET' />
         <h1>Modern ML and AI</h1>
       </Divider>
       <Divider>
-        <Image src='/images/config.svg' width={100} height={100} alt='MOSFET' />
+        <Image src='/images/config.svg' width={75} height={75} alt='MOSFET' />
         <h1>Configurable</h1>
       </Divider>
     </Container>
@@ -27,7 +22,7 @@ function Second() {
 
 const Container = styled.div`
   width: 100%;
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -53,13 +48,13 @@ const Divider = styled.div`
     width: 30%;
   }
   h1 {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 500;
     @media screen and (max-width: 1200px), screen and (max-height: 770px) {
-      font-size: 20px;
+      font-size: 18px;
     }
     @media screen and (max-width: 650px) {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 `;

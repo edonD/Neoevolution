@@ -32,7 +32,7 @@ function F1({ stateChanger }) {
       </SoftwareContianer>
       <Wrapper>
         <HeaderContainer>
-          <p>Simple to use</p>
+          <p> Time Saving</p>
         </HeaderContainer>
         <HeaderContainer>
           <h1>

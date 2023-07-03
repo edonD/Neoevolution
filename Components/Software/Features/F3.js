@@ -31,7 +31,7 @@ function F3({ stateChanger }) {
       </SoftwareContianer>
       <Wrapper>
         <HeaderContainer>
-          <p>Cost Saving</p>
+          <p>Easily controllable</p>
         </HeaderContainer>
         <HeaderContainer>
           <h1>

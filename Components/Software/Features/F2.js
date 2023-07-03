@@ -31,7 +31,7 @@ function F2({ stateChanger }) {
       </SoftwareContianer>
       <Wrapper>
         <HeaderContainer>
-          <p>Time Saving</p>
+          <p>Cost Saving</p>
         </HeaderContainer>
         <HeaderContainer>
           <h1>

@@ -67,7 +67,7 @@ function Third() {
     hidden: {
       backgroundColor: "transparent",
       boxShadow: "0px 0px 25px 1px rgba(190, 190, 190, 0)",
-      color: "#a2a8bd",
+      color: "#989898",
       borderRadius: "4px",
     },
     visible: {
@@ -103,14 +103,14 @@ function Third() {
             animate={controls3}
             variants={upload}
           >
-            <h1>Easily controllable</h1>
+            <h1>Easily Controllable</h1>
           </AnimatedDivider>
           <AnimatedDivider
             initial='hidden'
             animate={controls4}
             variants={upload}
           >
-            <h1>Custom machine learning and AI algorithms</h1>
+            <h1>Advanced AI Algorithms</h1>
           </AnimatedDivider>
         </AnimationWrapper>
 
@@ -217,20 +217,24 @@ const AnimationWrapper = styled.div`
   }
 `;
 const AnimatedDivider = styled(motion.div)`
-  height: 68px;
+  height: 60px;
   width: 300px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   background-color: transparent;
+  padding: 0px;
   padding-left: 20px;
 
   margin: 5px;
   margin-right: 50px;
 
   h1 {
-    font-weight: 400;
-    font-size: 20px;
+    /* color: #989898; */
+    margin: 0px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
   }
 `;
 
