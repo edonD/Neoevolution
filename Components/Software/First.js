@@ -108,7 +108,7 @@ const Header = styled.div`
   position: relative;
   width: 40%;
   height: 80%;
-  border: 1px solid green;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -157,7 +157,6 @@ const SoftwareContianer = styled.div`
   align-items: flex-start;
   color: white;
   user-select: none;
-  border: 1px solid yellow;
   /* padding-top: 50px; */
 
   h1 {
