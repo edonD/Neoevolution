@@ -158,7 +158,7 @@ const BodyBodyContainer = styled.div`
   p {
     font-size: 22px;
     font-weight: 200;
-    @media screen and (max-width: 1400px) {
+    @media screen and (max-width: 1400px), screen and (max-height: 770px) {
       font-size: 18px;
     }
     @media screen and (max-width: 600px) {
@@ -187,7 +187,7 @@ const BodyHeaderContainer = styled.div`
     font-size: 38px;
     font-weight: 200;
     color: black;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 32px;
     }
     @media screen and (max-width: 600px) {

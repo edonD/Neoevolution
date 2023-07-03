@@ -127,7 +127,7 @@ const Header = styled.div`
     margin: 0px;
     font-size: 44px;
     text-shadow: 3px 3px 5px black;
-    @media screen and (max-width: 1400px) {
+    @media screen and (max-width: 1400px), screen and (max-height: 770px) {
       font-size: 36px;
     }
     @media screen and (max-width: 600px) {
@@ -140,7 +140,7 @@ const Header = styled.div`
     margin-top: 15px;
     font-size: 24px;
     text-shadow: 3px 3px 5px black;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 20px;
     }
     @media screen and (max-width: 600px) {
