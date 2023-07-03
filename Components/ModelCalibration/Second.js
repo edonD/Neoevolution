@@ -117,7 +117,7 @@ const DescriptionHeader = styled.div`
   color: black;
   h3 {
     font-weight: 400;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 12px;
     }
     @media screen and (max-width: 650px) {
@@ -142,7 +142,7 @@ const DescriptionBody = styled.div`
     margin: 0px 15px 15px 15px;
     color: #826d7a;
     font-size: 15px;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 8px;
     }
     @media screen and (max-width: 600px) {

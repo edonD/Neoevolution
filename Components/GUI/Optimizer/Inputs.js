@@ -162,7 +162,7 @@ const Label = styled.label`
   /* Add your styles for the label here */
   font-weight: 200;
   margin-right: 10px;
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1200px), screen and (max-height: 770px) {
     font-size: 14px;
   }
 `;

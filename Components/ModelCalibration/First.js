@@ -103,7 +103,7 @@ const StyledButton = styled(Button)`
     font-weight: 600;
     font-size: 20px;
     margin-top: 00px;
-    @media (max-width: 1200px) {
+    @media (max-width: 1200px), screen and (max-height: 770px) {
       width: 180px;
       height: 38px;
       font-size: 15px;
@@ -126,7 +126,7 @@ const UploadButton = styled(Button)`
     border: 1px solid #f5c900;
     box-shadow: 0 0 16px rgb(0, 0, 0, 0%);
     font-weight: 600;
-    @media (max-width: 1200px) {
+    @media (max-width: 1200px), screen and (max-height: 770px) {
       width: 180px;
       height: 38px;
       font-size: 15px;
@@ -173,7 +173,7 @@ const Body = styled.div`
   h1 {
     margin: 0px;
     font-size: 60px;
-    @media (max-width: 1200px) {
+    @media (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 36px;
     }
   }
@@ -183,7 +183,7 @@ const Body = styled.div`
     font-size: 20px;
     font-weight: 500;
     color: #6995c2;
-    @media (max-width: 1200px) {
+    @media (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 18px;
     }
   }

@@ -115,7 +115,7 @@ const Header = styled.div`
     text-align: left;
     margin: 0px;
     font-size: 58px;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 48px;
     }
     @media screen and (max-width: 600px) {
@@ -128,7 +128,7 @@ const Header = styled.div`
     margin: 0px;
     margin-top: 15px;
     font-size: 24px;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       width: 100%;
       font-size: 20px;
     }

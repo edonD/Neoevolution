@@ -126,7 +126,7 @@ const Header = styled.div`
   h1 {
     font-weight: 200;
   }
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1200px), screen and (max-height: 770px) {
     font-size: 12px;
   }
 `;

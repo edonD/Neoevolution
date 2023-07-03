@@ -72,7 +72,7 @@ const Header = styled.div`
 
   margin: 0px;
   font-size: 46px;
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1200px), screen and (max-height: 770px) {
     font-size: 36px;
   }
   @media screen and (max-width: 900px) {
@@ -90,7 +90,7 @@ const Description = styled.div`
   align-items: flex-start;
   color: white;
   span {
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 16px;
     }
     @media screen and (max-width: 900px) {

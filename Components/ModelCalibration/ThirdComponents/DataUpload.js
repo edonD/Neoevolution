@@ -50,7 +50,7 @@ const Wrapper = styled.div`
     margin: 0px;
     font-size: 25px;
     font-weight: 500;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 20px;
     }
   }
@@ -61,7 +61,7 @@ const Wrapper = styled.div`
     font-size: 15px;
     font-weight: 500;
     color: #d4d7da;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 13px;
     }
   }

@@ -55,7 +55,7 @@ const Divider = styled.div`
   h1 {
     font-size: 24px;
     font-weight: 500;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 20px;
     }
     @media screen and (max-width: 650px) {

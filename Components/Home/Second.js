@@ -79,7 +79,7 @@ const BodyDivider = styled.div`
     justify-content: flex-start;
     align-items: center;
   }
-  @medina screen and (max-height: 770px) {
+  @media screen and (max-height: 770px) {
     margin-bottom: 20px;
   }
   h1 {

@@ -161,7 +161,7 @@ const DescriptionBody = styled.div`
     color: black;
     font-size: 15px;
     font-weight: 200;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px,screen and (max-height: 770px)) {
       font-size: 8px;
     }
     @media screen and (max-width: 600px) {

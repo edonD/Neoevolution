@@ -87,7 +87,7 @@ const HeaderDivider = styled.div`
     font-size: 38px;
     font-weight: 400;
     text-align: left;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 32px;
     }
     @media screen and (max-width: 600px) {
@@ -113,7 +113,7 @@ const BodyDivider = styled.div`
     font-size: 22px;
     font-weight: 100;
     text-align: left;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 18px;
     }
     @media screen and (max-width: 600px) {

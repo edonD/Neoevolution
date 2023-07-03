@@ -229,7 +229,7 @@ const Login = styled(Button)`
       color: #3360da;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 12px;
     }
   }
@@ -249,7 +249,7 @@ const SignUpButton = styled(Button)`
       background-color: #e5e5e5;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 12px;
     }
   }
@@ -357,7 +357,7 @@ const Contact = styled(Button)`
       );
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1200px), screen and (max-height: 770px) {
       font-size: 12px;
     }
   }
