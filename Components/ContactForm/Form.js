@@ -414,6 +414,10 @@ const WrapperForm = styled.div`
   @media screen and (max-width: 1200px) {
     width: 55%;
   }
+
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
   @media screen and (max-height: 600px) {
     width: 100%;
 

@@ -1,9 +1,36 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
-
-type Todo @model {
+type Contact {
   id: ID!
-  name: String!
-  description: String
+  email: String!
+  firstName: String!
+  lastName: String!
+  company: String!
+  jobRole: String!
+  jobTitle: String!
+  category: ContactCategory!
+  message: String!
+}
+
+enum ContactCategory {
+  PERSONAL
+  ACADEMY
+  ENTERPRISE
+}
+
+input CreateContactInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  company: String!
+  jobRole: String!
+  jobTitle: String!
+  category: ContactCategory!
+  message: String!
+}
+
+type Mutation {
+  createContact(input: CreateContactInput!): Contact
+}
+
+type Query {
+  getContact(id: ID!): Contact
 }
