@@ -3,23 +3,28 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
-// import { Button } from "@mui/material
+import { API } from "aws-amplify";
+import { createContactUs } from "../../src/graphql/mutations";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { Dialog } from "primereact/dialog";
 
 function ContactForm() {
   const [email, setEmail] = useState("");
-
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [company, setCompany] = useState("");
   const [jobrole, setJobrole] = useState("");
   const [jobtitle, setJobtitle] = useState("");
   const [details, setDetails] = useState("");
-
   const [checkboxValue, setCheckboxValue] = useState([]);
+
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState("");
+  const [dialogSuccess, setDialogSuccess] = useState(false);
+
   const router = useRouter();
   const onCheckboxChange = (e) => {
     let selectedValue = [...checkboxValue];
@@ -27,6 +32,32 @@ function ContactForm() {
     else selectedValue.splice(selectedValue.indexOf(e.value), 1);
 
     setCheckboxValue(selectedValue);
+  };
+  const CreateContactUs = async () => {
+    try {
+      const createNewPostInput = {
+        email: email,
+        firstName: name,
+        lastName: lastname,
+        company: company,
+        checkBox: checkboxValue,
+        message: details,
+      };
+      console.log(createNewPostInput);
+      const createNewPost = await API.graphql({
+        query: createContactUs,
+        variables: { input: createNewPostInput },
+      });
+      console.log(createNewPost);
+      setDialogMessage("Thank you for contacting us!");
+      setDialogVisible(true);
+      setDialogSuccess(true);
+    } catch (error) {
+      console.error(error);
+      setDialogVisible(true);
+      setDialogSuccess(false);
+      setDialogMessage("Something went wrong, please try again later.", error);
+    }
   };
   return (
     <Container>
@@ -115,7 +146,7 @@ function ContactForm() {
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            //  handleSubmit(e);
+            CreateContactUs();
           }}
         >
           <Grid container spacing={2} rowSpacing={2}>
@@ -125,7 +156,8 @@ function ContactForm() {
             <Grid item xs={12} md={12}>
               <InputText
                 type='text'
-                placeholder='Please enter your business email.'
+                required
+                placeholder='Please enter your business email *'
                 style={{ width: "100%" }}
                 value={email}
                 onChange={(event) => {
@@ -137,8 +169,9 @@ function ContactForm() {
             <Grid item xs={12} md={6}>
               <InputText
                 style={{ width: "100%" }}
+                required
                 id='name'
-                placeholder='First Name'
+                placeholder='First Name *'
                 name='name'
                 value={name}
                 onChange={(event) => {
@@ -149,8 +182,9 @@ function ContactForm() {
             <Grid item xs={12} md={6}>
               <InputText
                 style={{ width: "100%" }}
+                required
                 id='last name'
-                placeholder='Last Name'
+                placeholder='Last Name *'
                 name='last name'
                 value={lastname}
                 onChange={(event) => {
@@ -161,8 +195,9 @@ function ContactForm() {
             <Grid item xs={12} md={12}>
               <InputText
                 style={{ width: "100%" }}
+                required
                 id='Company'
-                placeholder='Company'
+                placeholder='Company *'
                 name='Company'
                 type='Company'
                 value={company}
@@ -176,8 +211,8 @@ function ContactForm() {
               <Checkbox
                 inputId='checkOption1'
                 name='option'
-                value='Chicago'
-                checked={checkboxValue.indexOf("Chicago") !== -1}
+                value='Enterprise'
+                checked={checkboxValue.includes("Enterprise")}
                 onChange={onCheckboxChange}
               />
               <label htmlFor='ingredient1' className='ml-2'>
@@ -189,8 +224,8 @@ function ContactForm() {
               <Checkbox
                 inputId='checkOption1'
                 name='option'
-                value='Chicago'
-                checked={checkboxValue.indexOf("Chicago") !== -1}
+                value='Academy'
+                checked={checkboxValue.includes("Academy")}
                 onChange={onCheckboxChange}
               />
               <label htmlFor='ingredient1' className='ml-2'>
@@ -204,22 +239,23 @@ function ContactForm() {
               <Checkbox
                 inputId='checkOption1'
                 name='option'
-                value='Chicago'
-                checked={checkboxValue.indexOf("Chicago") !== -1}
+                value='Personal'
+                checked={checkboxValue.includes("Personal")}
                 onChange={onCheckboxChange}
               />
               <label htmlFor='ingredient1' className='ml-2'>
-                Person
+                Personal
               </label>
               {/* </FormGroup> */}
             </Grid>
 
             <Grid item xs={12} md={12}>
               <InputTextarea
+                required
                 rows={5}
                 cols={30}
                 style={{ width: "100%" }}
-                placeholder='Your Message'
+                placeholder='Your Message *'
                 value={details}
                 onChange={(event) => {
                   setDetails(event.target.value);
@@ -228,9 +264,11 @@ function ContactForm() {
             </Grid>
             <Grid item xs={12} md={12}>
               <FormButton
+                submit
                 className='blue-white-lightblue'
                 onClick={() => {
-                  router.push("/");
+                  // CreateContactUs();
+                  // router.push("/");
                 }}
               >
                 Contact Us
@@ -238,6 +276,42 @@ function ContactForm() {
             </Grid>
           </Grid>
         </Form>
+        <Dialog
+          style={{ width: "500px", height: "200px", position: "relative" }}
+          visible={dialogVisible}
+          onHide={() => {
+            setDialogVisible(false);
+            router.push("/");
+          }}
+          header={
+            dialogSuccess ? (
+              <span style={{ color: "green" }}>Success</span>
+            ) : (
+              <span style={{ color: "red" }}>Error</span>
+            )
+          }
+          footer={
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                className='orange-white'
+                onClick={() => {
+                  setDialogVisible(false);
+                  router.push("/");
+                }}
+              >
+                Continue
+              </Button>
+            </div>
+          }
+        >
+          {dialogMessage && <div>{dialogMessage}</div>}
+        </Dialog>
       </WrapperForm>
     </Container>
   );
@@ -486,6 +560,63 @@ const StampIcon = styled.div`
     bottom: 0.15rem;
     border: 1px solid #3fa4f9; /* Set the inner border line to 0 */
     border-radius: 50%;
+  }
+`;
+const Button = styled.button`
+  background-color: #1abc9c;
+  border-radius: 4px;
+  color: #fff;
+  width: 80%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  padding: 8px;
+  font-weight: 300;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
+  @media screen and (max-width: 900px) {
+    /* width: 80%; */
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+  &:focus {
+    outline: none;
+  }
+
+  &.orange-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    /* text-transform: uppercase; */
+    padding: 10px;
+    /* transition: background-color 0.2s ease; */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
+    background-color: #1abc9c;
+    color: #fff;
+    border: 1px solid #1abc9c;
+    @media screen and (max-width: 900px) {
+      font-size: 10px;
+      padding: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 95%;
+      font-size: 8px;
+      padding: 5px;
+    }
+  }
+  &.orange-white:hover {
+    opacity: 0.8;
   }
 `;
 const FormButton = styled.button`

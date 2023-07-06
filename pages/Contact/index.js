@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Form from "../../Components/ContactForm/Form";
-import Header from "../../Components/Home/Header";
 
 function Contact() {
   return (

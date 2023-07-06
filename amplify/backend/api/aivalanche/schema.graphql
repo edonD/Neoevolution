@@ -1,36 +1,16 @@
-type Contact {
+type ContactUs
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [update, delete, create] }
+      { allow: owner }
+    ]
+  ) {
   id: ID!
   email: String!
   firstName: String!
   lastName: String!
   company: String!
-  jobRole: String!
-  jobTitle: String!
-  category: ContactCategory!
+  checkBox: [String]
   message: String!
-}
-
-enum ContactCategory {
-  PERSONAL
-  ACADEMY
-  ENTERPRISE
-}
-
-input CreateContactInput {
-  email: String!
-  firstName: String!
-  lastName: String!
-  company: String!
-  jobRole: String!
-  jobTitle: String!
-  category: ContactCategory!
-  message: String!
-}
-
-type Mutation {
-  createContact(input: CreateContactInput!): Contact
-}
-
-type Query {
-  getContact(id: ID!): Contact
 }

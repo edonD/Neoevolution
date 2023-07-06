@@ -1,45 +1,63 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createContactUs = /* GraphQL */ `
+  mutation CreateContactUs(
+    $input: CreateContactUsInput!
+    $condition: ModelContactUsConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createContactUs(input: $input, condition: $condition) {
       id
-      name
-      description
+      email
+      firstName
+      lastName
+      company
+      checkBox
+      message
       createdAt
       updatedAt
+      owner
+      __typename
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateContactUs = /* GraphQL */ `
+  mutation UpdateContactUs(
+    $input: UpdateContactUsInput!
+    $condition: ModelContactUsConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateContactUs(input: $input, condition: $condition) {
       id
-      name
-      description
+      email
+      firstName
+      lastName
+      company
+      checkBox
+      message
       createdAt
       updatedAt
+      owner
+      __typename
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteContactUs = /* GraphQL */ `
+  mutation DeleteContactUs(
+    $input: DeleteContactUsInput!
+    $condition: ModelContactUsConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteContactUs(input: $input, condition: $condition) {
       id
-      name
-      description
+      email
+      firstName
+      lastName
+      company
+      checkBox
+      message
       createdAt
       updatedAt
+      owner
+      __typename
     }
   }
 `;

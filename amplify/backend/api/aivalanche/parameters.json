@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "aivalanche",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authaivalanche5e90a998",
+      "Outputs.UserPoolId"
+    ]
+  }
 }
