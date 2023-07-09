@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { Auth } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import styled from "styled-components";
 import { InputMask } from "primereact/inputmask";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../store/slices/userSlice";
+import { selectUser, selectUserNameId } from "../../store/slices/userSlice";
 import { Oval } from "react-loader-spinner";
 
 function ConfirmForm() {
@@ -17,12 +17,16 @@ function ConfirmForm() {
   const [resendLoading, setResendLoading] = useState(false);
 
   const username = useSelector(selectUser);
+  const usernameId = useSelector(selectUserNameId);
   const router = useRouter();
 
   const confirm = async () => {
     try {
       setLoading(true);
+
+      // console.log("usernameId", usernameId);
       await Auth.confirmSignUp(username, confirmationCode);
+
       setErrorMessage("");
       router.push("/Login");
     } catch (err) {
@@ -106,18 +110,6 @@ function ConfirmForm() {
             >
               Resend
             </a>
-            <Oval
-              height={20}
-              width={20}
-              color='#4fa94d'
-              wrapperStyle={{}}
-              wrapperClass=''
-              visible={resendLoading}
-              ariaLabel='oval-loading'
-              secondaryColor='#4fa94d'
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
           </p>
         </form>
       </Body>
@@ -224,7 +216,7 @@ const FormButton = styled.button`
 const CardContent = styled.div`
   width: 100%;
   /* padding: 2rem; */
-  border-radius: 53px;
+  border-radius: 23px;
   background-color: white;
   padding-top: 2rem; /* 32px */
   padding-bottom: 5rem; /* 32px */

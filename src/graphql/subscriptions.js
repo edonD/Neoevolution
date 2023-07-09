@@ -61,3 +61,63 @@ export const onDeleteContactUs = /* GraphQL */ `
     }
   }
 `;
+export const onCreateProfileInformation = /* GraphQL */ `
+  subscription OnCreateProfileInformation(
+    $filter: ModelSubscriptionProfileInformationFilterInput
+    $owner: String
+  ) {
+    onCreateProfileInformation(filter: $filter, owner: $owner) {
+      id
+      firstName
+      lastName
+      company
+      country
+      jobTitle
+      jobRole
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateProfileInformation = /* GraphQL */ `
+  subscription OnUpdateProfileInformation(
+    $filter: ModelSubscriptionProfileInformationFilterInput
+    $owner: String
+  ) {
+    onUpdateProfileInformation(filter: $filter, owner: $owner) {
+      id
+      firstName
+      lastName
+      company
+      country
+      jobTitle
+      jobRole
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteProfileInformation = /* GraphQL */ `
+  subscription OnDeleteProfileInformation(
+    $filter: ModelSubscriptionProfileInformationFilterInput
+    $owner: String
+  ) {
+    onDeleteProfileInformation(filter: $filter, owner: $owner) {
+      id
+      firstName
+      lastName
+      company
+      country
+      jobTitle
+      jobRole
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;

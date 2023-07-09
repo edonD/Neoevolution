@@ -43,3 +43,49 @@ export const listContactuses = /* GraphQL */ `
     }
   }
 `;
+export const getProfileInformation = /* GraphQL */ `
+  query GetProfileInformation($id: ID!) {
+    getProfileInformation(id: $id) {
+      id
+      firstName
+      lastName
+      company
+      country
+      jobTitle
+      jobRole
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listProfileInformations = /* GraphQL */ `
+  query ListProfileInformations(
+    $filter: ModelProfileInformationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProfileInformations(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        firstName
+        lastName
+        company
+        country
+        jobTitle
+        jobRole
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;

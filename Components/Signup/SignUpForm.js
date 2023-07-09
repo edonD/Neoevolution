@@ -6,11 +6,18 @@ import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import Amplify, { Auth } from "aws-amplify";
+import Amplify, { API, Auth } from "aws-amplify";
 import styled from "styled-components";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectUserNameId,
+  setProfile,
+  setUser,
+} from "../../store/slices/userSlice";
+import { updateProfileInformation } from "../../src/graphql/mutations";
+import { useRef } from "react";
+import { Toast } from "primereact/toast";
 
 function SignUpForm({ callbackFunction }) {
   const [email, setEmail] = useState("");
@@ -22,6 +29,26 @@ function SignUpForm({ callbackFunction }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const toast = useRef(null);
+
+  // const handleError = () => {
+  //   // Call the callback function with the item as an argument
+  //   toast.current.show({
+  //     severity: "error",
+  //     summary: "Error",
+  //     detail: "Error Updating",
+  //     life: 3000,
+  //   });
+  // };
+
+  // const handleSuccess = () => {
+  //   toast.current.show({
+  //     severity: "success",
+  //     summary: "Updated",
+  //     detail: "Update Successful",
+  //     life: 3000,
+  //   });
+  // };
 
   async function signUp() {
     try {
@@ -41,9 +68,11 @@ function SignUpForm({ callbackFunction }) {
       });
 
       dispatch(setUser(user.username));
+      dispatch(setProfile({ name: name, lastName: lastName }));
 
       // fetchUserId();
       handleConfirmClick();
+      // CreateProfileInformation();
     } catch (error) {
       console.log("error signing up:", error);
       setErrorMessage(error.message);
@@ -271,7 +300,6 @@ const FormStyled = styled.form`
 const PasswordStyled = styled(Password)`
   width: 100%;
 
-  border: 1px solid #e0e0e0;
   margin-bottom: 20px;
 `;
 

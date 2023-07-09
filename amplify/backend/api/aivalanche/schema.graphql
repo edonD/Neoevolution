@@ -14,3 +14,13 @@ type ContactUs
   checkBox: [String]
   message: String!
 }
+
+type ProfileInformation @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  company: String!
+  country: String!
+  jobTitle: String!
+  jobRole: String!
+}
