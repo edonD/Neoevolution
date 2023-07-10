@@ -24,3 +24,15 @@ type ProfileInformation @model @auth(rules: [{ allow: owner }]) {
   jobTitle: String!
   jobRole: String!
 }
+
+type CompanyInformation @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  street: String!
+  housenr: String!
+  postalcode: String!
+  city: String!
+  country: String!
+  taxID: String!
+  ponumber: String!
+  billingemail: String!
+}

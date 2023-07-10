@@ -121,3 +121,69 @@ export const deleteProfileInformation = /* GraphQL */ `
     }
   }
 `;
+export const createCompanyInformation = /* GraphQL */ `
+  mutation CreateCompanyInformation(
+    $input: CreateCompanyInformationInput!
+    $condition: ModelCompanyInformationConditionInput
+  ) {
+    createCompanyInformation(input: $input, condition: $condition) {
+      id
+      street
+      housenr
+      postalcode
+      city
+      country
+      taxID
+      ponumber
+      billingemail
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateCompanyInformation = /* GraphQL */ `
+  mutation UpdateCompanyInformation(
+    $input: UpdateCompanyInformationInput!
+    $condition: ModelCompanyInformationConditionInput
+  ) {
+    updateCompanyInformation(input: $input, condition: $condition) {
+      id
+      street
+      housenr
+      postalcode
+      city
+      country
+      taxID
+      ponumber
+      billingemail
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteCompanyInformation = /* GraphQL */ `
+  mutation DeleteCompanyInformation(
+    $input: DeleteCompanyInformationInput!
+    $condition: ModelCompanyInformationConditionInput
+  ) {
+    deleteCompanyInformation(input: $input, condition: $condition) {
+      id
+      street
+      housenr
+      postalcode
+      city
+      country
+      taxID
+      ponumber
+      billingemail
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;

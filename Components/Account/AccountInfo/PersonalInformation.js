@@ -193,6 +193,7 @@ function PersonalInformation() {
               required
               fullWidth
               id='name'
+              label='First Name'
               placeholder='First Name'
               name='name'
               value={name}
@@ -207,6 +208,7 @@ function PersonalInformation() {
               required
               fullWidth
               id='last name'
+              label='Last Name'
               placeholder='Last Name'
               name='last name'
               value={lastname}
@@ -220,6 +222,7 @@ function PersonalInformation() {
               variant='outlined'
               required
               fullWidth
+              label='Job Title'
               value={company}
               name='Company'
               placeholder='Company'
@@ -235,6 +238,7 @@ function PersonalInformation() {
               variant='outlined'
               required
               fullWidth
+              label='Country'
               value={country}
               name='Country'
               placeholder='Country'
@@ -251,6 +255,7 @@ function PersonalInformation() {
               required
               fullWidth
               id='jobRole'
+              label='Job Role'
               placeholder='Job role'
               name='jobRole'
               value={jobrole}
@@ -266,6 +271,7 @@ function PersonalInformation() {
               fullWidth
               value={jobtitle}
               name='jobTitle'
+              label='Job Title'
               placeholder='Job title'
               id='jobTitle'
               onChange={(event) => {

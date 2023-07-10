@@ -9,7 +9,6 @@ import {
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
-import { Button } from "@mui/material";
 
 function EmailInformation() {
   const [oldPassword, setOldPassword] = useState("");
@@ -59,14 +58,9 @@ function EmailInformation() {
           </Grid>
 
           <Grid item xs={12} md={12}>
-            <FormButton
-              type='submit'
-              fullWidth
-              variant='contained'
-              color='primary'
-            >
+            <Button type='submit' fullWidth className='blue-white-lightblue'>
               Change Password
-            </FormButton>
+            </Button>
           </Grid>
         </Grid>
       </Form>
@@ -151,23 +145,78 @@ const Form = styled.form`
   }
 `;
 
-const FormButton = styled(Button)`
-  && {
-    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
-    width: 320px;
-    height: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: #3f9cf3;
-    color: white;
-    cursor: pointer;
+const Button = styled.button`
+  background-color: #1abc9c;
+  border-radius: 4px;
+  color: #fff;
+  width: 80%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  padding: 8px;
+  font-weight: 300;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 
-    &:hover {
-      background-color: #388ddb;
+  @media screen and (max-width: 900px) {
+    /* width: 80%; */
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+  &:focus {
+    outline: none;
+  }
+
+  &.orange-white {
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    /* text-transform: uppercase; */
+    padding: 10px;
+    /* transition: background-color 0.2s ease; */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
+    background-color: #1abc9c;
+    color: #fff;
+    border: 1px solid #1abc9c;
+    @media screen and (max-width: 900px) {
+      font-size: 12px;
+      padding: 10px;
+    }
+    /* @media screen and (max-width: 600px) {
+      width: 95%;
+      font-size: 8px;
+      padding: 5px;
+    } */
+  }
+  &.orange-white:hover {
+    opacity: 0.8;
+  }
+  &.blue-white-lightblue {
+    font-size: 16px;
+    padding: 15px;
+    width: 320px;
+    background-color: #53a5fc;
+    color: #fff;
+    border: 1px solid #53a5fc;
+    @media screen and (max-width: 900px) {
+      width: 100%;
     }
   }
-  @media screen and (max-width: 400px) {
-    font-size: 12px;
+
+  &.blue-white-lightblue:hover {
+    color: #53a5fc;
+    background-color: #fff;
+    border: 1px solid #53a5fc;
   }
 `;
 

@@ -20,29 +20,29 @@ function BillingHistory() {
           <Grid item xs={12}>
             <Headerh2>Active Orders</Headerh2>
           </Grid>
-          <Grid item xs={12} md={12} xl={6}>
+          <Grid item xs={12} md={12} xl={12}>
             <CardInternal state={"In Process"} />
           </Grid>
-          <Grid item xs={12} md={12} xl={6}>
+          <Grid item xs={12} md={12} xl={12}>
             <CardInternal state={"In Process"} />
           </Grid>
-          <Grid item xs={12} md={12} xl={6}>
+          <Grid item xs={12} md={12} xl={12}>
             <CardInternal state={"In Process"} />
           </Grid>
-          <Grid item xs={12} md={12} xl={6}>
+          <Grid item xs={12} md={12} xl={12}>
             <CardInternal state={"In Process"} />
           </Grid>
 
-          <Grid item xs={12} md={12} xl={6}>
+          <Grid item xs={12} md={12} xl={12}>
             <CardInternal state={"In Process"} />
           </Grid>
-          <Grid item xs={12} md={12} xl={6}>
+          <Grid item xs={12} md={12} xl={12}>
             <CardInternal state={"In Process"} />
           </Grid>
-          <Grid item xs={12} md={12} xl={6}>
+          <Grid item xs={12} md={12} xl={12}>
             <CardInternal state={"In Process"} />
           </Grid>
-          <Grid item xs={12} md={12} xl={6}>
+          <Grid item xs={12} md={12} xl={12}>
             <CardInternal state={"In Process"} />
           </Grid>
         </Grid>

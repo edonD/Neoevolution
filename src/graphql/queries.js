@@ -89,3 +89,53 @@ export const listProfileInformations = /* GraphQL */ `
     }
   }
 `;
+export const getCompanyInformation = /* GraphQL */ `
+  query GetCompanyInformation($id: ID!) {
+    getCompanyInformation(id: $id) {
+      id
+      street
+      housenr
+      postalcode
+      city
+      country
+      taxID
+      ponumber
+      billingemail
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listCompanyInformations = /* GraphQL */ `
+  query ListCompanyInformations(
+    $filter: ModelCompanyInformationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCompanyInformations(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        street
+        housenr
+        postalcode
+        city
+        country
+        taxID
+        ponumber
+        billingemail
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;

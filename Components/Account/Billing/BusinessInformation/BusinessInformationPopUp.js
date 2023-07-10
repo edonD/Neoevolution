@@ -37,12 +37,12 @@ export default function FormDialog() {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Company Information</DialogTitle>
         <DialogContent>
-          <CompanyInformation />
+          <CompanyInformation callback={handleClose} />
         </DialogContent>
-        <DialogActions>
+        {/* <DialogActions>
           <CancelButton onClick={handleClose}>Cancel</CancelButton>
           <SubmitButton onClick={handleClose}>SAVE</SubmitButton>
-        </DialogActions>
+        </DialogActions> */}
       </Dialog>
     </Container>
   );

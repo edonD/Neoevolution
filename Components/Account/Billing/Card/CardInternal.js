@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  CardMedia,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
+import { GiSwirledShell } from "react-icons/gi";
 import styled from "styled-components";
 import Image from "next/image";
 import { BiLoaderCircle } from "react-icons/bi";
@@ -17,17 +10,10 @@ function CardInternal({ state }) {
   return (
     <Card>
       <Header>
-        <ImageContainer>
-          <Image
-            src='/images/gggrain-2.svg'
-            layout='fill'
-            objectFit='contain'
-            alt='brain'
-          />
-        </ImageContainer>
+        <GiSwirledShell size={50} style={{ transform: "rotate(-180deg)" }} />
       </Header>
       <Box>
-        <CardContent>
+        <DateCardContent>
           <ListItem>
             <Icon>
               <RiCalendar2Line size={20} />
@@ -40,27 +26,24 @@ function CardInternal({ state }) {
             </Icon>
             <h1>07:49 AM</h1>
           </ListItem>
-        </CardContent>
+        </DateCardContent>
         <CardContent>
           <ListItem>
             <h3>Model Calibration</h3>
           </ListItem>
-          <ListItem state={state}>
-            <h2>{state}</h2>
-          </ListItem>
         </CardContent>
-        <IconContainer>
-          <DownloadItem>
-            <IconCircle state={state}>
-              {state === "Delivered" ? (
-                <AiOutlineDownload size={20} />
-              ) : (
-                <BiLoaderCircle size={20} />
-              )}
-            </IconCircle>
-          </DownloadItem>
-        </IconContainer>
       </Box>
+      <IconContainer>
+        <DownloadItem>
+          <IconCircle state={state}>
+            {state === "Delivered" ? (
+              <AiOutlineDownload size={20} />
+            ) : (
+              <BiLoaderCircle size={20} />
+            )}
+          </IconCircle>
+        </DownloadItem>
+      </IconContainer>
     </Card>
   );
 }
@@ -81,7 +64,7 @@ const ImageContainer = styled.div`
 
 const Card = styled.div`
   width: 100%;
-  height: 220px;
+  height: 100%;
   background-color: transparent;
   position: relative;
   display: flex;
@@ -96,7 +79,7 @@ const Card = styled.div`
   }
 `;
 const Box = styled.div`
-  width: calc(100% - 200px);
+  width: calc(100% - 50px);
   height: 100%;
   background-color: transparent;
   display: flex;
@@ -106,7 +89,7 @@ const Box = styled.div`
 `;
 
 const Header = styled.div`
-  width: 200px;
+  width: 50px;
   height: 100%;
   background-color: transparent;
   display: flex;
@@ -116,6 +99,19 @@ const Header = styled.div`
   padding-left: 10px;
 `;
 
+const DateCardContent = styled.div`
+  width: 40%;
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 20px;
+  @media screen and (max-width: 400px) {
+    display: none;
+  }
+`;
 const CardContent = styled.div`
   width: 40%;
   height: 100%;
@@ -124,10 +120,15 @@ const CardContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  @media screen and (max-width: 400px) {
+    width: 100%;
+    background-color: transparent;
+    align-items: center;
+  }
 `;
 
 const IconContainer = styled.div`
-  width: 20%;
+  width: 50px;
   height: 100%;
   background-color: transparent;
   display: flex;
@@ -145,6 +146,9 @@ const Icon = styled.div`
   align-items: center;
   color: #909aff;
   background: transparent;
+  @media screen and (max-width: 400px) {
+    display: none;
+  }
 `;
 
 const IconCircle = styled.div`
@@ -169,18 +173,21 @@ const IconCircle = styled.div`
 `;
 
 const ListItem = styled.div`
-  width: fit-content;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background: transparent;
+  background: blue;
   padding: 0px;
   background-color: transparent;
   margin: 0px 0px 0px 0px;
   color: black;
   //cursor: pointer;
+  @media screen and (max-width: 400px) {
+    justify-content: center;
+  }
 
   h1 {
     font-size: 14px;
