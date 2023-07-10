@@ -1,16 +1,4 @@
 import React from "react";
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-  Box,
-} from "@mui/material";
 
 import CardInternal from "./Card/CardInternal";
 
@@ -18,8 +6,6 @@ import { Grid } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import Img1 from "../../../public/images/evolution.jpg";
-import Image from "next/image";
 
 function BillingHistory() {
   const [street, setStreet] = useState("");
