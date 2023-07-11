@@ -23,7 +23,7 @@ export default function FormDialog() {
 
   return (
     <Container>
-      <FormButton variant='outlined' onClick={handleClickOpen}>
+      <FormButton variant='text' onClick={handleClickOpen}>
         <AiFillCreditCard size={30} />
       </FormButton>
       <CardContent onClick={handleClickOpen}>
@@ -117,12 +117,24 @@ const FormButton = styled(Button)`
     font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
     width: 75px;
     height: 75px;
-    background: rgb(26, 64, 116);
+    background: hsla(341, 94%, 49%, 1);
+
     background: linear-gradient(
-      132deg,
-      rgba(59, 77, 116, 1) 0%,
-      rgba(6, 20, 41, 1) 53%,
-      rgba(4, 33, 77, 1) 99%
+      180deg,
+      hsla(341, 94%, 49%, 1) 0%,
+      hsla(16, 90%, 77%, 1) 100%
+    );
+
+    background: -moz-linear-gradient(
+      180deg,
+      hsla(341, 94%, 49%, 1) 0%,
+      hsla(16, 90%, 77%, 1) 100%
+    );
+
+    background: -webkit-linear-gradient(
+      180deg,
+      hsla(341, 94%, 49%, 1) 0%,
+      hsla(16, 90%, 77%, 1) 100%
     );
     color: white;
     cursor: pointer;

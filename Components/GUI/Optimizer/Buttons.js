@@ -78,6 +78,9 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
 
     return !isEmpty; // Returns true if none of the first three items are empty, false otherwise
   };
+
+  const paid = false;
+  const subscribed = false;
   const singleCalibrationHandle = () => {
     if (checkFirstThreeItems()) {
       dispatch(setReferenceData(ReferenceData));
@@ -121,27 +124,58 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
 
   const startCalibrationHandle = () => {
     if (checkFirstThreeItems()) {
-      dispatch(setReferenceData(ReferenceData));
-      dispatch(setNetlist(Model));
-      dispatch(setParametersData(ParametersData));
-      dispatch(setTestBench(TestBench));
-      dispatch(addAdvancedOption(advancedOptions));
-      const jsonData = {
-        ReferenceData: JSONReferendeData,
-        Model: JSONNetlist,
-        ParametersData: JSONParametersData,
-        TestBenches: JSONTestBench,
-        advancedOptions,
-        type: "Complete Calibration",
-      };
-      const jsonString = JSON.stringify(jsonData, null, 2);
-      uploadJSONToS3(
-        subPath,
-        "Start Simulation",
-        jsonString,
-        handleRegerenceDataProgressChange,
-        handleUploadReferenceDataComplete
-      );
+      if (paid || subscribed) {
+        dispatch(setReferenceData(ReferenceData));
+        dispatch(setNetlist(Model));
+        dispatch(setParametersData(ParametersData));
+        dispatch(setTestBench(TestBench));
+        dispatch(addAdvancedOption(advancedOptions));
+        const jsonData = {
+          ReferenceData: JSONReferendeData,
+          Model: JSONNetlist,
+          ParametersData: JSONParametersData,
+          TestBenches: JSONTestBench,
+          advancedOptions,
+          type: "Complete Calibration",
+        };
+        const jsonString = JSON.stringify(jsonData, null, 2);
+        uploadJSONToS3(
+          subPath,
+          "Start Simulation",
+          jsonString,
+          handleRegerenceDataProgressChange,
+          handleUploadReferenceDataComplete
+        );
+      } else {
+        toast.current.show({
+          severity: "warning",
+          summary: " Pay or Subscribe to start Calibration",
+          detail: <Button className='black-white'>Set up paid account</Button>,
+          life: 3000,
+        });
+      }
+      //   dispatch(setReferenceData(ReferenceData));
+      //   dispatch(setNetlist(Model));
+      //   dispatch(setParametersData(ParametersData));
+      //   dispatch(setTestBench(TestBench));
+      //   dispatch(addAdvancedOption(advancedOptions));
+      //   const jsonData = {
+      //     ReferenceData: JSONReferendeData,
+      //     Model: JSONNetlist,
+      //     ParametersData: JSONParametersData,
+      //     TestBenches: JSONTestBench,
+      //     advancedOptions,
+      //     type: "Complete Calibration",
+      //   };
+      //   const jsonString = JSON.stringify(jsonData, null, 2);
+      //   uploadJSONToS3(
+      //     subPath,
+      //     "Start Simulation",
+      //     jsonString,
+      //     handleRegerenceDataProgressChange,
+      //     handleUploadReferenceDataComplete
+      //   );
+      // }
     } else {
       toast.current.show({
         severity: "error",
@@ -260,6 +294,23 @@ const Button = styled.button`
     border: 1px solid #ea402f;
     .icon3 {
       color: #ea402f;
+    }
+  }
+
+  &.black-white {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.2);
+    color: black;
+    border: 1px solid black;
+  }
+
+  &.black-white:hover {
+    color: #349a77;
+    background-color: #fff;
+    border: 1px solid #349a77;
+    .icon1 {
+      color: #349a77;
     }
   }
 

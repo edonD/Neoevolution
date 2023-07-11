@@ -8,13 +8,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CompanyInformation from "./CompanyInformation";
 import styled from "styled-components";
-import { MdOutlineBusinessCenter } from "react-icons/md";
+import { BsCurrencyEuro } from "react-icons/bs";
+import { useRouter } from "next/router";
 
-export default function FormDialog() {
+export default function Pricing() {
   const [open, setOpen] = React.useState(false);
+  const router = useRouter();
 
   const handleClickOpen = () => {
-    setOpen(true);
+    router.push("/Pricing");
   };
 
   const handleClose = () => {
@@ -24,26 +26,16 @@ export default function FormDialog() {
   return (
     <Container>
       <FormButton variant='text' onClick={handleClickOpen}>
-        <MdOutlineBusinessCenter size={30} />
+        <BsCurrencyEuro size={30} />
       </FormButton>
       <CardContent onClick={handleClickOpen}>
         <ListItem>
-          <h1>Company Information</h1>
+          <h1>Pricing</h1>
         </ListItem>
         <ListItem>
-          <h3>Add or change company information</h3>
+          <h3>Check different pricing schemes</h3>
         </ListItem>
       </CardContent>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Company Information</DialogTitle>
-        <DialogContent>
-          <CompanyInformation callback={handleClose} />
-        </DialogContent>
-        {/* <DialogActions>
-          <CancelButton onClick={handleClose}>Cancel</CancelButton>
-          <SubmitButton onClick={handleClose}>SAVE</SubmitButton>
-        </DialogActions> */}
-      </Dialog>
     </Container>
   );
 }
@@ -125,69 +117,31 @@ const FormButton = styled(Button)`
     width: 75px;
     height: 75px;
     /* global 92%+ browsers support */
-    background: hsla(248, 21%, 15%, 1);
+    background: hsla(165, 60%, 11%, 1);
 
     background: linear-gradient(
       180deg,
-      hsla(248, 21%, 15%, 1) 0%,
-      hsla(250, 14%, 61%, 1) 100%
+      hsla(165, 60%, 11%, 1) 0%,
+      hsla(149, 54%, 31%, 1) 100%
     );
 
     background: -moz-linear-gradient(
       180deg,
-      hsla(248, 21%, 15%, 1) 0%,
-      hsla(250, 14%, 61%, 1) 100%
+      hsla(165, 60%, 11%, 1) 0%,
+      hsla(149, 54%, 31%, 1) 100%
     );
 
     background: -webkit-linear-gradient(
       180deg,
-      hsla(248, 21%, 15%, 1) 0%,
-      hsla(250, 14%, 61%, 1) 100%
+      hsla(165, 60%, 11%, 1) 0%,
+      hsla(149, 54%, 31%, 1) 100%
     );
-
     border: none;
     color: white;
     cursor: pointer;
 
     &:hover {
-      background-color: #388ddb;
-    }
-  }
-  @media screen and (max-width: 400px) {
-    font-size: 12px;
-  }
-`;
-const SubmitButton = styled(Button)`
-  && {
-    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
-    width: 150px;
-    height: 40px;
-    background: rgb(26, 64, 116);
-    background: linear-gradient(90deg, #1cb5e0 0%, #000851 100%);
-    color: white;
-    cursor: pointer;
-
-    &:hover {
-      background: linear-gradient(90deg, #1cb5e0 0%, #000851 50%);
-    }
-  }
-  @media screen and (max-width: 400px) {
-    font-size: 12px;
-  }
-`;
-
-const CancelButton = styled(Button)`
-  && {
-    font-family: Inter, Montserrat, Helvetica, Arial, sans-serif;
-    width: 150px;
-    height: 40px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    border: 1px solid #efefef;
-
-    &:hover {
-      background-color: #f3f3f8;
+      background-color: #a88ddb;
     }
   }
   @media screen and (max-width: 400px) {

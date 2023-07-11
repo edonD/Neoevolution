@@ -10,7 +10,7 @@ import CompanyInformation from "./CompanyInformation";
 import styled from "styled-components";
 import { MdOutlineBusinessCenter } from "react-icons/md";
 
-export default function FormDialog() {
+export default function InvoicePreferences() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -28,7 +28,7 @@ export default function FormDialog() {
       </FormButton>
       <CardContent onClick={handleClickOpen}>
         <ListItem>
-          <h1>Company Information</h1>
+          <h1>Billing Preferences</h1>
         </ListItem>
         <ListItem>
           <h3>Add or change company information</h3>
@@ -125,24 +125,24 @@ const FormButton = styled(Button)`
     width: 75px;
     height: 75px;
     /* global 92%+ browsers support */
-    background: hsla(248, 21%, 15%, 1);
+    background: hsla(213, 77%, 14%, 1);
 
     background: linear-gradient(
       180deg,
-      hsla(248, 21%, 15%, 1) 0%,
-      hsla(250, 14%, 61%, 1) 100%
+      hsla(213, 77%, 14%, 1) 0%,
+      hsla(202, 27%, 45%, 1) 100%
     );
 
     background: -moz-linear-gradient(
       180deg,
-      hsla(248, 21%, 15%, 1) 0%,
-      hsla(250, 14%, 61%, 1) 100%
+      hsla(213, 77%, 14%, 1) 0%,
+      hsla(202, 27%, 45%, 1) 100%
     );
 
     background: -webkit-linear-gradient(
       180deg,
-      hsla(248, 21%, 15%, 1) 0%,
-      hsla(250, 14%, 61%, 1) 100%
+      hsla(213, 77%, 14%, 1) 0%,
+      hsla(202, 27%, 45%, 1) 100%
     );
 
     border: none;

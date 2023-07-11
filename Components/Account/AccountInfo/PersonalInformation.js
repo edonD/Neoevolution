@@ -222,7 +222,7 @@ function PersonalInformation() {
               variant='outlined'
               required
               fullWidth
-              label='Job Title'
+              label='Company'
               value={company}
               name='Company'
               placeholder='Company'

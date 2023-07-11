@@ -8,17 +8,10 @@ import styled from "styled-components";
 import { Button } from "@mui/material";
 import CardPopUp from "../Billing/PaymentProcessor/CardPopUp";
 import BusinessInformationPopUp from "../Billing/BusinessInformation/BusinessInformationPopUp";
+import Pricing from "./BusinessInformation/Pricing";
+import InvoicePreferences from "./BusinessInformation/InvoicePreferences";
 
 function BillingHistory() {
-  const [street, setStreet] = useState("");
-  const [housenr, setHousenr] = useState("");
-  const [postalcode, setPostalcode] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [taxID, setTaxID] = useState("");
-  const [ponumber, setPonumber] = useState("");
-  const [email, setEmail] = useState("");
-
   return (
     <WrapperForm>
       <Form
@@ -33,6 +26,12 @@ function BillingHistory() {
           </Grid>
           <Grid item xs={12} md={6}>
             <BusinessInformationPopUp />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Pricing />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <InvoicePreferences />
           </Grid>
         </Grid>
       </Form>
