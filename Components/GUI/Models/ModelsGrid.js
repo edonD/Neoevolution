@@ -35,7 +35,7 @@ function ModelsGrid({ projects, onData }) {
             <Headerh2>Transistors </Headerh2>
           </Grid>
           {mosfetArray.map((item) => (
-            <Grid item xs={12} md={6} lg={4} xl={4} key={item}>
+            <Grid item xs={12} md={4} lg={3} xl={3} key={item}>
               <CardForSelection name={item} />
             </Grid>
           ))}
@@ -44,7 +44,7 @@ function ModelsGrid({ projects, onData }) {
             <Headerh2>Passive Elements </Headerh2>
           </Grid>
           {passiveComponentArray.map((item) => (
-            <Grid item xs={12} md={6} lg={4} xl={4} key={item}>
+            <Grid item xs={12} md={4} lg={3} xl={3} key={item}>
               <CardForSelection name={item} />
             </Grid>
           ))}
@@ -53,7 +53,7 @@ function ModelsGrid({ projects, onData }) {
             <Headerh2>Other </Headerh2>
           </Grid>
           {customModelArray.map((item) => (
-            <Grid item xs={12} md={6} lg={4} xl={4} key={item}>
+            <Grid item xs={12} md={4} lg={3} xl={3} key={item}>
               <CardForSelection name={item} />
             </Grid>
           ))}

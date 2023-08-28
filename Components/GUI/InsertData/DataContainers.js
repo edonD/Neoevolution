@@ -15,12 +15,16 @@ const FileUploaderWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 200px;
-  height: 200px;
+  height: 150px;
   border: 1px dashed ${(props) => (props.hasFiles ? "#e0e0e0" : "#6e96f6")};
   border-radius: 5px;
-  margin: 10px;
+  margin: 0px 10px;
   cursor: pointer;
   position: relative;
+
+  @media screen and (max-width: 1200px) {
+    margin: 10px;
+  }
 
   p {
     margin-top: 10px;
@@ -118,6 +122,7 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 5px;
 `;
 
 const Container = styled.div`

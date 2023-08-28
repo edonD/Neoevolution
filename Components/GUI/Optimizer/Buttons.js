@@ -31,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserNameId } from "../../../store/slices/userSlice";
 import { currentProject } from "../../../store/slices/projectListSlice";
 import { currentModel } from "../../../store/slices/modelListSlice";
+import { useRouter } from "next/router";
 
 function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
   const [startSimulation, setStartSimulation] = useState(false);
@@ -60,6 +61,8 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
   const JSONTestBench = `${subPath}/${TBfolderName}/${TestBench}`;
   const JSONParametersData = `${subPath}/${PDfolderName}/${ParametersData}`;
   const JSONNetlist = `${subPath}/${NLfolderName}/${Model}`;
+
+  const router = useRouter();
 
   const show = () => {
     toast.current.show({
@@ -150,7 +153,16 @@ function Buttons({ onClickRunPython, onClickRunNGSPice, onClickPlot }) {
         toast.current.show({
           severity: "warning",
           summary: " Pay or Subscribe to start Calibration",
-          detail: <Button className='black-white'>Set up paid account</Button>,
+          detail: (
+            <Button
+              className='black-white'
+              onClick={() => {
+                router.push("/billing/overview");
+              }}
+            >
+              Set up paid account
+            </Button>
+          ),
           life: 3000,
         });
       }

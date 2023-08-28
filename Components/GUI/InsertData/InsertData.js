@@ -222,13 +222,13 @@ function InsertData() {
 
   return (
     <Container alignment={numRows}>
-      <TableContainer>
+      {/* <TableContainer>
         {numRows === 0 ? (
           <ContinueButton />
         ) : (
           <DataDescription numRows={numRows} />
         )}
-      </TableContainer>
+      </TableContainer> */}
 
       <InsertDataContainer>
         <DataContainers
@@ -266,7 +266,7 @@ function InsertData() {
           value={uploadCostFunctionProgress}
           done={uploadCostFunctionDone}
         />
-        <ContinueButton show={numRows} />
+        {/* <ContinueButton show={numRows} /> */}
       </InsertDataContainer>
     </Container>
   );
@@ -279,7 +279,11 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 150px);
+  /* min-height: calc(100vh - 150px);
+   */
+  width: 100%;
+  height: 100%;
+
   @media screen and (max-width: 1200px) {
     height: 100%;
   }
@@ -305,9 +309,9 @@ const InsertDataContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  padding-bottom: 50px;
+  /* padding-bottom: 50px; */
   width: 100%;
-  height: 35%;
+  height: 100%;
   @media screen and (max-width: 1200px) {
     height: 100%;
     flex-direction: column;

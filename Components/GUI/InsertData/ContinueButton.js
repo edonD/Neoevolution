@@ -15,41 +15,41 @@ function ContinueButton({ show }) {
 
   const { projectName, modelName } = router.query;
   return (
-    <Link
-      href={`/projects/${projectName}/${modelName[0]}/insert-data/reference-data`}
+    // <Link
+    //   href={`/projects/${projectName}/${modelName[0]}/insert-data/reference-data`}
+    // >
+    <Card
+      onClick={() => {
+        setLoading(true);
+      }}
+      show={show}
     >
-      <Card
-        onClick={() => {
-          setLoading(true);
-        }}
-        show={show}
-      >
-        {loading ? (
-          <TailSpin
-            height='80'
-            width='80'
-            color='#3e89ff'
-            ariaLabel='rotating-square-loading'
-            strokeWidth='4'
-            wrapperStyle={{}}
-            wrapperClass=''
-            visible={loading}
+      {loading ? (
+        <TailSpin
+          height='80'
+          width='80'
+          color='#3e89ff'
+          ariaLabel='rotating-square-loading'
+          strokeWidth='4'
+          wrapperStyle={{}}
+          wrapperClass=''
+          visible={loading}
+        />
+      ) : (
+        <ImageContainer>
+          <Image
+            src='/images/plus-svgrepo-com.svg'
+            width={100}
+            height={100}
+            alt='brain'
           />
-        ) : (
-          <ImageContainer>
-            <Image
-              src='/images/plus-svgrepo-com.svg'
-              width={100}
-              height={100}
-              alt='brain'
-            />
-          </ImageContainer>
-        )}
-        <ListItem>
-          <h3>New Calibration</h3>
-        </ListItem>
-      </Card>
-    </Link>
+        </ImageContainer>
+      )}
+      <ListItem>
+        <h3>New Calibration</h3>
+      </ListItem>
+    </Card>
+    // </Link>
   );
 }
 

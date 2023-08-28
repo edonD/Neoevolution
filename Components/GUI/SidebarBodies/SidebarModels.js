@@ -296,7 +296,7 @@ const WrapperDescription = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  @media screen and (max-width: 1600px) {
+  @media screen and (max-width: 1400px) {
     display: none;
   }
 `;

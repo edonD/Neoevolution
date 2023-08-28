@@ -115,7 +115,7 @@ const Button = styled.button`
 `;
 const Card = styled.div`
   width: 100%;
-  height: 200px;
+  height: 75px;
   background-color: transparent;
   position: relative;
   display: flex;
@@ -123,13 +123,15 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   /* border: 1px solid black; */
+  margin: 10px;
   border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease 0s;
   cursor: pointer;
   @media screen and (max-width: 1200px) {
     width: 100%;
-    height: 150px;
+    height: 75px;
+    margin: 5px;
   }
   :hover {
     background-color: #f3f3f8;
@@ -233,7 +235,7 @@ const ListItem = styled.div`
   h1 {
     font-size: 14px;
     color: black;
-    font-weight: 200;
+    font-weight: bold;
     margin: 0px;
     @media screen and (max-width: 750px) {
       font-size: 10px;
@@ -253,7 +255,7 @@ const ListItem = styled.div`
   }
   h3 {
     color: black;
-    font-weight: 200;
+    font-weight: 400;
     margin: 0px;
     font-size: 14px;
     @media screen and (max-width: 750px) {
